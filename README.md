@@ -7,5 +7,5 @@
 4. Go to `http://localhost:8080`
 
 ## How to add Synerg'Hetic GitLab remote, then push to two differents remotes
-1. git remote set-url --add --push origin git@git.synerghetic.net:synerghetic/dataviz_synerghetic.git
-2. git push -u origin master
+1. `git remote set-url --add --push origin git@git.synerghetic.net:synerghetic/dataviz_synerghetic.git`
+2. `git push -u origin master`
