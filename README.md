@@ -8,4 +8,4 @@
 
 ## How to add Synerg'Hetic GitLab remote, then push to two differents remotes
 1. `git remote set-url --add --push origin git@git.synerghetic.net:synerghetic/dataviz_synerghetic.git`
-2. `git push -u origin master`
+2. `git push -u origin *your branch*`
