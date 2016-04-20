@@ -12,41 +12,90 @@ export default class Board extends React.Component {
     componentWillMount(){
         const boardElem = document.getElementsByClassName('babies-board');
 
+        // Set board DOM Elem
         this.setState({
-            boardElem: boardElem
+            boardElem: boardElem,
+            style: {
+                transform: 'translate3d(0,0,0)'
+            },
+            boardTranslateY: 0,
+            boardTranslateX: 0
         })
     }
 
     componentDidMount(){
-        // this.state.boardElem.on('keypress', this.navigate);
-        window.addEventListener('keydown', this.handleKeyDown)
+        // Add event listener
+        window.addEventListener('keydown', this.handleKeyDown.bind(this))
     }
 
-    navigate(e){
-        console.log(e)
-    }
-
-    handleKeyDown(e) {
+    handleKeyDown(e){
         e.preventDefault()
 
+        // Arrow up
         if(e.keyCode == 38) {
-            console.log('en haut')
+            this.navigate("Y",true)
         }
-        if(.keyCode == 40) {
-            console.log('en bas')
+        // Arrow down
+        if(e.keyCode == 40) {
+            this.navigate("Y",false)
         }
+        // Arrow left
         if(e.keyCode == 37) {
-            console.log('a gauche')
+            this.navigate("X",true)
         }
-        if(.keyCode == 39) {
-            console.log('a droite')
-            console.log('ces soirées là')
+        // Arrow right
+        if(e.keyCode == 39) {
+            this.navigate("X",false)
+        }
+    }
+
+    navigate(direction, isPositive){
+        console.log(direction, isPositive)
+        const { boardTranslateY, boardTranslateX } = this.state
+
+        switch(direction){
+            // Case translate Y
+            case "Y":
+                if (isPositive) {
+                    this.setState({
+                        style: {
+                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                        },
+                        boardTranslateY: boardTranslateY + 20
+                    })
+                } else {
+                    this.setState({
+                        style: {
+                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                        },
+                        boardTranslateY: boardTranslateY - 20
+                    })
+                }
+                break;
+            // Case translate X
+            case "X":
+                if (isPositive) {
+                    this.setState({
+                        style: {
+                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                        },
+                        boardTranslateX: boardTranslateX + 20
+                    })
+                } else {
+                    this.setState({
+                        style: {
+                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                        },
+                        boardTranslateX: boardTranslateX - 20
+                    })
+                }
+                break;
         }
     }
 
     render(){
         return (
-            <section className="babies-board">
+            <section className="babies-board" style={this.state.style}>
 
             </section>
         )
