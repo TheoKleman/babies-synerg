@@ -18,11 +18,30 @@ export default class Board extends React.Component {
     }
 
     componentDidMount(){
-        this.state.boardElem.on('keypress', this.navigate);
+        // this.state.boardElem.on('keypress', this.navigate);
+        window.addEventListener('keydown', this.handleKeyDown)
     }
 
     navigate(e){
         console.log(e)
+    }
+
+    handleKeyDown(e) {
+        e.preventDefault()
+
+        if(e.keyCode == 38) {
+            console.log('en haut')
+        }
+        if(.keyCode == 40) {
+            console.log('en bas')
+        }
+        if(e.keyCode == 37) {
+            console.log('a gauche')
+        }
+        if(.keyCode == 39) {
+            console.log('a droite')
+            console.log('ces soirées là')
+        }
     }
 
     render(){
