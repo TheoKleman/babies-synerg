@@ -18,8 +18,16 @@ export default class Board extends React.Component {
             style: {
                 transform: 'translate3d(0,0,0)'
             },
-            boardTranslateY: 0,
-            boardTranslateX: 0
+            boardTranslateY: {
+                Y: 0,
+                min: null,
+                max: null
+            },
+            boardTranslateX: {
+                X: 0,
+                min: null,
+                max: null
+            }
         })
     }
 
@@ -29,29 +37,32 @@ export default class Board extends React.Component {
     }
 
     handleKeyDown(e){
-        e.preventDefault()
-
         // Arrow up
         if(e.keyCode == 38) {
+            e.preventDefault()
             this.navigate("Y",true)
         }
         // Arrow down
         if(e.keyCode == 40) {
+            e.preventDefault()
             this.navigate("Y",false)
         }
         // Arrow left
         if(e.keyCode == 37) {
+            e.preventDefault()
             this.navigate("X",true)
         }
         // Arrow right
         if(e.keyCode == 39) {
+            e.preventDefault()
             this.navigate("X",false)
         }
     }
 
     navigate(direction, isPositive){
         console.log(direction, isPositive)
-        const { boardTranslateY, boardTranslateX } = this.state
+        const { X } = this.state.boardTranslateX
+        const { Y } = this.state.boardTranslateY
 
         switch(direction){
             // Case translate Y
@@ -59,16 +70,20 @@ export default class Board extends React.Component {
                 if (isPositive) {
                     this.setState({
                         style: {
-                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                            transform: 'translate3d('+X+'px,'+Y+'px,0)'
                         },
-                        boardTranslateY: boardTranslateY + 20
+                        boardTranslateY: {
+                            Y: Y + 20
+                        }
                     })
                 } else {
                     this.setState({
                         style: {
-                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                            transform: 'translate3d('+X+'px,'+Y+'px,0)'
                         },
-                        boardTranslateY: boardTranslateY - 20
+                        boardTranslateY: {
+                            Y: Y - 20
+                        }
                     })
                 }
                 break;
@@ -77,16 +92,20 @@ export default class Board extends React.Component {
                 if (isPositive) {
                     this.setState({
                         style: {
-                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                            transform: 'translate3d('+X+'px,'+Y+'px,0)'
                         },
-                        boardTranslateX: boardTranslateX + 20
+                        boardTranslateX: {
+                            X: X + 20
+                        }
                     })
                 } else {
                     this.setState({
                         style: {
-                            transform: 'translate3d('+boardTranslateX+'px,'+boardTranslateY+'px,0)'
+                            transform: 'translate3d('+X+'px,'+Y+'px,0)'
                         },
-                        boardTranslateX: boardTranslateX - 20
+                        boardTranslateX: {
+                            X: X - 20
+                        }
                     })
                 }
                 break;
