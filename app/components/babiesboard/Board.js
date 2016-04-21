@@ -49,16 +49,7 @@ export default class Board extends React.Component {
                 min: null,
                 max: null
             }
-        }
-    }
-
-    componentWillMount(){
-        const boardElem = document.getElementsByClassName('babies-board');
-
-        // Set board DOM Elem
-        this.setState({
-            boardElem: boardElem,
-        })
+        });
     }
 
     componentDidMount(){
