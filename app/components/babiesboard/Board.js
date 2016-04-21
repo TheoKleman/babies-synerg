@@ -1,12 +1,30 @@
 import React from "react"
+import qwest from "qwest"
+
+import BabiesList from "./BabiesList"
 
 export default class Board extends React.Component {
     constructor(){
         super()
 
         this.state = {
-            boardElem: null
+            boardElem: null,
+            babies: [],
+            babiesData: {},
+            boardWidth: 3000,
+            boardHeight: 1666
         }
+    }
+
+    loadBabies() {
+        qwest
+            .get("./../json/babies.json")
+            .then((xhr, response) => {
+                this.setState({
+                    babies: response.babies,
+                    babiesData: response.babies[0]
+                })
+            })
     }
 
     componentWillMount(){
@@ -34,6 +52,8 @@ export default class Board extends React.Component {
     componentDidMount(){
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
+
+        this.loadBabies()
     }
 
     handleKeyDown(e){
@@ -113,9 +133,10 @@ export default class Board extends React.Component {
     }
 
     render(){
+        
         return (
             <section className="babies-board" style={this.state.style}>
-
+                <BabiesList {...this.state} />
             </section>
         )
     }
