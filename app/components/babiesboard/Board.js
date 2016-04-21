@@ -14,11 +14,6 @@ export default class Board extends React.Component {
             boardWidth: 3000,
             boardHeight: 1666,
             boardTransform: 'translate3d(0px,0px,0)',
-            style: {
-                transform: 'translate3d(0px,0px,0)',
-                width: "3000px",
-                height: "1666px",
-            },
             boardTranslateY: {
                 Y: 0,
                 min: null,
@@ -49,22 +44,6 @@ export default class Board extends React.Component {
         // Set board DOM Elem
         this.setState({
             boardElem: boardElem,
-            boardTransform: 'translate3d(0px,0px,0)',
-            style: {
-                transform: 'translate3d(0px,0px,0)',
-                width: "3000px",
-                height: "1666px",
-            },
-            boardTranslateY: {
-                Y: 0,
-                min: null,
-                max: null
-            },
-            boardTranslateX: {
-                X: 0,
-                min: null,
-                max: null
-            }
         })
     }
 
@@ -111,21 +90,14 @@ export default class Board extends React.Component {
                             Y: Y + 20
                         }
                     })
-                    this.setState({
-                        boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
-                    })
-                    this.updateTransform()
                 } else {
                     this.setState({
                         boardTranslateY: {
                             Y: Y - 20
                         }
                     })
-                    this.setState({
-                        boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
-                    })
-                    this.updateTransform()
                 }
+                this.updateBoardTransform()
                 break;
             // Case translate X
             case "X":
@@ -135,38 +107,33 @@ export default class Board extends React.Component {
                             X: X + 20
                         }
                     })
-                    this.setState({
-                        boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
-                    })
-                    this.updateTransform()
                 } else {
                     this.setState({
                         boardTranslateX: {
                             X: X - 20
                         }
                     })
-                    this.setState({
-                        boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
-                    })
-                    this.updateTransform()
                 }
+                this.updateBoardTransform()
                 break;
         }
     }
 
-    updateTransform(){
-        let { style } = this.state;
-        style.transform = this.state.boardTransform
-
+    updateBoardTransform(){
         this.setState({
-            style: style
+            boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
         })
     }
 
     render(){
-        
+        let style = {
+            width: this.state.boardWidth,
+            height: this.state.boardHeight,
+            transform: this.state.boardTransform
+        }
+
         return (
-            <section className="babies-board" style={this.state.style}>
+            <section className="babies-board" style={style}>
                 <BabiesList {...this.state} />
             </section>
         )
