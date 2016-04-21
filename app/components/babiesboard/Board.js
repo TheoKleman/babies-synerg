@@ -44,6 +44,7 @@ export default class Board extends React.Component {
         // Set board DOM Elem
         this.setState({
             boardElem: boardElem,
+            viewportSize: this.props.viewportSize
         })
     }
 
@@ -51,6 +52,7 @@ export default class Board extends React.Component {
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
 
+        // Load babies JSON
         this.loadBabies()
     }
 
