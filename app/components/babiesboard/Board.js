@@ -12,7 +12,23 @@ export default class Board extends React.Component {
             babies: [],
             babiesData: {},
             boardWidth: 3000,
-            boardHeight: 1666
+            boardHeight: 1666,
+            boardTransform: 'translate3d(0px,0px,0)',
+            style: {
+                transform: 'translate3d(0px,0px,0)',
+                width: "3000px",
+                height: "1666px",
+            },
+            boardTranslateY: {
+                Y: 0,
+                min: null,
+                max: null
+            },
+            boardTranslateX: {
+                X: 0,
+                min: null,
+                max: null
+            }
         }
     }
 
@@ -49,7 +65,7 @@ export default class Board extends React.Component {
                 min: null,
                 max: null
             }
-        });
+        })
     }
 
     componentDidMount(){

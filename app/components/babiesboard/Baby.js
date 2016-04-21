@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default class Baby extends React.Component {
-	constructor(props) {
+	constructor() {
 		super()
 
 		this.state = {
@@ -24,7 +24,6 @@ export default class Baby extends React.Component {
 
 	// Position Top can be a number between 0 and Board size - baby height
 	// Position Left can be a number between 0 and Board size - baby width
-
 	setPosition() {
 		this.setState({
 			style: {
