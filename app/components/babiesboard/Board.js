@@ -85,38 +85,29 @@ export default class Board extends React.Component {
             // Case translate Y
             case "Y":
                 if (isPositive) {
-                    this.setState({
-                        boardTranslateY: {
-                            Y: Y + 20
-                        }
-                    })
+                    Y = Y + 20
                 } else {
-                    this.setState({
-                        boardTranslateY: {
-                            Y: Y - 20
-                        }
-                    })
+                    Y = Y - 20
                 }
-                this.updateBoardTransform()
                 break;
             // Case translate X
             case "X":
                 if (isPositive) {
-                    this.setState({
-                        boardTranslateX: {
-                            X: X + 20
-                        }
-                    })
+                    X = X + 20
                 } else {
-                    this.setState({
-                        boardTranslateX: {
-                            X: X - 20
-                        }
-                    })
+                    X = X - 20
                 }
-                this.updateBoardTransform()
                 break;
         }
+        this.setState({
+            boardTranslateX: {
+                X: X
+            },
+            boardTranslateY: {
+                Y: Y
+            }
+        })
+        this.updateBoardTransform()
     }
 
     updateBoardTransform(){
