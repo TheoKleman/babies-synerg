@@ -14,13 +14,13 @@ export default class Board extends React.Component {
             boardWidth: 3000,
             boardHeight: 1666,
             boardTransform: 'translate3d(0px,0px,0)',
-            boardTranslateY: {
-                Y: 0,
+            boardTranslateX: {
+                X: 0,
                 min: null,
                 max: null
             },
-            boardTranslateX: {
-                X: 0,
+            boardTranslateY: {
+                Y: 0,
                 min: null,
                 max: null
             }
@@ -54,6 +54,24 @@ export default class Board extends React.Component {
 
         // Load babies JSON
         this.loadBabies()
+
+        // Center board & set min/max board translateX/Y
+        let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
+        let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
+
+        this.setState({
+            boardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
+            boardTranslateX: {
+                X: centerX,
+                max: 0,
+                min: - (this.state.boardWidth - this.props.viewportSize.width)
+            },
+            boardTranslateY: {
+                Y: centerY,
+                max: 0,
+                min: - (this.state.boardHeight - this.props.viewportSize.height)
+            }
+        })
     }
 
     handleKeyDown(e){
@@ -101,12 +119,30 @@ export default class Board extends React.Component {
                 }
                 break;
         }
+
+        // Check if X is in range
+        if (X < this.state.boardTranslateX.min) {
+            X = this.state.boardTranslateX.min
+        } else if (X > this.state.boardTranslateX.max){
+            X = this.state.boardTranslateX.max
+        }
+        // Check if Y is in range
+        if (Y < this.state.boardTranslateY.min) {
+            Y = this.state.boardTranslateY.min
+        } else if (Y > this.state.boardTranslateY.max){
+            Y = this.state.boardTranslateX.max
+        }
+
         this.setState({
             boardTranslateX: {
-                X: X
+                X: X,
+                max: 0,
+                min: - (this.state.boardWidth - this.props.viewportSize.width)
             },
             boardTranslateY: {
-                Y: Y
+                Y: Y,
+                max: 0,
+                min: - (this.state.boardHeight - this.props.viewportSize.height)
             }
         })
         this.updateBoardTransform()
