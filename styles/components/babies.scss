@@ -3,8 +3,28 @@
 	.baby {
 		position: absolute;
 		display: inline-block;
-		width: 150px;
-		height: 150px;
-		background-color: blue;
+		width: 200px;
+		height: 200px;
+		background: url("../images/baby-placeholder.png");
+        background-size: cover;
+
+        > .wrapper {
+            padding: 10px;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+
+            span {
+                display: block;
+                color: white;
+            }
+        }
+
+        &:hover {
+            > .wrapper {
+                opacity: 1;
+            }
+        }
 	}
 }

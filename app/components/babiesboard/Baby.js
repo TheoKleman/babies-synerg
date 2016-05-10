@@ -145,10 +145,14 @@ export default class Baby extends React.Component {
 				style={this.state.style}
 				onMouseEnter={this.handleMouseEnter.bind(this)}
 				onMouseLeave={this.handleMouseLeave}>
-				<span>Name: {name}</span>
-				<p>Profile: {profile}</p>
-				<span>Temps a Hétic: {yearSpent}</span>
-				<span>z-index: {this.state.style.zIndex}</span>
+				<div className="wrapper">
+					<span>Name: {name}</span>
+					<br/>
+					<span>Skills: {profile}</span>
+					<br/>
+					<span>CurrentYear: {yearSpent}</span>
+					<br/>
+				</div>
 			</div>
 		);
 	}
