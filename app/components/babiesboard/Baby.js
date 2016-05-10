@@ -29,6 +29,11 @@ export default class Baby extends React.Component {
 		var distanceTop = Math.floor(Math.random() * (this.state.maxH - this.state.babyHeight)) + 1
 		var distanceLeft = Math.floor(Math.random() * (this.state.maxW - this.state.babyWidth)) + 1
 		var test = 0
+		var baby = {
+			id: this.props.id,
+			x: distanceLeft,
+			y: distanceTop
+		}
 
 		switch(true) {
 			case (distanceTop < 100):
@@ -81,12 +86,6 @@ export default class Baby extends React.Component {
 				break;
 		}
 
-		// if(distanceTop < 100) {
-		// 	test = 24
-		// } else if(distanceTop < 200) {
-		// 	test = 38
-		// }
-
 		this.setState({
 			style: {
 				top:  distanceTop+"px",
@@ -94,6 +93,8 @@ export default class Baby extends React.Component {
 				zIndex: test
 			}
 		})
+
+		this.props.pushBabies(baby)
 	}
 
 	render() {
@@ -102,7 +103,7 @@ export default class Baby extends React.Component {
 		const yearSpent = this.props.datas.year
 
 		return(
-			<div className="baby" style={this.state.style}>
+			<div className="baby" style={this.state.style} data-id={this.props.datas.id}>
 				<span>Name: {name}</span>
 				<p>Profile: {profile}</p>
 				<span>Temps a Hétic: {yearSpent}</span>
