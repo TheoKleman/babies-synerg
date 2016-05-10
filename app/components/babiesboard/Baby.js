@@ -1,4 +1,5 @@
 import React from 'react'
+var classNames = require('classnames')
 
 export default class Baby extends React.Component {
 	constructor() {
@@ -13,14 +14,13 @@ export default class Baby extends React.Component {
 				top: "0px",
 				left: "0px",
 				zIndex: 0
-			}
+			},
+			isHovering: false
 		}
 	}
 
 	componentDidMount() {
-
 		this.setPosition();
-
 	}
 
 	// Position Top can be a number between 0 and Board size - baby height
@@ -97,13 +97,54 @@ export default class Baby extends React.Component {
 		this.props.pushBabies(baby)
 	}
 
+	handleMouseEnter(e) {
+		console.log('entering')
+
+		var self = this
+	
+		// console.log(this.searchIndex(this.props.id, this.props.babiesPos))
+
+		// var x = this.props.babiesPos.map(function(obj) {
+		// 	if(obj.id == self.props.id) {
+		// 		return obj[i]
+		// 	} else {
+		// 		return 'empty'
+		// 	}
+		// })
+		
+	}
+
+	handleMouseLeave(e) {
+		console.log('leaving')
+	}
+
+	searchIndex(id, array, callback) {
+		var myBaby = []
+
+		for(var i = 0; i < array.length; i++) {
+
+			if(array[i].id == id) {
+				myBaby.push[array[i]]
+			}
+		}
+		return myBaby
+	}
+
 	render() {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
 		const yearSpent = this.props.datas.year
 
+		var babyClasses = classNames({
+			'baby': true
+		})
+
 		return(
-			<div className="baby" style={this.state.style} data-id={this.props.datas.id}>
+			<div 
+				className={babyClasses}
+				style={this.state.style}
+				onMouseEnter={this.handleMouseEnter.bind(this)}
+				onMouseLeave={this.handleMouseLeave}>
 				<span>Name: {name}</span>
 				<p>Profile: {profile}</p>
 				<span>Temps a Hétic: {yearSpent}</span>
