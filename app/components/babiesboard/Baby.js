@@ -99,35 +99,20 @@ export default class Baby extends React.Component {
 
 	handleMouseEnter(e) {
 		console.log('entering')
-
-		var self = this
 	
-		// console.log(this.searchIndex(this.props.id, this.props.babiesPos))
-
-		// var x = this.props.babiesPos.map(function(obj) {
-		// 	if(obj.id == self.props.id) {
-		// 		return obj[i]
-		// 	} else {
-		// 		return 'empty'
-		// 	}
-		// })
+		let babyHovered = this.getBabyPosition(this.props.id) 
 		
+		this.setState({isHovering: true})
 	}
 
 	handleMouseLeave(e) {
 		console.log('leaving')
+
+		this.setState({isHovering: false})
 	}
 
-	searchIndex(id, array, callback) {
-		var myBaby = []
-
-		for(var i = 0; i < array.length; i++) {
-
-			if(array[i].id == id) {
-				myBaby.push[array[i]]
-			}
-		}
-		return myBaby
+	getBabyPosition(id) {
+		return this.props.babiesPos[id + 1]
 	}
 
 	render() {
@@ -136,7 +121,8 @@ export default class Baby extends React.Component {
 		const yearSpent = this.props.datas.year
 
 		var babyClasses = classNames({
-			'baby': true
+			'baby': true,
+			'hover': this.state.isHovering
 		})
 
 		return(
@@ -144,7 +130,7 @@ export default class Baby extends React.Component {
 				className={babyClasses}
 				style={this.state.style}
 				onMouseEnter={this.handleMouseEnter.bind(this)}
-				onMouseLeave={this.handleMouseLeave}>
+				onMouseLeave={this.handleMouseLeave.bind(this)}>
 				<span>Name: {name}</span>
 				<p>Profile: {profile}</p>
 				<span>Temps a Hétic: {yearSpent}</span>

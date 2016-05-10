@@ -6,5 +6,8 @@
 		width: 150px;
 		height: 150px;
 		background-color: blue;
+		&.hover {
+			border: 1px solid red;
+		}
 	}
 }
