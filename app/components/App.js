@@ -1,6 +1,7 @@
 import React from "react"
 
 import Board from "./babiesboard/Board"
+import HomeInterface from "./GUI/HomeInterface.js"
 
 export default class App extends React.Component {
     constructor(){
@@ -29,7 +30,10 @@ export default class App extends React.Component {
 
     render(){
         return (
-            <Board viewportSize={this.state.viewportSize} />
+            <div className="main-content">
+                <HomeInterface />
+                <Board viewportSize={this.state.viewportSize} />
+            </div>
         )
     }
 }
