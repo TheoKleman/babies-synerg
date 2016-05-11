@@ -2,6 +2,7 @@ const path = require('path')
 const NpmInstallPlugin = require('npm-install-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
@@ -16,6 +17,7 @@ const PATHS = {
   build: path.join(__dirname, 'build'),
   style: path.join(__dirname, 'styles/master.scss'),
   images: path.join(__dirname, 'images'),
+  json: path.join(__dirname, 'json'),
   fonts: path.join(__dirname, 'fonts')
 }
 
@@ -125,6 +127,7 @@ if(TARGET === 'build') {
       return [precss, autoprefixer];
     },
     plugins: [
+      new CopyWebpackPlugin([{from: PATHS.json, to: path.join(__dirname, 'build/json')}]),
       new CleanWebpackPlugin([PATHS.build]),
       new ExtractTextPlugin('[name].[chunkhash].css'),
       new webpack.optimize.CommonsChunkPlugin({

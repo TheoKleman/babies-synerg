@@ -29,7 +29,7 @@ export default class Board extends React.Component {
 
     loadBabies() {
         qwest
-            .get("./../json/babies.json")
+            .get("/json/babies.json")
             .then((xhr, response) => {
                 this.setState({
                     babies: response.babies,
