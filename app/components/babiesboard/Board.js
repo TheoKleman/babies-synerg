@@ -13,7 +13,6 @@ export default class Board extends React.Component {
             babiesData: {},
             boardWidth: 3000,
             boardHeight: 1666,
-            boardTransform: 'translate3d(0px,0px,0)',
             boardTranslateX: {
                 X: 0,
                 min: null,
@@ -57,7 +56,7 @@ export default class Board extends React.Component {
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
         this.setState({
-            boardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
+            initialBoardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
             boardTranslateX: {
                 X: centerX,
                 max: 0,
@@ -149,18 +148,15 @@ export default class Board extends React.Component {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
             y: this.state.boardTranslateY.Y,
-            ease: Power1.easeOut
+            ease: Power2.easeOut
         })
-        // this.setState({
-        //     boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
-        // })
     }
 
     render(){
         let style = {
             width: this.state.boardWidth,
             height: this.state.boardHeight,
-            transform: this.state.boardTransform
+            transform: this.state.initialBoardTransform
         }
 
         return (
