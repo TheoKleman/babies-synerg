@@ -98,7 +98,7 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e) {
-		console.log('entering')
+		// console.log('entering')
 	
 		let babyHovered = this.getBabyPosition(this.props.id) 
 		
@@ -106,7 +106,7 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseLeave(e) {
-		console.log('leaving')
+		// console.log('leaving')
 
 		this.setState({isHovering: false})
 	}
@@ -130,7 +130,7 @@ export default class Baby extends React.Component {
 				className={babyClasses}
 				style={this.state.style}
 				onMouseEnter={this.handleMouseEnter.bind(this)}
-				onMouseLeave={this.handleMouseLeave}>
+				onMouseLeave={this.handleMouseLeave.bind(this)}>
 				<div className="wrapper">
 					<span>Name: {name}</span>
 					<br/>

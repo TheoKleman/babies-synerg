@@ -1,5 +1,6 @@
 import React from "react"
 import qwest from "qwest"
+import GSAP from 'gsap'
 
 import BabiesList from "./BabiesList"
 
@@ -8,7 +9,6 @@ export default class Board extends React.Component {
         super()
 
         this.state = {
-            boardElem: null,
             babies: [],
             babiesData: {},
             boardWidth: 3000,
@@ -39,11 +39,8 @@ export default class Board extends React.Component {
     }
 
     componentWillMount(){
-        const boardElem = document.getElementsByClassName('babies-board');
-
         // Set board DOM Elem
         this.setState({
-            boardElem: boardElem,
             viewportSize: this.props.viewportSize
         })
     }
@@ -105,17 +102,17 @@ export default class Board extends React.Component {
             // Case translate Y
             case "Y":
                 if (isPositive) {
-                    Y = Y + 20
+                    Y = Y + 25
                 } else {
-                    Y = Y - 20
+                    Y = Y - 25
                 }
                 break;
             // Case translate X
             case "X":
                 if (isPositive) {
-                    X = X + 20
+                    X = X + 25
                 } else {
-                    X = X - 20
+                    X = X - 25
                 }
                 break;
         }
@@ -149,9 +146,14 @@ export default class Board extends React.Component {
     }
 
     updateBoardTransform(){
-        this.setState({
-            boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
+        TweenMax.to(this.refs.board,1, {
+            x: this.state.boardTranslateX.X,
+            y: this.state.boardTranslateY.Y,
+            ease: Power1.easeOut
         })
+        // this.setState({
+        //     boardTransform: 'translate3d('+this.state.boardTranslateX.X+'px,'+this.state.boardTranslateY.Y+'px,0)'
+        // })
     }
 
     render(){
@@ -162,7 +164,7 @@ export default class Board extends React.Component {
         }
 
         return (
-            <section className="babies-board" style={style}>
+            <section ref="board" className="babies-board" style={style}>
                 <BabiesList {...this.state} />
             </section>
         )

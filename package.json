@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "gsap": "^1.18.4",
     "json-loader": "^0.5.4",
     "qwest": "^4.4.0",
     "react": "^0.14.6",
