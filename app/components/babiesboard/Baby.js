@@ -8,14 +8,15 @@ export default class Baby extends React.Component {
 		this.state = {
 			maxW: 3000,
 			maxH: 1666,
-			babyWidth: 150,
-			babyHeight: 150,
+			babyWidth: 200,
+			babyHeight: 200,
 			style: {
 				top: "0px",
 				left: "0px",
 				zIndex: 0
 			},
-			isHovering: false
+			isHovering: false,
+			iNeighbourg: false
 		}
 	}
 
@@ -99,10 +100,18 @@ export default class Baby extends React.Component {
 
 	handleMouseEnter(e) {
 		// console.log('entering')
+		this.setState({isHovering: true})
 	
 		let babyHovered = this.getBabyPosition(this.props.id) 
+
+		// Check if babies are around
+		var babiesToMoove = this.getBabiesNear(babyHovered.x, babyHovered.y)
+
+		console.log(babiesToMoove)
 		
-		this.setState({isHovering: true})
+		babiesToMoove.map( elem => {
+			console.log(elem)
+		} )
 	}
 
 	handleMouseLeave(e) {
@@ -115,6 +124,23 @@ export default class Baby extends React.Component {
 		return this.props.babiesPos[id + 1]
 	}
 
+	getBabiesNear(posX, posY) {
+		var emptyArray = []
+
+		var xMin = posX - this.state.babyWidth
+		var xMax = posX + this.state.babyWidth
+		var yMin = posY - this.state.babyHeight
+		var yMax = posY + this.state.babyHeight
+
+		this.props.babiesPos.map( elem => {
+			if(xMin < elem.x && elem.x < xMax && yMin < elem.y && elem.y < yMax) {
+				emptyArray.push({id: elem.id, x: elem.x, y: elem.y})	
+			}
+		})
+
+		return emptyArray
+	}
+
 	render() {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
@@ -122,7 +148,8 @@ export default class Baby extends React.Component {
 
 		var babyClasses = classNames({
 			'baby': true,
-			'hover': this.state.isHovering
+			'hover': this.state.isHovering,
+			'neighbourg': this.state.isNeighbourg
 		})
 
 		return(
@@ -130,7 +157,8 @@ export default class Baby extends React.Component {
 				className={babyClasses}
 				style={this.state.style}
 				onMouseEnter={this.handleMouseEnter.bind(this)}
-				onMouseLeave={this.handleMouseLeave.bind(this)}>
+				onMouseLeave={this.handleMouseLeave.bind(this)}
+				ref="baby">
 				<div className="wrapper">
 					<span>Name: {name}</span>
 					<br/>
