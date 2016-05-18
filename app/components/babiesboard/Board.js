@@ -176,7 +176,6 @@ export default class Board extends React.Component {
             y: this.state.boardTranslateY.Y,
             ease: Power2.easeOut
         })
-        window.requestAnimationFrame(this.updateBoardTransform)
     }
 
     render(){
