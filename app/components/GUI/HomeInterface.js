@@ -14,7 +14,7 @@ export default class HomeInterface extends React.Component {
                 <div className="misc">
                     <div className="misc--buttons">
                         <button className="primary">
-                            Share
+                            Partager
                         </button>
                         <button className="secondary">
                             Infos
