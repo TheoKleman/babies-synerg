@@ -126,17 +126,17 @@ export default class Board extends React.Component {
             // Case translate Y
             case "Y":
                 if (isPositive) {
-                    Y = Y + 25
+                    Y = Y + 15
                 } else {
-                    Y = Y - 25
+                    Y = Y - 15
                 }
                 break;
             // Case translate X
             case "X":
                 if (isPositive) {
-                    X = X + 25
+                    X = X + 15
                 } else {
-                    X = X - 25
+                    X = X - 15
                 }
                 break;
         }
