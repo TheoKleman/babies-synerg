@@ -1,19 +1,39 @@
 import React from "react"
 
+import Board from "./babiesboard/Board"
+import HomeInterface from "./GUI/HomeInterface.js"
+
 export default class App extends React.Component {
     constructor(){
         super()
 
         this.state = {
-            body: "Hello world !"
+            viewportSize: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+            }
         }
+    }
+
+    handleResize(){
+        this.setState({
+            viewportSize: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+            }
+        })
+    }
+
+    componentDidMount(){
+        window.addEventListener('resize', this.handleResize.bind(this))
     }
 
     render(){
         return (
-            <main>
-                <h1>{this.state.body}</h1>
-            </main>
+            <div className="main-content">
+                <HomeInterface />
+                <Board viewportSize={this.state.viewportSize} />
+            </div>
         )
     }
 }

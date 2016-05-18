@@ -4,11 +4,11 @@
 @import "config/colors";
 @import "config/responsive";
 
+// Fonts 
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300,400italic);
 
-body {
-    font-family: "Lato", sans-serif;
-}
-
-h1 {
-    font-size: 20px;
-}
+// Local imports
+@import "components/layout.scss";
+@import "components/board.scss";
+@import "components/babies.scss";
+@import "components/home-interface.scss";
