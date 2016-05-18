@@ -47,6 +47,7 @@ export default class Board extends React.Component {
     componentDidMount(){
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
+        window.addEventListener('mousemove', this.handleMouseMouse.bind(this))
 
         // Load babies JSON
         this.loadBabies()
@@ -66,7 +67,8 @@ export default class Board extends React.Component {
                 Y: centerY,
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
-            }
+            },
+            mouseMoveAreaSize: this.state.viewportSize.height/3
         })
     }
 
@@ -88,6 +90,31 @@ export default class Board extends React.Component {
         }
         // Arrow right
         if(e.keyCode == 39) {
+            e.preventDefault()
+            this.navigate("X",false)
+        }
+    }
+
+    handleMouseMouse(e){
+        console.log(e);
+
+        // Mouse is in top area
+        if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
+            e.preventDefault()
+            this.navigate("Y",true)
+        }
+        // Mouse is in bottom area
+        if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
+            e.preventDefault()
+            this.navigate("Y",false)
+        }
+        // Mouse is in left area
+        if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
+            e.preventDefault()
+            this.navigate("X",true)
+        }
+        // Mouse is in right area
+        if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
             e.preventDefault()
             this.navigate("X",false)
         }

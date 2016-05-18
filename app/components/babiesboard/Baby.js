@@ -113,10 +113,10 @@ export default class Baby extends React.Component {
 
 			var test = ReactDOM.findDOMNode(this.refs[elemId])
 
-			console.log(ReactDOM.findDOMNode(this))
-			console.log(test)
+			// console.log(ReactDOM.findDOMNode(this))
+			// console.log(test)
 		} )
-		console.log('--stop--')
+		// console.log('--stop--')
 	}
 
 	handleMouseLeave(e) {
