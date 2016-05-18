@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 var classNames = require('classnames')
 
 export default class Baby extends React.Component {
@@ -106,12 +107,16 @@ export default class Baby extends React.Component {
 
 		// Check if babies are around
 		var babiesToMoove = this.getBabiesNear(babyHovered.x, babyHovered.y)
-
-		console.log(babiesToMoove)
 		
 		babiesToMoove.map( elem => {
-			console.log(elem)
+			var elemId = elem.id
+
+			var test = ReactDOM.findDOMNode(this.refs[elemId])
+
+			console.log(ReactDOM.findDOMNode(this))
+			console.log(test)
 		} )
+		console.log('--stop--')
 	}
 
 	handleMouseLeave(e) {
@@ -145,6 +150,7 @@ export default class Baby extends React.Component {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
 		const yearSpent = this.props.datas.year
+		const id = this.props.id.toString()
 
 		var babyClasses = classNames({
 			'baby': true,
@@ -158,7 +164,7 @@ export default class Baby extends React.Component {
 				style={this.state.style}
 				onMouseEnter={this.handleMouseEnter.bind(this)}
 				onMouseLeave={this.handleMouseLeave.bind(this)}
-				ref="baby">
+				ref={id}>
 				<div className="wrapper">
 					<span>Name: {name}</span>
 					<br/>
