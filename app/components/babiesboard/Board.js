@@ -96,8 +96,6 @@ export default class Board extends React.Component {
     }
 
     handleMouseMouse(e){
-        console.log(e);
-
         // Mouse is in top area
         if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
             e.preventDefault()
@@ -168,6 +166,7 @@ export default class Board extends React.Component {
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             }
         })
+
         this.updateBoardTransform()
     }
 
@@ -177,6 +176,7 @@ export default class Board extends React.Component {
             y: this.state.boardTranslateY.Y,
             ease: Power2.easeOut
         })
+        window.requestAnimationFrame(this.updateBoardTransform)
     }
 
     render(){
