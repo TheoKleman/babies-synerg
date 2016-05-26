@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default class HomeInterface extends React.Component {
+export default class Footer extends React.Component {
     constructor() {
         super()
     }
 
     render() {
         return(
-            <footer className="home-interface-bottom-left">
+            <footer className="main-footer">
                 <div className="logo">
                     <img src="/images/logo.png" alt=""/>
                 </div>

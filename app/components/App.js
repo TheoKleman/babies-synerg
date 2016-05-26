@@ -1,7 +1,8 @@
 import React from "react"
 
 import Board from "./babiesboard/Board"
-import HomeInterface from "./GUI/HomeInterface.js"
+import Footer from "./GUI/Footer.js"
+import FilterNav from "./GUI/FilterNav.js"
 
 export default class App extends React.Component {
     constructor(){
@@ -31,7 +32,8 @@ export default class App extends React.Component {
     render(){
         return (
             <div className="main-content">
-                <HomeInterface />
+                <FilterNav />
+                <Footer />
                 <Board viewportSize={this.state.viewportSize} />
             </div>
         )
