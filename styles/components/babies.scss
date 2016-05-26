@@ -27,15 +27,16 @@
             height: 30px;
             width: calc(100% - 120px);
             border-radius: 100%;
-            background: rgba($purple,.1);
-            filter: blur(5px);
+            background: rgba($purple,.18);
+            filter: blur(10px);
         }
 
         &.hover {
-			border: 1px solid red;
+			// border: 1px solid red;
 		}
 
         > .wrapper {
+            display: none;
             padding: 10px;
             opacity: 0;
             width: 100%;

@@ -5,7 +5,7 @@ import GSAP from 'gsap'
 import BabiesList from "./BabiesList"
 
 export default class Board extends React.Component {
-    constructor(){
+    constructor() {
         super()
 
         this.state = {
@@ -26,7 +26,7 @@ export default class Board extends React.Component {
         }
     }
 
-    loadBabies(){
+    loadBabies() {
         qwest
             .get("/json/babies.json")
             .then((xhr, response) => {
@@ -37,7 +37,7 @@ export default class Board extends React.Component {
             })
     }
 
-    componentWillMount(){
+    componentWillMount() {
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
         
@@ -47,7 +47,7 @@ export default class Board extends React.Component {
         })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // Load babies JSON
         this.loadBabies()
 
@@ -72,11 +72,11 @@ export default class Board extends React.Component {
         })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
     }
 
-    handleKeyDown(e){
+    handleKeyDown(e) {
         // Arrow up
         if(e.keyCode == 38) {
             e.preventDefault()
@@ -97,9 +97,14 @@ export default class Board extends React.Component {
             e.preventDefault()
             this.navigate("X",false)
         }
+
+        // Spacebar
+        if(e.keyCode == 32) {
+            this.props.setFormIsDisplayedProps(true)
+        }
     }
 
-    handleMouseMove(e){
+    handleMouseMove(e) {
         e.preventDefault()
         var direction = null
         var isPositive = null
@@ -138,7 +143,7 @@ export default class Board extends React.Component {
         }
     }
 
-    navigate(direction, isPositive){
+    navigate(direction, isPositive) {
         let { X } = this.state.boardTranslateX
         let { Y } = this.state.boardTranslateY
 
@@ -190,12 +195,14 @@ export default class Board extends React.Component {
         this.updateBoardTransform()
     }
 
-    updateBoardTransform(){
-        TweenMax.to(this.refs.board,1, {
-            x: this.state.boardTranslateX.X,
-            y: this.state.boardTranslateY.Y,
-            ease: Power2.easeOut
-        })
+    updateBoardTransform() {
+        if (!this.props.formDisplayed) {
+            TweenMax.to(this.refs.board,1, {
+                x: this.state.boardTranslateX.X,
+                y: this.state.boardTranslateY.Y,
+                ease: Power2.easeOut
+            })
+        }
     }
 
     render(){
@@ -210,9 +217,7 @@ export default class Board extends React.Component {
                 ref="board"
                 className="babies-board"
                 style={style}
-                onKeyDown={this.handleKeyDown.bind(this)}
-                onMouseMove={this.handleMouseMove.bind(this)}
-                >
+                onMouseMove={this.handleMouseMove.bind(this)}>
                 <BabiesList {...this.state} />
             </section>
         )
