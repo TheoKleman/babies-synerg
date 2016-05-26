@@ -38,6 +38,9 @@ export default class Board extends React.Component {
     }
 
     componentWillMount(){
+        // Add event listener
+        window.addEventListener('keydown', this.handleKeyDown.bind(this))
+        
         // Set board DOM Elem
         this.setState({
             viewportSize: this.props.viewportSize
@@ -45,10 +48,6 @@ export default class Board extends React.Component {
     }
 
     componentDidMount(){
-        // Add event listener
-        window.addEventListener('keydown', this.handleKeyDown.bind(this))
-        window.addEventListener('mousemove', this.handleMouseMove.bind(this))
-
         // Load babies JSON
         this.loadBabies()
 
@@ -71,6 +70,10 @@ export default class Board extends React.Component {
             },
             mouseMoveAreaSize: 200
         })
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("keydown", this.handleKeyDown.bind(this))
     }
 
     handleKeyDown(e){
@@ -203,7 +206,13 @@ export default class Board extends React.Component {
         }
 
         return (
-            <section ref="board" className="babies-board" style={style}>
+            <section
+                ref="board"
+                className="babies-board"
+                style={style}
+                onKeyDown={this.handleKeyDown.bind(this)}
+                onMouseMove={this.handleMouseMove.bind(this)}
+                >
                 <BabiesList {...this.state} />
             </section>
         )
