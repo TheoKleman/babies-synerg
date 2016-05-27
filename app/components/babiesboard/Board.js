@@ -23,6 +23,7 @@ export default class Board extends React.Component {
                 min: null,
                 max: null
             },
+            spacebarDown: false,
         }
     }
 
@@ -40,6 +41,8 @@ export default class Board extends React.Component {
     componentWillMount() {
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
+        window.addEventListener('keypress', this.handleKeyPress.bind(this))
+        window.addEventListener("keyup", this.handleKeyUp.bind(this))
         
         // Set board DOM Elem
         this.setState({
@@ -74,6 +77,8 @@ export default class Board extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
+        window.removeEventListener("keypress", this.handleKeyPress.bind(this))
+        window.removeEventListener("keyup", this.handleKeyUp.bind(this))
     }
 
     handleKeyDown(e) {
@@ -97,10 +102,29 @@ export default class Board extends React.Component {
             e.preventDefault()
             this.navigate("X",false)
         }
+    }
 
-        // Spacebar
-        if(e.keyCode == 32 && !this.props.formDisplayed) {
-            this.props.setFormIsDisplayedProps(true)
+    handleKeyPress(e) {
+        var self = this;
+
+        // Spacebar - Open form modal
+        if (e.keyCode == 32 && !this.props.formDisplayed && this.state.spacebarDown == false) {
+            this.setState({
+                spacebarDown: true,
+                spacebarTO: setTimeout(function(){
+                    console.log("open form modal")
+                    self.props.setFormIsDisplayedProps(true)
+                }, 1000)
+            })
+        }
+    }
+
+    handleKeyUp(e) {
+        if (e.keyCode == 32 && !this.props.formDisplayed) {
+            this.setState({
+                spacebarDown: false
+            })
+            clearTimeout(this.state.spacebarTO)
         }
     }
 

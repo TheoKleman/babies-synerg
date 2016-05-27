@@ -25,7 +25,6 @@ export default class Form extends React.Component {
                 self.refs.form.className = 'form';
                 setTimeout(function(){
                     self.props.setFormIsDisplayedProps(false)
-                    console.log("Board movable")
                 }, 250)
             }
         })
