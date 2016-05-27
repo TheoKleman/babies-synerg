@@ -13,7 +13,9 @@ export default class BabiesList extends React.Component {
 			        x: null,
 			        y: null
 			    }
-			]
+			],
+			savePosX: [0],
+			savePosY: [0]
 		}
 
 	}
@@ -31,6 +33,27 @@ export default class BabiesList extends React.Component {
 
 	}
 
+	pushPositionsX(pos) {
+		var newArray = this.state.savePosX
+		var tempArray = newArray
+
+		newArray = newArray.push(pos)
+
+		this.setState({
+			savePosX: tempArray
+		})
+	}
+	pushPositionsY(pos) {
+		var newArray = this.state.savePosY
+		var tempArray = newArray
+
+		newArray = newArray.push(pos)
+
+		this.setState({
+			savePosY: tempArray
+		})
+	}
+
 	render() {
 
 		return(
@@ -38,7 +61,15 @@ export default class BabiesList extends React.Component {
 				{
 					this.props.babies.map(function(baby, i) {
 							return(
-								<Baby key={i} datas={baby} pushBabies={this.pushBabies.bind(this)} id={i} babiesPos={this.state.babiesPos} />
+								<Baby key={i} 
+											datas={baby} 
+											pushBabies={this.pushBabies.bind(this)}
+											pushPositionsX={this.pushPositionsX.bind(this)}
+											pushPositionsY={this.pushPositionsY.bind(this)}
+											id={i} 
+											babiesPos={this.state.babiesPos}
+											posX={this.state.savePosX}
+											posY={this.state.savePosY} />
 							);
 						}
 					, this)

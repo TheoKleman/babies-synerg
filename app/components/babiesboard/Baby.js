@@ -9,7 +9,7 @@ export default class Baby extends React.Component {
 		this.state = {
 			maxW: 3000,
 			maxH: 1666,
-			babyWidth: 200,
+			babyWidth: 120,
 			babyHeight: 200,
 			style: {
 				top: "0px",
@@ -17,19 +17,25 @@ export default class Baby extends React.Component {
 				zIndex: 0
 			},
 			isHovering: false,
-			iNeighbourg: false
+			iNeighbourg: false,
+			savePosX: [],
+			savePosY: []
 		}
 	}
 
 	componentDidMount() {
-		this.setPosition();
+		this.setPosition()
 	}
 
 	// Position Top can be a number between 0 and Board size - baby height
 	// Position Left can be a number between 0 and Board size - baby width
 	setPosition() {
+
+		// this.contains.call(sauvPosition, elem)
+
 		var distanceTop = Math.floor(Math.random() * (this.state.maxH - this.state.babyHeight)) + 1
 		var distanceLeft = Math.floor(Math.random() * (this.state.maxW - this.state.babyWidth)) + 1
+
 		var test = 0
 		var baby = {
 			id: this.props.id,
@@ -97,10 +103,66 @@ export default class Baby extends React.Component {
 		})
 
 		this.props.pushBabies(baby)
+
+		// var isInArrayX = this.isInArray(distanceLeft, this.props.posX)
+		// var isInArrayY = this.isInArray(distanceTop, this.props.posY)
+
+		// if(isInArrayX || isInArrayY) {
+		// 	this.setPosition()
+		// }
+
+		// var topMin = distanceTop - this.state.babyHeight
+		// var topMax = distanceTop + this.state.babyHeight
+		// var leftMin = distanceLeft - this.state.babyWidth
+		// var leftMax = distanceLeft + this.state.babyWidth
+
+		// var arrayPosY = this.saveExcludedPos(topMax, topMin, "Y");
+		// var arrayPosX = this.saveExcludedPos(leftMax, leftMin, "X")
+		
+		// this.props.pushPositions(arrayPosX)
+		// this.props.pushPositions(arrayPosY)
+	}
+
+	isInArray(elem, array) {
+		if(array[0].indexOf(elem) != -1 ) {
+			return true
+		}
+		else {
+			return false
+		}
+	}
+
+	saveExcludedPos(max, min, direction) {
+
+		if(direction == "X") {
+
+			var newArray = []
+			var previousArray = this.state.savePosX.slice()
+
+			for(var i = min; i < max; i++) {
+				if(i > 0) {
+					newArray.push(i)
+				}
+			}
+			
+			return newArray
+		} 
+		else if(direction == "Y") {
+
+			var newArray = []
+			var previousArray = this.state.savePosY.slice()
+
+			for(var i = min; i < max; i++) {
+				if(i > 0) {
+					newArray.push(i)
+				}
+			}
+			
+			return newArray
+		} 
 	}
 
 	handleMouseEnter(e) {
-		// console.log('entering')
 		this.setState({isHovering: true})
 	
 		let babyHovered = this.getBabyPosition(this.props.id) 
@@ -109,14 +171,12 @@ export default class Baby extends React.Component {
 		var babiesToMoove = this.getBabiesNear(babyHovered.x, babyHovered.y)
 		
 		babiesToMoove.map( elem => {
-			var elemId = elem.id
+			var elemId = "baby-"+elem.id
 
-			var test = ReactDOM.findDOMNode(this.refs[elemId])
+			// var test = ReactDOM.findDOMNode(this.refs[elemId])
+			// console.log(this.refs.elemId)
 
-			console.log(ReactDOM.findDOMNode(this))
-			console.log(test)
 		} )
-		console.log('--stop--')
 	}
 
 	handleMouseLeave(e) {
@@ -139,7 +199,8 @@ export default class Baby extends React.Component {
 
 		this.props.babiesPos.map( elem => {
 			if(xMin < elem.x && elem.x < xMax && yMin < elem.y && elem.y < yMax) {
-				emptyArray.push({id: elem.id, x: elem.x, y: elem.y})	
+				// emptyArray.push({id: elem.id, x: elem.x, y: elem.y})
+				emptyArray.push(elem)
 			}
 		})
 
@@ -150,7 +211,10 @@ export default class Baby extends React.Component {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
 		const yearSpent = this.props.datas.year
-		const id = this.props.id.toString()
+		const id = "baby-"+this.props.id
+
+		// console.log('x array: '+this.state.savePosX)
+		// console.log('y array: '+this.state.savePosY)
 
 		var babyClasses = classNames({
 			'baby': true,
