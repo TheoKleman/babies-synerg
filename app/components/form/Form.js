@@ -7,6 +7,7 @@ export default class Form extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
+        // If props "form is displayed", show form
         if (nextProps.isDisplayed == true) {
             this.showForm()
         }
@@ -14,8 +15,8 @@ export default class Form extends React.Component {
 
     hideForm() {
         var self = this;
-        // console.log("hideForm")
 
+        // Tween to hidden state + set props
         TweenMax.to(this.refs.form, .5, {
             opacity: 0,
             scale: .95,
@@ -25,15 +26,15 @@ export default class Form extends React.Component {
                 setTimeout(function(){
                     self.props.setFormIsDisplayedProps(false)
                     console.log("Board movable")
-                }, 200)
+                }, 250)
             }
         })
     }
 
     showForm() {
         var self = this;
-        // console.log("showForm")
 
+        // Tween to displayed state, props already set
         TweenMax.to(this.refs.form, .5, {
             opacity: 1,
             scale: 1,
@@ -48,6 +49,7 @@ export default class Form extends React.Component {
         var closeForm
         var button
 
+        // Button available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
             var button = <button className="primary" onClick={closeForm}>Close</button>

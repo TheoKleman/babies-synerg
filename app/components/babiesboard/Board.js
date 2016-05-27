@@ -106,40 +106,44 @@ export default class Board extends React.Component {
 
     handleMouseMove(e) {
         e.preventDefault()
-        var direction = null
-        var isPositive = null
 
-        // Clear navigate interval
-        clearInterval(this.state.navigateInterval)
+        // Handle Mouse Move only if board is movable
+        if (!this.props.formDisplayed) {
+            var direction = null
+            var isPositive = null
 
-        // Mouse is in top area
-        if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
-            direction = "Y"
-            isPositive = true
-        }
-        // Mouse is in bottom area
-        else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
-            direction = "Y"
-            isPositive = false
-        }
-        // Mouse is in left area
-        else if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
-            direction = "X"
-            isPositive = true
-        }
-        // Mouse is in right area
-        else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
-            direction = "X"
-            isPositive = false
-        }
+            // Clear navigate interval
+            clearInterval(this.state.navigateInterval)
 
-        // Execute navigate
-        if (direction != null && isPositive != null) {
-            this.navigate(direction, isPositive)
-            var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
-            this.setState({
-                navigateInterval: navigateInterval
-            })
+            // Mouse is in top area
+            if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
+                direction = "Y"
+                isPositive = true
+            }
+            // Mouse is in bottom area
+            else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
+                direction = "Y"
+                isPositive = false
+            }
+            // Mouse is in left area
+            else if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
+                direction = "X"
+                isPositive = true
+            }
+            // Mouse is in right area
+            else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
+                direction = "X"
+                isPositive = false
+            }
+
+            // Execute navigate
+            if (direction != null && isPositive != null) {
+                this.navigate(direction, isPositive)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                this.setState({
+                    navigateInterval: navigateInterval
+                })
+            }
         }
     }
 
@@ -196,13 +200,11 @@ export default class Board extends React.Component {
     }
 
     updateBoardTransform() {
-        if (!this.props.formDisplayed) {
-            TweenMax.to(this.refs.board,1, {
-                x: this.state.boardTranslateX.X,
-                y: this.state.boardTranslateY.Y,
-                ease: Power2.easeOut
-            })
-        }
+        TweenMax.to(this.refs.board,1, {
+            x: this.state.boardTranslateX.X,
+            y: this.state.boardTranslateY.Y,
+            ease: Power2.easeOut
+        })
     }
 
     render(){
