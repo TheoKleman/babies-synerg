@@ -99,7 +99,7 @@ export default class Board extends React.Component {
         }
 
         // Spacebar
-        if(e.keyCode == 32) {
+        if(e.keyCode == 32 && !this.props.formDisplayed) {
             this.props.setFormIsDisplayedProps(true)
         }
     }

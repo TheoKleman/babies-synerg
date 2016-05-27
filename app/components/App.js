@@ -23,11 +23,9 @@ export default class App extends React.Component {
     }
 
     setIsDisplayedState(value) {
-        console.log(value)
         this.setState({
             formDisplayed: value
         })
-        console.log(this.state.formDisplayed)
     }
 
     handleResize(){
