@@ -1,4 +1,4 @@
-footer.home-interface-bottom-left {
+footer.main-footer {
     position: absolute;
     height: 130px;
     bottom: 0;
@@ -10,7 +10,7 @@ footer.home-interface-bottom-left {
         left: 20px;
         width: 90px;
         height: 90px;
-        background: $blue;
+        background: $blue-a9;
 
         img {
             display: block;
@@ -55,5 +55,24 @@ footer.home-interface-bottom-left {
                 text-decoration: none;
             }
         }
+    }
+}
+
+nav.main-filter {
+    position: absolute;
+    height: 130px;
+    top: 0;
+    right: 0;
+    z-index: 10;
+
+    > button.filter-babies {
+        margin-top: 20px;
+        margin-right: 20px;
+        border: 0;
+        padding: 0 20px;
+        line-height: 70px;
+        height: 70px;
+        display: block;
+        background: $blue-a9;
     }
 }

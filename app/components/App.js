@@ -1,7 +1,9 @@
 import React from "react"
 
+import Form from "./form/Form.js"
 import Board from "./babiesboard/Board"
-import HomeInterface from "./GUI/HomeInterface.js"
+import Footer from "./GUI/Footer.js"
+import FilterNav from "./GUI/FilterNav.js"
 
 export default class App extends React.Component {
     constructor(){
@@ -11,8 +13,19 @@ export default class App extends React.Component {
             viewportSize: {
                 width: window.innerWidth,
                 height: window.innerHeight,
-            }
+            },
+            formDisplayed: false,
         }
+    }
+
+    componentDidMount(){
+        window.addEventListener('resize', this.handleResize.bind(this))
+    }
+
+    setIsDisplayedState(value) {
+        this.setState({
+            formDisplayed: value
+        })
     }
 
     handleResize(){
@@ -24,15 +37,18 @@ export default class App extends React.Component {
         })
     }
 
-    componentDidMount(){
-        window.addEventListener('resize', this.handleResize.bind(this))
-    }
-
     render(){
         return (
             <div className="main-content">
-                <HomeInterface />
-                <Board viewportSize={this.state.viewportSize} />
+                <Form
+                    isDisplayed={this.state.formDisplayed}
+                    setFormIsDisplayedProps={this.setIsDisplayedState.bind(this)}/>
+                <Board
+                    viewportSize={this.state.viewportSize}
+                    formDisplayed={this.state.formDisplayed}
+                    setFormIsDisplayedProps={this.setIsDisplayedState.bind(this)}/>
+                <FilterNav />
+                <Footer />
             </div>
         )
     }

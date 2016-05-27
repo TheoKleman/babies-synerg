@@ -175,7 +175,6 @@ export default class Baby extends React.Component {
 
 			// var test = ReactDOM.findDOMNode(this.refs[elemId])
 			// console.log(this.refs.elemId)
-
 		} )
 	}
 
@@ -229,6 +228,7 @@ export default class Baby extends React.Component {
 				onMouseEnter={this.handleMouseEnter.bind(this)}
 				onMouseLeave={this.handleMouseLeave.bind(this)}
 				ref={id}>
+				<span className="baby-bg"></span>
 				<div className="wrapper">
 					<span>Name: {name}</span>
 					<br/>

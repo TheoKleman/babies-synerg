@@ -5,7 +5,7 @@ import GSAP from 'gsap'
 import BabiesList from "./BabiesList"
 
 export default class Board extends React.Component {
-    constructor(){
+    constructor() {
         super()
 
         this.state = {
@@ -22,7 +22,7 @@ export default class Board extends React.Component {
                 Y: 0,
                 min: null,
                 max: null
-            }
+            },
         }
     }
 
@@ -37,17 +37,17 @@ export default class Board extends React.Component {
             })
     }
 
-    componentWillMount(){
+    componentWillMount() {
+        // Add event listener
+        window.addEventListener('keydown', this.handleKeyDown.bind(this))
+        
         // Set board DOM Elem
         this.setState({
             viewportSize: this.props.viewportSize
         })
     }
 
-    componentDidMount(){
-        // Add event listener
-        window.addEventListener('keydown', this.handleKeyDown.bind(this))
-
+    componentDidMount() {
         // Load babies JSON
         this.loadBabies()
 
@@ -55,6 +55,7 @@ export default class Board extends React.Component {
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
+        // Set states
         this.setState({
             initialBoardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
             boardTranslateX: {
@@ -66,11 +67,16 @@ export default class Board extends React.Component {
                 Y: centerY,
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
-            }
+            },
+            mouseMoveAreaSize: 200
         })
     }
 
-    handleKeyDown(e){
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.handleKeyDown.bind(this))
+    }
+
+    handleKeyDown(e) {
         // Arrow up
         if(e.keyCode == 38) {
             e.preventDefault()
@@ -91,9 +97,57 @@ export default class Board extends React.Component {
             e.preventDefault()
             this.navigate("X",false)
         }
+
+        // Spacebar
+        if(e.keyCode == 32 && !this.props.formDisplayed) {
+            this.props.setFormIsDisplayedProps(true)
+        }
     }
 
-    navigate(direction, isPositive){
+    handleMouseMove(e) {
+        e.preventDefault()
+
+        // Handle Mouse Move only if board is movable
+        if (!this.props.formDisplayed) {
+            var direction = null
+            var isPositive = null
+
+            // Clear navigate interval
+            clearInterval(this.state.navigateInterval)
+
+            // Mouse is in top area
+            if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
+                direction = "Y"
+                isPositive = true
+            }
+            // Mouse is in bottom area
+            else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
+                direction = "Y"
+                isPositive = false
+            }
+            // Mouse is in left area
+            else if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
+                direction = "X"
+                isPositive = true
+            }
+            // Mouse is in right area
+            else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
+                direction = "X"
+                isPositive = false
+            }
+
+            // Execute navigate
+            if (direction != null && isPositive != null) {
+                this.navigate(direction, isPositive)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                this.setState({
+                    navigateInterval: navigateInterval
+                })
+            }
+        }
+    }
+
+    navigate(direction, isPositive) {
         let { X } = this.state.boardTranslateX
         let { Y } = this.state.boardTranslateY
 
@@ -101,17 +155,17 @@ export default class Board extends React.Component {
             // Case translate Y
             case "Y":
                 if (isPositive) {
-                    Y = Y + 25
+                    Y = Y + 20
                 } else {
-                    Y = Y - 25
+                    Y = Y - 20
                 }
                 break;
             // Case translate X
             case "X":
                 if (isPositive) {
-                    X = X + 25
+                    X = X + 20
                 } else {
-                    X = X - 25
+                    X = X - 20
                 }
                 break;
         }
@@ -141,10 +195,11 @@ export default class Board extends React.Component {
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             }
         })
+
         this.updateBoardTransform()
     }
 
-    updateBoardTransform(){
+    updateBoardTransform() {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
             y: this.state.boardTranslateY.Y,
@@ -160,7 +215,11 @@ export default class Board extends React.Component {
         }
 
         return (
-            <section ref="board" className="babies-board" style={style}>
+            <section
+                ref="board"
+                className="babies-board"
+                style={style}
+                onMouseMove={this.handleMouseMove.bind(this)}>
                 <BabiesList {...this.state} />
             </section>
         )
