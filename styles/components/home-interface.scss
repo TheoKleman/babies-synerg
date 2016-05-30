@@ -76,3 +76,54 @@ nav.main-filter {
         background: $blue-a9;
     }
 }
+
+nav.controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+
+    .controls--arrows {
+        position: relative;
+        height: 22px;
+        width: 36px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+
+        > span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            display: block;
+            background: $blue;
+            transition: all ease .5s;
+
+            &.active {
+                background: $yellow;
+                transition: all ease .1s;
+            }
+
+            &.arrow-top {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &.arrow-left {
+                left: 0;
+                bottom: 0;
+            }
+
+            &.arrow-bottom {
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &.arrow-right {
+                right: 0;
+                bottom: 0;
+            }
+        }
+    }
+}

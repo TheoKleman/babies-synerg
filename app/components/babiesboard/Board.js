@@ -82,25 +82,32 @@ export default class Board extends React.Component {
     }
 
     handleKeyDown(e) {
-        // Arrow up
-        if(e.keyCode == 38) {
-            e.preventDefault()
-            this.navigate("Y",true)
-        }
-        // Arrow down
-        if(e.keyCode == 40) {
-            e.preventDefault()
-            this.navigate("Y",false)
-        }
-        // Arrow left
-        if(e.keyCode == 37) {
-            e.preventDefault()
-            this.navigate("X",true)
-        }
-        // Arrow right
-        if(e.keyCode == 39) {
-            e.preventDefault()
-            this.navigate("X",false)
+        // Handle arrow keys only if board is movable
+        if (!this.props.formDisplayed) {
+            // Arrow up
+            if(e.keyCode == 38) {
+                e.preventDefault()
+                this.navigate("Y",true)
+                this.props.setControlHighlighting("top", true)
+            }
+            // Arrow down
+            if(e.keyCode == 40) {
+                e.preventDefault()
+                this.navigate("Y",false)
+                this.props.setControlHighlighting("bottom", true)
+            }
+            // Arrow left
+            if(e.keyCode == 37) {
+                e.preventDefault()
+                this.navigate("X",true)
+                this.props.setControlHighlighting("left", true)
+            }
+            // Arrow right
+            if(e.keyCode == 39) {
+                e.preventDefault()
+                this.navigate("X",false)
+                this.props.setControlHighlighting("right", true)
+            }
         }
     }
 
@@ -125,6 +132,11 @@ export default class Board extends React.Component {
                 spacebarDown: false
             })
             clearTimeout(this.state.spacebarTO)
+        }
+
+        // Unset controls highlithing
+        if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 37 || e.keyCode == 39) {
+            this.props.unsetControlsHighlighting()   
         }
     }
 
