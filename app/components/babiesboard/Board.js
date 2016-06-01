@@ -84,31 +84,51 @@ export default class Board extends React.Component {
     handleKeyDown(e) {
         // Handle arrow keys only if board is movable
         if (!this.props.formDisplayed) {
+            var direction = null
+            var isPositive = null
+
+            // Clear navigate interval
+            clearInterval(this.state.navigateInterval)
+
             // Arrow up
-            if(e.keyCode == 38) {
+            if (e.keyCode == 38) {
                 e.preventDefault()
-                this.navigate("Y",true)
+                direction = "Y"
+                isPositive = true
                 this.props.setControlHighlighting("top", true)
             }
             // Arrow down
-            if(e.keyCode == 40) {
+            else if (e.keyCode == 40) {
                 e.preventDefault()
-                this.navigate("Y",false)
+                direction = "Y"
+                isPositive = false
                 this.props.setControlHighlighting("bottom", true)
             }
             // Arrow left
-            if(e.keyCode == 37) {
+            else if (e.keyCode == 37) {
                 e.preventDefault()
-                this.navigate("X",true)
+                direction = "X"
+                isPositive = true
                 this.props.setControlHighlighting("left", true)
             }
             // Arrow right
-            if(e.keyCode == 39) {
+            else if (e.keyCode == 39) {
                 e.preventDefault()
-                this.navigate("X",false)
+                direction = "X"
+                isPositive = false
                 this.props.setControlHighlighting("right", true)
             }
+
+            // Execute navigate
+            if (direction != null && isPositive != null) {
+                this.navigate(direction, isPositive)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                this.setState({
+                    navigateInterval: navigateInterval
+                })
+            }
         }
+
     }
 
     handleKeyPress(e) {
@@ -127,6 +147,9 @@ export default class Board extends React.Component {
     }
 
     handleKeyUp(e) {
+        // Clear navigate interval
+        clearInterval(this.state.navigateInterval)
+
         if (e.keyCode == 32 && !this.props.formDisplayed) {
             this.setState({
                 spacebarDown: false
