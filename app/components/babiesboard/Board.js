@@ -87,8 +87,13 @@ export default class Board extends React.Component {
             var direction = null
             var isPositive = null
 
-            // Clear navigate interval
-            clearInterval(this.state.navigateInterval)
+            // Clear mouse navigate interval
+            if (this.state.boardIsTranslatingWithMouse) {
+                clearInterval(this.state.navigateInterval)
+                this.setState({
+                    boardIsTranslatingWithMouse: false
+                })
+            }
 
             // Arrow up
             if (e.keyCode == 38) {
@@ -120,10 +125,11 @@ export default class Board extends React.Component {
             }
 
             // Execute navigate
-            if (direction != null && isPositive != null) {
+            if (direction != null && isPositive != null && !this.state.boardIsTranslatingWithKeys) {
                 this.navigate(direction, isPositive)
-                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 25)
                 this.setState({
+                    boardIsTranslatingWithKeys: true,
                     navigateInterval: navigateInterval
                 })
             }
@@ -149,6 +155,9 @@ export default class Board extends React.Component {
     handleKeyUp(e) {
         // Clear navigate interval
         clearInterval(this.state.navigateInterval)
+        this.setState({
+            boardIsTranslatingWithKeys: false,
+        })
 
         if (e.keyCode == 32 && !this.props.formDisplayed) {
             this.setState({
@@ -193,13 +202,18 @@ export default class Board extends React.Component {
             else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
                 direction = "X"
                 isPositive = false
+            } else {
+                this.setState({
+                    boardIsTranslatingWithMouse: false,
+                })
             }
 
             // Execute navigate
             if (direction != null && isPositive != null) {
                 this.navigate(direction, isPositive)
-                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 75)
                 this.setState({
+                    boardIsTranslatingWithMouse: true,
                     navigateInterval: navigateInterval
                 })
             }
