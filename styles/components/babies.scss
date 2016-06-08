@@ -1,10 +1,53 @@
 .babies-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
 
 	.baby {
 		position: absolute;
 		display: inline-block;
 		width: 200px;
 		height: 200px;
+
+        &.gridElement {
+            border: 1px solid red;
+        }
+
+        .the-baby{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: translate3d(-50%, -50%, 0);
+
+            &:after {
+                display: block;
+                content: '';
+                position: absolute;
+                z-index: -1;
+                left: 50px;
+                right: 60px;
+                bottom: -7px;
+                height: 30px;
+                width: calc(100% - 120px);
+                border-radius: 100%;
+                background: rgba($purple,.18);
+                filter: blur(10px);
+            }
+
+            .wrapper {
+                display: none;
+                padding: 10px;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                background: black;
+
+                span {
+                    display: block;
+                    color: white;
+                }
+            }
+        }
 
         span.baby-bg {
             position: absolute;
@@ -16,38 +59,9 @@
             background-size: cover;
         }
 
-        &:after {
-            display: block;
-            content: '';
-            position: absolute;
-            z-index: -1;
-            left: 50px;
-            right: 60px;
-            bottom: -7px;
-            height: 30px;
-            width: calc(100% - 120px);
-            border-radius: 100%;
-            background: rgba($purple,.18);
-            filter: blur(10px);
-        }
-
         &.hover {
 			// border: 1px solid red;
 		}
-
-        > .wrapper {
-            display: none;
-            padding: 10px;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-
-            span {
-                display: block;
-                color: white;
-            }
-        }
 
         &:hover {
             > .wrapper {

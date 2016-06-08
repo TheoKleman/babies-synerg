@@ -1,18 +1,17 @@
-import React from "react"
+import React from "react"   
 import qwest from "qwest"
 import GSAP from 'gsap'
 
 import BabiesList from "./BabiesList"
+import HomeTitle from "./HomeTitle"
 
 export default class Board extends React.Component {
     constructor() {
         super()
 
         this.state = {
-            babies: [],
-            babiesData: {},
-            boardWidth: 3000,
-            boardHeight: 1666,
+            boardWidth: 4400,
+            boardHeight: 2475,
             boardTranslateX: {
                 X: 0,
                 min: null,
@@ -26,16 +25,13 @@ export default class Board extends React.Component {
         }
     }
 
-    loadBabies() {
-        qwest
-            .get("/json/babies.json")
-            .then((xhr, response) => {
-                this.setState({
-                    babies: response.babies,
-                    babiesData: response.babies[0]
-                })
-            })
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        // You can access `this.props` and `this.state` here
+        // This function should return a boolean, whether the component should re-render.
+        return false;
     }
+
 
     componentWillMount() {
         // Add event listener
@@ -45,11 +41,10 @@ export default class Board extends React.Component {
         this.setState({
             viewportSize: this.props.viewportSize
         })
+
     }
 
     componentDidMount() {
-        // Load babies JSON
-        this.loadBabies()
 
         // Center board & set min/max board translateX/Y
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
@@ -220,7 +215,9 @@ export default class Board extends React.Component {
                 className="babies-board"
                 style={style}
                 onMouseMove={this.handleMouseMove.bind(this)}>
-                <BabiesList {...this.state} />
+
+                <BabiesList boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight}/>
+                <HomeTitle boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight} />
             </section>
         )
     }

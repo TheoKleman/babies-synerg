@@ -1,0 +1,15 @@
+{
+  "maxW": 3000,
+  "maxH": 1600,
+  "babyWidth": 200,
+  "babyHeight": 200,
+  "style": {
+    "top": "0px",
+    "left": "0px",
+    "zIndex": 0
+  },
+  "isHovering": false,
+  "iNeighbourg": false,
+  "savedTop": 0,
+  "savedLeft": 0
+}

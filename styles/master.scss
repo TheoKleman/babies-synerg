@@ -2,6 +2,7 @@
 @import "lib/reset";
 
 @import "config/colors";
+@import "config/commons.scss";
 @import "config/responsive";
 
 // Fonts 
@@ -13,3 +14,4 @@
 @import "components/babies.scss";
 @import "components/home-interface.scss";
 @import "components/form.scss";
+@import "components/home-title.scss";

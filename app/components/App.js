@@ -15,6 +15,7 @@ export default class App extends React.Component {
                 height: window.innerHeight,
             },
             formDisplayed: false,
+            spacePressed: false,
         }
     }
 
