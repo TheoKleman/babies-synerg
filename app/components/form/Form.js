@@ -4,6 +4,11 @@ import GSAP from 'gsap'
 export default class Form extends React.Component {
     constructor() {
         super()
+
+        this.state = {
+            step: 0,
+            stepMax: 6,
+        }
     }
 
     componentWillUpdate(nextProps) {
@@ -25,7 +30,6 @@ export default class Form extends React.Component {
                 self.refs.form.className = 'form';
                 setTimeout(function(){
                     self.props.setFormIsDisplayedProps(false)
-                    console.log("Board movable")
                 }, 250)
             }
         })
@@ -45,6 +49,44 @@ export default class Form extends React.Component {
         })
     }
 
+    nextStep() {
+        if (this.state.step >= this.state.stepMax) {
+            var newStep = this.state.step
+        } else {
+            var newStep = this.state.step + 1
+        }
+
+        this.setState({
+            step: newStep
+        })
+    }
+
+    previousStep() {
+        if (this.state.step <= 0) {
+            var newStep = 0
+        } else {
+            var newStep = this.state.step - 1
+        }
+
+        this.setState({
+            step: newStep
+        })
+    }
+
+    switchToStep(step) {
+        var newStep = this.refs.inputStep.value * 1
+
+        if (newStep <= 0) {
+            var newStep = 0
+        } else if (newStep >= this.state.stepMax) {
+            var newStep = this.state.stepMax
+        }
+
+        this.setState({
+            step: newStep
+        })
+    }
+
     render() {
         var closeForm
         var button
@@ -59,7 +101,16 @@ export default class Form extends React.Component {
             <section
                 ref="form"
                 className="form">
-                <h1>This is a form</h1>
+                <p>current step : {this.state.step}</p>
+                <br/>
+
+                <h1>Previous/Next step</h1>
+                <button onClick={this.previousStep.bind(this)}>Previous step</button>
+                <button onClick={this.nextStep.bind(this)}>Next step</button>
+                <br/>
+                <h1>Swictch to new step</h1>
+                <input type="number" placeholder="Enter a step value" ref="inputStep"/>
+                <button onClick={this.switchToStep.bind(this)}>Switch to step</button>
 
                 {button}
             </section>

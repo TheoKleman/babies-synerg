@@ -21,7 +21,7 @@ export default class Board extends React.Component {
                 Y: 0,
                 min: null,
                 max: null
-            },
+            }
         }
     }
 
@@ -36,6 +36,8 @@ export default class Board extends React.Component {
     componentWillMount() {
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
+        window.addEventListener('keypress', this.handleKeyPress.bind(this))
+        window.addEventListener("keyup", this.handleKeyUp.bind(this))
         
         // Set board DOM Elem
         this.setState({
@@ -69,33 +71,98 @@ export default class Board extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
+        window.removeEventListener("keypress", this.handleKeyPress.bind(this))
+        window.removeEventListener("keyup", this.handleKeyUp.bind(this))
     }
 
     handleKeyDown(e) {
-        // Arrow up
-        if(e.keyCode == 38) {
-            e.preventDefault()
-            this.navigate("Y",true)
-        }
-        // Arrow down
-        if(e.keyCode == 40) {
-            e.preventDefault()
-            this.navigate("Y",false)
-        }
-        // Arrow left
-        if(e.keyCode == 37) {
-            e.preventDefault()
-            this.navigate("X",true)
-        }
-        // Arrow right
-        if(e.keyCode == 39) {
-            e.preventDefault()
-            this.navigate("X",false)
+        // Handle arrow keys only if board is movable
+        if (!this.props.formDisplayed) {
+            var direction = null
+            var isPositive = null
+
+            // Clear mouse navigate interval
+            if (this.state.boardIsTranslatingWithMouse) {
+                clearInterval(this.state.navigateInterval)
+                this.setState({
+                    boardIsTranslatingWithMouse: false
+                })
+            }
+
+            // Arrow up
+            if (e.keyCode == 38) {
+                e.preventDefault()
+                direction = "Y"
+                isPositive = true
+                this.props.setControlHighlighting("top", true)
+            }
+            // Arrow down
+            else if (e.keyCode == 40) {
+                e.preventDefault()
+                direction = "Y"
+                isPositive = false
+                this.props.setControlHighlighting("bottom", true)
+            }
+            // Arrow left
+            else if (e.keyCode == 37) {
+                e.preventDefault()
+                direction = "X"
+                isPositive = true
+                this.props.setControlHighlighting("left", true)
+            }
+            // Arrow right
+            else if (e.keyCode == 39) {
+                e.preventDefault()
+                direction = "X"
+                isPositive = false
+                this.props.setControlHighlighting("right", true)
+            }
+
+            // Execute navigate
+            if (direction != null && isPositive != null && !this.state.boardIsTranslatingWithKeys) {
+                this.navigate(direction, isPositive)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 25)
+                this.setState({
+                    boardIsTranslatingWithKeys: true,
+                    navigateInterval: navigateInterval
+                })
+            }
         }
 
-        // Spacebar
-        if(e.keyCode == 32 && !this.props.formDisplayed) {
-            this.props.setFormIsDisplayedProps(true)
+    }
+
+    handleKeyPress(e) {
+        var self = this;
+
+        // Spacebar - Open form modal
+        if (e.keyCode == 32 && !this.props.formDisplayed && this.state.spacebarDown == false) {
+            this.setState({
+                spacebarDown: true,
+                spacebarTO: setTimeout(function(){
+                    console.log("open form modal")
+                    self.props.setFormIsDisplayedProps(true)
+                }, 1000)
+            })
+        }
+    }
+
+    handleKeyUp(e) {
+        // Clear navigate interval
+        clearInterval(this.state.navigateInterval)
+        this.setState({
+            boardIsTranslatingWithKeys: false,
+        })
+
+        if (e.keyCode == 32 && !this.props.formDisplayed) {
+            this.setState({
+                spacebarDown: false
+            })
+            clearTimeout(this.state.spacebarTO)
+        }
+
+        // Unset controls highlithing
+        if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 37 || e.keyCode == 39) {
+            this.props.unsetControlsHighlighting()   
         }
     }
 
@@ -129,13 +196,18 @@ export default class Board extends React.Component {
             else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
                 direction = "X"
                 isPositive = false
+            } else {
+                this.setState({
+                    boardIsTranslatingWithMouse: false,
+                })
             }
 
             // Execute navigate
             if (direction != null && isPositive != null) {
                 this.navigate(direction, isPositive)
-                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 50)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 75)
                 this.setState({
+                    boardIsTranslatingWithMouse: true,
                     navigateInterval: navigateInterval
                 })
             }
