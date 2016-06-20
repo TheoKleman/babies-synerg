@@ -18,6 +18,18 @@ export default class Form extends React.Component {
         }
     }
 
+    componentWillMount() {
+        // Add event listener
+        window.addEventListener('keydown', this.handleKeyDown.bind(this))
+    }
+
+    handleKeyDown(e) {
+        // ESC key 
+        if (e.keyCode == 27 && this.props.isDisplayed) {
+            this.hideForm();
+        }
+    }
+
     hideForm() {
         var self = this;
 

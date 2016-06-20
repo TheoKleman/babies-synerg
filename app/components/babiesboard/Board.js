@@ -23,7 +23,8 @@ export default class Board extends React.Component {
                 Y: 0,
                 min: null,
                 max: null
-            }
+            },
+            spacebarDown: false
         }
     }
 
@@ -49,14 +50,12 @@ export default class Board extends React.Component {
     }
 
     componentDidMount() {
-
         // Center board & set min/max board translateX/Y
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
         // Set states
         this.setState({
-            initialBoardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
             boardTranslateX: {
                 X: centerX,
                 max: 0,
@@ -67,7 +66,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: 200
+            mouseMoveAreaSize: this.props.viewportSize.height/8
         })
     }
 
@@ -130,19 +129,20 @@ export default class Board extends React.Component {
                 })
             }
         }
-
     }
 
     handleKeyPress(e) {
         var self = this;
 
         // Spacebar - Open form modal
-        if (e.keyCode == 32 && !this.props.formDisplayed && this.state.spacebarDown == false) {
+        if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
             this.setState({
                 spacebarDown: true,
                 spacebarTO: setTimeout(function(){
-                    console.log("open form modal")
                     self.props.setFormIsDisplayedProps(true)
+                    self.setState({
+                        spacebarDown: false,
+                    })
                 }, 1000)
             })
         }
@@ -156,10 +156,10 @@ export default class Board extends React.Component {
         })
 
         if (e.keyCode == 32 && !this.props.formDisplayed) {
-            this.setState({
-                spacebarDown: false
-            })
             clearTimeout(this.state.spacebarTO)
+            this.setState({
+                spacebarDown: false,
+            })
         }
 
         // Unset controls highlithing
@@ -252,20 +252,22 @@ export default class Board extends React.Component {
             Y = this.state.boardTranslateX.max
         }
 
-        this.setState({
-            boardTranslateX: {
-                X: X,
-                max: 0,
-                min: - (this.state.boardWidth - this.props.viewportSize.width)
-            },
-            boardTranslateY: {
-                Y: Y,
-                max: 0,
-                min: - (this.state.boardHeight - this.props.viewportSize.height)
-            }
-        })
+        if (!this.props.formDisplayed) {
+            this.setState({
+                boardTranslateX: {
+                    X: X,
+                    max: 0,
+                    min: - (this.state.boardWidth - this.props.viewportSize.width)
+                },
+                boardTranslateY: {
+                    Y: Y,
+                    max: 0,
+                    min: - (this.state.boardHeight - this.props.viewportSize.height)
+                }
+            })
 
-        this.updateBoardTransform()
+            this.updateBoardTransform()
+        }
     }
 
     updateBoardTransform() {
@@ -277,10 +279,14 @@ export default class Board extends React.Component {
     }
 
     render(){
+        // Center board & set min/max board translateX/Y
+        let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
+        let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
+
         let style = {
             width: this.state.boardWidth,
             height: this.state.boardHeight,
-            transform: this.state.initialBoardTransform
+            transform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)'
         }
 
         return (
@@ -290,8 +296,14 @@ export default class Board extends React.Component {
                 style={style}
                 onMouseMove={this.handleMouseMove.bind(this)}>
 
-                <BabiesList boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight}/>
-                <HomeTitle boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight} />
+                <BabiesList
+                    boardWidth={this.state.boardWidth}
+                    boardHeight={this.state.boardHeight}/>
+                <HomeTitle
+                    boardWidth={this.state.boardWidth}
+                    boardHeight={this.state.boardHeight}
+                    setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
+                    formDisplayed={this.props.formDisplayed} />
             </section>
         )
     }

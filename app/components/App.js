@@ -21,7 +21,9 @@ export default class App extends React.Component {
                 right: false,
                 bottom: false,
                 left: false,
-            }
+            },
+            boardWidth: 4400,
+            boardHeight: 2475,
         }
     }
 
