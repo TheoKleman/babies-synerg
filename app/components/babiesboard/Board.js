@@ -64,7 +64,8 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: this.props.viewportSize.height/8
+            mouseMoveAreaSize: this.props.viewportSize.height/8,
+            mouseMoveAreaSizeSecurityBorder: 10,
         })
     }
 
@@ -167,6 +168,7 @@ export default class Board extends React.Component {
     }
 
     handleMouseMove(e) {
+        console.log(e);
         e.preventDefault()
 
         // Handle Mouse Move only if board is movable
@@ -178,22 +180,22 @@ export default class Board extends React.Component {
             clearInterval(this.state.navigateInterval)
 
             // Mouse is in top area
-            if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
+            if((e.clientY > this.state.mouseMoveAreaSizeSecurityBorder) && (e.clientY < this.state.mouseMoveAreaSize)) {
                 direction = "Y"
                 isPositive = true
             }
             // Mouse is in bottom area
-            else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
+            else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < (this.state.viewportSize.height - this.state.mouseMoveAreaSizeSecurityBorder))) {
                 direction = "Y"
                 isPositive = false
             }
             // Mouse is in left area
-            else if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
+            else if((e.clientX > this.state.mouseMoveAreaSizeSecurityBorder) && (e.clientX < this.state.mouseMoveAreaSize)) {
                 direction = "X"
                 isPositive = true
             }
             // Mouse is in right area
-            else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
+            else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < (this.state.viewportSize.width - this.state.mouseMoveAreaSizeSecurityBorder))) {
                 direction = "X"
                 isPositive = false
             } else {
