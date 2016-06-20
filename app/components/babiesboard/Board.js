@@ -64,7 +64,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: 100
+            mouseMoveAreaSize: this.props.viewportSize.height/8
         })
     }
 
