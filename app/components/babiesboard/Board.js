@@ -44,7 +44,6 @@ export default class Board extends React.Component {
         this.setState({
             viewportSize: this.props.viewportSize
         })
-
     }
 
     componentDidMount() {
@@ -250,7 +249,7 @@ export default class Board extends React.Component {
             Y = this.state.boardTranslateX.max
         }
 
-        if (!this.props.formDisplayed) {
+        if (!this.props.formDisplayed && this.props.mouseIsInViewport) {
             this.setState({
                 boardTranslateX: {
                     X: X,
