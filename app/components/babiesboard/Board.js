@@ -21,7 +21,8 @@ export default class Board extends React.Component {
                 Y: 0,
                 min: null,
                 max: null
-            }
+            },
+            spacebarDown: false
         }
     }
 
@@ -126,19 +127,20 @@ export default class Board extends React.Component {
                 })
             }
         }
-
     }
 
     handleKeyPress(e) {
         var self = this;
 
         // Spacebar - Open form modal
-        if (e.keyCode == 32 && !this.props.formDisplayed && this.state.spacebarDown == false) {
+        if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
             this.setState({
                 spacebarDown: true,
                 spacebarTO: setTimeout(function(){
-                    console.log("open form modal")
                     self.props.setFormIsDisplayedProps(true)
+                    self.setState({
+                        spacebarDown: false,
+                    })
                 }, 1000)
             })
         }
@@ -152,10 +154,10 @@ export default class Board extends React.Component {
         })
 
         if (e.keyCode == 32 && !this.props.formDisplayed) {
-            this.setState({
-                spacebarDown: false
-            })
             clearTimeout(this.state.spacebarTO)
+            this.setState({
+                spacebarDown: false,
+            })
         }
 
         // Unset controls highlithing
