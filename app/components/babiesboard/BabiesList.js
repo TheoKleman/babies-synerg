@@ -1,9 +1,9 @@
-import React from "react"
+import React, { Component, PropTypes } from "react"
 import qwest from "qwest"
 import Baby from "./Baby"
 import GSAP from 'gsap'
 
-export default class BabiesList extends React.Component {
+export default class BabiesList extends Component {
 
 	constructor() {
 		super()
@@ -44,6 +44,19 @@ export default class BabiesList extends React.Component {
 	    // console.log("nbCaseY : "+nbCasesY);
 
 	}
+
+	moveBox(id, left, top) {
+	    this.setState(update(this.state, {
+	      babies: {
+	        [id]: {
+	          $merge: {
+	            left: left,
+	            top: top
+	          }
+	        }
+	      }
+	    }));
+	  }
 
     buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight){
         let array = []

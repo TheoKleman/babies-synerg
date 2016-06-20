@@ -6,7 +6,7 @@
 	.baby {
 		position: absolute;
 		display: inline-block;
-		width: 200px;
+		width: 100px;
 		height: 200px;
 
         &.gridElement {
@@ -17,7 +17,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, 0%, 0);
 
             &:after {
                 display: block;
