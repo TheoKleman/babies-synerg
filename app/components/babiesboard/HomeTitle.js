@@ -19,8 +19,6 @@ export default class HomeTitle extends React.Component {
 	}
 
 	render() {
-	
-
 		var titleStyle = {
 			position: 'absolute',
 			top: (this.props.boardHeight / 2) - (this.state.height / 2),
@@ -35,7 +33,9 @@ export default class HomeTitle extends React.Component {
 			ref="homeTitle">
 				<h1><span>Aujourd'hui, synerg'hetic compte 164 enfants du web !</span></h1>
 
-				<SpaceBar />
+				<SpaceBar
+					formDisplayed={this.props.formDisplayed}
+					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps} />
 				<p>Maintenez la barre espace pour ...</p>
 			</div>
 		)

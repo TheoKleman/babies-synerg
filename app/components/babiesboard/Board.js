@@ -250,20 +250,22 @@ export default class Board extends React.Component {
             Y = this.state.boardTranslateX.max
         }
 
-        this.setState({
-            boardTranslateX: {
-                X: X,
-                max: 0,
-                min: - (this.state.boardWidth - this.props.viewportSize.width)
-            },
-            boardTranslateY: {
-                Y: Y,
-                max: 0,
-                min: - (this.state.boardHeight - this.props.viewportSize.height)
-            }
-        })
+        if (!this.props.formDisplayed) {
+            this.setState({
+                boardTranslateX: {
+                    X: X,
+                    max: 0,
+                    min: - (this.state.boardWidth - this.props.viewportSize.width)
+                },
+                boardTranslateY: {
+                    Y: Y,
+                    max: 0,
+                    min: - (this.state.boardHeight - this.props.viewportSize.height)
+                }
+            })
 
-        this.updateBoardTransform()
+            this.updateBoardTransform()
+        }
     }
 
     updateBoardTransform() {
@@ -292,8 +294,14 @@ export default class Board extends React.Component {
                 style={style}
                 onMouseMove={this.handleMouseMove.bind(this)}>
 
-                <BabiesList boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight}/>
-                <HomeTitle boardWidth={this.state.boardWidth} boardHeight={this.state.boardHeight} />
+                <BabiesList
+                    boardWidth={this.state.boardWidth}
+                    boardHeight={this.state.boardHeight}/>
+                <HomeTitle
+                    boardWidth={this.state.boardWidth}
+                    boardHeight={this.state.boardHeight}
+                    setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
+                    formDisplayed={this.props.formDisplayed} />
             </section>
         )
     }
