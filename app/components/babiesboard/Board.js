@@ -47,14 +47,12 @@ export default class Board extends React.Component {
     }
 
     componentDidMount() {
-
         // Center board & set min/max board translateX/Y
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
         // Set states
         this.setState({
-            initialBoardTransform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)',
             boardTranslateX: {
                 X: centerX,
                 max: 0,
@@ -65,7 +63,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: 200
+            mouseMoveAreaSize: 100
         })
     }
 
@@ -275,10 +273,14 @@ export default class Board extends React.Component {
     }
 
     render(){
+        // Center board & set min/max board translateX/Y
+        let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
+        let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
+
         let style = {
             width: this.state.boardWidth,
             height: this.state.boardHeight,
-            transform: this.state.initialBoardTransform
+            transform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)'
         }
 
         return (

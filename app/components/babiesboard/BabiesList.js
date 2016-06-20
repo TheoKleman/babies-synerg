@@ -37,10 +37,10 @@ export default class BabiesList extends React.Component {
 	        boardItSelf: this.buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight)
 	    })
 
-	    console.log("caseHeight : "+caseWidth);
-	    console.log("caseWidth : "+caseHeight);
-	    console.log("nbCaseX : "+nbCasesX);
-	    console.log("nbCaseY : "+nbCasesY);
+	    // console.log("caseHeight : "+caseWidth);
+	    // console.log("caseWidth : "+caseHeight);
+	    // console.log("nbCaseX : "+nbCasesX);
+	    // console.log("nbCaseY : "+nbCasesY);
 
 	}
 
@@ -170,11 +170,10 @@ export default class BabiesList extends React.Component {
 	componentWillMount() {
         this.loadBabySpec()
         this.loadBabies()
-        console.log("will mount");
 	}
 
 	componentDidMount(){
-		console.log(this.refs.babyContainer);
+		// console.log(this.refs.babyContainer);
 	}
 
 	render() {
