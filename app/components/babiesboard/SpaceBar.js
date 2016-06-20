@@ -11,21 +11,27 @@ export default class SpaceBar extends React.Component {
         }
     }
 
-    handleClick(e) {
+    handleMouseDown(e) {
         var self = this
-        console.log(e)
 
-        // if (!this.props.formDisplayed && !this.state.clickDown) {
-        //     this.setState({
-        //         clickDown: true,
-        //         clickTO: setTimeout(function(){
-        //             self.props.setFormIsDisplayedProps(true)
-        //             self.setState({
-        //                 clickDown: false,
-        //             })
-        //         }, 1000)
-        //     })
-        // }
+        if (!this.props.formDisplayed && !this.state.clickDown) {
+            this.setState({
+                clickDown: true,
+                clickTO: setTimeout(function(){
+                    self.props.setFormIsDisplayedProps(true)
+                    self.setState({
+                        clickDown: false,
+                    })
+                }, 1000)
+            })
+        }
+    }
+
+    handleMouseUp(e) {
+        clearTimeout(this.state.clickTO)
+        this.setState({
+            clickDown: false,
+        })
     }
 
     render() {
@@ -36,7 +42,8 @@ export default class SpaceBar extends React.Component {
         return(
             <div 
                 className="space-bar-wrapper"
-                onClick={this.handleClick.bind(this)}
+                onMouseDown={this.handleMouseDown.bind(this)}
+                onMouseUp={this.handleMouseUp.bind(this)}
                 >
                 <span className="space-bar-double"></span>
                 <button
