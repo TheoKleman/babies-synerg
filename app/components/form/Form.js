@@ -48,17 +48,19 @@ export default class Form extends React.Component {
     }
 
     showForm() {
-        var self = this;
+        if (!this.props.isDisplayed) {
+            var self = this;
 
-        // Tween to displayed state, props already set
-        TweenMax.to(this.refs.form, .5, {
-            opacity: 1,
-            scale: 1,
-            ease: Power2.easeOut,
-            onStart: function(){
-                self.refs.form.className += ' displayed';
-            }
-        })
+            // Tween to displayed state, props already set
+            TweenMax.to(this.refs.form, .5, {
+                opacity: 1,
+                scale: 1,
+                ease: Power2.easeOut,
+                onStart: function(){
+                    self.refs.form.className += ' displayed';
+                }
+            })
+        }
     }
 
     nextStep() {

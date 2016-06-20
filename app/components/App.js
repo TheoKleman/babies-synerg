@@ -24,11 +24,13 @@ export default class App extends React.Component {
             },
             boardWidth: 4400,
             boardHeight: 2475,
+            mouseInViewport: true,
         }
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
+        document.addEventListener('mouseout', this.handleMouseLeaveViewport.bind(this))
     }
 
     setControlHighlighting(control) {
@@ -89,6 +91,18 @@ export default class App extends React.Component {
         })
     }
 
+    handleMouseLeaveViewport(e) {
+        if (e.toElement == null && e.relatedTarget == null) {
+            this.setState({
+                mouseInViewport: false
+            })
+        } else {
+            this.setState({
+                mouseInViewport: true
+            })
+        }
+    }
+
     render(){
         return (
             <div className="main-content">
@@ -101,7 +115,8 @@ export default class App extends React.Component {
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
-                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}/>
+                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
+                    mouseIsInViewport={this.state.mouseInViewport}/>
                 <FilterNav />
                 <Footer />
                 <Controls 
