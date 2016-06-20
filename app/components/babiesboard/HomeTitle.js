@@ -10,7 +10,6 @@ export default class HomeTitle extends React.Component {
 			width: 450,
 			height: 250
 		}
-
 	}
 
 	componentDidMount() {
@@ -35,7 +34,9 @@ export default class HomeTitle extends React.Component {
 
 				<SpaceBar
 					formDisplayed={this.props.formDisplayed}
-					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps} />
+					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
+					setSpacebarProgression={this.props.setSpacebarProgression}
+					spacebarProgression={this.props.spacebarProgression} />
 				<p>Maintenez la barre espace pour ...</p>
 			</div>
 		)

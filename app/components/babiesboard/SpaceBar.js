@@ -7,7 +7,8 @@ export default class SpaceBar extends React.Component {
 
         this.state = {
             clickDown: false,
-            clickTO: null
+            clickTO: null,
+            p: 0
         }
     }
 
@@ -18,19 +19,29 @@ export default class SpaceBar extends React.Component {
             this.setState({
                 clickDown: true,
                 clickTO: setTimeout(function(){
+                    clearInterval(self.state.clickProgress)
                     self.props.setFormIsDisplayedProps(true)
                     self.setState({
                         clickDown: false,
+                        p: 0,
                     })
-                }, 1000)
+                }, 1000),
+                clickProgress: setInterval(function(){
+                    self.setState({
+                        p: self.state.p + 1
+                    })
+                }, 10)
             })
         }
     }
 
     handleMouseUp(e) {
+        // Reset timeout & Reset progression
         clearTimeout(this.state.clickTO)
+        clearInterval(this.state.clickProgress)
         this.setState({
             clickDown: false,
+            p: 0
         })
     }
 
@@ -47,7 +58,7 @@ export default class SpaceBar extends React.Component {
                 >
                 <span className="space-bar-double"></span>
                 <button
-                    className={spaceClasses}>Un projet digital à leur confier ?</button>
+                    className={spaceClasses}>Un projet digital à leur confier ? ({this.state.p}%)</button>
             </div>
         )
     }

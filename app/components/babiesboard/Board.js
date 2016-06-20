@@ -24,17 +24,16 @@ export default class Board extends React.Component {
                 min: null,
                 max: null
             },
-            spacebarDown: false
+            spacebarDown: false,
+            spacebarProgression: 0,
         }
     }
 
-    
     shouldComponentUpdate(nextProps, nextState) {
         // You can access `this.props` and `this.state` here
         // This function should return a boolean, whether the component should re-render.
         return false;
     }
-
 
     componentWillMount() {
         // Add event listener
@@ -65,7 +64,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: this.props.viewportSize.height/8
+            mouseMoveAreaSize: this.props.viewportSize.height/12
         })
     }
 
@@ -73,6 +72,12 @@ export default class Board extends React.Component {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
         window.removeEventListener("keypress", this.handleKeyPress.bind(this))
         window.removeEventListener("keyup", this.handleKeyUp.bind(this))
+    }
+
+    setSpacebarProgression(value) {
+        this.setState({
+            spacebarProgression: value
+        })
     }
 
     handleKeyDown(e) {
@@ -302,7 +307,9 @@ export default class Board extends React.Component {
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
-                    formDisplayed={this.props.formDisplayed} />
+                    formDisplayed={this.props.formDisplayed}
+                    setSpacebarProgression={this.setSpacebarProgression.bind(this)}
+                    spacebarProgression={this.state.spacebarProgression} />
             </section>
         )
     }
