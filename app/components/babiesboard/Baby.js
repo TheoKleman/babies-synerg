@@ -1,6 +1,8 @@
 import React from 'react'
 import qwest from "qwest"
 import ReactDOM from 'react-dom'
+import Draggable from 'react-draggable';
+
 var classNames = require('classnames')
 
 export default class Baby extends React.Component {
@@ -22,12 +24,12 @@ export default class Baby extends React.Component {
 			savedTop: 0,
 			savedLeft: 0,
 			globalDrag: null,
+			deltaPosition: { x: 0, y: 0 },
 		}
 	}
 
     componentWillMount() {
     	this.setBabySpec()
-    	
     }
 
 	componentDidMount() {
@@ -85,6 +87,28 @@ export default class Baby extends React.Component {
 		this.setState({isHovering: false})
 	}
 
+	handleMouseDown(e) {
+		console.log(e)
+	}
+
+	handleDrag(e, ui) {
+      const {x, y} = this.state.deltaPosition;
+      this.setState({
+        deltaPosition: {
+          x: x + ui.deltaX,
+          y: y + ui.deltaY,
+        }
+      })
+    }
+
+    onStart() {
+      this.setState({activeDrags: ++this.state.activeDrags});
+    }
+
+    onStop() {
+      this.setState({activeDrags: --this.state.activeDrags});
+    }
+
 	render() {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
@@ -97,25 +121,36 @@ export default class Baby extends React.Component {
 			'neighbourg': this.state.isNeighbourg
 		})
 
+		const {deltaPosition} = this.state
 		return(
-			<div 
-				className={babyClasses}
+			<Draggable
+				axis="both"
+		        handle=".baby"
+		        defaultPosition={{x: this.props.pos.origin.Xpx, y: this.props.pos.origin.Ypx}}
+		        position={null}
+		        zIndex={100}
+		        onDrag={this.handleDrag.bind(this)}
+		        onStart={this.onStart.bind(this)}
+		        onStop={this.onStop.bind(this)}>
+				<div className={babyClasses}
+				onMouseDown={this.handleMouseDown.bind(this)}
 				onMouseEnter={this.handleMouseEnter.bind(this, id)}
 				onMouseLeave={this.handleMouseLeave.bind(this)}
 				id={id}
 				ref="itSelf">
-				<div className="the-baby" >	
-					<span className="baby-bg"></span>
-					<div className="wrapper">
-						<span>Name: {name}</span>
-						<br/>
-						<span>Skills: {profile}</span>
-						<br/>
-						<span>CurrentYear: {yearSpent}</span>
-						<br/>
+					<div className="the-baby" >	
+						<span className="baby-bg"></span>
+						<div className="wrapper">
+							<span>Name: {name}</span>
+							<br/>
+							<span>Skills: {profile}</span>
+							<br/>
+							<span>CurrentYear: {yearSpent}</span>
+							<br/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Draggable>
 		);
 	}
 }

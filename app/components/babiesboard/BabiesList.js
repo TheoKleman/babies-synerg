@@ -18,7 +18,7 @@ export default class BabiesList extends Component {
             nbCasesY: 0,
             caseWidth: 0,
             caseHeight: 0,
-            safetyWidthDistance: 50,
+            safetyWidthDistance: 30,
             safetyHeightDistance: -20,
 		}
 	}

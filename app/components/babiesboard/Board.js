@@ -12,7 +12,7 @@ export default class Board extends React.Component {
         // w 4400
         // h 2475
         this.state = {
-            boardWidth: 3500,
+            boardWidth: 3400,
             boardHeight: 1900,
             boardTranslateX: {
                 X: 0,
