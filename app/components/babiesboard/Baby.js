@@ -20,7 +20,8 @@ export default class Baby extends React.Component {
 			isHovering: false,
 			iNeighbourg: false,
 			savedTop: 0,
-			savedLeft: 0
+			savedLeft: 0,
+			globalDrag: null,
 		}
 	}
 
@@ -30,7 +31,6 @@ export default class Baby extends React.Component {
     }
 
 	componentDidMount() {
-
 		this.setPosition(this.props.pos.origin)
 	}
 
@@ -64,21 +64,24 @@ export default class Baby extends React.Component {
 	        zIndex: pos.y
 	      }
 	    )
-
 	}
 
 	getRandomNumber(limitInf, limitSup) {	
 		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
 	}
 
-	handleMouseEnter(e) {
+	handleMouseEnter(e, id) {
 		this.setState({isHovering: true})
 	
+		// Save datas here for the future
+		let babyXpx = this.props.pos.origin.Xpx
+		let babyYpx = this.props.pos.origin.Ypx
+		let babyDatas = this.props.datas
+
 		// let babyHovered = this.getBabyPosition(this.props.id) 
 	}
 
 	handleMouseLeave(e) {
-
 		this.setState({isHovering: false})
 	}
 
@@ -97,7 +100,7 @@ export default class Baby extends React.Component {
 		return(
 			<div 
 				className={babyClasses}
-				onMouseEnter={this.handleMouseEnter.bind(this)}
+				onMouseEnter={this.handleMouseEnter.bind(this, id)}
 				onMouseLeave={this.handleMouseLeave.bind(this)}
 				id={id}
 				ref="itSelf">

@@ -1,6 +1,7 @@
 import React from "react"
 import qwest from "qwest"
 import Baby from "./Baby"
+import GSAP from 'gsap'
 
 export default class BabiesList extends React.Component {
 
@@ -12,7 +13,7 @@ export default class BabiesList extends React.Component {
             boardItSelf: [],
             scale: 5,
             widthWhiteSpace: 300,
-            heightWhiteSpace: 300,
+            heightWhiteSpace: 250,
             nbCasesX: 0,
             nbCasesY: 0,
             caseWidth: 0,
@@ -182,12 +183,13 @@ export default class BabiesList extends React.Component {
 			<div className="babies-container" ref="babyContainer">
 				{
 					this.state.babies.map((baby, i) =>
-							<Baby key={i}
-								datas={baby}
-								babySpec={this.state.babySpec}
-								pos={this.setRandomPosition()}
-								test = {this.refs.babyContainer}
-								id={i} />
+						<Baby 
+							key={i}
+							datas={baby}
+							babySpec={this.state.babySpec}
+							pos={this.setRandomPosition()}
+							test = {this.refs.babyContainer}
+							id={i} />
           			) 
 				}
 			</div>
