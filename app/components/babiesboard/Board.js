@@ -23,7 +23,6 @@ export default class Board extends React.Component {
                 max: null
             },
             spacebarDown: false,
-            spacebarProgression: 0,
         }
     }
 
@@ -70,12 +69,6 @@ export default class Board extends React.Component {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
         window.removeEventListener("keypress", this.handleKeyPress.bind(this))
         window.removeEventListener("keyup", this.handleKeyUp.bind(this))
-    }
-
-    setSpacebarProgression(value) {
-        this.setState({
-            spacebarProgression: value
-        })
     }
 
     handleKeyDown(e) {
@@ -305,9 +298,7 @@ export default class Board extends React.Component {
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
-                    formDisplayed={this.props.formDisplayed}
-                    setSpacebarProgression={this.setSpacebarProgression.bind(this)}
-                    spacebarProgression={this.state.spacebarProgression} />
+                    formDisplayed={this.props.formDisplayed}/>
             </section>
         )
     }
