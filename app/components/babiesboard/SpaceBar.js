@@ -15,6 +15,8 @@ export default class SpaceBar extends React.Component {
         var self = this
 
         if (!this.props.formDisplayed && !this.state.clickDown) {
+            // Center board
+            this.props.centerBoard()
             this.setState({
                 clickDown: true,
                 clickTO: setTimeout(function(){

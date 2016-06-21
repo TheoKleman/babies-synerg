@@ -136,24 +136,10 @@ export default class Board extends React.Component {
         // Spacebar - Open form modal
         if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
             // Center board 
-            TweenMax.to(self.refs.board,1, {
-                x: self.state.boardCenterX,
-                y: self.state.boardCenterY,
-                ease: Power2.easeOut
-            })
+            self.centerBoard()
 
             self.setState({
                 spacebarDown: true,
-                boardTranslateX: {
-                    X: self.state.boardCenterX,
-                    max: 0,
-                    min: - (this.state.boardWidth - this.props.viewportSize.width)
-                },
-                boardTranslateY: {
-                    Y: self.state.boardCenterY,
-                    max: 0,
-                    min: - (this.state.boardHeight - this.props.viewportSize.height)
-                },
                 spacebarTO: setTimeout(function(){
                     self.props.setFormIsDisplayedProps(true)
                     self.setState({
@@ -335,6 +321,27 @@ export default class Board extends React.Component {
         }
     }
 
+    centerBoard() {
+        console.log("centerBoard called")
+        TweenMax.to(this.refs.board,1, {
+            x: this.state.boardCenterX,
+            y: this.state.boardCenterY,
+            ease: Power2.easeOut
+        })
+        this.setState({
+            boardTranslateX: {
+                X: this.state.boardCenterX,
+                max: 0,
+                min: - (this.state.boardWidth - this.props.viewportSize.width)
+            },
+            boardTranslateY: {
+                Y: this.state.boardCenterY,
+                max: 0,
+                min: - (this.state.boardHeight - this.props.viewportSize.height)
+            },
+        })
+    }
+
     updateBoardTransform() {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
@@ -369,7 +376,8 @@ export default class Board extends React.Component {
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
-                    formDisplayed={this.props.formDisplayed}/>
+                    formDisplayed={this.props.formDisplayed}
+                    centerBoard={this.centerBoard.bind(this)}/>
             </section>
         )
     }
