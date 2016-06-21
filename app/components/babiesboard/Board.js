@@ -9,9 +9,11 @@ export default class Board extends React.Component {
     constructor() {
         super()
 
+        // w 4400
+        // h 2475
         this.state = {
-            boardWidth: 4400,
-            boardHeight: 2475,
+            boardWidth: 3400,
+            boardHeight: 1900,
             boardTranslateX: {
                 X: 0,
                 min: null,
