@@ -115,18 +115,17 @@ export default class Form extends React.Component {
             <section
                 ref="form"
                 className="form">
-                <p>current step : {this.state.step}</p>
-                <br/>
-
-                <h1>Previous/Next step</h1>
-                <button onClick={this.previousStep.bind(this)}>Previous step</button>
-                <button onClick={this.nextStep.bind(this)}>Next step</button>
-                <br/>
-                <h1>Swictch to new step</h1>
-                <input type="number" placeholder="Enter a step value" ref="inputStep"/>
-                <button onClick={this.switchToStep.bind(this)}>Switch to step</button>
-
-                {button}
+                <div className="form--container">
+                    <div className="form--container--left">
+                        <img className="gif-baby" src="/images/synerg-baby-placeholder.png" alt=""/>
+                    </div>
+                    
+                    <div className="form--container--right">
+                        <h1>Hello world</h1>
+                        <p>Here we have a beautiful text content, such wow</p>
+                        <p>and probably one day, a beautiful form :D</p>
+                    </div>
+                </div>
             </section>
         );
     }
