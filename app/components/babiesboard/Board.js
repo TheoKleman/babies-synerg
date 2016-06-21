@@ -322,13 +322,14 @@ export default class Board extends React.Component {
     }
 
     centerBoard() {
-        console.log("centerBoard called")
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardCenterX,
             y: this.state.boardCenterY,
             ease: Power2.easeOut
         })
+        clearInterval(this.state.navigateInterval)
         this.setState({
+            navigateInterval: undefined,
             boardTranslateX: {
                 X: this.state.boardCenterX,
                 max: 0,
