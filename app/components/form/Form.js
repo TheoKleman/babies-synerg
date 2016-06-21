@@ -108,7 +108,7 @@ export default class Form extends React.Component {
         // Button available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
-            var button = <button className="primary" onClick={closeForm}>Close</button>
+            var button = <button className="primary form--close" onClick={closeForm}>Close</button>
         }
 
         return(
@@ -126,6 +126,7 @@ export default class Form extends React.Component {
                         <p>and probably one day, a beautiful form :D</p>
                     </div>
                 </div>
+                {button}
             </section>
         );
     }
