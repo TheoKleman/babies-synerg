@@ -22,6 +22,7 @@
     "qwest": "^4.4.0",
     "react": "~15.1.0",
     "react-dom": "^15.1.0",
+    "react-draggable": "^2.1.2",
     "react-router": "^2.1.1",
     "scrollmagic": "^2.0.5"
   },

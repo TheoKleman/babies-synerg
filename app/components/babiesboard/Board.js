@@ -25,7 +25,6 @@ export default class Board extends React.Component {
                 max: null
             },
             spacebarDown: false,
-            spacebarProgression: 0,
         }
     }
 
@@ -54,6 +53,8 @@ export default class Board extends React.Component {
 
         // Set states
         this.setState({
+            boardCenterX: centerX,
+            boardCenterY: centerY,
             boardTranslateX: {
                 X: centerX,
                 max: 0,
@@ -64,7 +65,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: this.props.viewportSize.height/12
+            mouseMoveAreaSize: this.props.viewportSize.height/9
         })
     }
 
@@ -72,12 +73,6 @@ export default class Board extends React.Component {
         window.removeEventListener("keydown", this.handleKeyDown.bind(this))
         window.removeEventListener("keypress", this.handleKeyPress.bind(this))
         window.removeEventListener("keyup", this.handleKeyUp.bind(this))
-    }
-
-    setSpacebarProgression(value) {
-        this.setState({
-            spacebarProgression: value
-        })
     }
 
     handleKeyDown(e) {
@@ -140,7 +135,10 @@ export default class Board extends React.Component {
 
         // Spacebar - Open form modal
         if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
-            this.setState({
+            // Center board 
+            self.centerBoard()
+
+            self.setState({
                 spacebarDown: true,
                 spacebarTO: setTimeout(function(){
                     self.props.setFormIsDisplayedProps(true)
@@ -180,38 +178,87 @@ export default class Board extends React.Component {
             var direction = null
             var isPositive = null
 
-            // Clear navigate interval
-            clearInterval(this.state.navigateInterval)
-
             // Mouse is in top area
             if((e.clientY > 0) && (e.clientY < this.state.mouseMoveAreaSize)) {
+                if (!this.state.mouseOnTopArea) {
+                    clearInterval(this.state.navigateInterval)
+                    this.setState({
+                        navigateInterval: undefined
+                    })
+                }
+                this.setState({
+                    mouseOnTopArea: true,
+                    mouseOnBottomArea: false,
+                    mouseOnLeftArea: false,
+                    mouseOnRightArea: false,
+                })
                 direction = "Y"
                 isPositive = true
             }
             // Mouse is in bottom area
             else if((e.clientY > this.state.viewportSize.height - this.state.mouseMoveAreaSize) && (e.clientY < this.state.viewportSize.height)) {
+                if (!this.state.mouseOnBottomArea) {
+                    clearInterval(this.state.navigateInterval)
+                    this.setState({
+                        navigateInterval: undefined
+                    })
+                }
+                this.setState({
+                    mouseOnTopArea: false,
+                    mouseOnBottomArea: true,
+                    mouseOnLeftArea: false,
+                    mouseOnRightArea: false,
+                })
                 direction = "Y"
                 isPositive = false
             }
             // Mouse is in left area
             else if((e.clientX > 0) && (e.clientX < this.state.mouseMoveAreaSize)) {
+                if (!this.state.mouseOnLeftArea) {
+                    clearInterval(this.state.navigateInterval)
+                    this.setState({
+                        navigateInterval: undefined
+                    })
+                }
+                this.setState({
+                    mouseOnTopArea: false,
+                    mouseOnBottomArea: false,
+                    mouseOnLeftArea: true,
+                    mouseOnRightArea: false,
+                })
                 direction = "X"
                 isPositive = true
             }
             // Mouse is in right area
             else if((e.clientX > this.state.viewportSize.width - this.state.mouseMoveAreaSize) && (e.clientX < this.state.viewportSize.width)) {
+                if (!this.state.mouseOnRightArea) {
+                    clearInterval(this.state.navigateInterval)
+                    this.setState({
+                        navigateInterval: undefined
+                    })
+                }
+                this.setState({
+                    mouseOnTopArea: false,
+                    mouseOnBottomArea: false,
+                    mouseOnLeftArea: false,
+                    mouseOnRightArea: true,
+                })
                 direction = "X"
                 isPositive = false
-            } else {
+            } 
+            // Other case
+            else {
+                clearInterval(this.state.navigateInterval)
                 this.setState({
                     boardIsTranslatingWithMouse: false,
+                    navigateInterval: undefined
                 })
             }
 
             // Execute navigate
-            if (direction != null && isPositive != null) {
+            if (direction != null && isPositive != null && this.state.navigateInterval == undefined) {
                 this.navigate(direction, isPositive)
-                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 75)
+                var navigateInterval = setInterval(this.navigate.bind(this, direction, isPositive), 30)
                 this.setState({
                     boardIsTranslatingWithMouse: true,
                     navigateInterval: navigateInterval
@@ -274,6 +321,28 @@ export default class Board extends React.Component {
         }
     }
 
+    centerBoard() {
+        TweenMax.to(this.refs.board,1, {
+            x: this.state.boardCenterX,
+            y: this.state.boardCenterY,
+            ease: Power2.easeOut
+        })
+        clearInterval(this.state.navigateInterval)
+        this.setState({
+            navigateInterval: undefined,
+            boardTranslateX: {
+                X: this.state.boardCenterX,
+                max: 0,
+                min: - (this.state.boardWidth - this.props.viewportSize.width)
+            },
+            boardTranslateY: {
+                Y: this.state.boardCenterY,
+                max: 0,
+                min: - (this.state.boardHeight - this.props.viewportSize.height)
+            },
+        })
+    }
+
     updateBoardTransform() {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
@@ -298,7 +367,8 @@ export default class Board extends React.Component {
                 ref="board"
                 className="babies-board"
                 style={style}
-                onMouseMove={this.handleMouseMove.bind(this)}>
+                onMouseMove={this.handleMouseMove.bind(this)}
+                >
 
                 <BabiesList
                     boardWidth={this.state.boardWidth}
@@ -308,8 +378,7 @@ export default class Board extends React.Component {
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
                     formDisplayed={this.props.formDisplayed}
-                    setSpacebarProgression={this.setSpacebarProgression.bind(this)}
-                    spacebarProgression={this.state.spacebarProgression} />
+                    centerBoard={this.centerBoard.bind(this)}/>
             </section>
         )
     }
