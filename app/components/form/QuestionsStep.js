@@ -34,7 +34,7 @@ export default class QuestionsStep extends React.Component {
 
         return(
             <section className="right--questions" style={style}>
-                <div className="content-vertically-centered">
+                <div className="content-centered">
                     <span className="question">
                         <small>Question 1/6</small>
                         <br />

@@ -123,10 +123,6 @@ section.form {
             }
         }
 
-        &:last-child {
-            margin-right: 0;
-        }
-
         &:hover, &.selected {
             button.key > span.key--content {
                 transform: translate3d(0,4px,0);
@@ -152,10 +148,11 @@ section.form {
             opacity: 1;
         }
 
-        > .content-vertically-centered {
+        > .content-centered {
             position: absolute;
             top: 50%;
-            transform: translate3d(0,-50%,0);
+            left: 50%;
+            transform: translate3d(-50%,-50%,0);
         }
     }
 

@@ -111,16 +111,14 @@ export default class Form extends React.Component {
         // Button available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
-            var button = <button className="form--close" onClick={closeForm}></button>
+            var buttonClose = <button className="form--close" onClick={closeForm}></button>
         }
 
-        // Set section to display by step value
-        var intro, questions, final = ""
-
-        if (this.state.step == 0) {
-            intro = "is-current-step"
-            questions, final = ""
+        // Button previous availability
+        if (this.state.step >=1) {
+            var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
         }
+        
 
         return(
             <section
@@ -145,14 +143,9 @@ export default class Form extends React.Component {
                     </div>
                 </div>
 
-                {button}
-                
-                <button
-                    className="form--previous-step {intro}"
-                    onClick={this.previousStep.bind(this)}
-                    >
-                    <span>Précédent</span>
-                </button>
+                {buttonClose}
+
+                {buttonPrevious}
             </section>
         );
     }

@@ -17,9 +17,9 @@ export default class IntroStep extends React.Component {
 
         return(
             <section className="right--intro" style={style}>
-                <div className="content-vertically-centered">
+                <div className="content-centered">
                     <span>
-                        BONJOUR, JE SUIS administrateur chez Synerg’HETIC !
+                        Bonjour, je suis administrateur chez Synerg’HETIC !
                     </span>
                     <p>
                         Dites moi en plus sur votre projet digital et je selectionnerai pour vous les étudiants les plus à même de travailler avec vous ! 
