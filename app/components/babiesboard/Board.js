@@ -65,7 +65,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: this.props.viewportSize.height/9
+            mouseMoveAreaSize: 170
         })
     }
 
@@ -85,7 +85,12 @@ export default class Board extends React.Component {
             if (this.state.boardIsTranslatingWithMouse) {
                 clearInterval(this.state.navigateInterval)
                 this.setState({
-                    boardIsTranslatingWithMouse: false
+                    boardIsTranslatingWithMouse: false,
+                    navigateInterval: undefined,
+                    mouseOnTopArea: false,
+                    mouseOnBottomArea: false,
+                    mouseOnLeftArea: false,
+                    mouseOnRightArea: false,
                 })
             }
 
@@ -253,7 +258,11 @@ export default class Board extends React.Component {
                 clearInterval(this.state.navigateInterval)
                 this.setState({
                     boardIsTranslatingWithMouse: false,
-                    navigateInterval: undefined
+                    navigateInterval: undefined,
+                    mouseOnTopArea: false,
+                    mouseOnBottomArea: false,
+                    mouseOnLeftArea: false,
+                    mouseOnRightArea: false,
                 })
             }
 
@@ -320,6 +329,16 @@ export default class Board extends React.Component {
             })
 
             this.updateBoardTransform()
+        } else if (!this.props.mouseIsInViewport) {
+            clearInterval(this.state.navigateInterval)
+            this.setState({
+                boardIsTranslatingWithMouse: false,
+                navigateInterval: undefined,
+                mouseOnTopArea: false,
+                mouseOnBottomArea: false,
+                mouseOnLeftArea: false,
+                mouseOnRightArea: false
+            })
         }
     }
 
@@ -346,10 +365,12 @@ export default class Board extends React.Component {
     }
 
     updateBoardTransform() {
+        var self = this
+
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
             y: this.state.boardTranslateY.Y,
-            ease: Power2.easeOut
+            ease: Power2.easeOut,
         })
     }
 

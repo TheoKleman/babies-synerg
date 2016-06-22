@@ -1,6 +1,9 @@
 import React from 'react'
 import GSAP from 'gsap'
 
+import IntroStep from './IntroStep'
+import QuestionsStep from './QuestionsStep'
+
 export default class Form extends React.Component {
     constructor() {
         super()
@@ -108,8 +111,14 @@ export default class Form extends React.Component {
         // Button available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
-            var button = <button className="primary form--close" onClick={closeForm}>✕</button>
+            var buttonClose = <button className="form--close" onClick={closeForm}></button>
         }
+
+        // Button previous availability
+        if (this.state.step >=1) {
+            var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
+        }
+        
 
         return(
             <section
@@ -117,16 +126,28 @@ export default class Form extends React.Component {
                 className="form">
                 <div className="form--container">
                     <div className="form--container--left">
-                        <img className="gif-baby" src="/images/synerg-baby-placeholder.png" alt=""/>
+                        <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
                     
                     <div className="form--container--right">
-                        <h1>Hello world</h1>
-                        <p>Here we have a beautiful text content, such wow</p>
-                        <p>and probably one day, a beautiful form :D</p>
+                        <IntroStep
+                            step={this.state.step}
+                            goToNextStep={this.nextStep.bind(this)}
+                            goToPreviousStep={this.previousStep.bind(this)}
+                            formIsDisplayed={this.props.isDisplayed}
+                            />
+                        <QuestionsStep
+                            step={this.state.step}
+                            goToNextStep={this.nextStep.bind(this)}
+                            goToPreviousStep={this.previousStep.bind(this)}
+                            formIsDisplayed={this.props.isDisplayed}
+                            />
                     </div>
                 </div>
-                {button}
+
+                {buttonClose}
+
+                {buttonPrevious}
             </section>
         );
     }

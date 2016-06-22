@@ -47,15 +47,14 @@ export default class SpaceBar extends React.Component {
         })
 
         return(
-            <div 
-                className="space-bar-wrapper"
+            <button
+                className="key spacebar"
                 onMouseDown={this.handleMouseDown.bind(this)}
                 onMouseUp={this.handleMouseUp.bind(this)}
                 >
-                <span className="space-bar-double"></span>
-                <button
-                    className={spaceClasses}>Un projet digital à leur confier ?</button>
-            </div>
+                <span className="key--content">Un projet digital à leur confier ?</span>
+                <span className="key--double"></span>
+            </button>
         )
     }
 
