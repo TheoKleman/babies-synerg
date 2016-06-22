@@ -90,8 +90,6 @@ export default class BabiesList extends Component {
         qwest
             .get("/json/babies.json")
             .then((xhr, response) => {
-                console.log("response")
-                console.log(response.babies)
                 this.setState({
                     babies: response.babies
                 })
