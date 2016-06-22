@@ -37,44 +37,4 @@ div.title-container {
 	width: auto;
 	width: 100%;
 	margin: 6% auto 20px auto;
-
-	button.space-bar,
-	.space-bar-double {
-		border-radius: 60px;
-		border: 4px solid $blue;
-	}
-
-	button.space-bar {
-		width: 450px;
-		height: 60px;
-		line-height: 52px;
-		padding: 0 20px;
-		text-align: center;
-		background-color: #ffffff;
-		font-size: 16px;
-		font-weight: 600;
-		text-transform: uppercase;
-		text-align: center;
-		letter-spacing: 1px;
-		color: $blue;
-		z-index: 2;
-		transform: translate3d(0, 0, 0);
-		transition: all ease;
-
-		&:hover {
-			transform: translate3d(0, 3px, 0);
-		}
-	}
-
-	.space-bar-double {
-		width: 450px;
-		position: absolute;
-		content: '';
-		left: 5px;
-		right: 2%;
-		height: 60px;
-		bottom: -10px;
-		background-color: $blue-a5;
-		z-index: -1;
-	}
 }

@@ -1,6 +1,9 @@
 import React from 'react'
 import GSAP from 'gsap'
 
+import IntroStep from './IntroStep'
+import QuestionsStep from './QuestionsStep'
+
 export default class Form extends React.Component {
     constructor() {
         super()
@@ -108,7 +111,15 @@ export default class Form extends React.Component {
         // Button available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
-            var button = <button className="primary form--close" onClick={closeForm}>✕</button>
+            var button = <button className="form--close" onClick={closeForm}></button>
+        }
+
+        // Set section to display by step value
+        var intro, questions, final = ""
+
+        if (this.state.step == 0) {
+            intro = "is-current-step"
+            questions, final = ""
         }
 
         return(
@@ -121,12 +132,27 @@ export default class Form extends React.Component {
                     </div>
                     
                     <div className="form--container--right">
-                        <h1>Hello world</h1>
-                        <p>Here we have a beautiful text content, such wow</p>
-                        <p>and probably one day, a beautiful form :D</p>
+                        <IntroStep
+                            step={this.state.step}
+                            goToNextStep={this.nextStep.bind(this)}
+                            goToPreviousStep={this.previousStep.bind(this)}
+                            />
+                        <QuestionsStep
+                            step={this.state.step}
+                            goToNextStep={this.nextStep.bind(this)}
+                            goToPreviousStep={this.previousStep.bind(this)}
+                            />
                     </div>
                 </div>
+
                 {button}
+                
+                <button
+                    className="form--previous-step {intro}"
+                    onClick={this.previousStep.bind(this)}
+                    >
+                    <span>Précédent</span>
+                </button>
             </section>
         );
     }
