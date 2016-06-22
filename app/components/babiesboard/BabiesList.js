@@ -45,19 +45,6 @@ export default class BabiesList extends Component {
 
 	}
 
-	moveBox(id, left, top) {
-	    this.setState(update(this.state, {
-	      babies: {
-	        [id]: {
-	          $merge: {
-	            left: left,
-	            top: top
-	          }
-	        }
-	      }
-	    }));
-	  }
-
     buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight){
         let array = []
         for ( var i=0; i < nbCasesX; i++ ){
@@ -138,7 +125,8 @@ export default class BabiesList extends Component {
 		let limit = Math.floor(this.state.scale / 2)
 		let casesOwn = {
 			origin: null,
-			otherCases: []
+			otherCases: [],
+			rotation: 0
 		}
 		for ( var i = (x - limit); i <= (x + limit); i++ ){
 			for ( var j = (y - limit); j <= (y + limit); j++ ){
@@ -182,7 +170,6 @@ export default class BabiesList extends Component {
 		return true
 	}
 
-
 	componentWillMount() {
         this.loadBabySpec()
         this.loadBabies()
@@ -197,7 +184,7 @@ export default class BabiesList extends Component {
 			<div className="babies-container" ref="babyContainer">
 				{
 					this.state.babies.map((baby, i) =>
-						<Baby 
+						<Baby
 							key={i}
 							datas={baby}
 							babySpec={this.state.babySpec}
