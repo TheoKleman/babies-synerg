@@ -177,7 +177,9 @@ export default class BabiesList extends Component {
 		// console.log(this.refs.babyContainer);
 	}
 
+
 	render() {
+
 		return(
 			<div className="babies-container" ref="babyContainer">
 				{

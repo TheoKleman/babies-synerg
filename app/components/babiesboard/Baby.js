@@ -26,7 +26,6 @@ export default class Baby extends React.Component {
 			savedTop: 0,
 			savedLeft: 0,
 			globalDrag: null,
-			test: 100
 		}
 	}
 
@@ -50,14 +49,15 @@ export default class Baby extends React.Component {
 				endOnly: true,
 				elementRect: { top: 0, left: 0, bottom: 0, right: 0 }
 			},
-			onmove: this.onDragListener
+			onmove: this.onDragListener.bind(this)
 		})
 	}
 
 	onDragListener(event) {
 		// console.log(event)
 
-		// console.log(this.props.pos.origin.Xpx)
+		var baseX = this.props.pos.origin.Xpx,
+			baseY = this.props.pos.origin.Ypx - 40
 
 		// var currentBaby = document.getElementById(event.target.id)
 
@@ -66,17 +66,15 @@ export default class Baby extends React.Component {
 			viewportWidth = window.innerWidth,
 			viewportHeight = window.innerHeight
 
-		console.log(boardWidth)
-
 		var target = event.target,
 		    // keep the dragged position in the data-x/data-y attributes
-		    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-		    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+		    x = (parseFloat(target.getAttribute('data-x')) || baseX) + event.dx,
+		    y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
 
 		// translate the element
 		target.style.webkitTransform =
 		target.style.transform =
-		  'translate(' + (event.clientX + (800)) + 'px, ' + (event.clientY + (500)) + 'px)';
+		  'translate(' + (x) + 'px, ' + (y) + 'px)';
 
 		// update the posiion attributes
 		target.setAttribute('data-x', x);
