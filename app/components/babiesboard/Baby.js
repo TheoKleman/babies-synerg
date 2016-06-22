@@ -47,7 +47,7 @@ export default class Baby extends React.Component {
 			restrict: {
 				restriction: 'parent',
 				endOnly: true,
-				elementRect: { top: 0, left: 0, bottom: 0, right: 0 }
+				elementRect: { top: 0, left: 0, bottom: 1.5, right: 1.5 }
 			},
 			onmove: this.onDragListener.bind(this)
 		})
@@ -83,6 +83,7 @@ export default class Baby extends React.Component {
 
 	setBabySpec(){
 		let response = this.props.babySpec
+
 		this.setState({
             maxW: response.maxW,
 			maxH: response.maxH,
@@ -96,8 +97,38 @@ export default class Baby extends React.Component {
 			isHovering: response.isHovering,
 			iNeighbourg: response.iNeighbourg,
 			savedTop: response.savedTop,
-			savedLeft: response.savedLeft
+			savedLeft: response.savedLeft,
         })
+
+		let skill = this.props.datas.tag
+        let babySKin = '';
+
+        switch(skill) {
+        	case "Designer":
+        		this.setState({
+        			skin: "Jaune"
+        		})
+        		break;
+        	case "Développeur":
+        		this.setState({
+        			skin: "Bleu"
+        		})
+        		break;
+        	case "Chef de projet":
+        		this.setState({
+        			skin: "Vert"
+        		})
+        		break;
+        	case "Marketeux":
+        		this.setState({
+        			skin: "Orange"
+        		})
+        		break;
+        	default:
+        		this.setState({
+        			skin: "baby-placeholder"
+        		})
+        }
 	}
 
 	setPosition(pos){
@@ -135,6 +166,10 @@ export default class Baby extends React.Component {
 		
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return true;
+	}
+
 	render() {
 		const name = this.props.datas.nickname
 		const profile = this.props.datas.tag
@@ -147,6 +182,11 @@ export default class Baby extends React.Component {
 			'neighbourg': this.state.isNeighbourg
 		})
 
+		var babyStyle = {
+			background: "url(/images/"+this.state.skin+".png)",
+			backgroundSize: "cover"
+		}
+
 		return(
 			<div
 			className={babyClasses}
@@ -155,8 +195,8 @@ export default class Baby extends React.Component {
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
 			ref="itSelf">
-				<div className="the-baby">	
-					<span className="baby-bg"></span>
+				<div className="the-baby">
+					<span className="baby-bg" style={babyStyle}></span>
 					<div className="wrapper">
 						<span>Name: {name}</span>
 						<br/>
