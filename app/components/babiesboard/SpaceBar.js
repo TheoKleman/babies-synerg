@@ -42,7 +42,8 @@ export default class SpaceBar extends React.Component {
 
     render() {
         var spaceClasses = classNames({
-            'space-bar': true
+            'space-bar': true,
+            'isPressed': this.props.isSpacePressed
         })
 
         return(

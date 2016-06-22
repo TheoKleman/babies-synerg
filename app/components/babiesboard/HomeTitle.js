@@ -25,6 +25,8 @@ export default class HomeTitle extends React.Component {
 			zIndex: 100,
 		}
 
+		console.log(this.props.spaceBarPressed)
+
 		return(
 			<div 
 			className="title-container"
@@ -35,7 +37,8 @@ export default class HomeTitle extends React.Component {
 				<SpaceBar
 					formDisplayed={this.props.formDisplayed}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
-					centerBoard={this.props.centerBoard.bind(this)} />
+					centerBoard={this.props.centerBoard.bind(this)}
+					isSpacePressed={this.props.spaceBarPressed} />
 				<p>Maintenez la barre espace pour ...</p>
 			</div>
 		)

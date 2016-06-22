@@ -61,7 +61,8 @@ div.title-container {
 		transform: translate3d(0, 0, 0);
 		transition: all ease;
 
-		&:hover {
+		&:hover,
+		&.isPressed {
 			transform: translate3d(0, 3px, 0);
 		}
 	}

@@ -147,6 +147,8 @@ export default class Board extends React.Component {
                     })
                 }, 1000)
             })
+
+            console.log(self.state.spacebarDown)
         }
     }
 
@@ -365,7 +367,7 @@ export default class Board extends React.Component {
         return (
             <section
                 ref="board"
-                className="babies-board"
+                id="babies-board"
                 style={style}
                 onMouseMove={this.handleMouseMove.bind(this)}
                 >
@@ -378,6 +380,7 @@ export default class Board extends React.Component {
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
                     formDisplayed={this.props.formDisplayed}
+                    spaceBarPressed={this.state.spacebarDown}
                     centerBoard={this.centerBoard.bind(this)}/>
             </section>
         )
