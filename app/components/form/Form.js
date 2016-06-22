@@ -126,7 +126,7 @@ export default class Form extends React.Component {
                 className="form">
                 <div className="form--container">
                     <div className="form--container--left">
-                        <img className="gif-baby" src="/images/synerg-baby-placeholder.png" alt=""/>
+                        <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
                     
                     <div className="form--container--right">
@@ -134,11 +134,13 @@ export default class Form extends React.Component {
                             step={this.state.step}
                             goToNextStep={this.nextStep.bind(this)}
                             goToPreviousStep={this.previousStep.bind(this)}
+                            formIsDisplayed={this.props.isDisplayed}
                             />
                         <QuestionsStep
                             step={this.state.step}
                             goToNextStep={this.nextStep.bind(this)}
                             goToPreviousStep={this.previousStep.bind(this)}
+                            formIsDisplayed={this.props.isDisplayed}
                             />
                     </div>
                 </div>

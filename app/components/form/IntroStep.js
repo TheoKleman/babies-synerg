@@ -5,6 +5,20 @@ export default class IntroStep extends React.Component {
         super()
     }
 
+    componentWillMount() {
+        window.addEventListener("keyup", this.handleKeyUp.bind(this))
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keyup", this.handleKeyUp.bind(this))   
+    }
+
+    handleKeyUp(e) {
+        if (e.keyCode == 13 && this.props.formIsDisplayed) {
+            this.props.goToNextStep()
+        }
+    }
+
     render() {
         var style = {
             display: 'none'
