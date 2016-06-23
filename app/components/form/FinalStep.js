@@ -22,6 +22,10 @@ export default class FinalStep extends React.Component {
         }, 500)
     }
 
+    sendFormData() {
+        // todo ajax mail.php
+    }
+
     render() {
         return(
             <section className="right--final" ref="sectionFinal">

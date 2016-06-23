@@ -23,16 +23,33 @@ export default class App extends React.Component {
                 bottom: false,
                 left: false,
             },
+            scrollDelta: {
+                deltaX: 0,
+                deltaY: 0
+            },
             boardWidth: 4400,
             boardHeight: 2475,
-            mouseInViewport: true,
-            detailDisplayed: false,
+            detailDisplayed: false
         }
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        document.addEventListener('mouseout', this.handleMouseLeaveViewport.bind(this))
+        // window.addEventListener('onmouseweel', this.handleScroll.bind(this));
+    }
+
+    componentWillUnmount() {
+        // window.removeEventListener('onmouseweel', this.handleScroll.bind(this));
+    }
+
+    handleScroll(e) {
+        e.preventDefault()
+        this.setState({
+            scrollDelta: {
+                deltaX: e.deltaX,
+                deltaY: e.deltaY
+            }
+        })
     }
 
     setControlHighlighting(control) {
@@ -99,39 +116,27 @@ export default class App extends React.Component {
         })
     }
 
-    handleMouseLeaveViewport(e) {
-        if (e.toElement == null && e.relatedTarget == null) {
-            this.setState({
-                mouseInViewport: false
-            })
-        } else {
-            this.setState({
-                mouseInViewport: true
-            })
-        }
-    }
-
     render(){
         return (
-            <div className="main-content">
+            <div className="main-content" onWheel={this.handleScroll.bind(this)}>
                 <Form
                     isDisplayed={this.state.formDisplayed}
-                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}/>
+                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)} />
                 <Board
                     viewportSize={this.state.viewportSize}
+                    scrollDelta={this.state.scrollDelta}
                     formDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
-                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    mouseIsInViewport={this.state.mouseInViewport}/>
+                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)} />
                 <DetailBaby
                     isDisplayed={this.state.detailDisplayed} />
                 <FilterNav />
                 <Footer />
                 <Controls 
-                    controlsHighlighting={this.state.controlsHighlighting}/>
+                    controlsHighlighting={this.state.controlsHighlighting} />
             </div>
         )
     }
