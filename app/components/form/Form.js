@@ -78,11 +78,11 @@ export default class Form extends React.Component {
                     answers: [
                         {
                             id: 0,
-                            text: "Oui"
+                            text: "Allez"
                         },
                         {
                             id: 1,
-                            text: "Non"
+                            text: "Nop nop nop"
                         }
                     ]
                 },
@@ -213,7 +213,7 @@ export default class Form extends React.Component {
         }
 
         // Button previous availability
-        if (this.state.step >=1) {
+        if (this.state.step >=1 && this.state.step <= this.state.questions.length) {
             var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
         }
         

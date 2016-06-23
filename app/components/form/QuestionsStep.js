@@ -36,7 +36,7 @@ export default class QuestionsStep extends React.Component {
             <section className="right--questions" style={style}>
                 <div className="content-centered">
                     <span className="question">
-                        <small>Question {questionNumber} / 5</small>
+                        <small>Question {questionNumber} / {this.props.questions.length}</small>
                         <br />
                         {currentQuestion.text}
                     </span>
