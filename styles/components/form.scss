@@ -141,13 +141,7 @@ section.form {
         width: 100%;
         height: 100%;
         position: relative;
-        // z-index: -1;
-        // opacity: 0;
-
-        &.is-current-step {
-            z-index: 1;
-            opacity: 1;
-        }
+        transform: scale(.5);
 
         > .content-centered {
             position: absolute;

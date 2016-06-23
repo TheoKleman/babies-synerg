@@ -7,17 +7,14 @@ export default class QuestionsStep extends React.Component {
         super()
     }
 
-    render() {
-        // Set if this step is displayed or not
-        var style = {
-            display: 'none'
-        }
-        if (this.props.step >= 1 && this.props.step < this.props.questions.length + 1) {
-            style = {
-                display: 'block'
-            }
-        }
+    componentDidMount() {
+        TweenMax.to(this.refs.sectionQuestions, .3, {
+            scale: 1,
+            ease: Power2.easeOut,
+        })
+    }
 
+    render() {
         // get currentQuestion
         var currentQuestion = this.props.currentQuestion
 
@@ -33,7 +30,7 @@ export default class QuestionsStep extends React.Component {
         }
 
         return(
-            <section className="right--questions" style={style}>
+            <section className="right--questions" ref="sectionQuestions">
                 <div className="content-centered">
                     <span className="question">
                         <small>Question {questionNumber} / {this.props.questions.length}</small>

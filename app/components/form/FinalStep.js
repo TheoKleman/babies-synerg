@@ -5,6 +5,13 @@ export default class FinalStep extends React.Component {
         super()
     }
 
+    componentDidMount() {
+        TweenMax.to(this.refs.sectionFinal, .3, {
+            scale: 1,
+            ease: Power2.easeOut,
+        })
+    }
+
     endForm() {
         var self = this
 
@@ -16,17 +23,8 @@ export default class FinalStep extends React.Component {
     }
 
     render() {
-        var style = {
-            display: 'none'
-        }
-        if (this.props.step == this.props.questions.length + 1) {
-            style = {
-                display: 'block'
-            }
-        }
-
         return(
-            <section className="right--final" style={style}>
+            <section className="right--final" ref="sectionFinal">
                 <div className="content-centered">
                     <span>
                         Merci !

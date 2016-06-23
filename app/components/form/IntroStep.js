@@ -13,6 +13,13 @@ export default class IntroStep extends React.Component {
         window.removeEventListener("keyup", this.handleKeyUp.bind(this))   
     }
 
+    componentDidMount() {
+        TweenMax.to(this.refs.sectionIntro, .3, {
+            scale: 1,
+            ease: Power2.easeOut,
+        })
+    }
+
     handleKeyUp(e) {
         if (e.keyCode == 13 && this.props.formIsDisplayed && this.props.step == 0) {
             this.props.goToNextStep()
@@ -20,17 +27,8 @@ export default class IntroStep extends React.Component {
     }
 
     render() {
-        var style = {
-            display: 'none'
-        }
-        if (this.props.step == 0) {
-            style = {
-                display: 'block'
-            }
-        }
-
         return(
-            <section className="right--intro" style={style}>
+            <section className="right--intro" ref="sectionIntro">
                 <div className="content-centered">
                     <span>
                         Bonjour, je suis administrateur chez Synerg’HETIC !

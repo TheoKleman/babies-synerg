@@ -224,6 +224,33 @@ export default class Form extends React.Component {
         if (this.state.step >=1 && this.state.step <= this.state.questions.length) {
             var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
         }
+
+        // Set right section content
+        if (this.state.step == 0) {
+            var rightContent = <IntroStep 
+                                    step={this.state.step}
+                                    goToNextStep={this.nextStep.bind(this)}
+                                    goToPreviousStep={this.previousStep.bind(this)}
+                                    formIsDisplayed={this.props.isDisplayed}
+                                    />
+        } else if (this.state.step >= 1 && this.state.step < this.state.questions.length + 1) {
+            var rightContent = <QuestionsStep
+                                    step={this.state.step}
+                                    goToNextStep={this.nextStep.bind(this)}
+                                    goToPreviousStep={this.previousStep.bind(this)}
+                                    formIsDisplayed={this.props.isDisplayed}
+                                    currentQuestionId={this.state.currentQuestionId}
+                                    questions={this.state.questions}
+                                    currentQuestion={this.state.currentQuestion}
+                                    />   
+        } else if (this.state.step == this.state.questions.length + 1) {
+            var rightContent = <FinalStep 
+                                    step={this.state.step}
+                                    questions={this.state.questions}
+                                    hideForm={this.hideForm.bind(this)}
+                                    resetForm={this.resetForm.bind(this)}
+                                    />
+        }
         
         return(
             <section
@@ -234,27 +261,7 @@ export default class Form extends React.Component {
                         <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
                     <div className="form--container--right">
-                        <IntroStep
-                            step={this.state.step}
-                            goToNextStep={this.nextStep.bind(this)}
-                            goToPreviousStep={this.previousStep.bind(this)}
-                            formIsDisplayed={this.props.isDisplayed}
-                            />
-                        <QuestionsStep
-                            step={this.state.step}
-                            goToNextStep={this.nextStep.bind(this)}
-                            goToPreviousStep={this.previousStep.bind(this)}
-                            formIsDisplayed={this.props.isDisplayed}
-                            currentQuestionId={this.state.currentQuestionId}
-                            questions={this.state.questions}
-                            currentQuestion={this.state.currentQuestion}
-                            />
-                        <FinalStep 
-                            step={this.state.step}
-                            questions={this.state.questions}
-                            hideForm={this.hideForm.bind(this)}
-                            resetForm={this.resetForm.bind(this)}
-                            />
+                        {rightContent}
                     </div>
                 </div>
 
