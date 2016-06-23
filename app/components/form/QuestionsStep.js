@@ -12,7 +12,7 @@ export default class QuestionsStep extends React.Component {
         var style = {
             display: 'none'
         }
-        if (this.props.step >= 1) {
+        if (this.props.step >= 1 && this.props.step < this.props.questions.length + 1) {
             style = {
                 display: 'block'
             }

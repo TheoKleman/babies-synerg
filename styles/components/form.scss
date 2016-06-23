@@ -137,7 +137,7 @@ section.form {
         }
     }
 
-    .right--intro, .right--questions, .right-final {
+    .right--intro, .right--questions, .right--final {
         width: 100%;
         height: 100%;
         position: relative;
@@ -190,7 +190,7 @@ section.form {
     }
 
     .right--questions {
-        
+
         > .content-centered {
             width: 100%;
         }
@@ -205,6 +205,26 @@ section.form {
             small {
                 font-size: 14px;
             }
+        }
+    }
+
+    .right--final {
+        text-align: center;
+
+        span {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: $blue;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 14px;
+            color: $grey;
+        }
+
+        button.key.spacebar {
+            margin-top: 30px;
         }
     }
 }

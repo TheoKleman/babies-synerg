@@ -3,6 +3,7 @@ import GSAP from 'gsap'
 
 import IntroStep from './IntroStep'
 import QuestionsStep from './QuestionsStep'
+import FinalStep from './FinalStep'
 
 export default class Form extends React.Component {
     constructor() {
@@ -142,7 +143,6 @@ export default class Form extends React.Component {
             var newCurrentQuestionId = this.state.currentQuestionId + 1
         } else {
             var newCurrentQuestionId = this.state.currentQuestionId
-            console.log("ended")
         }
         this.setState({
             step: newStep,
@@ -158,10 +158,10 @@ export default class Form extends React.Component {
             var newStep = this.state.step - 1
         }
 
-        if (newStep > 1) {
+        if (newStep >= 1 && newStep < this.state.questions.length && this.state.currentQuestionId <= this.state.questions.length - 1) {
             var newCurrentQuestionId = this.state.currentQuestionId - 1
         } else {
-            var newCurrentQuestionId = 0
+            var newCurrentQuestionId = this.state.currentQuestionId
         }
         this.setState({
             step: newStep,
@@ -193,6 +193,8 @@ export default class Form extends React.Component {
                     <div className="form--container--left">
                         <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
+                    {this.state.step}
+                    {this.state.currentQuestionId}
                     <div className="form--container--right">
                         <IntroStep
                             step={this.state.step}
@@ -208,6 +210,11 @@ export default class Form extends React.Component {
                             currentQuestionId={this.state.currentQuestionId}
                             questions={this.state.questions}
                             currentQuestion={this.state.currentQuestion}
+                            />
+                        <FinalStep 
+                            step={this.state.step}
+                            questions={this.state.questions}
+                            hideForm={this.hideForm.bind(this)}
                             />
                     </div>
                 </div>
