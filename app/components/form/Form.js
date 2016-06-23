@@ -72,6 +72,38 @@ export default class Form extends React.Component {
                         }
                     ]
                 },
+                {
+                    id: 3,
+                    text: "Une petite dernière question pour la route ?",
+                    answers: [
+                        {
+                            id: 0,
+                            text: "Oui"
+                        },
+                        {
+                            id: 1,
+                            text: "Non"
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    text: "J'ai plus d'inspiration, alors oui ou non ?",
+                    answers: [
+                        {
+                            id: 0,
+                            text: "Oui"
+                        },
+                        {
+                            id: 1,
+                            text: "Non"
+                        },
+                        {
+                            id: 2,
+                            text: "Je sais pas :|"
+                        }
+                    ]
+                }
             ],
         }
     }
@@ -193,8 +225,6 @@ export default class Form extends React.Component {
                     <div className="form--container--left">
                         <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
-                    {this.state.step}
-                    {this.state.currentQuestionId}
                     <div className="form--container--right">
                         <IntroStep
                             step={this.state.step}
