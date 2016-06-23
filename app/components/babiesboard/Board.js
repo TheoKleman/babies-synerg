@@ -80,7 +80,6 @@ export default class Board extends React.Component {
         
         // Execute scroll navigate interval
         if ((deltaX != 0 || deltaY != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.isDragging) {
-            console.log("jsuis la frèr")
             var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 40)
             this.setState({
                 navigateScrollInterval: navigateScrollInterval,
