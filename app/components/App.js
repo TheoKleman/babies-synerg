@@ -5,6 +5,7 @@ import Board from "./babiesboard/Board"
 import Footer from "./GUI/Footer.js"
 import FilterNav from "./GUI/FilterNav.js"
 import Controls from "./GUI/Controls.js"
+import DetailBaby from "./babiesBoard/DetailBaby"
 
 export default class App extends React.Component {
     constructor(){
@@ -25,6 +26,7 @@ export default class App extends React.Component {
             boardWidth: 4400,
             boardHeight: 2475,
             mouseInViewport: true,
+            detailDisplayed: false,
         }
     }
 
@@ -82,6 +84,12 @@ export default class App extends React.Component {
         })
     }
 
+    setDetailIsDisplayedState(value) {
+        this.setState({
+            detailDisplayed: value
+        })
+    }
+
     handleResize(){
         this.setState({
             viewportSize: {
@@ -113,10 +121,13 @@ export default class App extends React.Component {
                     viewportSize={this.state.viewportSize}
                     formDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                    setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     mouseIsInViewport={this.state.mouseInViewport}/>
+                <DetailBaby
+                    isDisplayed={this.state.detailDisplayed} />
                 <FilterNav />
                 <Footer />
                 <Controls 
