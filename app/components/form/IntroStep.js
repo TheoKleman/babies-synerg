@@ -14,7 +14,7 @@ export default class IntroStep extends React.Component {
     }
 
     handleKeyUp(e) {
-        if (e.keyCode == 13 && this.props.formIsDisplayed) {
+        if (e.keyCode == 13 && this.props.formIsDisplayed && this.props.step == 0) {
             this.props.goToNextStep()
         }
     }

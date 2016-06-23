@@ -49,6 +49,28 @@ export default class Form extends React.Component {
                         }
                     ]
                 },
+                {
+                    id: 2,
+                    text: "Vous voulez travailler avec nous ?",
+                    answers: [
+                        {
+                            id: 0,
+                            text: "Oui"
+                        },
+                        {
+                            id: 1,
+                            text: "Oui"
+                        },
+                        {
+                            id: 2,
+                            text: "Oui"
+                        },
+                        {
+                            id: 3,
+                            text: "Oui"
+                        }
+                    ]
+                },
             ],
         }
     }
@@ -110,17 +132,17 @@ export default class Form extends React.Component {
     }
 
     nextStep() {
-        console.log("nextStep called")
         if (this.state.step >= this.state.stepMax) {
             var newStep = this.state.step
         } else {
             var newStep = this.state.step + 1
         }
 
-        if (newStep > 1) {
+        if (newStep > 1 && this.state.currentQuestionId < this.state.questions.length - 1) {
             var newCurrentQuestionId = this.state.currentQuestionId + 1
         } else {
-            var newCurrentQuestionId = 0
+            var newCurrentQuestionId = this.state.currentQuestionId
+            console.log("ended")
         }
         this.setState({
             step: newStep,
@@ -184,6 +206,7 @@ export default class Form extends React.Component {
                             goToPreviousStep={this.previousStep.bind(this)}
                             formIsDisplayed={this.props.isDisplayed}
                             currentQuestionId={this.state.currentQuestionId}
+                            questions={this.state.questions}
                             currentQuestion={this.state.currentQuestion}
                             />
                     </div>

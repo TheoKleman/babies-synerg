@@ -6,7 +6,7 @@ export default class QuestionsStep extends React.Component {
     constructor() {
         super()
     }
-    
+
     render() {
         // Set if this step is displayed or not
         var style = {
@@ -24,11 +24,19 @@ export default class QuestionsStep extends React.Component {
         // Toggle btn
         var goToNextStep = this.props.goToNextStep.bind(this)
 
+        // Var question number 
+        var questionNumber = 0
+        if (currentQuestion.id < this.props.questions.length) {
+            questionNumber = currentQuestion.id + 1
+        } else {
+            questionNumber = currentQuestion.id
+        }
+
         return(
             <section className="right--questions" style={style}>
                 <div className="content-centered">
                     <span className="question">
-                        <small>Question {currentQuestion.id + 1}/5</small>
+                        <small>Question {questionNumber} / 5</small>
                         <br />
                         {currentQuestion.text}
                     </span>
