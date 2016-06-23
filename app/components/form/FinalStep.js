@@ -5,18 +5,30 @@ export default class FinalStep extends React.Component {
         super()
     }
 
-    render() {
-        var style = {
-            display: 'none'
-        }
-        if (this.props.step == this.props.questions.length + 1) {
-            style = {
-                display: 'block'
-            }
-        }
+    componentDidMount() {
+        TweenMax.to(this.refs.sectionFinal, .3, {
+            scale: 1,
+            ease: Power2.easeOut,
+        })
+    }
 
+    endForm() {
+        var self = this
+
+        this.props.hideForm()
+
+        setTimeout(function(){
+            self.props.resetForm()
+        }, 500)
+    }
+
+    sendFormData() {
+        // todo ajax mail.php
+    }
+
+    render() {
         return(
-            <section className="right--final" style={style}>
+            <section className="right--final" ref="sectionFinal">
                 <div className="content-centered">
                     <span>
                         Merci !
@@ -27,7 +39,7 @@ export default class FinalStep extends React.Component {
 
                     <button 
                         className="key spacebar"
-                        onClick={this.props.hideForm.bind(this)}
+                        onClick={this.endForm.bind(this)}
                         >
                         <span className="key--content">such wow</span>
                         <span className="key--double"></span>
