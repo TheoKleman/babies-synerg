@@ -8,16 +8,16 @@ export default class AnswerItem extends React.Component {
     render() {
         var char = ""
         switch(this.props.answerId) {
-            case 1:
+            case 0:
                 char = "A"
                 break;
-            case 2:
+            case 1:
                 char = "B"
                 break;
-            case 3:
+            case 2:
                 char = "C"
                 break;
-            case 4:
+            case 3:
                 char = "D"
                 break;
         }

@@ -371,7 +371,7 @@ export default class Board extends React.Component {
                 ref="board"
                 id="babies-board"
                 style={style}
-                onMouseMove={this.handleMouseMove.bind(this)}
+                //onMouseMove={this.handleMouseMove.bind(this)}
                 >
 
                 <BabiesList

@@ -11,6 +11,45 @@ export default class Form extends React.Component {
         this.state = {
             step: 0,
             stepMax: 6,
+            currentQuestionId: 0,
+            questions: [
+                {
+                    id: 0,
+                    text: "Quelle est la nature de votre projet ?",
+                    answers: [
+                        {
+                            id: 0,
+                            text: "Site web"
+                        },
+                        {
+                            id: 1,
+                            text: "Application mobile"
+                        },
+                        {
+                            id: 2,
+                            text: "Contenu multimédia"
+                        },
+                        {
+                            id: 3,
+                            text: "Web marketing"
+                        }
+                    ]
+                },
+                {
+                    id: 1,
+                    text: "Disposez-vous déjà de maquettes graphiques ?",
+                    answers: [
+                        {
+                            id: 0,
+                            text: "Oui"
+                        },
+                        {
+                            id: 1,
+                            text: "Non"
+                        }
+                    ]
+                },
+            ],
         }
     }
 
@@ -24,6 +63,10 @@ export default class Form extends React.Component {
     componentWillMount() {
         // Add event listener
         window.addEventListener('keydown', this.handleKeyDown.bind(this))
+
+        this.setState({
+            "currentQuestion": this.state.questions[0]
+        })
     }
 
     handleKeyDown(e) {
@@ -67,14 +110,22 @@ export default class Form extends React.Component {
     }
 
     nextStep() {
+        console.log("nextStep called")
         if (this.state.step >= this.state.stepMax) {
             var newStep = this.state.step
         } else {
             var newStep = this.state.step + 1
         }
 
+        if (newStep > 1) {
+            var newCurrentQuestionId = this.state.currentQuestionId + 1
+        } else {
+            var newCurrentQuestionId = 0
+        }
         this.setState({
-            step: newStep
+            step: newStep,
+            "currentQuestionId": newCurrentQuestionId,
+            "currentQuestion": this.state.questions[newCurrentQuestionId]
         })
     }
 
@@ -85,22 +136,15 @@ export default class Form extends React.Component {
             var newStep = this.state.step - 1
         }
 
-        this.setState({
-            step: newStep
-        })
-    }
-
-    switchToStep(step) {
-        var newStep = this.refs.inputStep.value * 1
-
-        if (newStep <= 0) {
-            var newStep = 0
-        } else if (newStep >= this.state.stepMax) {
-            var newStep = this.state.stepMax
+        if (newStep > 1) {
+            var newCurrentQuestionId = this.state.currentQuestionId - 1
+        } else {
+            var newCurrentQuestionId = 0
         }
-
         this.setState({
-            step: newStep
+            step: newStep,
+            "currentQuestionId": newCurrentQuestionId,
+            "currentQuestion": this.state.questions[newCurrentQuestionId]
         })
     }
 
@@ -108,7 +152,7 @@ export default class Form extends React.Component {
         var closeForm
         var button
 
-        // Button available only if form is displayed
+        // Button close available only if form is displayed
         if (this.props.isDisplayed) {
             var closeForm = this.hideForm.bind(this);
             var buttonClose = <button className="form--close" onClick={closeForm}></button>
@@ -119,7 +163,6 @@ export default class Form extends React.Component {
             var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
         }
         
-
         return(
             <section
                 ref="form"
@@ -128,7 +171,6 @@ export default class Form extends React.Component {
                     <div className="form--container--left">
                         <img className="gif-baby" src="/images/baby.gif" alt=""/>
                     </div>
-                    
                     <div className="form--container--right">
                         <IntroStep
                             step={this.state.step}
@@ -141,6 +183,8 @@ export default class Form extends React.Component {
                             goToNextStep={this.nextStep.bind(this)}
                             goToPreviousStep={this.previousStep.bind(this)}
                             formIsDisplayed={this.props.isDisplayed}
+                            currentQuestionId={this.state.currentQuestionId}
+                            currentQuestion={this.state.currentQuestion}
                             />
                     </div>
                 </div>
