@@ -372,7 +372,8 @@ export default class Board extends React.Component {
                 <BabiesList
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
-                    setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps} />
+                    setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
+                    setBabyDetail={this.props.setBabyDetail} />
                 <HomeTitle
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}

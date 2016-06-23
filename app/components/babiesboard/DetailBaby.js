@@ -45,14 +45,18 @@ export default class DetailBaby extends Component {
 
 	render() {
 
+		let nickname = this.props.babyDetail.nickname
+		let tag = this.props.babyDetail.tag
+		let year = this.props.babyDetail.year
+
 		return (
 			<div 
 				ref="detail"
 				className="baby-detail">
 
-				<div className="nickname">Jean michel</div>
-				<div className="skill">Fond de bus</div>
-				<div className="promotion">Promotion 2018</div>
+				<div className="nickname">{nickname}</div>
+				<div className="skill">{tag}</div>
+				<div className="promotion">Promotion {year}</div>
 			</div>
 		);
 	}
