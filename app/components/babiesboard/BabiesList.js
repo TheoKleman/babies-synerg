@@ -178,6 +178,7 @@ export default class BabiesList extends Component {
 	}
 
 	render() {
+
 		return(
 			<div className="babies-container" ref="babyContainer">
 				{
@@ -188,6 +189,7 @@ export default class BabiesList extends Component {
 							babySpec={this.state.babySpec}
 							pos={this.setRandomPosition()}
 							test = {this.refs.babyContainer}
+							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 							id={i} />
           			) 
 				}

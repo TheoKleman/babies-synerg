@@ -26,7 +26,7 @@ export default class Baby extends React.Component {
 			savedTop: 0,
 			savedLeft: 0,
 			globalDrag: null,
-			test: 100
+			savedX: 0,
 		}
 	}
 
@@ -48,16 +48,18 @@ export default class Baby extends React.Component {
 			restrict: {
 				restriction: 'parent',
 				endOnly: true,
-				elementRect: { top: 0, left: 0, bottom: 0, right: 0 }
+				elementRect: { top: 0, left: 0, bottom: 1.5, right: 1.5 }
 			},
-			onmove: this.onDragListener
+			onmove: this.onDragListener.bind(this),
+			onend: this.onDragStop.bind(this),
 		})
 	}
 
 	onDragListener(event) {
 		// console.log(event)
 
-		// console.log(this.props.pos.origin.Xpx)
+		var baseX = this.props.pos.origin.Xpx,
+			baseY = this.props.pos.origin.Ypx - 40
 
 		// var currentBaby = document.getElementById(event.target.id)
 
@@ -66,25 +68,55 @@ export default class Baby extends React.Component {
 			viewportWidth = window.innerWidth,
 			viewportHeight = window.innerHeight
 
-		console.log(boardWidth)
-
 		var target = event.target,
 		    // keep the dragged position in the data-x/data-y attributes
-		    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-		    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+		    x = (parseFloat(target.getAttribute('data-x')) || baseX) + event.dx,
+		    y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
+
+		var babyRotation = this.rotateBaby(x),
+			rotationExageration = 2
+
+		// console.log(babyRotation)
+		this.refs.itSelf.style.transform = "rotate("+(babyRotation * rotationExageration)+"deg)"
+
+		this.setState({
+			transform: this.refs.itSelf.style.transform,
+		})
 
 		// translate the element
 		target.style.webkitTransform =
 		target.style.transform =
-		  'translate(' + (event.clientX + (800)) + 'px, ' + (event.clientY + (500)) + 'px)';
+		  'translate(' + (x) + 'px, ' + (y) + 'px)';
 
 		// update the posiion attributes
 		target.setAttribute('data-x', x);
 		target.setAttribute('data-y', y);
 	}
 
+	onDragStop(event) {
+		// event.target..style.transform = "rotate(0deg)"
+
+		var babyContent = document.getElementById(event.target.id).firstChild
+		babyContent.style.transform = "rotate(0deg)"
+
+		// var target = event.target,
+		//     // keep the dragged position in the data-x/data-y attributes
+		//     x = (parseFloat(target.getAttribute('data-x')) || baseX) + event.dx,
+		//     y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
+
+		// // translate the element
+		// target.style.webkitTransform =
+		// target.style.transform =
+		//   'translate(' + (x) + 'px, ' + (y) + 'px)';
+
+		// // update the posiion attributes
+		// target.setAttribute('data-x', x);
+		// target.setAttribute('data-y', y);
+	}
+
 	setBabySpec(){
 		let response = this.props.babySpec
+
 		this.setState({
             maxW: response.maxW,
 			maxH: response.maxH,
@@ -98,8 +130,10 @@ export default class Baby extends React.Component {
 			isHovering: response.isHovering,
 			iNeighbourg: response.iNeighbourg,
 			savedTop: response.savedTop,
-			savedLeft: response.savedLeft
+			savedLeft: response.savedLeft,
         })
+
+		this.getBabySkin(this.props.datas.tag)
 	}
 
 	setPosition(pos){
@@ -114,6 +148,66 @@ export default class Baby extends React.Component {
 	    )
 	}
 
+	getRotationAngle(direction) {
+		
+		var test = direction % 2
+		
+		if(direction < 0) {
+			var rotateAngle = "-"+ (test * direction / 90)	
+		} else {
+			var rotateAngle = (test * direction / 90)
+		}
+		
+		return rotateAngle
+	}
+
+	rotateBaby(direction) {
+		var angle = 0
+
+		if(direction > this.state.savedX) {
+			angle = this.getRotationAngle(direction)
+			this.state.savedX = direction
+			return angle
+		} else {
+			angle = this.getRotationAngle(-direction)
+			this.state.savedX = direction
+
+			return angle
+		}
+	}
+
+	getBabySkin(skill) {
+
+        let babySKin = '';
+
+        switch(skill) {
+        	case "Designer":
+        		this.setState({
+        			skin: "Jaune.png"
+        		})
+        		break;
+        	case "Développeur":
+        		this.setState({
+        			skin: "Bleu.png"
+        		})
+        		break;
+        	case "Chef de projet":
+        		this.setState({
+        			skin: "Vert.png"
+        		})
+        		break;
+        	case "Marketeux":
+        		this.setState({
+        			skin: "Orange.png"
+        		})
+        		break;
+        	default:
+        		this.setState({
+        			skin: "baby-placeholder.png"
+        		})
+        }
+	}
+
 	getRandomNumber(limitInf, limitSup) {	
 		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
 	}
@@ -126,15 +220,18 @@ export default class Baby extends React.Component {
 		let babyYpx = this.props.pos.origin.Ypx
 		let babyDatas = this.props.datas
 
-		// let babyHovered = this.getBabyPosition(this.props.id) 
+		// this.setState({
+		// 	skin: "baby.gif"
+		// })
 	}
 
 	handleMouseLeave(e) {
-		this.setState({isHovering: false})
+		// this.getBabySkin(this.props.datas.tag)
+		this.props.setDetailIsDisplayedProps(false)
 	}
 
 	handleMouseDown(e) {
-		
+		this.props.setDetailIsDisplayedProps(true)
 	}
 
 	render() {
@@ -149,6 +246,11 @@ export default class Baby extends React.Component {
 			'neighbourg': this.state.isNeighbourg
 		})
 
+		var babyStyle = {
+			backgroundImage: "url(/images/"+this.state.skin+")",
+			backgroundSize: "cover"
+		}
+
 		return(
 			<div
 			className={babyClasses}
@@ -157,8 +259,8 @@ export default class Baby extends React.Component {
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
 			ref="itSelf">
-				<div className="the-baby">	
-					<span className="baby-bg"></span>
+				<div className="the-baby" style={{transform: this.state.transform}}>
+					<span className="baby-bg" style={babyStyle}></span>
 					<div className="wrapper">
 						<span>Name: {name}</span>
 						<br/>

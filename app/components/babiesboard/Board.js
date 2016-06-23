@@ -25,12 +25,14 @@ export default class Board extends React.Component {
                 max: null
             },
             spacebarDown: false,
+            babyRendered: false
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         // You can access `this.props` and `this.state` here
         // This function should return a boolean, whether the component should re-render.
+
         return false;
     }
 
@@ -65,7 +67,7 @@ export default class Board extends React.Component {
                 max: 0,
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
-            mouseMoveAreaSize: 170
+            mouseMoveAreaSize: this.props.viewportSize.height/9
         })
     }
 
@@ -85,12 +87,7 @@ export default class Board extends React.Component {
             if (this.state.boardIsTranslatingWithMouse) {
                 clearInterval(this.state.navigateInterval)
                 this.setState({
-                    boardIsTranslatingWithMouse: false,
-                    navigateInterval: undefined,
-                    mouseOnTopArea: false,
-                    mouseOnBottomArea: false,
-                    mouseOnLeftArea: false,
-                    mouseOnRightArea: false,
+                    boardIsTranslatingWithMouse: false
                 })
             }
 
@@ -258,11 +255,7 @@ export default class Board extends React.Component {
                 clearInterval(this.state.navigateInterval)
                 this.setState({
                     boardIsTranslatingWithMouse: false,
-                    navigateInterval: undefined,
-                    mouseOnTopArea: false,
-                    mouseOnBottomArea: false,
-                    mouseOnLeftArea: false,
-                    mouseOnRightArea: false,
+                    navigateInterval: undefined
                 })
             }
 
@@ -329,16 +322,6 @@ export default class Board extends React.Component {
             })
 
             this.updateBoardTransform()
-        } else if (!this.props.mouseIsInViewport) {
-            clearInterval(this.state.navigateInterval)
-            this.setState({
-                boardIsTranslatingWithMouse: false,
-                navigateInterval: undefined,
-                mouseOnTopArea: false,
-                mouseOnBottomArea: false,
-                mouseOnLeftArea: false,
-                mouseOnRightArea: false
-            })
         }
     }
 
@@ -365,12 +348,10 @@ export default class Board extends React.Component {
     }
 
     updateBoardTransform() {
-        var self = this
-
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardTranslateX.X,
             y: this.state.boardTranslateY.Y,
-            ease: Power2.easeOut,
+            ease: Power2.easeOut
         })
     }
 
@@ -395,13 +376,15 @@ export default class Board extends React.Component {
 
                 <BabiesList
                     boardWidth={this.state.boardWidth}
-                    boardHeight={this.state.boardHeight}/>
+                    boardHeight={this.state.boardHeight}
+                    setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps} />
                 <HomeTitle
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
                     setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
                     formDisplayed={this.props.formDisplayed}
                     spaceBarPressed={this.state.spacebarDown}
+                    babyRendered={this.state.babyRendered}
                     centerBoard={this.centerBoard.bind(this)}/>
             </section>
         )
