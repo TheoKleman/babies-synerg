@@ -1,36 +1,83 @@
 import React from 'react'
 
+import AnswerItem from './AnswerItem'
+
 export default class QuestionsStep extends React.Component {
     constructor() {
         super()
-    }
 
-    toggleBtn(ref) {
-        if (this.hasClass(ref, "selected")) {
-            ref.className = "form--answers--item"
-        } else {
-            // Remove siblings "selected" class
-            for (var i = 0; i < ref.parentNode.childNodes.length; i++) {
-                ref.parentNode.childNodes[i].className = "form--answers--item"
-            }
-            // Add "selected" class to ref
-            ref.className = "form--answers--item selected"
+        this.state = {
+            questions: [
+                {
+                    id: 1,
+                    text: "Quelle est la nature de votre projet ?",
+                    answers: [
+                        {
+                            id: 1,
+                            text: "Site web"
+                        },
+                        {
+                            id: 2,
+                            text: "Application mobile"
+                        },
+                        {
+                            id: 3,
+                            text: "Contenu multimédia"
+                        },
+                        {
+                            id: 4,
+                            text: "Web marketing"
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    text: "Disposez-vous déjà de maquettes graphiques ?",
+                    answers: [
+                        {
+                            id: 1,
+                            text: "Oui"
+                        },
+                        {
+                            id: 2,
+                            text: "Non"
+                        }
+                    ]
+                },
+            ],
+            "currentQuestionId": 0,
         }
     }
 
-    hasClass(element, cls) {
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    componentWillMount() {
+        this.setState({
+            "currentQuestion": this.state.questions[this.state.currentQuestionId]
+        })
+    }
+
+    toggleQuestion(currentQuestionId){
+        this.props.goToNextStep.bind(this);
+
+        var newCurrentQuestionId = currentQuestionId + 1
+        this.setState({
+            "currentQuestionId": newCurrentQuestionId,
+            "currentQuestion": this.state.questions[newCurrentQuestionId]
+        })
     }
 
     render() {
+        // Set if this step is displayed or not
         var style = {
             display: 'none'
         }
-        if (this.props.step == 1) {
+        if (this.props.step >= 1) {
             style = {
                 display: 'block'
             }
         }
+
+        // Toggle btn
+        var goToNextStep = this.toggleQuestion.bind(this, this.state.currentQuestionId)
 
         return(
             <section className="right--questions" style={style}>
@@ -38,65 +85,19 @@ export default class QuestionsStep extends React.Component {
                     <span className="question">
                         <small>Question 1/6</small>
                         <br />
-                        Quelle est la nature de votre projet ?
+                        {this.state.currentQuestion.text}
                     </span>
                     
                     <div className="form--answers">
-                        <div
-                            className="form--answers--item"
-                            ref="answer1"
-                            onClick={this.toggleBtn.bind(this, this.refs.answer1)}
-                            >
-                            <button className="key">
-                                <span className="key--content">A</span>
-                                <span className="key--double"></span>
-                            </button>
-                            <div className="item--answer">
-                                <p>Site web</p>
-                            </div>
-                        </div>
-
-                        <div
-                            className="form--answers--item"
-                            ref="answer2"
-                            onClick={this.toggleBtn.bind(this, this.refs.answer2)}
-                            >
-                            <button className="key">
-                                <span className="key--content">B</span>
-                                <span className="key--double"></span>
-                            </button>
-                            <div className="item--answer">
-                                <p>Application mobile</p>
-                            </div>
-                        </div>
-
-                        <div
-                            className="form--answers--item"
-                            ref="answer3"
-                            onClick={this.toggleBtn.bind(this, this.refs.answer3)}
-                            >
-                            <button className="key">
-                                <span className="key--content">C</span>
-                                <span className="key--double"></span>
-                            </button>
-                            <div className="item--answer">
-                                <p>Contenu multimédia</p>
-                            </div>
-                        </div>
-
-                        <div
-                            className="form--answers--item"
-                            ref="answer4"
-                            onClick={this.toggleBtn.bind(this, this.refs.answer4)}
-                            >
-                            <button className="key">
-                                <span className="key--content">D</span>
-                                <span className="key--double"></span>
-                            </button>
-                            <div className="item--answer">
-                                <p>Web marketing</p>
-                            </div>
-                        </div>
+                        {
+                            this.state.currentQuestion.answers.map(function(answer, i){
+                                return <AnswerItem 
+                                    key={answer.id}
+                                    answerId={answer.id}
+                                    answerText={answer.text}
+                                    goToNextStep={goToNextStep}/>
+                            })
+                        }
                     </div>
                 </div>
             </section>

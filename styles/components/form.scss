@@ -88,6 +88,7 @@ section.form {
     }
     
     .form--answers--item {
+        cursor: pointer;
         height: 65px;
         display: inline-block;
         padding: 5px 0;
@@ -189,6 +190,11 @@ section.form {
     }
 
     .right--questions {
+        
+        > .content-centered {
+            width: 100%;
+        }
+
         span.question {
             display: block;
             text-transform: uppercase;

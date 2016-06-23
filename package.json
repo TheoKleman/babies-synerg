@@ -19,6 +19,7 @@
     "classnames": "^2.2.5",
     "gsap": "^1.18.4",
     "interact-js": "^2.0.1",
+    "interact.js": "^1.2.6",
     "json-loader": "^0.5.4",
     "qwest": "^4.4.0",
     "react": "~15.1.0",
