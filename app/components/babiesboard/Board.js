@@ -22,6 +22,8 @@ export default class Board extends React.Component {
                 min: null,
                 max: null
             },
+            boardIsTranslatingWithScroll: false,
+            boardIsTranslatingWithKeys: false,
             spacebarDown: false,
             babyRendered: false
         }
@@ -30,7 +32,6 @@ export default class Board extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         // You can access `this.props` and `this.state` here
         // This function should return a boolean, whether the component should re-render.
-
         return false;
     }
 
@@ -51,7 +52,7 @@ export default class Board extends React.Component {
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
-        // Set states
+        // Set states at the beginning
         this.setState({
             boardCenterX: centerX,
             boardCenterY: centerY,
@@ -66,13 +67,6 @@ export default class Board extends React.Component {
                 min: - (this.state.boardHeight - this.props.viewportSize.height)
             },
         })
-
-        // Execute scroll navigate interval
-        var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 50)
-        this.setState({
-            navigateScrollInterval: navigateScrollInterval,
-            boardIsTranslatingWithScroll: true
-        })
     }
 
     componentWillUnmount() {
@@ -83,15 +77,32 @@ export default class Board extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         let { deltaX, deltaY } = this.props.scrollDelta
-
+        
         // Execute scroll navigate interval
-        if (!this.state.boardIsTranslatingWithScroll) {
-            var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 50)
+        if ((deltaX != 0 || deltaY != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.isDragging) {
+            console.log("jsuis la frèr")
+            var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 40)
             this.setState({
                 navigateScrollInterval: navigateScrollInterval,
                 boardIsTranslatingWithScroll: true
             })
+        } else if (deltaX == 0 && deltaY == 0) {
+            this.isNotNavigatingWithScroll()
         }
+
+        // Drag board
+        // this.setState({
+        //     boardTranslateX: {
+        //         X: this.state.boardTranslateX.X + this.props.mouseDownDrag.X/2,
+        //         max: 0,
+        //         min: - (this.state.boardWidth - this.props.viewportSize.width)
+        //     },
+        //     boardTranslateY: {
+        //         Y: this.state.boardTranslateY.Y + this.props.mouseDownDrag.Y/2,
+        //         max: 0,
+        //         min: - (this.state.boardHeight - this.props.viewportSize.height)
+        //     },
+        // })
     }
 
     handleKeyDown(e) {
@@ -131,11 +142,14 @@ export default class Board extends React.Component {
 
             // Execute navigate
             if (direction != null && isPositive != null && !this.state.boardIsTranslatingWithKeys) {
+                this.isNotNavigatingWithScroll()
+
                 this.navigateWithKeys(direction, isPositive)
-                var navigateInterval = setInterval(this.navigateWithKeys.bind(this, direction, isPositive), 25)
+                var navigateKeysInterval = setInterval(this.navigateWithKeys.bind(this, direction, isPositive), 25)
+
                 this.setState({
                     boardIsTranslatingWithKeys: true,
-                    navigateInterval: navigateInterval
+                    navigateKeysInterval: navigateKeysInterval
                 })
             }
         }
@@ -163,10 +177,7 @@ export default class Board extends React.Component {
 
     handleKeyUp(e) {
         // Clear navigate interval
-        clearInterval(this.state.navigateInterval)
-        this.setState({
-            boardIsTranslatingWithKeys: false,
-        })
+        this.isNotNavigatingWithKeys()
 
         if (e.keyCode == 32 && !this.props.formDisplayed) {
             clearTimeout(this.state.spacebarTO)
@@ -182,6 +193,7 @@ export default class Board extends React.Component {
     }
 
     navigateWithScroll() {
+        let maxSpeed = 90
         let { X } = this.state.boardTranslateX
         let { Y } = this.state.boardTranslateY
 
@@ -189,6 +201,18 @@ export default class Board extends React.Component {
 
         let newX = 1 * (-deltaX)
         let newY = 1 * (-deltaY)
+
+        // Set max speed
+        if (newX > maxSpeed) {
+            newX = maxSpeed
+        } else if (newX < -maxSpeed) {
+            newX = -maxSpeed
+        }
+        if (newY > maxSpeed) {
+            newY = maxSpeed
+        } else if (newY < -maxSpeed) {
+            newY = -maxSpeed
+        }
 
         // Set new X & Y board values
         X = X + newX
@@ -207,6 +231,7 @@ export default class Board extends React.Component {
             Y = this.state.boardTranslateX.max
         }
 
+        // Apply
         if (!this.props.formDisplayed) {
             this.setState({
                 boardTranslateX: {
@@ -279,18 +304,32 @@ export default class Board extends React.Component {
         }
     }
 
+    isNotNavigatingWithScroll() {
+        clearInterval(this.state.navigateScrollInterval)
+        this.setState({
+            navigateScrollInterval: undefined,
+            boardIsTranslatingWithScroll: false,
+        })
+    }
+
+    isNotNavigatingWithKeys() {
+        clearInterval(this.state.navigateKeysInterval)
+        this.setState({
+            navigateKeysInterval: undefined,
+            boardIsTranslatingWithKeys: false,
+        })
+    }
+
     centerBoard() {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardCenterX,
             y: this.state.boardCenterY,
             ease: Power2.easeOut
         })
-        clearInterval(this.state.navigateScrollInterval)
-        clearInterval(this.state.navigateInterval)
+        // Clear all navigation intervals
+        this.isNotNavigatingWithKeys()
+        this.isNotNavigatingWithScroll()
         this.setState({
-            navigateInterval: undefined,
-            navigateScrollInterval: undefined,
-            boardIsTranslatingWithScroll: false,
             boardTranslateX: {
                 X: this.state.boardCenterX,
                 max: 0,

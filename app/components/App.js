@@ -27,6 +27,13 @@ export default class App extends React.Component {
                 deltaX: 0,
                 deltaY: 0
             },
+            mouseDownPos: {
+                X: 0,
+                Y: 0,
+            },
+            mouseDown: false,
+            mouseDownInitialX: 0,
+            mouseDownInitialY: 0,
             boardWidth: 4400,
             boardHeight: 2475,
             detailDisplayed: false
@@ -35,11 +42,7 @@ export default class App extends React.Component {
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        // window.addEventListener('onmouseweel', this.handleScroll.bind(this));
-    }
-
-    componentWillUnmount() {
-        // window.removeEventListener('onmouseweel', this.handleScroll.bind(this));
+        window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
     }
 
     handleScroll(e) {
@@ -50,6 +53,40 @@ export default class App extends React.Component {
                 deltaY: e.deltaY
             }
         })
+    }
+
+    handleMouseDown(e) {
+        let initialX = e.pageX
+        let initialY = e.pageY
+        this.setState({
+            mouseDown: true,
+            mouseDownInitialX: initialX,
+            mouseDownInitialY: initialY
+        })
+    }
+
+    handleMouseUp(e) {
+        this.setState({
+            mouseDown: false
+        })
+    }
+
+    handleMouseDownMove(e) {
+        if (this.state.mouseDown) {
+            this.setState({
+                mouseDownPos: {
+                    X: e.pageX - this.state.mouseDownInitialX,
+                    Y: e.pageY - this.state.mouseDownInitialY
+                }
+            })
+        } else {
+            this.setState({
+                mouseDownPos: {
+                    X: 0,
+                    Y: 0
+                }
+            })
+        }
     }
 
     setControlHighlighting(control) {
@@ -118,7 +155,12 @@ export default class App extends React.Component {
 
     render(){
         return (
-            <div className="main-content" onWheel={this.handleScroll.bind(this)}>
+            <div
+                className="main-content"
+                onWheel={this.handleScroll.bind(this)}
+                onMouseDown={this.handleMouseDown.bind(this)}
+                onMouseUp={this.handleMouseUp.bind(this)}
+                >
                 <Form
                     isDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)} />
@@ -130,7 +172,9 @@ export default class App extends React.Component {
                     setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
-                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)} />
+                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
+                    isDragging={this.state.mouseDown}
+                    mouseDownDrag={this.state.mouseDownPos} />
                 <DetailBaby
                     isDisplayed={this.state.detailDisplayed} />
                 <FilterNav />
