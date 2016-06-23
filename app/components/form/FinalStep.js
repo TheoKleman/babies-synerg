@@ -5,6 +5,16 @@ export default class FinalStep extends React.Component {
         super()
     }
 
+    endForm() {
+        var self = this
+
+        this.props.hideForm()
+
+        setTimeout(function(){
+            self.props.resetForm()
+        }, 500)
+    }
+
     render() {
         var style = {
             display: 'none'
@@ -27,7 +37,7 @@ export default class FinalStep extends React.Component {
 
                     <button 
                         className="key spacebar"
-                        onClick={this.props.hideForm.bind(this)}
+                        onClick={this.endForm.bind(this)}
                         >
                         <span className="key--content">such wow</span>
                         <span className="key--double"></span>

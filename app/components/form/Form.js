@@ -202,6 +202,14 @@ export default class Form extends React.Component {
         })
     }
 
+    resetForm() {
+        this.setState({
+            step: 0,
+            "currentQuestionId": 0,
+            "currentQuestion": this.state.questions[0]
+        })
+    }
+
     render() {
         var closeForm
         var button
@@ -245,6 +253,7 @@ export default class Form extends React.Component {
                             step={this.state.step}
                             questions={this.state.questions}
                             hideForm={this.hideForm.bind(this)}
+                            resetForm={this.resetForm.bind(this)}
                             />
                     </div>
                 </div>
