@@ -190,6 +190,7 @@ export default class BabiesList extends Component {
 							pos={this.setRandomPosition()}
 							test = {this.refs.babyContainer}
 							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
+							setBabyDetail={this.props.setBabyDetail}
 							id={i} />
           			) 
 				}

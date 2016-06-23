@@ -6,11 +6,11 @@
 	.baby {
 		position: absolute;
 		display: inline-block;
-		width: 10px;
+		width: 100px;
 		height: 200px;
 
-        &:hover {
-            cursor: url(/images/cursor.png), auto;
+        &.hovered {
+            // cursor: url(/images/cursor.png), auto;
         }
 
         &.gridElement {
@@ -58,9 +58,67 @@
             position: absolute;
             z-index: 1;
             display: block;
+            left: 0;
+            top: 0;
             width: 200px;
             height: 200px;
             background-size: cover;
+
+            &.moving {
+                z-index: -1;
+                opacity: 0;
+            }
+        }
+
+        .baby-pieces {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            display: block;
+            opacity: 0;
+            z-index: -1;
+
+            &.moving {
+                opacity: 1;
+            }
+
+            span.baby-body {
+                position: absolute;
+                width: 100px;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                transform: translate3d(-50%, 0, 0);
+                text-align: center;
+                z-index: 2;
+                
+                img {
+                    height: 100%;
+                    width: auto;
+                }
+            }
+            span.baby-arm-right {
+                left: 25px;
+                transform-origin: 100% 0%; 
+            }
+            span.baby-arm-left {
+                right: 25px;
+                transform-origin: 0% 0%;
+            }
+
+            span.baby-arm-right,
+            span.baby-arm-left {
+                position: absolute;
+                width: 65px;
+                top: 55px;
+                transition: transform .1s ease;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
         }
 
         &.hover {

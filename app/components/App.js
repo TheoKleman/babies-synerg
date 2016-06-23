@@ -27,6 +27,12 @@ export default class App extends React.Component {
             boardHeight: 2475,
             mouseInViewport: true,
             detailDisplayed: false,
+            babyHoveredDetail: {
+                nickname: "",
+                skills: [],
+                tag: "",
+                year: 0
+            },
         }
     }
 
@@ -90,6 +96,12 @@ export default class App extends React.Component {
         })
     }
 
+    setBabyDetail(value) {
+        this.setState({
+            babyHoveredDetail: value
+        })
+    }
+
     handleResize(){
         this.setState({
             viewportSize: {
@@ -122,12 +134,14 @@ export default class App extends React.Component {
                     formDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
+                    setBabyDetail={this.setBabyDetail.bind(this)}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     mouseIsInViewport={this.state.mouseInViewport}/>
                 <DetailBaby
-                    isDisplayed={this.state.detailDisplayed} />
+                    isDisplayed={this.state.detailDisplayed}
+                    babyDetail={this.state.babyHoveredDetail} />
                 <FilterNav />
                 <Footer />
                 <Controls 
