@@ -1,5 +1,6 @@
 import React from 'react'
 import GSAP from 'gsap'
+import qwest from 'qwest'
 
 import IntroStep from './IntroStep'
 import QuestionsStep from './QuestionsStep'
@@ -15,113 +16,7 @@ export default class Form extends React.Component {
 			nextQuestionId: 0,
 			previousQuestionsIds: [0,0,0],
 			currentQuestionId: 0,
-			questions: [
-				{
-					id: 0,
-					text: "Quelle est la nature de votre projet ?",
-					answers: [
-						{
-							id: 0,
-							nextQuestionId: 2,
-							text: "Site web"
-						},
-						{
-							id: 1,
-							nextQuestionId: 3,
-							text: "Application mobile"
-						},
-						{
-							id: 2,
-							nextQuestionId: 4,
-							text: "Contenu multimédia"
-						},
-						{
-							id: 3,
-							nextQuestionId: 4,
-							text: "Web marketing"
-						}
-					]
-				},
-				{
-					id: 1,
-					text: "Disposez-vous déjà de maquettes graphiques ?",
-					answers: [
-						{
-							id: 0,
-							nextQuestionId: 3,
-							text: "Oui"
-						},
-						{
-							id: 1,
-							nextQuestionId: 4,
-							text: "Non"
-						}
-					]
-				},
-				{
-					id: 2,
-					text: "Vous voulez travailler avec nous ?",
-					answers: [
-						{
-							id: 0,
-							nextQuestionId: 1,
-							text: "Oui"
-						},
-						{
-							id: 1,
-							nextQuestionId: 3,
-							text: "Oui"
-						},
-						{
-							id: 2,
-							nextQuestionId: 3,
-							text: "Oui"
-						},
-						{
-							id: 3,
-							nextQuestionId: 4,
-							text: "Oui"
-						}
-					]
-				},
-				{
-					id: 3,
-					text: "Une petite dernière question pour la route ?",
-					answers: [
-						{
-							id: 0,
-							nextQuestionId: 4,
-							text: "Allez"
-						},
-						{
-							id: 1,
-							nextQuestionId: 4,
-							text: "Nop nop nop"
-						}
-					]
-				},
-				{
-					id: 4,
-					text: "J'ai plus d'inspiration, alors oui ou non ?",
-					answers: [
-						{
-							id: 0,
-							nextQuestionId: null,
-							text: "Oui"
-						},
-						{
-							id: 1,
-							nextQuestionId: null,
-							text: "Non"
-						},
-						{
-							id: 2,
-							nextQuestionId: null,
-							text: "Je sais pas :|"
-						}
-					]
-				}
-			],
+			questions: [],
 		}
 	}
 
@@ -143,6 +38,8 @@ export default class Form extends React.Component {
 		this.setState({
 			"currentQuestion": this.state.questions[0]
 		})
+
+		this.loadQuestions()
 	}
 
 	handleKeyDown(e) {
@@ -151,6 +48,16 @@ export default class Form extends React.Component {
 			this.hideForm();
 		}
 	}
+
+	loadQuestions() {
+        qwest
+            .get("/json/questions.json")
+            .then((xhr, response) => {
+                this.setState({
+                    questions: response
+                })
+            });
+    }
 
 	hideForm() {
 		var self = this;

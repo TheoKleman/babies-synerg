@@ -58,8 +58,6 @@ export default class Baby extends React.Component {
 	}
 
 	onDragListener(event) {
-		// console.log(event)
-
 		console.log('mooving')
 
 		this.setState({
@@ -238,8 +236,7 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e, id) {
-	
-		
+
 	}
 
 	handleMouseLeave(e) {
