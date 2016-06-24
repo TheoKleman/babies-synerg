@@ -11,7 +11,7 @@ export default class Footer extends React.Component {
             <Draggable
                 axis="both"
                 handle="footer"
-                bounds={{top: -100, left: -100, right: 100, bottom: 100}}>
+                bounds={{top: -100, left: 0, right: 100, bottom: 0}}>
                 <footer className="main-footer">
                     <div className="logo">
                         <img src="/images/logo.png" alt=""/>

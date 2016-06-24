@@ -44,7 +44,8 @@ export default class App extends React.Component {
                 tag: "",
                 year: 0
             },
-            detailDisplayed: false
+            detailDisplayed: false,
+            isSorting: false,
         }
     }
 
@@ -158,6 +159,12 @@ export default class App extends React.Component {
         })
     }
 
+    setSorting(value) {
+        this.setState({
+            isSorting: value
+        })
+    }
+
     handleResize(){
         this.setState({
             viewportSize: {
@@ -185,6 +192,8 @@ export default class App extends React.Component {
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
                     setBabyDetail={this.setBabyDetail.bind(this)}
+                    setSorting={this.setSorting.bind(this)}
+                    isSorting={this.state.isSorting}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
@@ -193,7 +202,9 @@ export default class App extends React.Component {
                 <DetailBaby
                     isDisplayed={this.state.detailDisplayed}
                     babyDetail={this.state.babyHoveredDetail} />
-                <FilterNav />
+                <FilterNav
+                    isSorting={this.state.isSorting}
+                    setSorting={this.setSorting.bind(this)} />
                 <Footer />
                 <Controls 
                     controlsHighlighting={this.state.controlsHighlighting} />

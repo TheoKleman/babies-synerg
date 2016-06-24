@@ -1,10 +1,16 @@
 body {
     line-height: 1.61;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-soothing: grayscale;
+    text-rendering: auto;
+    font-family: $font-m1mregular;
 }
 
 div, span, button {
 	box-sizing: border-box;
 }
+
+p { font-family: $font-m1mregular; }
 
 button.key {
     display: inline-block;
@@ -16,6 +22,7 @@ button.key {
     padding: 0;
     background: transparent;
     border: 0;
+    font-family: $font-m1mbold;
 
     > span {
         display: block;
@@ -65,7 +72,8 @@ button.key {
         min-width: 370px;
         height: 60px;
         margin-top: 30px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        letter-spacing: 1.5px;
 
         > span {
             display: block;
