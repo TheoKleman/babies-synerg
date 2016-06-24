@@ -159,9 +159,10 @@ nav.controls {
     position: absolute;
     display: flex;
     align-items: flex-end;
-    bottom: 20px;
-    right: 20px;
-    height: 65px; 
+    bottom: 0;
+    right: 0;
+    height: 90px; 
+    padding: 0 20px 20px 0;
     z-index: 10;
     overflow: hidden;
 
@@ -175,7 +176,7 @@ nav.controls {
         transition: transform .3s ease-in-out;
 
         &.hidden {
-            transform: translate3d(0, 150%, 0);
+            transform: translate3d(0, 100px, 0);
         }
 
         > button {
@@ -183,7 +184,10 @@ nav.controls {
 
             &:hover { 
                 cursor: default;
-                span.key--content { transform: translate3d(0, 0, 0); }
+                span.key--content { 
+                    transform: translate3d(0, 0, 0);
+                    background-color: $light;
+                }
             }
 
             &.arrow-top {

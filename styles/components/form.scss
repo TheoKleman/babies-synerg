@@ -124,7 +124,7 @@ section.form {
             }
         }
 
-        &:hover, &.selected {
+        &.selected {
             button.key > span.key--content {
                 transform: translate3d(0,4px,0);
             }

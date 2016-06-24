@@ -54,7 +54,7 @@ export default class Form extends React.Component {
             .get("/json/questions.json")
             .then((xhr, response) => {
                 this.setState({
-                    questions: response
+                    questions: response.questions
                 })
             });
     }

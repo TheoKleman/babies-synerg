@@ -12,6 +12,13 @@ div, span, button {
 
 p { font-family: $font-m1mregular; }
 
+.disable-select {
+    -webkit-user-select: none;  
+        -moz-user-select: none;    
+            -ms-user-select: none;      
+                user-select: none;
+}
+
 button.key {
     display: inline-block;
     position: relative;
@@ -57,7 +64,8 @@ button.key {
 
     &:hover {
         span.key--content {
-            transform: translate3d(0,4px,0);
+            // transform: translate3d(0,4px,0);
+            background-color: $yellow;
         }
     }
 

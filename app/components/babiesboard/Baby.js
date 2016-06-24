@@ -46,7 +46,7 @@ export default class Baby extends React.Component {
 				resistance: 10,
 				minSpeed: 200,
 				endSpeed: 100,
-				smoothEndDuration: 100
+				smoothEndDuration: 100,
 			},
 			restrict: {
 				restriction: 'parent',
@@ -54,6 +54,7 @@ export default class Baby extends React.Component {
 			},
 			onmove: this.onDragListener.bind(this),
 			onend: this.onDragStop.bind(this),
+			pointerMoveTolerance: 10
 		})
 	}
 
@@ -110,22 +111,6 @@ export default class Baby extends React.Component {
 		this.setState({
 			isDragging: false
 		})
-
-		/*
-		var target = event.target,
-		    // keep the dragged position in the data-x/data-y attributes
-		    x = (parseFloat(target.getAttribute('data-x')) || baseX) + event.dx,
-		    y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
-
-		// translate the element
-		target.style.webkitTransform =
-		target.style.transform =
-		  'translate(' + (x) + 'px, ' + (y) + 'px)';
-
-		// update the posiion attributes
-		target.setAttribute('data-x', x);
-		target.setAttribute('data-y', y);
-		*/
 	}
 
 	setBabySpec(){
@@ -160,19 +145,6 @@ export default class Baby extends React.Component {
 	        zIndex: pos.y
 	      }
 	    )
-	}
-
-	getRotationAngle(direction) {
-		
-		// var test = direction % 2
-		
-		// if(direction < 0) {
-		// 	var rotateAngle = "-" + (test * direction) / 100	
-		// } else {
-		// 	var rotateAngle = (test * direction) / 100
-		// }
-		
-		return direction
 	}
 
 	rotateBaby(direction, rotateAngleLimit) {
@@ -226,13 +198,9 @@ export default class Baby extends React.Component {
         		break;
         	default:
         		this.setState({
-        			skin: "jaune.png"
+        			skin: "orange.png"
         		})
         }
-	}
-
-	getRandomNumber(limitInf, limitSup) {	
-		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
 	}
 
 	handleMouseEnter(e, id) {
@@ -248,10 +216,6 @@ export default class Baby extends React.Component {
 		let babyDatas = this.props.datas
 		this.props.setDetailIsDisplayedProps(true)
 		this.props.setBabyDetail(babyDatas)
-	}
-
-	handleMouseUp(e) {
-		console.log('mouse up')
 	}
 
 	render() {
@@ -284,7 +248,6 @@ export default class Baby extends React.Component {
 			<div
 			className={babyClasses}
 			onMouseDown={this.handleMouseDown.bind(this)}
-			// onMouseUp={this.handleMouseUp.bind(this)}
 			onMouseEnter={this.handleMouseEnter.bind(this, id)}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}

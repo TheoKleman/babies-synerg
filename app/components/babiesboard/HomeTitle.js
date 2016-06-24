@@ -29,7 +29,7 @@ export default class HomeTitle extends React.Component {
 
 		return(
 			<div 
-			className="title-container"
+			className="title-container disable-select"
 			style={titleStyle}
 			ref="homeTitle">
 				<h1><span>Aujourd'hui, synerg'hetic compte 164 enfants du web !</span></h1>
