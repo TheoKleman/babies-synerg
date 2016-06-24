@@ -24,6 +24,7 @@ export default class Board extends React.Component {
             },
             boardIsTranslatingWithScroll: false,
             boardIsTranslatingWithKeys: false,
+            boardIsTranslatingWithDrag: false,
             spacebarDown: false,
             babyRendered: false
         }
@@ -78,7 +79,7 @@ export default class Board extends React.Component {
     componentWillReceiveProps(nextProps) {
         let { deltaX, deltaY } = this.props.scrollDelta
         
-        // Execute scroll navigate interval
+        // Scroll board
         if ((deltaX != 0 || deltaY != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.isDragging) {
             var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 40)
             this.setState({
@@ -90,18 +91,44 @@ export default class Board extends React.Component {
         }
 
         // Drag board
-        // this.setState({
-        //     boardTranslateX: {
-        //         X: this.state.boardTranslateX.X + this.props.mouseDownDrag.X/2,
-        //         max: 0,
-        //         min: - (this.state.boardWidth - this.props.viewportSize.width)
-        //     },
-        //     boardTranslateY: {
-        //         Y: this.state.boardTranslateY.Y + this.props.mouseDownDrag.Y/2,
-        //         max: 0,
-        //         min: - (this.state.boardHeight - this.props.viewportSize.height)
-        //     },
-        // })
+        if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll) {
+            let newX = this.state.boardTranslateX.X + this.props.mouseDownDrag.X/10
+            let newY = this.state.boardTranslateY.Y + this.props.mouseDownDrag.Y/10
+
+            // Check if X is in range
+            if (newX < this.state.boardTranslateX.min) {
+                newX = this.state.boardTranslateX.min
+            } else if (newX > this.state.boardTranslateX.max){
+                newX = this.state.boardTranslateX.max
+            }
+            // Check if Y is in range
+            if (newY < this.state.boardTranslateY.min) {
+                newY = this.state.boardTranslateY.min
+            } else if (newY > this.state.boardTranslateY.max){
+                newY = this.state.boardTranslateX.max
+            }
+
+            // todo
+            // - max speed
+            this.setState({
+                boardIsTranslatingWithDrag: true,
+                navigateDragInterval: navigateDragInterval,
+                boardTranslateX: {
+                    X: newX,
+                    max: 0,
+                    min: - (this.state.boardWidth - this.props.viewportSize.width)
+                },
+                boardTranslateY: {
+                    Y: newY,
+                    max: 0,
+                    min: - (this.state.boardHeight - this.props.viewportSize.height)
+                },
+            })
+            
+            var navigateDragInterval = setInterval(this.updateBoardTransform(), 200)
+        } else if (this.props.mouseDownDrag.X == 0 && this.props.mouseDownDrag.Y == 0) {
+            this.isNotNavigatingWithDrag()
+        }
     }
 
     handleKeyDown(e) {
@@ -319,6 +346,12 @@ export default class Board extends React.Component {
         })
     }
 
+    isNotNavigatingWithDrag() {
+        this.setState({
+            boardIsTranslatingWithDrag: false,
+        })
+    }
+
     centerBoard() {
         TweenMax.to(this.refs.board,1, {
             x: this.state.boardCenterX,
@@ -354,7 +387,6 @@ export default class Board extends React.Component {
         // Center board & set min/max board translateX/Y
         let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
         let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
-
         let style = {
             width: this.state.boardWidth,
             height: this.state.boardHeight,
@@ -367,7 +399,6 @@ export default class Board extends React.Component {
                 id="babies-board"
                 style={style}
                 >
-
                 <BabiesList
                     boardWidth={this.state.boardWidth}
                     boardHeight={this.state.boardHeight}
