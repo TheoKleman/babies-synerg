@@ -57,6 +57,7 @@ button.key {
 
     &:hover {
         span.key--content {
+            background: $yellow;
             transform: translate3d(0,4px,0);
         }
     }
@@ -88,6 +89,12 @@ button.key {
         span.key--content {
             height: 50px;
             line-height: 42px;
+        }
+
+        &:hover {
+            span.key--content {
+                background: $light;
+            }
         }
     }
 
