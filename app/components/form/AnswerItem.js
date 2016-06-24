@@ -7,6 +7,7 @@ export default class AnswerItem extends React.Component {
 
 	handleAnswer() {
 		this.props.setNextQuestionId(this.props.answer.nextQuestionId)
+		this.props.saveAnswer(this.props.question.text, this.props.answer.text)
 	}
 
 	render() {
@@ -24,13 +25,19 @@ export default class AnswerItem extends React.Component {
 			case 3:
 				char = "D"
 				break;
+			case 4:
+				char = "E"
+				break;
 		}
+
+		var id = "question"+this.props.question.id+"-answer"+this.props.answer.id
 
 		return(
 			<div
 				className="form--answers--item"
 				ref={this.props.answer.id}
 				onClick={this.handleAnswer.bind(this)}
+				id={id}
 				>
 				<button className="key">
 					<span className="key--content">{char}</span>

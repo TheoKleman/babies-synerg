@@ -1,7 +1,7 @@
 // Responsive breakpoints
 $tablet-bk: 768px;
 $laptop-bk: 960px;
-$laptop-large-bk: 1300px;
+$laptop-large-bk: 1400px;
 
 @mixin MQ($media) {
     @if $media == tablet {

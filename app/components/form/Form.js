@@ -14,9 +14,10 @@ export default class Form extends React.Component {
 			step: 0,
 			stepMax: 6,
 			nextQuestionId: 0,
-			previousQuestionsIds: [0,0,0],
+			previousQuestionsIds: [],
 			currentQuestionId: 0,
 			questions: [],
+			answers:[]
 		}
 	}
 
@@ -54,7 +55,7 @@ export default class Form extends React.Component {
             .get("/json/questions.json")
             .then((xhr, response) => {
                 this.setState({
-                    questions: response
+                    questions: response.questions
                 })
             });
     }
@@ -100,18 +101,16 @@ export default class Form extends React.Component {
 		}
 
 		// set new question to display
-		if (newStep > 1 && newStep < 6) {
+		if (newStep > 1) {
 			var newCurrentQuestionId = nextQuestionId
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 		}
 
 		// Update previous questions ids array
-		var previousQuestionsIds = new Array()
-		previousQuestionsIds.push(this.state.previousQuestionsIds)
-		console.log(previousQuestionsIds)
-		previousQuestionsIds = previousQuestionsIds.push(this.state.currentQuestionId)
-		console.log(previousQuestionsIds)
+		var previousQuestionsIds = []
+		previousQuestionsIds = this.state.previousQuestionsIds
+		previousQuestionsIds = previousQuestionsIds.concat(this.state.currentQuestionId)
 
 		this.setState({
 			step: newStep,
@@ -128,21 +127,55 @@ export default class Form extends React.Component {
 			var newStep = this.state.step - 1
 		}
 
-		if (newStep >= 1 && newStep < 6) {
-			var newCurrentQuestionId = this.state.previousQuestionId
+		// set new question to display
+		if (newStep >= 1) {
+			var newCurrentQuestionId = this.state.previousQuestionsIds[this.state.previousQuestionsIds.length - 1]
+			// Update previous questions ids array
+			var previousQuestionsIds = []
+			previousQuestionsIds = this.state.previousQuestionsIds
+			previousQuestionsIds = previousQuestionsIds.pop()
+
+			// Unset last answer
+			var answersArray = []
+			answersArray = this.state.answers
+			answersArray = answersArray.splice(answersArray.length - 2, answersArray.length)
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
+			var previousQuestionsIds = []
+			var answers = []
 		}
+
 		this.setState({
 			step: newStep,
+			answers: answersArray,
+			previousQuestionsIds: previousQuestionsIds,
 			currentQuestionId: newCurrentQuestionId,
 			currentQuestion: this.state.questions[newCurrentQuestionId]
 		})
+
+		console.log(this.state.questions[newCurrentQuestionId])
 	}
 
 	setNextQuestionId(nextQuestionId) {
 		this.setState({
 			nextQuestionId: nextQuestionId
+		})
+	}
+
+	saveAnswer(question, answer) {
+		console.log(question)
+		console.log(answer)
+		// var theAnswer = {
+		// 	question: question, 
+		// 	answer: answer
+		// }
+		var theAnswer = [question,answer]
+		var answersArray = []
+		answersArray = this.state.answers
+		answersArray = answersArray.concat(theAnswer)
+
+		this.setState({
+			answers: answersArray
 		})
 	}
 
@@ -185,6 +218,7 @@ export default class Form extends React.Component {
 									formIsDisplayed={this.props.isDisplayed}
 									currentQuestion={this.state.currentQuestion}
 									setNextQuestionId={this.setNextQuestionId.bind(this)}
+									saveAnswer={this.saveAnswer.bind(this)}
 									/>   
 		} else if (this.state.step == 6) {
 			var rightContent = <FinalStep 
