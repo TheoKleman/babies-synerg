@@ -52,7 +52,7 @@ export default class SpaceBar extends React.Component {
                 onMouseDown={this.handleMouseDown.bind(this)}
                 onMouseUp={this.handleMouseUp.bind(this)}
                 >
-                <span className="key--content">Un projet digital à leur confier ?</span>
+                <span className="key--content">Un projet digital a leur confier ?</span>
                 <span className="key--double"></span>
             </button>
         )
