@@ -74,7 +74,7 @@
         },
         {
             "nickname": "Aymeric C.",
-            "skills": ["Ui","DesignMobile","Motion"],
+            "skills": ["Ui","DesignMobile","Motion","3d"],
             "tag": "Designer",
             "year": 2019
         },
@@ -128,7 +128,7 @@
         },
         {
             "nickname": "Corentin F.",
-            "skills": ["Front","RéalisationVideo","Montagevideo","Motion"],
+            "skills": ["Front","RéalisationVideo","Montagevideo","Motion","3d"],
             "tag": "Développeur",
             "year": 2016
         },
@@ -169,7 +169,7 @@
             "year": 2017
         },
         {
-            "nickname": "Centis",
+            "nickname": "Centis M.",
             "skills": ["Ui","DesignMobile","Illu","Motion"],
             "tag": "Designer",
             "year": 2017
@@ -181,7 +181,7 @@
             "year": 2018
         },
         {
-            "nickname": "Clément Dumas",
+            "nickname": "Clément Du.",
             "skills": ["Ui","DesignMobile","Illu","Front","Strategie"],
             "tag": "Designer",
             "year": 2017
@@ -241,7 +241,7 @@
             "year": 2019
         },
         {
-            "nickname": "Damien Laurent",
+            "nickname": "Damien L.",
             "skills": ["Front","Back"],
             "tag": "Développeur",
             "year": 2017
@@ -283,7 +283,7 @@
             "year": 2017
         },
         {
-            "nickname": "Julein G.",
+            "nickname": "Julien G.",
             "skills": ["Ui","DesignMobile","Strategie","RéalisationVideo","Montagevideo","Motion"],
             "tag": "Designer",
             "year": 2018
@@ -460,6 +460,72 @@
             "nickname": "Alexandra T.",
             "skills": ["Illu","Front","Strategie","Montagevideo"],
             "tag": "Chef de projet",
+            "year": 2018
+        },
+        {
+            "nickname": "Raphaëlle L.",
+            "skills": ["Ui","DesignMobile","Illu","Montagevideo"],
+            "tag": "Designer",
+            "year": 2019
+        },
+        {
+            "nickname": "Lionel P.",
+            "skills": ["Front","Back","RéalisationVideo","Montagevideo"],
+            "tag": "Développeur",
+            "year": 2019
+        },
+        {
+            "nickname": "Louis A.",
+            "skills": ["Ui","DesignMobile","Front","RéalisationVideo","Montagevideo"],
+            "tag": "Designer",
+            "year": 2018
+        },
+        {
+            "nickname": "Claire C.",
+            "skills": [],
+            "tag": "Chef de projet",
+            "year": 2017
+        },
+        {
+            "nickname": "Clarisse L.",
+            "skills": ["Back","Android","Seo","Montagevideo"],
+            "tag": "Développeur",
+            "year": 2018
+        },
+        {
+            "nickname": "Youssra M.",
+            "skills": ["Ui","DesignMobile","Illu","Front","Back","iOS","Strategie","RéalisationVideo","Montagevideo","Motion"],
+            "tag": "Designer",
+            "year": 2018
+        },
+        {
+            "nickname": "Antoine F.",
+            "skills": ["Front","iOS","Strategie","Seo",""],
+            "tag": "Chef de projet",
+            "year": 2018
+        },
+        {
+            "nickname": "Kris P.",
+            "skills": ["Ui","DesignMobile"],
+            "tag": "Designer",
+            "year": 2018
+        },
+        {
+            "nickname": "Jean L.",
+            "skills": ["Front"],
+            "tag": "Développeur",
+            "year": 2018
+        },
+        {
+            "nickname": "Aude F.",
+            "skills": ["Front","Back","Strategie","Montagevideo"],
+            "tag": "Développeur",
+            "year": 2019
+        },
+        {
+            "nickname": "Paul S.",
+            "skills": ["Back","Front","Seo","Montagevideo"],
+            "tag": "Développeur",
             "year": 2018
         }
     ]
