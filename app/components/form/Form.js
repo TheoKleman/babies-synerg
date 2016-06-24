@@ -12,11 +12,8 @@ export default class Form extends React.Component {
 		this.state = {
 			step: 0,
 			stepMax: 6,
-			lastAnswer: {
-				id: undefined,
-				nextQuestionId: 0,
-				text: undefined,
-			},
+			nextQuestionId: 0,
+			previousQuestionId: 0,
 			currentQuestionId: 0,
 			questions: [
 				{
@@ -134,8 +131,9 @@ export default class Form extends React.Component {
 			this.showForm()
 		}
 
-		// console.log("current: "+this.state.lastAnswer.nextQuestionId)
-		// console.log("next: "+nextState.lastAnswer.nextQuestionId)
+		if (nextState.nextQuestionId != this.state.nextQuestionId) {
+			this.nextStep(nextState.nextQuestionId)
+		}
 	}
 
 	componentWillMount() {
@@ -187,23 +185,22 @@ export default class Form extends React.Component {
 		}
 	}
 
-	nextStep() {
+	nextStep(nextQuestionId) {
 		if (this.state.step >= this.state.stepMax) {
 			var newStep = this.state.step
 		} else {
 			var newStep = this.state.step + 1
 		}
 
-		console.log("nextStep called with new question id : "+ this.state.lastAnswer.nextQuestionId)
-
 		if (newStep > 1 && newStep < 6) {
-			var newCurrentQuestionId = this.state.lastAnswer.nextQuestionId
+			var newCurrentQuestionId = nextQuestionId
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 		}
 
 		this.setState({
 			step: newStep,
+			previousQuestionId: this.state.currentQuestionId,
 			currentQuestionId: newCurrentQuestionId,
 			currentQuestion: this.state.questions[newCurrentQuestionId]
 		})
@@ -216,26 +213,21 @@ export default class Form extends React.Component {
 			var newStep = this.state.step - 1
 		}
 
-		if (newStep >= 1 && newStep < this.state.questions.length && this.state.currentQuestionId <= this.state.questions.length - 1) {
-			var newCurrentQuestionId = this.state.currentQuestionId - 1
+		if (newStep >= 1 && newStep < 6) {
+			var newCurrentQuestionId = this.state.previousQuestionId
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 		}
 		this.setState({
 			step: newStep,
-			"currentQuestionId": newCurrentQuestionId,
-			"currentQuestion": this.state.questions[newCurrentQuestionId]
+			currentQuestionId: newCurrentQuestionId,
+			currentQuestion: this.state.questions[newCurrentQuestionId]
 		})
 	}
 
-	setLastAnswer(answer) {
-		console.log("setLastAnswer called")
+	setNextQuestionId(nextQuestionId) {
 		this.setState({
-			lastAnswer: {
-				id: answer.id,
-				nextQuestionId: answer.nextQuestionId,
-				text: answer.text,
-			}
+			nextQuestionId: nextQuestionId
 		})
 	}
 
@@ -277,7 +269,7 @@ export default class Form extends React.Component {
 									goToPreviousStep={this.previousStep.bind(this)}
 									formIsDisplayed={this.props.isDisplayed}
 									currentQuestion={this.state.currentQuestion}
-									setLastAnswer={this.setLastAnswer.bind(this)}
+									setNextQuestionId={this.setNextQuestionId.bind(this)}
 									/>   
 		} else if (this.state.step == 6) {
 			var rightContent = <FinalStep 

@@ -71,11 +71,6 @@ export default class Board extends React.Component {
 		})
 	}
 
-	componentWillUpdate(nextProps, nextState) {
-		console.log(nextProps)
-		console.log("componentWillMount")
-	}
-
 	componentWillUnmount() {
 		window.removeEventListener("keydown", this.handleKeyDown.bind(this))
 		window.removeEventListener("keypress", this.handleKeyPress.bind(this))

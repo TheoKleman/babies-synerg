@@ -22,7 +22,7 @@ export default class QuestionsStep extends React.Component {
         var goToNextStep = this.props.goToNextStep.bind(this)
 
         // Set last answer
-        var setLastAnswer = this.props.setLastAnswer.bind(this)
+        var setNextQuestionId = this.props.setNextQuestionId.bind(this)
 
         // Var question number 
         var questionNumber = this.props.step
@@ -42,7 +42,7 @@ export default class QuestionsStep extends React.Component {
                                     key={answer.id}
                                     answer={answer}
                                     goToNextStep={goToNextStep}
-                                    setLastAnswer={setLastAnswer}/>
+                                    setNextQuestionId={setNextQuestionId}/>
                             })
                         }
                     </div>

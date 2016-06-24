@@ -6,7 +6,7 @@ export default class AnswerItem extends React.Component {
 	}
 
 	handleAnswer() {
-		this.props.setLastAnswer(this.props.answer)
+		this.props.setNextQuestionId(this.props.answer.nextQuestionId)
 	}
 
 	render() {
@@ -38,6 +38,7 @@ export default class AnswerItem extends React.Component {
 				</button>
 				<div className="item--answer">
 					<p>{this.props.answer.text}</p>
+					<p>Next: {this.props.answer.nextQuestionId}</p>
 				</div>
 			</div>
 		);
