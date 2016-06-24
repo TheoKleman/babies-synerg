@@ -13,7 +13,7 @@ export default class Form extends React.Component {
 			step: 0,
 			stepMax: 6,
 			nextQuestionId: 0,
-			previousQuestionId: 0,
+			previousQuestionsIds: [0,0,0],
 			currentQuestionId: 0,
 			questions: [
 				{
@@ -192,15 +192,23 @@ export default class Form extends React.Component {
 			var newStep = this.state.step + 1
 		}
 
+		// set new question to display
 		if (newStep > 1 && newStep < 6) {
 			var newCurrentQuestionId = nextQuestionId
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 		}
 
+		// Update previous questions ids array
+		var previousQuestionsIds = new Array()
+		previousQuestionsIds.push(this.state.previousQuestionsIds)
+		console.log(previousQuestionsIds)
+		previousQuestionsIds = previousQuestionsIds.push(this.state.currentQuestionId)
+		console.log(previousQuestionsIds)
+
 		this.setState({
 			step: newStep,
-			previousQuestionId: this.state.currentQuestionId,
+			previousQuestionsIds: previousQuestionsIds,
 			currentQuestionId: newCurrentQuestionId,
 			currentQuestion: this.state.questions[newCurrentQuestionId]
 		})
