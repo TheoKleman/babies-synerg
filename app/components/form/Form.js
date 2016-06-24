@@ -6,269 +6,305 @@ import QuestionsStep from './QuestionsStep'
 import FinalStep from './FinalStep'
 
 export default class Form extends React.Component {
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.state = {
-            step: 0,
-            stepMax: 6,
-            currentQuestionId: 0,
-            questions: [
-                {
-                    id: 0,
-                    text: "Quelle est la nature de votre projet ?",
-                    answers: [
-                        {
-                            id: 0,
-                            text: "Site web"
-                        },
-                        {
-                            id: 1,
-                            text: "Application mobile"
-                        },
-                        {
-                            id: 2,
-                            text: "Contenu multimédia"
-                        },
-                        {
-                            id: 3,
-                            text: "Web marketing"
-                        }
-                    ]
-                },
-                {
-                    id: 1,
-                    text: "Disposez-vous déjà de maquettes graphiques ?",
-                    answers: [
-                        {
-                            id: 0,
-                            text: "Oui"
-                        },
-                        {
-                            id: 1,
-                            text: "Non"
-                        }
-                    ]
-                },
-                {
-                    id: 2,
-                    text: "Vous voulez travailler avec nous ?",
-                    answers: [
-                        {
-                            id: 0,
-                            text: "Oui"
-                        },
-                        {
-                            id: 1,
-                            text: "Oui"
-                        },
-                        {
-                            id: 2,
-                            text: "Oui"
-                        },
-                        {
-                            id: 3,
-                            text: "Oui"
-                        }
-                    ]
-                },
-                {
-                    id: 3,
-                    text: "Une petite dernière question pour la route ?",
-                    answers: [
-                        {
-                            id: 0,
-                            text: "Allez"
-                        },
-                        {
-                            id: 1,
-                            text: "Nop nop nop"
-                        }
-                    ]
-                },
-                {
-                    id: 4,
-                    text: "J'ai plus d'inspiration, alors oui ou non ?",
-                    answers: [
-                        {
-                            id: 0,
-                            text: "Oui"
-                        },
-                        {
-                            id: 1,
-                            text: "Non"
-                        },
-                        {
-                            id: 2,
-                            text: "Je sais pas :|"
-                        }
-                    ]
-                }
-            ],
-        }
-    }
+		this.state = {
+			step: 0,
+			stepMax: 6,
+			lastAnswer: {
+				id: undefined,
+				nextQuestionId: 0,
+				text: undefined,
+			},
+			currentQuestionId: 0,
+			questions: [
+				{
+					id: 0,
+					text: "Quelle est la nature de votre projet ?",
+					answers: [
+						{
+							id: 0,
+							nextQuestionId: 2,
+							text: "Site web"
+						},
+						{
+							id: 1,
+							nextQuestionId: 3,
+							text: "Application mobile"
+						},
+						{
+							id: 2,
+							nextQuestionId: 4,
+							text: "Contenu multimédia"
+						},
+						{
+							id: 3,
+							nextQuestionId: 4,
+							text: "Web marketing"
+						}
+					]
+				},
+				{
+					id: 1,
+					text: "Disposez-vous déjà de maquettes graphiques ?",
+					answers: [
+						{
+							id: 0,
+							nextQuestionId: 3,
+							text: "Oui"
+						},
+						{
+							id: 1,
+							nextQuestionId: 4,
+							text: "Non"
+						}
+					]
+				},
+				{
+					id: 2,
+					text: "Vous voulez travailler avec nous ?",
+					answers: [
+						{
+							id: 0,
+							nextQuestionId: 1,
+							text: "Oui"
+						},
+						{
+							id: 1,
+							nextQuestionId: 3,
+							text: "Oui"
+						},
+						{
+							id: 2,
+							nextQuestionId: 3,
+							text: "Oui"
+						},
+						{
+							id: 3,
+							nextQuestionId: 4,
+							text: "Oui"
+						}
+					]
+				},
+				{
+					id: 3,
+					text: "Une petite dernière question pour la route ?",
+					answers: [
+						{
+							id: 0,
+							nextQuestionId: 4,
+							text: "Allez"
+						},
+						{
+							id: 1,
+							nextQuestionId: 4,
+							text: "Nop nop nop"
+						}
+					]
+				},
+				{
+					id: 4,
+					text: "J'ai plus d'inspiration, alors oui ou non ?",
+					answers: [
+						{
+							id: 0,
+							nextQuestionId: null,
+							text: "Oui"
+						},
+						{
+							id: 1,
+							nextQuestionId: null,
+							text: "Non"
+						},
+						{
+							id: 2,
+							nextQuestionId: null,
+							text: "Je sais pas :|"
+						}
+					]
+				}
+			],
+		}
+	}
 
-    componentWillUpdate(nextProps) {
-        // If props "form is displayed", show form
-        if (nextProps.isDisplayed == true) {
-            this.showForm()
-        }
-    }
+	componentWillUpdate(nextProps, nextState) {
+		// If props "form is displayed", show form
+		if (nextProps.isDisplayed == true) {
+			this.showForm()
+		}
 
-    componentWillMount() {
-        // Add event listener
-        window.addEventListener('keydown', this.handleKeyDown.bind(this))
+		// console.log("current: "+this.state.lastAnswer.nextQuestionId)
+		// console.log("next: "+nextState.lastAnswer.nextQuestionId)
+	}
 
-        this.setState({
-            "currentQuestion": this.state.questions[0]
-        })
-    }
+	componentWillMount() {
+		// Add event listener
+		window.addEventListener('keydown', this.handleKeyDown.bind(this))
 
-    handleKeyDown(e) {
-        // ESC key 
-        if (e.keyCode == 27 && this.props.isDisplayed) {
-            this.hideForm();
-        }
-    }
+		this.setState({
+			"currentQuestion": this.state.questions[0]
+		})
+	}
 
-    hideForm() {
-        var self = this;
+	handleKeyDown(e) {
+		// ESC key 
+		if (e.keyCode == 27 && this.props.isDisplayed) {
+			this.hideForm();
+		}
+	}
 
-        // Tween to hidden state + set props
-        TweenMax.to(this.refs.form, .5, {
-            opacity: 0,
-            scale: .95,
-            ease: Power2.easeOut,
-            onComplete: function(){
-                self.refs.form.className = 'form';
-                setTimeout(function(){
-                    self.props.setFormIsDisplayedProps(false)
-                }, 250)
-            }
-        })
-    }
+	hideForm() {
+		var self = this;
 
-    showForm() {
-        if (!this.props.isDisplayed) {
-            var self = this;
+		// Tween to hidden state + set props
+		TweenMax.to(this.refs.form, .5, {
+			opacity: 0,
+			scale: .95,
+			ease: Power2.easeOut,
+			onComplete: function(){
+				self.refs.form.className = 'form';
+				setTimeout(function(){
+					self.props.setFormIsDisplayedProps(false)
+				}, 250)
+			}
+		})
+	}
 
-            // Tween to displayed state, props already set
-            TweenMax.to(this.refs.form, .5, {
-                opacity: 1,
-                scale: 1,
-                ease: Power2.easeOut,
-                onStart: function(){
-                    self.refs.form.className += ' displayed';
-                }
-            })
-        }
-    }
+	showForm() {
+		if (!this.props.isDisplayed) {
+			var self = this;
 
-    nextStep() {
-        if (this.state.step >= this.state.stepMax) {
-            var newStep = this.state.step
-        } else {
-            var newStep = this.state.step + 1
-        }
+			// Tween to displayed state, props already set
+			TweenMax.to(this.refs.form, .5, {
+				opacity: 1,
+				scale: 1,
+				ease: Power2.easeOut,
+				onStart: function(){
+					self.refs.form.className += ' displayed';
+				}
+			})
+		}
+	}
 
-        if (newStep > 1 && this.state.currentQuestionId < this.state.questions.length - 1) {
-            var newCurrentQuestionId = this.state.currentQuestionId + 1
-        } else {
-            var newCurrentQuestionId = this.state.currentQuestionId
-        }
-        this.setState({
-            step: newStep,
-            "currentQuestionId": newCurrentQuestionId,
-            "currentQuestion": this.state.questions[newCurrentQuestionId]
-        })
-    }
+	nextStep() {
+		if (this.state.step >= this.state.stepMax) {
+			var newStep = this.state.step
+		} else {
+			var newStep = this.state.step + 1
+		}
 
-    previousStep() {
-        if (this.state.step <= 0) {
-            var newStep = 0
-        } else {
-            var newStep = this.state.step - 1
-        }
+		console.log("nextStep called with new question id : "+ this.state.lastAnswer.nextQuestionId)
 
-        if (newStep >= 1 && newStep < this.state.questions.length && this.state.currentQuestionId <= this.state.questions.length - 1) {
-            var newCurrentQuestionId = this.state.currentQuestionId - 1
-        } else {
-            var newCurrentQuestionId = this.state.currentQuestionId
-        }
-        this.setState({
-            step: newStep,
-            "currentQuestionId": newCurrentQuestionId,
-            "currentQuestion": this.state.questions[newCurrentQuestionId]
-        })
-    }
+		if (newStep > 1 && newStep < 6) {
+			var newCurrentQuestionId = this.state.lastAnswer.nextQuestionId
+		} else {
+			var newCurrentQuestionId = this.state.currentQuestionId
+		}
 
-    resetForm() {
-        this.setState({
-            step: 0,
-            "currentQuestionId": 0,
-            "currentQuestion": this.state.questions[0]
-        })
-    }
+		this.setState({
+			step: newStep,
+			currentQuestionId: newCurrentQuestionId,
+			currentQuestion: this.state.questions[newCurrentQuestionId]
+		})
+	}
 
-    render() {
-        var closeForm
-        var button
+	previousStep() {
+		if (this.state.step <= 0) {
+			var newStep = 0
+		} else {
+			var newStep = this.state.step - 1
+		}
 
-        // Button close available only if form is displayed
-        if (this.props.isDisplayed) {
-            var closeForm = this.hideForm.bind(this);
-            var buttonClose = <button className="form--close" onClick={closeForm}></button>
-        }
+		if (newStep >= 1 && newStep < this.state.questions.length && this.state.currentQuestionId <= this.state.questions.length - 1) {
+			var newCurrentQuestionId = this.state.currentQuestionId - 1
+		} else {
+			var newCurrentQuestionId = this.state.currentQuestionId
+		}
+		this.setState({
+			step: newStep,
+			"currentQuestionId": newCurrentQuestionId,
+			"currentQuestion": this.state.questions[newCurrentQuestionId]
+		})
+	}
 
-        // Button previous availability
-        if (this.state.step >=1 && this.state.step <= this.state.questions.length) {
-            var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
-        }
+	setLastAnswer(answer) {
+		console.log("setLastAnswer called")
+		this.setState({
+			lastAnswer: {
+				id: answer.id,
+				nextQuestionId: answer.nextQuestionId,
+				text: answer.text,
+			}
+		})
+	}
 
-        // Set right section content
-        if (this.state.step == 0) {
-            var rightContent = <IntroStep 
-                                    step={this.state.step}
-                                    goToNextStep={this.nextStep.bind(this)}
-                                    goToPreviousStep={this.previousStep.bind(this)}
-                                    formIsDisplayed={this.props.isDisplayed}
-                                    />
-        } else if (this.state.step >= 1 && this.state.step < this.state.questions.length + 1) {
-            var rightContent = <QuestionsStep
-                                    step={this.state.step}
-                                    goToNextStep={this.nextStep.bind(this)}
-                                    goToPreviousStep={this.previousStep.bind(this)}
-                                    formIsDisplayed={this.props.isDisplayed}
-                                    currentQuestionId={this.state.currentQuestionId}
-                                    questions={this.state.questions}
-                                    currentQuestion={this.state.currentQuestion}
-                                    />   
-        } else if (this.state.step == this.state.questions.length + 1) {
-            var rightContent = <FinalStep 
-                                    step={this.state.step}
-                                    questions={this.state.questions}
-                                    hideForm={this.hideForm.bind(this)}
-                                    resetForm={this.resetForm.bind(this)}
-                                    />
-        }
-        
-        return(
-            <section
-                ref="form"
-                className="form">
-                <div className="form--container">
-                    <div className="form--container--left">
-                        <img className="gif-baby" src="/images/baby.gif" alt=""/>
-                    </div>
-                    <div className="form--container--right">
-                        {rightContent}
-                    </div>
-                </div>
+	resetForm() {
+		this.setState({
+			step: 0,
+			currentQuestionId: 0,
+			currentQuestion: this.state.questions[0]
+		})
+	}
 
-                {buttonClose}
+	render() {
+		var closeForm
+		var button
 
-                {buttonPrevious}
-            </section>
-        );
-    }
+		// Button close available only if form is displayed
+		if (this.props.isDisplayed) {
+			var closeForm = this.hideForm.bind(this);
+			var buttonClose = <button className="form--close" onClick={closeForm}></button>
+		}
+
+		// Button previous availability
+		if (this.state.step >= 1 && this.state.step <= 6) {
+			var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
+		}
+
+		// Set right section content
+		if (this.state.step == 0) {
+			var rightContent = <IntroStep 
+									step={this.state.step}
+									goToNextStep={this.nextStep.bind(this)}
+									goToPreviousStep={this.previousStep.bind(this)}
+									formIsDisplayed={this.props.isDisplayed}
+									/>
+		} else if (this.state.step >= 1 && this.state.step < 6) {
+			var rightContent = <QuestionsStep
+									step={this.state.step}
+									goToNextStep={this.nextStep.bind(this)}
+									goToPreviousStep={this.previousStep.bind(this)}
+									formIsDisplayed={this.props.isDisplayed}
+									currentQuestion={this.state.currentQuestion}
+									setLastAnswer={this.setLastAnswer.bind(this)}
+									/>   
+		} else if (this.state.step == 6) {
+			var rightContent = <FinalStep 
+									step={this.state.step}
+									questions={this.state.questions}
+									hideForm={this.hideForm.bind(this)}
+									resetForm={this.resetForm.bind(this)}
+									/>
+		}
+		
+		return(
+			<section
+				ref="form"
+				className="form">
+				<div className="form--container">
+					<div className="form--container--left">
+						<img className="gif-baby" src="/images/baby.gif" alt=""/>
+					</div>
+					<div className="form--container--right">
+						{rightContent}
+					</div>
+				</div>
+
+				{buttonClose}
+
+				{buttonPrevious}
+			</section>
+		);
+	}
 }

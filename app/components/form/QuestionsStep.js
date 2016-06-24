@@ -21,19 +21,17 @@ export default class QuestionsStep extends React.Component {
         // Toggle btn
         var goToNextStep = this.props.goToNextStep.bind(this)
 
+        // Set last answer
+        var setLastAnswer = this.props.setLastAnswer.bind(this)
+
         // Var question number 
-        var questionNumber = 0
-        if (currentQuestion.id < this.props.questions.length) {
-            questionNumber = currentQuestion.id + 1
-        } else {
-            questionNumber = currentQuestion.id
-        }
+        var questionNumber = this.props.step
 
         return(
             <section className="right--questions" ref="sectionQuestions">
                 <div className="content-centered">
                     <span className="question">
-                        <small>Question {questionNumber} / {this.props.questions.length}</small>
+                        <small>Question {questionNumber} / 5</small>
                         <br />
                         {currentQuestion.text}
                     </span>
@@ -42,9 +40,9 @@ export default class QuestionsStep extends React.Component {
                             currentQuestion.answers.map(function(answer, i){
                                 return <AnswerItem 
                                     key={answer.id}
-                                    answerId={answer.id}
-                                    answerText={answer.text}
-                                    goToNextStep={goToNextStep}/>
+                                    answer={answer}
+                                    goToNextStep={goToNextStep}
+                                    setLastAnswer={setLastAnswer}/>
                             })
                         }
                     </div>

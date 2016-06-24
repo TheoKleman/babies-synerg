@@ -51,7 +51,7 @@ export default class App extends React.Component {
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
+        // window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
     }
 
     handleScroll(e) {
