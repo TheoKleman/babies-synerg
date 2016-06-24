@@ -236,10 +236,7 @@ export default class Baby extends React.Component {
 
 	handleMouseEnter(e, id) {
 	
-		let babyDatas = this.props.datas
-
-		this.props.setDetailIsDisplayedProps(true)
-		this.props.setBabyDetail(babyDatas)
+		
 	}
 
 	handleMouseLeave(e) {
@@ -248,7 +245,9 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseDown(e) {
-
+		let babyDatas = this.props.datas
+		this.props.setDetailIsDisplayedProps(true)
+		this.props.setBabyDetail(babyDatas)
 	}
 
 	handleMouseUp(e) {
