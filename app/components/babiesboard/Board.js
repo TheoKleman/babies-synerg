@@ -110,22 +110,22 @@ export default class Board extends React.Component {
 
             // todo
             // - max speed
-            this.setState({
-                boardIsTranslatingWithDrag: true,
-                navigateDragInterval: navigateDragInterval,
-                boardTranslateX: {
-                    X: newX,
-                    max: 0,
-                    min: - (this.state.boardWidth - this.props.viewportSize.width)
-                },
-                boardTranslateY: {
-                    Y: newY,
-                    max: 0,
-                    min: - (this.state.boardHeight - this.props.viewportSize.height)
-                },
-            })
+            // this.setState({
+            //     boardIsTranslatingWithDrag: true,
+            //     navigateDragInterval: navigateDragInterval,
+            //     boardTranslateX: {
+            //         X: newX,
+            //         max: 0,
+            //         min: - (this.state.boardWidth - this.props.viewportSize.width)
+            //     },
+            //     boardTranslateY: {
+            //         Y: newY,
+            //         max: 0,
+            //         min: - (this.state.boardHeight - this.props.viewportSize.height)
+            //     },
+            // })
             
-            var navigateDragInterval = setInterval(this.updateBoardTransform(), 200)
+            // var navigateDragInterval = setInterval(this.updateBoardTransform(), 200)
         } else if (this.props.mouseDownDrag.X == 0 && this.props.mouseDownDrag.Y == 0) {
             this.isNotNavigatingWithDrag()
         }
