@@ -181,6 +181,11 @@ nav.controls {
         > button {
             position: absolute;
 
+            &:hover { 
+                cursor: default;
+                span.key--content { transform: translate3d(0, 0, 0); }
+            }
+
             &.arrow-top {
                 top: 0;
                 left: 50%;
@@ -231,7 +236,7 @@ nav.controls {
         transform: scale(1);
         transition: transform .3s ease;
         &:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         &.active {
             &::before { width: 35px; }
