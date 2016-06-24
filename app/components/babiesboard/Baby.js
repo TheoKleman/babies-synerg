@@ -29,6 +29,7 @@ export default class Baby extends React.Component {
 			savedX: 0,
 			updateAngle: true,
 			isDragging: false,
+			rotateAngleLimit: 40,
 		}
 	}
 
@@ -82,10 +83,8 @@ export default class Baby extends React.Component {
 
 
 		// Rotate baby here
-		var babyRotation = this.rotateBaby(x),
+		var babyRotation = this.rotateBaby(x, this.state.rotateAngleLimit),
 			rotationExageration = 2
-
-			console.log(babyRotation)
 
 		this.refs.itSelf.style.transform = "rotate("+babyRotation+"deg)"
 
@@ -178,14 +177,14 @@ export default class Baby extends React.Component {
 		return direction
 	}
 
-	rotateBaby(direction) {
+	rotateBaby(direction, rotateAngleLimit) {
 		var angle = 0
 
 		if(direction > this.state.savedX) {
 			angle = direction - this.state.savedX
 			this.state.savedX = direction
-			if(angle > 70) {
-				angle = 70
+			if(angle > rotateAngleLimit) {
+				angle = rotateAngleLimit
 				return angle
 			} else {
 				return angle
@@ -193,8 +192,12 @@ export default class Baby extends React.Component {
 		} else {
 			angle = direction - this.state.savedX
 			this.state.savedX = direction
-
-			return angle
+			if(angle < -rotateAngleLimit) {
+				angle = -rotateAngleLimit
+				return angle
+			} else {
+				return angle
+			}
 		}
 	}
 
@@ -295,6 +298,8 @@ export default class Baby extends React.Component {
 						<span className="baby-body"><img src={babyBody} alt="baby body"/></span>
 						<span className="baby-arm-right" style={{transform: this.state.transformArms}}><img src="/images/right-arm.png" alt="baby right arm"/></span>
 						<span className="baby-arm-left" style={{transform: this.state.transformArms}}><img src="/images/left-arm.png" alt="baby left arm"/></span>
+						<span className="baby-leg-right" style={{transform: this.state.transformArms}}><img src="/images/right-leg.png" alt="baby right leg"/></span>
+						<span className="baby-leg-left" style={{transform: this.state.transformArms}}><img src="/images/left-leg.png" alt="baby left leg"/></span>
 					</div>
 				</div>
 			</div>

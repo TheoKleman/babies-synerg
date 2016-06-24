@@ -46,6 +46,7 @@ export default class App extends React.Component {
             },
             detailDisplayed: false,
             isSorting: false,
+            isSoundActive: true,
         }
     }
 
@@ -165,6 +166,12 @@ export default class App extends React.Component {
         })
     }
 
+    setSound(value) {
+        this.setState({
+            isSoundActive: value
+        })
+    }
+
     handleResize(){
         this.setState({
             viewportSize: {
@@ -175,6 +182,11 @@ export default class App extends React.Component {
     }
 
     render(){
+
+        if(!this.state.formDisplayed) {
+            var detailBaby = <DetailBaby isDisplayed={this.state.detailDisplayed} babyDetail={this.state.babyHoveredDetail} />
+        }
+
         return (
             <div
                 className="main-content"
@@ -199,15 +211,16 @@ export default class App extends React.Component {
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     isDragging={this.state.mouseDown}
                     mouseDownDrag={this.state.mouseDownPos} />
-                <DetailBaby
-                    isDisplayed={this.state.detailDisplayed}
-                    babyDetail={this.state.babyHoveredDetail} />
+                {detailBaby}
                 <FilterNav
                     isSorting={this.state.isSorting}
                     setSorting={this.setSorting.bind(this)} />
                 <Footer />
                 <Controls 
-                    controlsHighlighting={this.state.controlsHighlighting} />
+                    controlsHighlighting={this.state.controlsHighlighting}
+                    formDisplayed={this.state.formDisplayed}
+                    isSoundActive={this.state.isSoundActive}
+                    setSound={this.setSound.bind(this)} />
             </div>
         )
     }
