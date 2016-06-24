@@ -27,6 +27,9 @@ export default class AnswerItem extends React.Component {
 		setTimeout(function() {
 			that.props.setNextQuestionId(that.props.answer.nextQuestionId)
 		}, 300)
+		
+		this.props.setNextQuestionId(this.props.answer.nextQuestionId)
+		this.props.saveAnswer(this.props.question.text, this.props.answer.text)
 	}
 
 	render() {
@@ -44,6 +47,9 @@ export default class AnswerItem extends React.Component {
 			case 3:
 				char = "D"
 				break;
+			case 4:
+				char = "E"
+				break;
 		}
 
 		var answerClasses = classNames({
@@ -51,11 +57,14 @@ export default class AnswerItem extends React.Component {
 			'selected': this.state.isClicked,
 		})
 
+		var id = "question"+this.props.question.id+"-answer"+this.props.answer.id
+
 		return(
 			<div
 				className="form--answers--item"
 				ref={this.props.answer.id}
 				onClick={this.handleAnswer.bind(this)}
+				id={id}
 				>
 				<button 
 					ref="itSelf"
