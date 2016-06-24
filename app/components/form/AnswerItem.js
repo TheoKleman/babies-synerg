@@ -38,7 +38,6 @@ export default class AnswerItem extends React.Component {
 				</button>
 				<div className="item--answer">
 					<p>{this.props.answer.text}</p>
-					<p>Next: {this.props.answer.nextQuestionId}</p>
 				</div>
 			</div>
 		);
