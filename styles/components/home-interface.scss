@@ -157,34 +157,38 @@ nav.main-filter {
 
 nav.controls {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    display: flex;
+    align-items: flex-end;
+    bottom: 20px;
+    right: 20px;
+    height: 65px; 
     z-index: 10;
+    overflow: hidden;
 
     .controls--arrows {
+        display: inline-block;
         position: relative;
-        height: 40px;
-        width: 66px;
+        width: 90px;
+        height: 55px;
         margin-right: 20px;
-        margin-bottom: 20px;
+        transform: translate3d(0, 0, 0);
+        transition: transform .3s ease-in-out;
 
-        > span {
+        &.hidden {
+            transform: translate3d(0, 150%, 0);
+        }
+
+        > button {
             position: absolute;
-            width: 16px;
-            height: 16px;
-            display: block;
-            background: $blue;
-            transition: all ease .5s;
-
-            &.active {
-                background: $yellow;
-                transition: all ease .1s;
-            }
 
             &.arrow-top {
                 top: 0;
                 left: 50%;
                 transform: translateX(-50%);
+                span.key--content {
+                    line-height: 24px;
+                    img { transform: rotate(90deg); }
+                }
             }
 
             &.arrow-left {
@@ -196,12 +200,56 @@ nav.controls {
                 bottom: 0;
                 left: 50%;
                 transform: translateX(-50%);
+                span.key--content {
+                    img { transform: rotate(-90deg); }
+                }
             }
 
             &.arrow-right {
                 right: 0;
                 bottom: 0;
+                span.key--content {
+                    img { transform: rotate(-180deg); }
+                }
             }
+
+            span.key--content {
+                line-height: 26px;
+                img {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+
+    .controls--sound {
+        position: relative;
+        display: inline-block;
+        width: 36px;
+        height: 40px;
+        transform: scale(1);
+        transition: transform .3s ease;
+        &:hover {
+            transform: scale(1.05);
+        }
+        &.active {
+            &::before { width: 35px; }
+        }
+        &::before {
+            position: absolute;
+            content: '';
+            top: 75%;
+            left: 5px;
+            width: 0px;
+            height: 3px;
+            background-color: $blue;
+            transform-origin: 0 0;
+            transform: translate3d(0, -50%, 0) rotate(-45deg);
+            transition: width .3s ease;
+        }
+        &:hover {
+            cursor: pointer;
         }
     }
 }

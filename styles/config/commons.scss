@@ -90,4 +90,29 @@ button.key {
             line-height: 42px;
         }
     }
+
+    &.mini {
+        min-width: 21px;
+        width: 32px;
+        height: 30px;
+        &.active {
+            span.key--content {
+                background-color: $yellow;
+                transform: translate3d(0, 6px, 0);
+            }
+        }
+
+        >span {
+            padding: 0;
+        }
+
+        span.key--double {
+            height: 32px;
+        }
+        span.key--content {
+            top: -12px;
+            height: 27px;
+            line-height: 20px;
+        }
+    }
 }
