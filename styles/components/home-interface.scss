@@ -3,6 +3,7 @@ footer.main-footer {
     height: 130px;
     bottom: 0;
     z-index: 10;
+    font-family: $font-m1mregular;
 
     .logo {
         position: absolute;
@@ -35,6 +36,8 @@ footer.main-footer {
 
             button {
                 margin-right: 10px;
+                font-family: $font-m1mbold;
+                letter-spacing: 1.2px;
             }
         }
 
@@ -46,13 +49,13 @@ footer.main-footer {
             p {
                 margin: 0;
                 color: $blue;
-                font-style: italic;
             }
 
             a {
                 color: $blue;
                 font-weight: bold;
                 text-decoration: none;
+                font-family: $font-m1mbold;
             }
         }
     }
@@ -60,20 +63,95 @@ footer.main-footer {
 
 nav.main-filter {
     position: absolute;
-    height: 130px;
-    top: 0;
-    right: 0;
+    height: 80px;
+    width: 80px;
+    top: 20px;
+    right: 20px;
     z-index: 10;
 
     > button.filter-babies {
-        margin-top: 20px;
-        margin-right: 20px;
-        border: 0;
-        padding: 0 20px;
-        line-height: 70px;
-        height: 70px;
-        display: block;
-        background: $blue-a9;
+        width: 100%;
+        height: 100%;
+        background-color: $blue;
+        &:hover {
+            .shapes {
+                &.fill-yellow { animation: shapeFitOut .4s ease forwards; }
+            }
+        }
+
+        .shapes {
+            position: relative;
+            margin-top: -10px;
+            width: 50px;
+            height: 50px;
+            z-index: 1;
+
+            &.fill-yellow {
+                position: absolute;
+                margin-top: 0;
+                bottom: 20px;
+                z-index: 2;
+                transform: rotate(30deg) scale(1);
+                animation: shapeFitIn .6s ease forwards;
+                // transition: transform .3s ease-in-out;
+
+                .shapes__item {
+                    border: none;
+                    background-color: $yellow;
+                }
+                span.triangle {
+                    background: none;
+                    border-bottom: 18px solid $yellow;
+                    border-right: 11px solid transparent;
+                    border-left: 11px solid transparent;
+                    &::before { display: none; }
+                }
+            }
+
+            &__item {
+                position: absolute;
+                content: '';
+                background: $blue;
+                border-color: $light;
+            }
+
+            span.circle {
+                bottom: -1px;
+                left: 0;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                border: 3px solid;
+            }
+            span.triangle {
+                bottom: 30px;
+                left: 50%;
+                transform: translate3d(-50%, 0, 0);
+                width: 0;
+                height: 0;
+                border-bottom: 18px solid $light;
+                border-right: 11px solid transparent;
+                border-left: 11px solid transparent;
+                &::before {
+                   position: absolute;
+                   content: '';
+                   left: -6px;
+                   top: 6px;
+                   width: 0;
+                   height: 0;
+                   border-bottom: 9px solid $blue;
+                   border-right: 6px solid transparent;
+                   border-left: 6px solid transparent; 
+                }
+            }
+            span.square {
+                right: 0;
+                bottom: 0;
+                width: 16px;
+                height: 16px;
+                border: 3px solid;
+            }
+        }
     }
 }
 
@@ -85,15 +163,15 @@ nav.controls {
 
     .controls--arrows {
         position: relative;
-        height: 22px;
-        width: 36px;
+        height: 40px;
+        width: 66px;
         margin-right: 20px;
         margin-bottom: 20px;
 
         > span {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 16px;
+            height: 16px;
             display: block;
             background: $blue;
             transition: all ease .5s;
@@ -126,4 +204,16 @@ nav.controls {
             }
         }
     }
+}
+
+@keyframes shapeFitOut {
+    0% { transform: rotate(30deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.2); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes shapeFitIn {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.2); }
+    100% { transform: rotate(30deg) scale(1); }
 }

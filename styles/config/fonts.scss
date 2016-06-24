@@ -1,0 +1,33 @@
+$font-silkscreen: 'silkscreennormal';
+$font-m1mregular: 'm_1mregular';
+$font-m1mbold: 'm_1mbold';
+
+// SILKSCREEN
+@font-face {
+    font-family: 'silkscreennormal';
+    src: url('/fonts/slkscr-webfont.woff2') format('woff2'),
+         url('/fonts/slkscr-webfont.woff') format('woff'),
+         url('/fonts/slkscre.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// MPLUS1M REGULAR
+@font-face {
+    font-family: 'm_1mregular';
+    src: url('/fonts/mplus-1m-regular-webfont.woff2') format('woff2'),
+         url('/fonts/mplus-1m-regular-webfont.woff') format('woff'),
+         url('/fonts/mplus-1m-regular.tff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// MPLUS1M BOLD
+@font-face {
+    font-family: 'm_1mbold';
+    src: url('/fonts/mplus-1m-bold-webfont.woff2') format('woff2'),
+         url('/fonts/mplus-1m-bold-webfont.woff') format('woff'),
+         url('/fonts/mplus-1m-bold.tff');
+    font-weight: normal;
+    font-style: normal;
+}

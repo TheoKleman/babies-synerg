@@ -20,6 +20,7 @@ export default class BabiesList extends Component {
             caseHeight: 0,
             safetyWidthDistance: 30,
             safetyHeightDistance: -20,
+            goSort: false,
 		}
 	}
 
@@ -191,6 +192,8 @@ export default class BabiesList extends Component {
 							test = {this.refs.babyContainer}
 							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 							setBabyDetail={this.props.setBabyDetail}
+							setSorting={this.props.setSorting}
+							isSorting={this.props.isSorting}
 							id={i} />
           			) 
 				}

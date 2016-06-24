@@ -225,7 +225,7 @@ export default class Baby extends React.Component {
         		break;
         	default:
         		this.setState({
-        			skin: "baby-placeholder.png"
+        			skin: "jaune.png"
         		})
         }
 	}
@@ -235,30 +235,16 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e, id) {
-		this.setState({isHovering: true})
 	
-		// Save datas here for the future
-		let babyXpx = this.props.pos.origin.Xpx
-		let babyYpx = this.props.pos.origin.Ypx
 		let babyDatas = this.props.datas
 
 		this.props.setDetailIsDisplayedProps(true)
 		this.props.setBabyDetail(babyDatas)
-
-		// this.setState({
-		// 	isHovering: true
-		// })
-		// this.setState({
-		// 	skin: "baby.gif"
-		// })
 	}
 
 	handleMouseLeave(e) {
 		// this.getBabySkin(this.props.datas.tag)
 		this.props.setDetailIsDisplayedProps(false)
-		// this.setState({
-		// 	isHovering: false
-		// })
 	}
 
 	handleMouseDown(e) {
@@ -267,9 +253,6 @@ export default class Baby extends React.Component {
 
 	handleMouseUp(e) {
 		console.log('mouse up')
-		// this.setState({
-		// 	updateAngle: false
-		// })
 	}
 
 	render() {
