@@ -42,13 +42,14 @@ export default class SpaceBar extends React.Component {
 
     render() {
         var spaceClasses = classNames({
-            'space-bar': true,
-            'isPressed': this.props.isSpacePressed
+            'spacebar': true,
+            'key': true,
+            'isPressed': this.props.isSpaceBarPressed
         })
 
         return(
             <button
-                className="key spacebar"
+                className={spaceClasses}
                 onMouseDown={this.handleMouseDown.bind(this)}
                 onMouseUp={this.handleMouseUp.bind(this)}
                 >

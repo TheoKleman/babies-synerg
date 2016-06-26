@@ -32,6 +32,12 @@ export default class Board extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
+		if ( nextProps.isSorting != this.props.isSorting ){
+			return true;
+		}
+		if( nextState.spacebarDown != this.state.spacebarDown) {
+			return true;
+		}
 		// You can access `this.props` and `this.state` here
 		// This function should return a boolean, whether the component should re-render.
 		return false;
@@ -412,7 +418,7 @@ export default class Board extends React.Component {
 					boardHeight={this.state.boardHeight}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					formDisplayed={this.props.formDisplayed}
-					spaceBarPressed={this.state.spacebarDown}
+					isSpaceBarPressed={this.state.spacebarDown}
 					babyRendered={this.state.babyRendered}
 					centerBoard={this.centerBoard.bind(this)}/>
 			</section>

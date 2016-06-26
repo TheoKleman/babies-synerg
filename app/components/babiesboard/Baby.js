@@ -40,7 +40,6 @@ export default class Baby extends React.Component {
 	componentDidMount() {
 		this.setPosition(this.props.pos.origin)
 
-		// interact.on('drag', this.refs.itSelf, this.dragListener)
 		interact(this.refs.itSelf).draggable({
 			inertia: {
 				resistance: 10,
@@ -59,16 +58,12 @@ export default class Baby extends React.Component {
 	}
 
 	onDragListener(event) {
-		console.log('mooving')
-
 		this.setState({
 			isDragging: true
 		})
 
 		var baseX = this.props.pos.origin.Xpx,
 			baseY = this.props.pos.origin.Ypx - 40
-
-		// var currentBaby = document.getElementById(event.target.id)
 
 		var boardWidth = document.getElementById('babies-board').clientWidth,
 			boardHeight = document.getElementById('babies-board').clientHeight,
@@ -81,7 +76,7 @@ export default class Baby extends React.Component {
 		    y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
 
 
-		// Rotate baby here
+		// Rotate baby here //
 		var babyRotation = this.rotateBaby(x, this.state.rotateAngleLimit),
 			rotationExageration = 2
 
@@ -202,6 +197,8 @@ export default class Baby extends React.Component {
         		})
         }
 	}
+
+
 
 	handleMouseEnter(e, id) {
 

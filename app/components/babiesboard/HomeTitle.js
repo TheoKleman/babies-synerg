@@ -2,6 +2,8 @@ import React from 'react'
 
 import SpaceBar from './Spacebar'
 
+var classNames = require('classnames')
+
 export default class HomeTitle extends React.Component {
 	constructor() {
 		super()
@@ -14,7 +16,6 @@ export default class HomeTitle extends React.Component {
 
 	componentDidMount() {
 		var titleElem = this.refs.homeTitle.width
-		console.log(titleElem)
 	}
 
 	render() {
@@ -24,8 +25,6 @@ export default class HomeTitle extends React.Component {
 			left: (this.props.boardWidth / 2) - (this.state.width / 2),
 			zIndex: 100,
 		}
-
-		console.log(this.props.spaceBarPressed)
 
 		return(
 			<div 
@@ -38,7 +37,7 @@ export default class HomeTitle extends React.Component {
 					formDisplayed={this.props.formDisplayed}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					centerBoard={this.props.centerBoard.bind(this)}
-					isSpacePressed={this.props.spaceBarPressed} />
+					isSpaceBarPressed={this.props.isSpaceBarPressed} />
 				<p>Maintenez la barre espace pour ...</p>
 			</div>
 		)

@@ -103,6 +103,12 @@ button.key {
                 background: $light;
             }
         }
+
+        &.isPressed {
+            span.key--content {
+                transform: translate3d(0,4px,0);
+            }
+        }
     }
 
     &.mini {

@@ -11,6 +11,7 @@ export default class BabiesList extends Component {
 		this.state = {
 			babies: [],
             boardItSelf: [],
+            babiesPosition: [],
             scale: 5,
             widthWhiteSpace: 300,
             heightWhiteSpace: 250,
@@ -21,6 +22,55 @@ export default class BabiesList extends Component {
             safetyWidthDistance: 30,
             safetyHeightDistance: -20,
             goSort: false,
+            devArea: {
+            	x: {
+            		start: 0.1,
+            		end: 0.45
+            	},
+            	y: {
+            		start: 0.1,
+            		end: 0.40
+            	}
+            },
+            cdpArea: {
+            	x: {
+            		start: 0.60,
+            		end: 0.95
+            	},
+            	y: {
+            		start: 0.05,
+            		end: 0.45
+            	}
+            },
+            marketArea: {
+            	x: {
+            		start: 0.1,
+            		end: 0.45
+            	},
+            	y: {
+            		start: 0.55,
+            		end: 0.95
+            	}
+            },
+            designArea: {
+            	x: {
+            		start: 0.55,
+            		end: 0.95
+            	},
+            	y: {
+            		start: 0.55,
+            		end: 0.95
+            	}
+            },
+            freeZone: 0.4,
+            devPositionsArea: [],
+			designPositionsArea: [],
+			cdpPositionsArea: [],
+			marketPositionsArea: [],
+			devs: [],
+			designers: [],
+			cdps: [],
+			marketeux: [],
 		}
 	}
 
@@ -30,7 +80,7 @@ export default class BabiesList extends Component {
 	    let caseWidth = this.props.boardWidth / nbCasesX
 	    let nbCasesY = Math.floor(( this.props.boardHeight / ( this.state.babySpec.babyHeight + this.state.safetyHeightDistance ) ) * this.state.scale)
 	    let caseHeight = this.props.boardHeight / nbCasesY
-	    // console.log(nbCasesX);
+	    
 	    this.setState({
 	        nbCasesX: nbCasesX,
 	        nbCasesY: nbCasesY,
@@ -39,11 +89,17 @@ export default class BabiesList extends Component {
 	        boardItSelf: this.buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight)
 	    })
 
+	    this.setState({
+	    	devPositionsArea: this.assignAreas(this.state.devArea),
+	    	designPositionsArea: this.assignAreas(this.state.designArea),
+	    	cdpPositionsArea: this.assignAreas(this.state.cdpArea),
+	    	marketPositionsArea: this.assignAreas(this.state.marketArea),
+	    })
+
 	    // console.log("caseHeight : "+caseWidth);
 	    // console.log("caseWidth : "+caseHeight);
 	    // console.log("nbCaseX : "+nbCasesX);
 	    // console.log("nbCaseY : "+nbCasesY);
-
 	}
 
     buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight){
@@ -77,7 +133,7 @@ export default class BabiesList extends Component {
     }
 
     boardCell(x, y, caseWidth, caseHeight, that){
-    	let limit = Math.floor(that.state.scale / 2)
+    	// let limit = Math.floor(that.state.scale / 2)
         return {
             "Xpx": (x * caseWidth),
             "Ypx": (y * caseHeight) - that.state.safetyHeightDistance,
@@ -94,7 +150,7 @@ export default class BabiesList extends Component {
                 this.setState({
                     babies: response.babies
                 })
-            });
+            })
     }
 
     loadBabySpec() { 
@@ -151,6 +207,14 @@ export default class BabiesList extends Component {
 		return casesOwn
 	}
 
+	setRandomDestination() {
+		////// COUCOU FUTUR MMOI
+		///// JE SUIS AU MOMENT OU J'AI LES IDS DES BÉBÉS QUI SONT DEVS, DESIGNER, CDP, MARKET
+		//// MAINTENANT JE DOIS BOUCLER DANS MON TABLEAU D'AREA POUR CHAQUE TYPE ET METTRE UNE POS RANDOM
+		/// QUAND J'AURAI TOUT ÇA JE POURRA AJOUTER UN CHAMP 'dest' DANS MON this.state.babiesPositions
+		//	VOILA BISOUS
+	}
+
 	checkIfSpotFree(x, y){
 		let limit = Math.floor(this.state.scale / 2)
 		for ( var i = (x - limit); i <= (x + limit); i++ ){
@@ -169,16 +233,116 @@ export default class BabiesList extends Component {
 		return true
 	}
 
+	// Save initial babies positions
+	fillPositions() {
+		var tempArray = []
+
+		for (var i = 0; i < this.state.babies.length; i++) {
+			let pos = this.setRandomPosition()
+			tempArray = tempArray.concat(pos)
+		}
+
+	    if(tempArray != null) {
+	    	this.state.babiesPosition = tempArray
+	    }
+
+	    this.sortBabiesByTag()
+	}
+
+	sortBabiesByTag() {
+		let designers = [],
+			devs = [],
+			cdps = [],
+			marketeux = []
+
+		for (var i = 0; i < this.state.babies.length; i++) {
+			let tag = this.state.babies[i].tag
+
+			if(tag == "Designer")
+				designers.push(i)
+
+			if(tag == "Développeur")
+				devs.push(i)
+
+			if(tag == "Chef de projet")
+				cdps.push(i)
+
+			if(tag == "DesMarketeuxigner")
+				marketeux.push(i)
+		}
+
+		this.setRandomDestination(designers)
+		this.setRandomDestination(devs)
+		this.setRandomDestination(cdps)
+		this.setRandomDestination(marketeux)
+	}
+
+	sortBabies() {
+		
+	}
+
+	assignAreas(areaConfig) {
+		let array = []
+
+		let leftStart = Math.floor(areaConfig.x.start * this.state.nbCasesX)
+		let leftEnd   = Math.floor(areaConfig.x.end * this.state.nbCasesX)
+		let topStart  = Math.floor(areaConfig.y.start * this.state.nbCasesY)
+		let topEnd    = Math.floor(areaConfig.y.end * this.state.nbCasesY)
+
+		for (var i = leftEnd; i >= leftStart; i--) {
+			array[i] = []
+			for (var j = topEnd; j >= topStart; j--) {
+				array[i][j] = new this.boardCell(i, j, this.state.caseWidth, this.state.caseHeight, this)
+			}
+		}
+
+		array = this.emptyArea(leftStart, array)
+		return array
+	}
+
+	emptyArea(firstIndex, array) {
+		let limit = Math.floor(array[firstIndex].length * this.state.freeZone)
+
+		for (var x = firstIndex; x < array.length; x++) {
+			for (var y = (array[firstIndex].length - limit); y < array[firstIndex].length; y++) {
+				array[x][y].free = 0
+			}
+		}
+
+		return array;
+	}
+
 	componentWillMount() {
         this.loadBabySpec()
         this.loadBabies()
 	}
 
 	componentDidMount(){
-		// console.log(this.refs.babyContainer);
+		
+	}
+
+	componentDidUpdate(){
+		
 	}
 
 	render() {
+		// let sortingBayby = false
+		// if ( this.props.isSorting ){
+		// 	sortingBayby = this.sortBabies()
+		// }
+
+		/* ##### DO NOT REMOVE / FIX MAX CALL SIZE ERROR ##### */
+		// Check here if we have babyPositions empty
+		if(this.state.babiesPosition == "") {
+			// If array with babies is not empty
+			// Call setPosition for each baby and fill babyPositions
+			if(this.state.babies != null) {
+				this.fillPositions()
+			}
+		}
+
+		// console.log(this.state.devPositionsArea)
+		console.log(this.state.babies)
 
 		return(
 			<div className="babies-container" ref="babyContainer">
@@ -188,7 +352,8 @@ export default class BabiesList extends Component {
 							key={i}
 							datas={baby}
 							babySpec={this.state.babySpec}
-							pos={this.setRandomPosition()}
+							pos={this.state.babiesPosition[i]}
+							sortingBayby={this.sortBabies()}
 							test = {this.refs.babyContainer}
 							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 							setBabyDetail={this.props.setBabyDetail}
