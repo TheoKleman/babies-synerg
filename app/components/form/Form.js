@@ -4,7 +4,8 @@ import qwest from 'qwest'
 
 import IntroStep from './IntroStep'
 import QuestionsStep from './QuestionsStep'
-import FinalStep from './FinalStep'
+import SummaryStep from './SummaryStep'
+import MailStep from './MailStep'
 
 export default class Form extends React.Component {
 	constructor() {
@@ -12,12 +13,19 @@ export default class Form extends React.Component {
 
 		this.state = {
 			step: 0,
-			stepMax: 6,
+			stepMax: 7,
 			nextQuestionId: 0,
 			previousQuestionsIds: [],
+			currentQuestion: {},
 			currentQuestionId: 0,
 			questions: [],
-			answers:[]
+			answers:[],
+			peopleAvailable: {
+				designers: 18,
+				developers: 9,
+				market: 3,
+				management: 24 
+			}
 		}
 	}
 
@@ -72,6 +80,7 @@ export default class Form extends React.Component {
 				self.refs.form.className = 'form';
 				setTimeout(function(){
 					self.props.setFormIsDisplayedProps(false)
+					self.resetForm()
 				}, 250)
 			}
 		})
@@ -96,6 +105,8 @@ export default class Form extends React.Component {
 	nextStep(nextQuestionId) {
 		if (this.state.step >= this.state.stepMax) {
 			var newStep = this.state.step
+		} else if (nextQuestionId === "endPoint") {
+			var newStep = 6
 		} else {
 			var newStep = this.state.step + 1
 		}
@@ -103,6 +114,8 @@ export default class Form extends React.Component {
 		// set new question to display
 		if (newStep > 1) {
 			var newCurrentQuestionId = nextQuestionId
+		} else if (newStep == 6) {
+			var newCurrentQuestionId = this.state.currentQuestionId
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 		}
@@ -130,19 +143,20 @@ export default class Form extends React.Component {
 		// set new question to display
 		if (newStep >= 1) {
 			var newCurrentQuestionId = this.state.previousQuestionsIds[this.state.previousQuestionsIds.length - 1]
+
 			// Update previous questions ids array
 			var previousQuestionsIds = []
 			previousQuestionsIds = this.state.previousQuestionsIds
-			previousQuestionsIds = previousQuestionsIds.pop()
+			previousQuestionsIds = previousQuestionsIds.slice(0, -1)
 
 			// Unset last answer
 			var answersArray = []
 			answersArray = this.state.answers
-			answersArray = answersArray.splice(answersArray.length - 2, answersArray.length)
+			answersArray = answersArray.slice(0, -2)
 		} else {
 			var newCurrentQuestionId = this.state.currentQuestionId
 			var previousQuestionsIds = []
-			var answers = []
+			var answersArray = []
 		}
 
 		this.setState({
@@ -152,8 +166,6 @@ export default class Form extends React.Component {
 			currentQuestionId: newCurrentQuestionId,
 			currentQuestion: this.state.questions[newCurrentQuestionId]
 		})
-
-		console.log(this.state.questions[newCurrentQuestionId])
 	}
 
 	setNextQuestionId(nextQuestionId) {
@@ -163,9 +175,6 @@ export default class Form extends React.Component {
 	}
 
 	saveAnswer(question, answer) {
-		console.log(question)
-		console.log(answer)
-
 		var theAnswer = [question,answer]
 		var answersArray = []
 		answersArray = this.state.answers
@@ -212,15 +221,20 @@ export default class Form extends React.Component {
 									step={this.state.step}
 									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
-									formIsDisplayed={this.props.isDisplayed}
 									currentQuestion={this.state.currentQuestion}
 									setNextQuestionId={this.setNextQuestionId.bind(this)}
 									saveAnswer={this.saveAnswer.bind(this)}
 									/>   
 		} else if (this.state.step == 6) {
-			var rightContent = <FinalStep 
+			var rightContent = <SummaryStep 
 									step={this.state.step}
-									questions={this.state.questions}
+									peopleAvailable={this.state.peopleAvailable}
+									goToNextStep={this.nextStep.bind(this)}
+									/>
+		} else if (this.state.step == 7) {
+			var rightContent = <MailStep 
+									step={this.state.step}
+									mailAnswers={this.state.answers}
 									hideForm={this.hideForm.bind(this)}
 									resetForm={this.resetForm.bind(this)}
 									/>

@@ -56,30 +56,30 @@ section.form {
     }
 
     button.form--previous-step {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 70px;
-            text-align: center;
-            padding: 0;
-            text-transform: none;
-            background-color: transparent;
-            color: $grey;
-            font-size: 11px;
-            height: 35px;
-            background: url(/images/UI/form-arrow.svg) no-repeat top center;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 70px;
+        text-align: center;
+        padding: 0;
+        text-transform: none;
+        background-color: transparent;
+        color: $grey;
+        font-size: 11px;
+        height: 35px;
+        background: url(/images/UI/form-arrow.svg) no-repeat top center;
 
-            span {
-                position: absolute;
-                display: inline-block;
-                text-align: center;
-                width: 100%;
-                height: 20px;
-                line-height: 20px;
-                right: 0;
-                bottom: 0;
-            }
+        span {
+            position: absolute;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            right: 0;
+            bottom: 0;
         }
+    }
     
     .form--answers {
         width: auto;
@@ -124,7 +124,7 @@ section.form {
             }
         }
 
-        &.selected {
+        &:hover {
             button.key > span.key--content {
                 background: $yellow;
                 transform: translate3d(0,4px,0);
@@ -138,7 +138,7 @@ section.form {
         }
     }
 
-    .right--intro, .right--questions, .right--final {
+    .right--intro, .right--questions, .right--summary, .right--mail {
         width: 100%;
         height: 100%;
         position: relative;
@@ -149,22 +149,6 @@ section.form {
             top: 50%;
             left: 50%;
             transform: translate3d(-50%,-50%,0);
-        }
-    }
-
-    .right--intro {
-        text-align: center;
-
-        span {
-            font-size: 18px;
-            text-transform: uppercase;
-            color: $blue;
-            font-weight: bold;
-        }
-
-        p {
-            font-size: 14px;
-            color: $grey;
         }
 
         button.key-enter {
@@ -177,10 +161,30 @@ section.form {
             max-height: 104px;
             padding: 0;
             background: url(/images/UI/key-enter.svg) no-repeat bottom center;
+            transition: all ease .075s;
 
             &:hover {
                 background: url(/images/UI/key-enter-hover.svg) no-repeat bottom center;
+                transition: all ease .075s;
             }
+        }
+    }
+
+    .right--intro {
+        text-align: center;
+        font-family: $font-silkscreen;
+
+        span {
+            display: inline-block;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: $blue;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            color: $grey;
         }
     }
 
@@ -196,6 +200,7 @@ section.form {
             color: $blue;
             font-size: 18px;
             margin-bottom: 20px;
+            font-family: $font-silkscreen;
 
             small {
                 font-size: 14px;
@@ -203,23 +208,171 @@ section.form {
         }
     }
 
-    .right--final {
+    .right--summary {
         text-align: center;
 
-        span {
-            font-size: 18px;
+        > .content-centered > span {
+            position: relative;
+            font-size: 35px;
             text-transform: uppercase;
             color: $blue;
             font-weight: bold;
+            font-family: $font-silkscreen;
+            letter-spacing: .5;
+            margin-bottom: 0;
+            
+            &:before {
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                height: 10px;
+                width: 100%;
+                z-index: -1;
+                content: '';
+                display: block;
+                background: $yellow;
+            }
+
+            small {
+                font-size: 20px;
+                margin-left: 5px;
+            }
         }
 
-        p {
-            font-size: 14px;
-            color: $grey;
+        ul {
+            margin-top: 0;
+            margin-bottom: 35px;
+            display: block;
+            font-family: $font-silkscreen;
+            color: $blue;
+
+            li {
+                display: inline-block;
+                font-size: 25px;
+                margin-right: 50px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                small {
+                    font-size: 14px;
+                    margin-left: 3px;
+                    text-transform: uppercase;
+                    font-family: $font-m1mbold;
+                }
+            }
         }
 
         button.key.spacebar {
             margin-top: 30px;
+        }
+    }
+
+    .right--mail {
+        > .content-centered {
+            width: 100%;
+            text-align: left;
+        }
+
+        > .content-centered > span {
+            display: inline-block;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: $blue;
+            font-family: $font-silkscreen;
+            margin-bottom: 15px;
+        }
+
+        .content-centered > .mail--form{
+            display: flex;
+        }
+
+        .textarea-section {
+            width: 100%;
+
+            textarea, input {
+                width: 100%;
+                resize: none;
+                height: 120px;
+                outline: 0;
+                padding: 10px;
+                font-size: 16px;
+                font-family: $font-m1mregular;
+                border: 1px solid $grey;
+                color: $grey;
+
+                &:focus {
+                    color: $blue;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 15px;
+                    height: 18px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    height: 6px;
+                    width: 5px;
+                    border: 5px solid rgba(0, 0, 0, 0);
+                    background-clip: padding-box;
+                    border-radius: 20px;
+                    background-color: $blue;
+                }
+                &::-webkit-scrollbar-button {
+                    width: 0;
+                    height: 0;
+                    display: none;
+                }
+                &::-webkit-scrollbar-corner {
+                    background-color: transparent;
+                }
+            }
+
+            input {
+                display: inline-block;
+                vertical-align: top;
+                width: 200px;
+                height: 40px;
+                line-height: 40px;
+            }
+
+            .input-group {
+                height: 40px;
+                padding: 0;
+                width: 100%;
+            }
+
+            .input-error {
+                vertical-align: top;
+                position: relative;
+                margin-left: 16px;
+                display: inline-block;
+                font-size: 12px;
+                font-family: $font-m1mregular;
+                color: $blue;
+                height: 40px;
+                line-height: 40px;
+
+                &:before {
+                    position: absolute;
+                    bottom: 12px;
+                    left: -6px;
+                    height: 8px;
+                    width: calc(100% + 6px);
+                    z-index: -1;
+                    content: '';
+                    display: block;
+                    background: $yellow;
+                }
+            }
+        }
+
+        .send-section {
+            width: 300px;
+
+            button.key-enter {
+                margin-top: 15px;
+            }
         }
     }
 }
