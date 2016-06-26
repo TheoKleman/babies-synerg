@@ -342,7 +342,7 @@ export default class BabiesList extends Component {
 		}
 
 		// console.log(this.state.devPositionsArea)
-		console.log(this.state.babies)
+		// console.log(this.state.babies)
 
 		return(
 			<div className="babies-container" ref="babyContainer">

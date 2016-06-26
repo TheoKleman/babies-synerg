@@ -165,10 +165,7 @@ export default class Form extends React.Component {
 	saveAnswer(question, answer) {
 		console.log(question)
 		console.log(answer)
-		// var theAnswer = {
-		// 	question: question, 
-		// 	answer: answer
-		// }
+
 		var theAnswer = [question,answer]
 		var answersArray = []
 		answersArray = this.state.answers

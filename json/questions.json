@@ -1,135 +1,357 @@
 {
-    "questions": [
-        {
-            "id": 0,
-            "text": "Quelle est la nature de votre projet ?",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 1,
-                    "text": "Site web"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 2,
-                    "text": "Application mobile"
-                },
-                {
-                    "id": 2,
-                    "nextQuestionId": 3,
-                    "text": "Contenu multimédia"
-                },
-                {
-                    "id": 3,
-                    "nextQuestionId": 4,
-                    "text": "Conseils"
-                }, 
-                {
-                    "id": 4,
-                    "nextQuestionId": "endPoint",
-                    "text": "Autres"
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "text": "Quel type de projet avez-vous en tête ?",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 4,
-                    "text": "Site vitrine"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 4,
-                    "text": "Site e-commerce"
-                },
-                {
-                    "id": 2,
-                    "nextQuestionId": 4,
-                    "text": "Refonte graphique"
-                },
-                {
-                    "id": 3,
-                    "nextQuestionId": "endPoint",
-                    "text": "Autres"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "text": "Désirez-vous une application mobile :",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 0,
-                    "text": "Android"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 0,
-                    "text": "iOS"
-                },
-                {
-                    "id": 2,
-                    "nextQuestionId": 0,
-                    "text": "Android et iOS "
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "text": "Souhaitez-vous un :",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 0,
-                    "text": "Motion design"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 1,
-                    "text": "Tournage et montage audiovisuel"
-                },
-                {
-                    "id": 2,
-                    "nextQuestionId": 2,
-                    "text": "3d"
-                }
-            ]
-        },
-        {
-            "id": 4,
-            "text": "Avez-vous besoin de :",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 3,
-                    "text": "Audit du site et reco"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 4,
-                    "text": "Cahier de charge"
-                }
-            ]
-        },
-        {
-            "id": 5,
-            "text": "Avez-vous des maquettes?",
-            "answers": [
-                {
-                    "id": 0,
-                    "nextQuestionId": 4,
-                    "text": "Oui"
-                },
-                {
-                    "id": 1,
-                    "nextQuestionId": 3,
-                    "text": "Non"
-                }
-            ]
-        }
-    ]
+	"questions": [
+		{
+			"id": 0,
+			"text": "Quelle est la nature de votre projet ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 1,
+					"text": "Site web"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 2,
+					"text": "Application mobile"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": 3,
+					"text": "Contenu multimédia"
+				},
+				{
+					"id": 3,
+					"nextQuestionId": 4,
+					"text": "Conseils"
+				}, 
+				{
+					"id": 4,
+					"nextQuestionId": "endPoint",
+					"text": "Autres"
+				}
+			]
+		},
+		{
+			"id": 1,
+			"text": "Quel type de projet avez-vous en tête ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 5,
+					"text": "Site vitrine"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 5,
+					"text": "Site e-commerce"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": 5,
+					"text": "Refonte graphique"
+				},
+				{
+					"id": 3,
+					"nextQuestionId": "endPoint",
+					"text": "Autres"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"text": "Désirez-vous une application mobile :",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 17,
+					"text": "Android"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 17,
+					"text": "iOS"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": 17,
+					"text": "Android et iOS "
+				}
+			]
+		},
+		{
+			"id": 3,
+			"text": "Souhaitez-vous un :",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 6,
+					"text": "Motion design"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 7,
+					"text": "Tournage et montage audiovisuel"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": 8,
+					"text": "3d"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"text": "Avez-vous besoin de :",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 9,
+					"text": "Audit du site et reco"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 10,
+					"text": "Cahier de charge"
+				}
+			]
+		},
+		{
+			"id": 5,
+			"text": "Avez-vous des maquettes?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "Non"
+				}
+			]
+		},
+		{
+			"id": 6,
+			"text": "Disposez-vous des ressources graphiques ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 13,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 13,
+					"text": "Non"
+				}
+			]
+		},             
+		{
+			"id": 7,
+			"text": "Avez-vous déjà le contenu vidéo ? ",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 14,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 14,
+					"text": "Non"
+				}
+			]
+		},
+		{
+			"id": 8,
+			"text": "Disposez-vous des ressources graphiques ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 14,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 14,
+					"text": "Non"
+				}
+			]
+		},
+		{
+			"id": 9,
+			"text": "De quel type ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 15,
+					"text": "Graphique et Ergonomique"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 15,
+					"text": "Technique"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": 15,
+					"text": "Référencement"
+				},
+				{
+					"id": 3,
+					"nextQuestionId": 15,
+					"text": "Strategie digital"
+				}    
+			]
+		},
+		{
+			"id": 10,
+			"text": "Avez-vous des éléments graphique ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 15,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 15,
+					"text": "Non"
+				} 
+			]
+		},
+		{
+			"id": 11,
+			"text": "Avez-vous besoin de recommandations marketing?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "Non"
+				} 
+			]
+		}, 
+		{
+			"id": 12,
+			"text": "Quel est votre budget ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": "endPoint",
+					"text": "0 - 2000 euros"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": "endPoint",
+					"text": "2000 - 5000 euros"
+				},
+				{
+					"id": 2,
+					"nextQuestionId": "endPoint",
+					"text": "5000 - 9000 euros"
+				},
+				{
+					"id": 3,
+					"nextQuestionId": "endPoint",
+					"text": "It's over 9000"
+				}
+			]
+		},
+		{
+			"id": 13,
+			"text": "Combien de temps doit durée la vidéo?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "0 - 30 secondes"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "30 secondes - 1 minutes"
+				} ,
+				{
+					"id": 2,
+					"nextQuestionId": 12,
+					"text": "1 minutes et plus"
+				} ,
+				{
+					"id": 3,
+					"nextQuestionId": 12,
+					"text": "Je ne sais pas"
+				} 
+			]
+		},
+		{
+			"id": 14,
+			"text": "Avez-vous besoin d'éléments visuels tel que du motion en plus ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "Non"
+				} 
+			]
+		},
+		{
+			"id": 15,
+			"text": "Avez-vous besoin de mettre en place ces recommandations ?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "Non"
+				} 
+			]
+		},
+		{
+			"id": 16,
+			"text": "Avez- vous besoin d'une page de présentation pour votre application?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 12,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 12,
+					"text": "Non"
+				} 
+			]
+		},
+		{
+			"id": 17,
+			"text": "Avez-vous des maquettes?",
+			"answers": [
+				{
+					"id": 0,
+					"nextQuestionId": 16,
+					"text": "Oui"
+				},
+				{
+					"id": 1,
+					"nextQuestionId": 16,
+					"text": "Non"
+				}
+			]
+		}
+	]
 }
