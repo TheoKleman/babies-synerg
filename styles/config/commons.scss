@@ -60,11 +60,13 @@ button.key {
         color: $blue;
         text-transform: uppercase;
         transform: translate3d(0,0px,0);
+        transition: all ease .075s;
     }
 
     &:hover {
         span.key--content {
-            // transform: translate3d(0,4px,0);
+            transition: all ease .075s;
+            transform: translate3d(0,4px,0);
             background-color: $yellow;
         }
     }

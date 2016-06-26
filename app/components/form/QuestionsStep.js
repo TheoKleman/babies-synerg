@@ -3,56 +3,56 @@ import React from 'react'
 import AnswerItem from './AnswerItem'
 
 export default class QuestionsStep extends React.Component {
-    constructor() {
-        super()
-    }
+	constructor() {
+		super()
+	}
 
-    componentDidMount() {
-        TweenMax.to(this.refs.sectionQuestions, .3, {
-            scale: 1,
-            ease: Power2.easeOut,
-        })
-    }
+	componentDidMount() {
+		TweenMax.to(this.refs.sectionQuestions, .3, {
+			scale: 1,
+			ease: Power2.easeOut,
+		})
+	}
 
-    render() {
-        // get currentQuestion
-        var currentQuestion = this.props.currentQuestion
+	render() {
+		// get currentQuestion
+		var currentQuestion = this.props.currentQuestion
 
-        // Toggle btn
-        var goToNextStep = this.props.goToNextStep.bind(this)
+		// Toggle btn
+		var goToNextStep = this.props.goToNextStep.bind(this)
 
-        // Set next question id
-        var setNextQuestionId = this.props.setNextQuestionId.bind(this)
+		// Set next question id
+		var setNextQuestionId = this.props.setNextQuestionId.bind(this)
 
-        // Save answer
-        var saveAnswer = this.props.saveAnswer.bind(this)
+		// Save answer
+		var saveAnswer = this.props.saveAnswer.bind(this)
 
-        // Var question number 
-        var questionNumber = this.props.step
+		// Var question number 
+		var questionNumber = this.props.step
 
-        return(
-            <section className="right--questions" ref="sectionQuestions">
-                <div className="content-centered">
-                    <span className="question">
-                        <small>Question {questionNumber} / 5</small>
-                        <br />
-                        {currentQuestion.text}
-                    </span>
-                    <div className="form--answers">
-                        {
-                            currentQuestion.answers.map(function(answer, i){
-                                return <AnswerItem 
-                                    key={answer.id}
-                                    answer={answer}
-                                    question={currentQuestion}
-                                    goToNextStep={goToNextStep}
-                                    setNextQuestionId={setNextQuestionId}
-                                    saveAnswer={saveAnswer}/>
-                            })
-                        }
-                    </div>
-                </div>
-            </section>
-        );
-    }
+		return(
+			<section className="right--questions" ref="sectionQuestions">
+				<div className="content-centered">
+					<span className="question">
+						<small>Question {questionNumber} / 5</small>
+						<br />
+						{currentQuestion.text}
+					</span>
+					<div className="form--answers">
+						{
+							currentQuestion.answers.map(function(answer, i){
+								return <AnswerItem 
+									key={answer.id}
+									answer={answer}
+									question={currentQuestion}
+									goToNextStep={goToNextStep}
+									setNextQuestionId={setNextQuestionId}
+									saveAnswer={saveAnswer}/>
+							})
+						}
+					</div>
+				</div>
+			</section>
+		);
+	}
 }

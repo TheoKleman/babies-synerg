@@ -34,7 +34,7 @@ export default class IntroStep extends React.Component {
                         Bonjour, je suis administrateur chez Synerg’HETIC !
                     </span>
                     <p>
-                        Dites moi en plus sur votre projet digital et je selectionnerai pour vous les étudiants les plus à même de travailler avec vous ! 
+                        Dites moi en plus sur votre projet digital et je selectionnerai pour vous <br /> les étudiants les plus à même de travailler avec vous ! 
                     </p>
 
                     <button

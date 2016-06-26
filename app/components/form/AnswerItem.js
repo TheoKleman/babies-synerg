@@ -18,18 +18,13 @@ export default class AnswerItem extends React.Component {
 	}
 
 	handleAnswer() {
-		var that = this
-
 		this.setState({
 			isClicked: true
 		})
 
-		setTimeout(function() {
-			that.props.setNextQuestionId(that.props.answer.nextQuestionId)
-		}, 300)
-		
 		this.props.setNextQuestionId(this.props.answer.nextQuestionId)
 		this.props.saveAnswer(this.props.question.text, this.props.answer.text)
+	
 	}
 
 	render() {
@@ -52,11 +47,6 @@ export default class AnswerItem extends React.Component {
 				break;
 		}
 
-		var answerClasses = classNames({
-			'key': true,
-			'selected': this.state.isClicked,
-		})
-
 		var id = "question"+this.props.question.id+"-answer"+this.props.answer.id
 
 		return(
@@ -68,7 +58,7 @@ export default class AnswerItem extends React.Component {
 				>
 				<button 
 					ref="itSelf"
-					className={answerClasses}>
+					className="key">
 					<span className="key--content">{char}</span>
 					<span className="key--double"></span>
 				</button>

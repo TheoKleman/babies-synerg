@@ -56,13 +56,15 @@ export default class App extends React.Component {
     }
 
     handleScroll(e) {
-        e.preventDefault()
-        this.setState({
-            scrollDelta: {
-                deltaX: e.deltaX,
-                deltaY: e.deltaY
-            }
-        })
+        if (!this.state.formDisplayed) {
+            e.preventDefault()
+            this.setState({
+                scrollDelta: {
+                    deltaX: e.deltaX,
+                    deltaY: e.deltaY
+                }
+            })
+        }
     }
 
     handleMouseDown(e) {
