@@ -24,42 +24,42 @@ export default class BabiesList extends Component {
             goSort: false,
             devArea: {
             	x: {
-            		start: 0.1,
+            		start: 0.05,
             		end: 0.45
             	},
             	y: {
-            		start: 0.1,
-            		end: 0.40
+            		start: 0,
+            		end: 0.25
             	}
             },
             cdpArea: {
             	x: {
-            		start: 0.60,
-            		end: 0.95
+            		start: 0.05,
+            		end: 0.40
             	},
             	y: {
-            		start: 0.05,
-            		end: 0.45
+            		start: 0.50,
+            		end: 0.8
             	}
             },
             marketArea: {
             	x: {
-            		start: 0.1,
-            		end: 0.45
+            		start: 0.60,
+            		end: 0.85
             	},
             	y: {
-            		start: 0.55,
-            		end: 0.95
+            		start: 0,
+            		end: 0.15
             	}
             },
             designArea: {
             	x: {
-            		start: 0.55,
-            		end: 0.95
+            		start: 0.58,
+            		end: 0.97
             	},
             	y: {
-            		start: 0.55,
-            		end: 0.95
+            		start: 0.39,
+            		end: 0.70
             	}
             },
             freeZone: 0.4,
@@ -181,7 +181,8 @@ export default class BabiesList extends Component {
 		let casesOwn = {
 			origin: null,
 			otherCases: [],
-			rotation: 0
+			rotation: 0,
+			destination: null,
 		}
 		for ( var i = (x - limit); i <= (x + limit); i++ ){
 			for ( var j = (y - limit); j <= (y + limit); j++ ){
@@ -207,13 +208,39 @@ export default class BabiesList extends Component {
 		return casesOwn
 	}
 
-	setRandomDestination() {
-		////// COUCOU FUTUR MMOI
-		///// JE SUIS AU MOMENT OU J'AI LES IDS DES BÉBÉS QUI SONT DEVS, DESIGNER, CDP, MARKET
-		//// MAINTENANT JE DOIS BOUCLER DANS MON TABLEAU D'AREA POUR CHAQUE TYPE ET METTRE UNE POS RANDOM
-		/// QUAND J'AURAI TOUT ÇA JE POURRA AJOUTER UN CHAMP 'dest' DANS MON this.state.babiesPositions
-		//	VOILA BISOUS
+	setRandomDestination(arrayIds, arrayPositions) {
+
+		let casesDest = {
+			destination: null,
+		}
+		let fakeLengthX = arrayPositions.length - 1
+		let xArrayLength = this.getArrayExactLength(arrayPositions)
+		let xFirstIndex = (fakeLengthX - xArrayLength) + 1
+		
+		let arrayY = arrayPositions[fakeLengthX]
+		let fakeLengthY = arrayY.length - 1
+		let yArrayLength = this.getArrayExactLength(arrayY)
+		let yFirstIndex = (fakeLengthY - yArrayLength) + 1
+
+		for (var i = 0; i < arrayIds.length; i++) {
+
+			var x = this.getRandomNumber(xFirstIndex, fakeLengthX),
+				y = this.getRandomNumber(yFirstIndex, fakeLengthY)
+
+			if(arrayPositions[x][y].free = 1) {
+				this.state.babiesPosition[arrayIds[i]].destination = arrayPositions[x][y]
+			} else {
+				this.state.babiesPosition[arrayIds[i]].destination = {
+					Xpx: 0,
+					Ypx: 0,
+					free: 1,
+					x: 0,
+					y: 0,
+				}
+			}
+		}
 	}
+
 
 	checkIfSpotFree(x, y){
 		let limit = Math.floor(this.state.scale / 2)
@@ -267,14 +294,16 @@ export default class BabiesList extends Component {
 			if(tag == "Chef de projet")
 				cdps.push(i)
 
-			if(tag == "DesMarketeuxigner")
+			if(tag == "Marketeux")
 				marketeux.push(i)
 		}
 
-		this.setRandomDestination(designers)
-		this.setRandomDestination(devs)
-		this.setRandomDestination(cdps)
-		this.setRandomDestination(marketeux)
+		if(designers != "" && devs != "" && cdps != "" && marketeux != "") {
+			this.setRandomDestination(designers, this.state.designPositionsArea)
+			this.setRandomDestination(devs, this.state.devPositionsArea)
+			this.setRandomDestination(cdps, this.state.cdpPositionsArea)
+			this.setRandomDestination(marketeux, this.state.marketPositionsArea)	
+		}
 	}
 
 	sortBabies() {
@@ -312,6 +341,20 @@ export default class BabiesList extends Component {
 		return array;
 	}
 
+	getRandomNumber(limitInf, limitSup) {	
+ 		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
+ 	}
+
+ 	getArrayExactLength(array) {
+ 		let arrayLength = 0;
+ 		for (var i = 0; i < array.length; i++) {
+ 		  if (array[i] !== undefined) {
+ 		    arrayLength++;
+ 		  }
+ 		}
+ 		return arrayLength
+ 	}
+
 	componentWillMount() {
         this.loadBabySpec()
         this.loadBabies()
@@ -342,7 +385,7 @@ export default class BabiesList extends Component {
 		}
 
 		// console.log(this.state.devPositionsArea)
-		console.log(this.state.babies)
+		// console.log(this.state.babies)
 
 		return(
 			<div className="babies-container" ref="babyContainer">
@@ -354,7 +397,7 @@ export default class BabiesList extends Component {
 							babySpec={this.state.babySpec}
 							pos={this.state.babiesPosition[i]}
 							sortingBayby={this.sortBabies()}
-							test = {this.refs.babyContainer}
+							test={this.refs.babyContainer}
 							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 							setBabyDetail={this.props.setBabyDetail}
 							setSorting={this.props.setSorting}

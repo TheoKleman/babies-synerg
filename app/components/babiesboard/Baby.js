@@ -75,17 +75,8 @@ export default class Baby extends React.Component {
 		    x = (parseFloat(target.getAttribute('data-x')) || baseX) + event.dx,
 		    y = (parseFloat(target.getAttribute('data-y')) || baseY) + event.dy;
 
-
 		// Rotate baby here //
-		var babyRotation = this.rotateBaby(x, this.state.rotateAngleLimit),
-			rotationExageration = 2
-
-		this.refs.itSelf.style.transform = "rotate("+babyRotation+"deg)"
-
-		this.setState({
-			transform: this.refs.itSelf.style.transform,
-			transformArms: "rotate("+babyRotation+"deg)"
-		})
+		this.makeBabyRotate(x)
 
 		// translate the element
 		target.style.webkitTransform =
@@ -98,8 +89,6 @@ export default class Baby extends React.Component {
 	}
 
 	onDragStop(event) {
-		console.log("stop drag")
-
 		var babyContent = document.getElementById(event.target.id).firstChild
 		babyContent.style.transform = "rotate(0deg)"
 
@@ -140,6 +129,38 @@ export default class Baby extends React.Component {
 	        zIndex: pos.y
 	      }
 	    )
+	}
+
+	updatePosition(posDestination, posOrigin){
+		if(posDestination != null) {
+			let tl = new TimelineLite ()
+			tl.to(
+	      	this.refs.itSelf,
+	      	2,
+		      {
+		        x: posDestination.Xpx +"px",
+		        y: posDestination.Ypx +"px",
+		        zIndex: posDestination.y,
+		        ease: Power2.easeOut,
+		        onStart: this.babyRotateOnMoove(posDestination.Xpx, posOrigin.Xpx),
+		      }
+		    )
+		}
+	}
+
+	babyRotateOnMoove(destination, origin) {
+		// var babyRotation = this.rotateBaby(direction, this.state.rotateAngleLimit)
+	}
+
+	makeBabyRotate(direction) {
+		var babyRotation = this.rotateBaby(direction, this.state.rotateAngleLimit)
+
+		this.refs.itSelf.style.transform = "rotate("+babyRotation+"deg)"
+
+		this.setState({
+			transform: this.refs.itSelf.style.transform,
+			transformArms: "rotate("+babyRotation+"deg)"
+		})
 	}
 
 	rotateBaby(direction, rotateAngleLimit) {
@@ -198,10 +219,16 @@ export default class Baby extends React.Component {
         }
 	}
 
-
+	componentDidUpdate() {
+		if(this.props.isSorting) {
+			console.log("isSorting:"+this.props.isSorting)
+			this.updatePosition(this.props.pos.destination, this.props.pos.origin)
+		} else {
+			console.log("pas sorted")
+		}
+	}
 
 	handleMouseEnter(e, id) {
-
 	}
 
 	handleMouseLeave(e) {
