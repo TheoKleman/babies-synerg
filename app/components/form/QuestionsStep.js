@@ -43,7 +43,6 @@ export default class QuestionsStep extends React.Component {
 	}
 
 	handleKeyUp(e) {
-		console.log("KeyUp")
 		var self = this
 
 		if (this.props.formIsDisplayed) {
@@ -91,14 +90,11 @@ export default class QuestionsStep extends React.Component {
 		// Toggle btn
 		var goToNextStep = this.props.goToNextStep.bind(this)
 
-		// Set next question id
-		var setNextQuestionId = this.props.setNextQuestionId.bind(this)
-
 		// Save answer
 		var saveAnswer = this.props.saveAnswer.bind(this)
 
 		// Var question number 
-		var questionNumber = this.props.step
+		var questionNumber = this.props.previousQuestionsIds.length + 1
 
 		// key pressed id
 		var keyPressedId = this.state.keyPressedId
@@ -124,7 +120,6 @@ export default class QuestionsStep extends React.Component {
 									resetKeyPressedId={resetKeyPressedId}
 									question={currentQuestion}
 									goToNextStep={goToNextStep}
-									setNextQuestionId={setNextQuestionId}
 									saveAnswer={saveAnswer}/>
 							})
 						}

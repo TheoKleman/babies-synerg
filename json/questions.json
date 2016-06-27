@@ -33,7 +33,7 @@
 		},
 		{
 			"id": 1,
-			"text": "Quel type de projet avez-vous en tête ?",
+			"text": "Quel type de projet avez-vous en tete ?",
 			"answers": [
 				{
 					"id": 0,
@@ -323,7 +323,7 @@
 		},
 		{
 			"id": 16,
-			"text": "Avez- vous besoin d'une page de presentation pour votre application?",
+			"text": "Avez-vous besoin d'une page de presentation pour votre application?",
 			"answers": [
 				{
 					"id": 0,
