@@ -16,6 +16,12 @@ export default class FilterNav extends React.Component {
             this.props.setSorting(false)
     }
 
+    mooveToGroup(e) {
+        e.preventDefault()
+
+        this.props.setGroupFocus(e.target.dataset.group)
+    }
+
     render() {
 
         var mainFilterClasses = classNames({
@@ -49,19 +55,31 @@ export default class FilterNav extends React.Component {
                     <ul>
                         <li className="pattern-item">
                             <span><img src="images/pattern-cdp.png" alt="couleur héticiens chefs de projet"/></span>
-                            <a href="" className="tag">Chefs de projet</a>
+                            <a 
+                            href=""
+                            className="tag"
+                            onClick={this.mooveToGroup.bind(this)} data-group="cdps">Chefs de projet</a>
                         </li>
                         <li className="pattern-item">
                             <span><img src="images/pattern-dev.png" alt="couleur héticiens développeurs"/></span>
-                            <a href="" className="tag">Developpeurs</a>
+                            <a 
+                            href=""
+                            className="tag"
+                            onClick={this.mooveToGroup.bind(this)} data-group="devs">Developpeurs</a>
                         </li>
                         <li className="pattern-item">
                             <span><img src="images/pattern-market.png" alt="couleur héticiens marketeux"/></span>
-                            <a href="" className="tag">Marketeux</a>
+                            <a 
+                            href=""
+                            className="tag"
+                            onClick={this.mooveToGroup.bind(this)} data-group="marketeux">Marketeux</a>
                         </li>
                         <li className="pattern-item">
                             <span><img src="images/pattern-design.png" alt="couleur héticiens designers"/></span>
-                            <a href="" className="tag">Designers</a>
+                            <a 
+                            href=""
+                            className="tag"
+                            onClick={this.mooveToGroup.bind(this)} data-group="designers">Designers</a>
                         </li>
                     </ul>
                 </div>
