@@ -69,6 +69,7 @@ export default class App extends React.Component {
     }
 
     handleMouseDown(e) {
+        e.preventDefault
         if (!this.state.babyIsHovered) {
             let initialX = e.pageX
             let initialY = e.pageY
@@ -81,6 +82,7 @@ export default class App extends React.Component {
     }
 
     handleMouseUp(e) {
+        e.preventDefault
         this.setState({
             mouseDown: false
         })
