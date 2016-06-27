@@ -28,14 +28,14 @@ export default class Board extends React.Component {
 			boardIsTranslatingWithDrag: false,
 			spacebarDown: false,
 			babyRendered: false,
-			devsGroupCenterX: 3400 / 4, 
-			devsGroupCenterY: 1900 / 4,
-			cdpsGroupCenterX: 3400 / 4, 
-			cdpsGroupCenterY: (1900 /4) * 3,
-			marketeuxGroupCenterX: (3400 / 4) * 3, 
-			marketeuxGroupCenterY: 1900 /4,
-			designersGroupCenterX: (3400 / 4) * 3, 
-			designersGroupCenterY: (1900 /4) * 3,
+			// devsGroupCenterX: (3400/4), 
+			// devsGroupCenterY: (1900/4),
+			// cdpsGroupCenterX: (3400/4), 
+			// cdpsGroupCenterY: ((1900/4)*3),
+			// marketeuxGroupCenterX: ((3400/4)*3), 
+			// marketeuxGroupCenterY: (1900/4),
+			// designersGroupCenterX: ((3400/4)*3), 
+			// designersGroupCenterY: ((1900/4)*3),
 		}
 	}
 
@@ -55,6 +55,13 @@ export default class Board extends React.Component {
 		// You can access `this.props` and `this.state` here
 		// This function should return a boolean, whether the component should re-render.
 		return false;
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+	    if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
+	    	
+	    	this.mooveToFocusedGroup(nextProps.focusedBabyGroup) 
+	    }
 	}
 
 	componentWillMount() {
@@ -445,68 +452,49 @@ export default class Board extends React.Component {
 	}
 
 	mooveToFocusedGroup(group) {
+
+		console.log("group: "+group)
+		
 		if(group == "cdps") {
 			this.setState({
 				boardTranslateX: {
-					X: this.state.cdpsGroupCenterX,
-					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
+					X: this.state.boardWidth / 4,
 				},
 				boardTranslateY: {
-					Y: this.state.cdpsGroupCenterY,
-					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
+					Y: (this.state.boardHeight / 4) * 3,
+				},
+			})
+		} else if(group == "designers") {
+			this.setState({
+				boardTranslateX: {
+					X: (this.state.boardWidth / 4) * 3,
+				},
+				boardTranslateY: {
+					Y: (this.state.boardHeight / 4) * 3,
+				},
+			})
+		} else if(group == "devs") {
+			this.setState({
+				boardTranslateX: {
+					X: this.state.boardWidth / 4,
+				},
+				boardTranslateY: {
+					Y: this.state.boardHeight / 4,
+				},
+			})
+		} else if(group == "marketeux") {
+			this.setState({
+				boardTranslateX: {
+					X: (this.state.boardWidth / 4) * 3,
+				},
+				boardTranslateY: {
+					Y: this.state.boardHeight / 4,
 				},
 			})
 		}
 
-		
-		if(group == "designers") {
-			this.setState({
-				boardTranslateX: {
-					X: this.state.designersGroupCenterX,
-					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
-				},
-				boardTranslateY: {
-					Y: this.state.designersGroupCenterY,
-					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
-				},
-			})
-		}
-		
-
-		if(group == "devs") {
-			this.setState({
-				boardTranslateX: {
-					X: this.state.devsGroupCenterX,
-					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
-				},
-				boardTranslateY: {
-					Y: this.state.devsGroupCenterY,
-					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
-				},
-			})
-		}
-		
-
-		if(group == "marketeux") {
-			this.setState({
-				boardTranslateX: {
-					X: this.state.marketeuxGroupCenterX,
-					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
-				},
-				boardTranslateY: {
-					Y: this.state.marketeuxGroupCenterY,
-					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
-				},
-			})
-		}
+		console.log(this.state.boardTranslateX)
+		console.log(this.state.boardTranslateY)
 
 		this.updateBoardTransform()
 	}
