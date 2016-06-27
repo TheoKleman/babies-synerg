@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import Draggable from 'react-draggable'
 import GSAP from 'gsap'
 
+import DetailBaby from "./DetailBaby"
 var interact = require('interact.js');
 var classNames = require('classnames')
 
@@ -29,6 +30,7 @@ export default class Baby extends React.Component {
 			savedX: 0,
 			updateAngle: true,
 			isDragging: false,
+			isDisplayedBabyDetail: false,
 			rotateAngleLimit: 40,
 			isMooving: false,
 		}
@@ -41,7 +43,11 @@ export default class Baby extends React.Component {
 	componentDidMount() {
 		this.setPosition(this.props.pos.origin)
 
-		if(!this.props.isSorted) {
+		this.enableDrag(true)
+	}
+
+	enableDrag(value) {
+		if(value) {
 			interact(this.refs.itSelf).draggable({
 				inertia: {
 					resistance: 10,
@@ -57,6 +63,8 @@ export default class Baby extends React.Component {
 				onend: this.onDragStop.bind(this),
 				pointerMoveTolerance: 10
 			})
+		} else {
+			interact(this.refs.itSelf).draggable(value)
 		}
 	}
 
@@ -274,21 +282,48 @@ export default class Baby extends React.Component {
         }
 	}
 
+	getBabyColor(skill) {
+
+        let babySKin = '';
+
+        switch(skill) {
+        	case "Designer":
+        		return "blue"
+        		break;
+        	case "Développeur":
+        		return "orange"
+        		break;
+        	case "Chef de projet":
+        		return "yellow"
+        		break;
+        	case "Marketeux":
+        		return "green"
+        		break;
+        	default:
+        		return "yellow"
+        }
+	}
+
 	componentDidUpdate() {
 		
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if( nextProps.formDisplayed != this.props.formDisplayed) {
+			if(this.props.formDisplayed) {
+				this.enableDrag(true)
+			} else {
+				this.enableDrag(false)
+			}
+		}
 		if(nextProps.isSorted != this.props.isSorted ) {
-			console.log('coucou')
 			if(this.props.isSorted) {
-				console.log('unSort')
+				this.enableDrag(true)
 				this.updatePosition(this.props.pos.origin, this.props.pos.destination)
 			} else {
-				console.log('sort ')
+				this.enableDrag(false)
 				this.updatePosition(this.props.pos.destination, this.props.pos.origin)
 			}
-			
 		}
 	}
 
@@ -298,23 +333,27 @@ export default class Baby extends React.Component {
 
 	handleMouseLeave(e) {
 		this.props.toggleBabyIsHovered(false)
-		// this.getBabySkin(this.props.datas.tag)
-		this.props.setDetailIsDisplayedProps(false)
+		this.setState({
+			isDisplayedBabyDetail: false
+		})
 	}
 
 	handleMouseDown(e) {
 		let babyDatas = this.props.datas		
-		this.props.setDetailIsDisplayedProps(true)
-		this.props.setBabyDetail(babyDatas)
+		this.setState({
+			isDisplayedBabyDetail: true
+		})
 	}
 
 	render() {
+
 		const id = "baby-"+this.props.id
 
 		var babyClasses = classNames({
 			'baby': true,
 			'hovered': this.state.isHovering,
-			'neighbourg': this.state.isNeighbourg
+			'neighbourg': this.state.isNeighbourg,
+			'disabled': this.props.isSorted
 		})
 
 		var piecesClasses = classNames({
@@ -334,14 +373,20 @@ export default class Baby extends React.Component {
 
 		var babyBody = "/images/body-"+this.state.skin
 
-		return(
+		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null
+
+		return(			
 			<div
 			className={babyClasses}
-			onMouseDown={this.handleMouseDown.bind(this)}
-			onMouseEnter={this.handleMouseEnter.bind(this, id)}
+			onMouseDown={onClickEvent}
+			// onMouseEnter={this.handleMouseEnter.bind(this, id)}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
 			ref="itSelf">
+				<DetailBaby
+					color={this.getBabyColor(this.props.datas.tag)}
+					babyDetail={this.props.datas}
+					isDisplayedBabyDetail={this.state.isDisplayedBabyDetail} />
 				<div className="the-baby" style={{transform: this.state.transform}}>
 					<span ref="bodyImage" className={babyBgClasses} style={babyStyle}></span>
 					<div ref="babyPieces" className={piecesClasses}>

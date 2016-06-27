@@ -2,23 +2,50 @@
 	position: absolute;
 	right: 0px;
 	top: 50%;
+	width: 180px;
 	padding: 1%;
 	font-size: 18px;
 	color: $blue;
 	transform: translate3d(100%, -50%, 0);
-	border: 4px solid $blue;
-	background: $light;
-	z-index: -1;
+	z-index: 2;
 	opacity: 0;
 	&.displayed {
 		z-index: 15;
 	}
+	&.blue {
+		div {
+			display: inline-block;
+			background-color: rgba($blue, .4);
+		}
+	}
+	&.orange {
+		div {
+			display: inline-block;
+			// background-color: rgba($orange, .4);
+		}
+	}
+	&.yellow {
+		div {
+			display: inline-block;
+			background-color: rgba($yellow, .4);
+		}
+	}
+	&.green {
+		div {
+			display: inline-block;
+			// background-color: rgba($green, .4);
+		}
+	}
+
+	div {
+		padding: 2px 10px;
+	}
 
 	.nickname {
-
+		font-family: $font-m1mbold;
 	}
 	.skill {
-		color: $purple;
+		
 	}
 	.promotion {
 

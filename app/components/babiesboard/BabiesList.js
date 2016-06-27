@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from "react"
 import qwest from "qwest"
-import Baby from "./Baby"
 import GSAP from 'gsap'
+
+import Baby from "./Baby"
 
 export default class BabiesList extends Component {
 
@@ -241,6 +242,10 @@ export default class BabiesList extends Component {
 		}
 	}
 
+	sortBabies() {
+		
+	}
+
 
 	checkIfSpotFree(x, y){
 		let limit = Math.floor(this.state.scale / 2)
@@ -306,10 +311,6 @@ export default class BabiesList extends Component {
 		}
 	}
 
-	sortBabies() {
-		
-	}
-
 	assignAreas(areaConfig) {
 		let array = []
 
@@ -369,11 +370,6 @@ export default class BabiesList extends Component {
 	}
 
 	render() {
-		// let sortingBayby = false
-		// if ( this.props.isSorted ){
-		// 	sortingBayby = this.sortBabies()
-		// }
-
 		/* ##### DO NOT REMOVE / FIX MAX CALL SIZE ERROR ##### */
 		// Check here if we have babyPositions empty
 		if(this.state.babiesPosition == "") {
@@ -383,9 +379,6 @@ export default class BabiesList extends Component {
 				this.fillPositions()
 			}
 		}
-
-		// console.log(this.state.devPositionsArea)
-		// console.log(this.state.babies)
 
 		return(
 			<div className="babies-container" ref="babyContainer">
@@ -398,10 +391,9 @@ export default class BabiesList extends Component {
 							pos={this.state.babiesPosition[i]}
 							sortingBayby={this.sortBabies()}
 							test={this.refs.babyContainer}
-							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
-							setBabyDetail={this.props.setBabyDetail}
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
+							formDisplayed={this.props.formDisplayed}
                             toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)}
 							id={i} />
           			) 
