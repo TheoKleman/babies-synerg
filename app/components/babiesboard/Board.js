@@ -105,10 +105,8 @@ export default class Board extends React.Component {
 			&& (deltaX != 0 || deltaY != 0) 
 			&& !this.state.boardIsTranslatingWithScroll 
 			&& !this.props.isDragging) {
-
-			console.log("EHERE")
 			
-			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 25)
+			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 5)
 			this.setState({
 				navigateScrollInterval: navigateScrollInterval,
 				boardIsTranslatingWithScroll: true
@@ -264,16 +262,14 @@ export default class Board extends React.Component {
 	}
 
 	navigateWithScroll() {
-		console.log("EH")
 		let maxSpeed = 90
 		let { X } = this.state.boardTranslateX
 		let { Y } = this.state.boardTranslateY
 
 		let { deltaX, deltaY } = this.props.scrollDelta
-		console.log(deltaY)
 
-		let newX = 3 * (-deltaX)
-		let newY = 3 * (-deltaY)
+		let newX = .75 * (-deltaX)
+		let newY = .75 * (-deltaY)
 
 		// Set max speed
 		if (newX > maxSpeed) {
@@ -431,7 +427,7 @@ export default class Board extends React.Component {
 	}
 
 	updateBoardTransformOnScroll() {
-		TweenMax.to(this.refs.board,.6, {
+		TweenMax.to(this.refs.board,.05, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
 			ease: Power0.easeNone
