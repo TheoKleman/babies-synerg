@@ -379,7 +379,7 @@ export default class Baby extends React.Component {
 			<div
 			className={babyClasses}
 			onMouseDown={onClickEvent}
-			// onMouseEnter={this.handleMouseEnter.bind(this, id)}
+			onMouseEnter={this.handleMouseEnter.bind(this, id)}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
 			ref="itSelf">
