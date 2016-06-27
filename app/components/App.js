@@ -5,7 +5,6 @@ import Board from "./babiesboard/Board"
 import Footer from "./GUI/Footer.js"
 import FilterNav from "./GUI/FilterNav.js"
 import Controls from "./GUI/Controls.js"
-import DetailBaby from "./babiesBoard/DetailBaby"
 
 export default class App extends React.Component {
     constructor(){
@@ -38,12 +37,6 @@ export default class App extends React.Component {
             boardHeight: 2475,
             mouseInViewport: true,
             detailDisplayed: false,
-            babyHoveredDetail: {
-                nickname: "",
-                skills: [],
-                tag: "",
-                year: 0
-            },
             detailDisplayed: false,
             isSorted: false,
             babyIsHovered: false,
@@ -161,18 +154,6 @@ export default class App extends React.Component {
         })
     }
 
-    setDetailIsDisplayedState(value) {
-        this.setState({
-            detailDisplayed: value
-        })
-    }
-
-    setBabyDetail(value) {
-        this.setState({
-            babyHoveredDetail: value
-        })
-    }
-
     setSorting(value) {
         this.setState({
             isSorted: value
@@ -195,11 +176,6 @@ export default class App extends React.Component {
     }
 
     render(){
-
-        if(!this.state.formDisplayed) {
-            var detailBaby = <DetailBaby isDisplayed={this.state.detailDisplayed} babyDetail={this.state.babyHoveredDetail} />
-        }
-
         return (
             <div
                 className="main-content"
@@ -215,8 +191,6 @@ export default class App extends React.Component {
                     scrollDelta={this.state.scrollDelta}
                     formDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
-                    setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
-                    setBabyDetail={this.setBabyDetail.bind(this)}
                     setSorting={this.setSorting.bind(this)}
                     isSorted={this.state.isSorted}
                     controlsHighlighting={this.state.controlsHighlighting}
@@ -225,7 +199,6 @@ export default class App extends React.Component {
                     isDragging={this.state.mouseDown}
                     toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)}
                     mouseDownDrag={this.state.mouseDownPos} />
-                {detailBaby}
                 <FilterNav
                     isSorted={this.state.isSorted}
                     setSorting={this.setSorting.bind(this)} />

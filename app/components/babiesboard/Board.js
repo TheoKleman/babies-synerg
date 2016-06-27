@@ -38,6 +38,9 @@ export default class Board extends React.Component {
 		if( nextState.spacebarDown != this.state.spacebarDown) {
 			return true;
 		}
+		if( nextProps.formDisplayed != this.props.formDisplayed) {
+			return true;
+		}
 		// You can access `this.props` and `this.state` here
 		// This function should return a boolean, whether the component should re-render.
 		return false;
@@ -441,10 +444,9 @@ export default class Board extends React.Component {
 				<BabiesList
 					boardWidth={this.state.boardWidth}
 					boardHeight={this.state.boardHeight}
-					setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
-					setBabyDetail={this.props.setBabyDetail}
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
+					formDisplayed={this.props.formDisplayed}
 					toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)} />
 				<HomeTitle
 					boardWidth={this.state.boardWidth}
