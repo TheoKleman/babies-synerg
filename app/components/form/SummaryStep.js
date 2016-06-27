@@ -3,6 +3,16 @@ import React from 'react'
 export default class SummaryStep extends React.Component {
     constructor() {
         super()
+
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+
+    componentWillMount() {
+        window.addEventListener("keydown", this.handleKeyDown)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.handleKeyDown)   
     }
 
     componentDidMount() {
@@ -10,6 +20,12 @@ export default class SummaryStep extends React.Component {
             scale: 1,
             ease: Power2.easeOut,
         })
+    }
+
+    handleKeyDown(e) {
+        if (e.keyCode == 32 && this.props.formIsDisplayed) {
+            this.props.goToNextStep()
+        }
     }
 
     render() {

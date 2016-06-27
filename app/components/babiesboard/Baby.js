@@ -293,15 +293,17 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e, id) {
+		this.props.toggleBabyIsHovered(true)
 	}
 
 	handleMouseLeave(e) {
+		this.props.toggleBabyIsHovered(false)
 		// this.getBabySkin(this.props.datas.tag)
 		this.props.setDetailIsDisplayedProps(false)
 	}
 
 	handleMouseDown(e) {
-		let babyDatas = this.props.datas
+		let babyDatas = this.props.datas		
 		this.props.setDetailIsDisplayedProps(true)
 		this.props.setBabyDetail(babyDatas)
 	}

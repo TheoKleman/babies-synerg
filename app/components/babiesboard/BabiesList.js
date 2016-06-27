@@ -76,7 +76,6 @@ export default class BabiesList extends Component {
 	}
 
     setVirtualBoard(){
-
 	    let nbCasesX = Math.floor(( this.props.boardWidth / ( this.state.babySpec.babyWidth + this.state.safetyWidthDistance ) ) * this.state.scale)
 	    let caseWidth = this.props.boardWidth / nbCasesX
 	    let nbCasesY = Math.floor(( this.props.boardHeight / ( this.state.babySpec.babyHeight + this.state.safetyHeightDistance ) ) * this.state.scale)
@@ -403,6 +402,7 @@ export default class BabiesList extends Component {
 							setBabyDetail={this.props.setBabyDetail}
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
+                            toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)}
 							id={i} />
           			) 
 				}

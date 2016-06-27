@@ -17,7 +17,7 @@
 				{
 					"id": 2,
 					"nextQuestionId": 3,
-					"text": "Contenu multimédia"
+					"text": "Contenu multimedia"
 				},
 				{
 					"id": 3,
@@ -33,7 +33,7 @@
 		},
 		{
 			"id": 1,
-			"text": "Quel type de projet avez-vous en tête ?",
+			"text": "Quel type de projet avez-vous en tete ?",
 			"answers": [
 				{
 					"id": 0,
@@ -59,7 +59,7 @@
 		},
 		{
 			"id": 2,
-			"text": "Désirez-vous une application mobile :",
+			"text": "Desirez-vous une application mobile :",
 			"answers": [
 				{
 					"id": 0,
@@ -149,7 +149,7 @@
 		},             
 		{
 			"id": 7,
-			"text": "Avez-vous déjà le contenu vidéo ? ",
+			"text": "Avez-vous deja le contenu video ? ",
 			"answers": [
 				{
 					"id": 0,
@@ -196,7 +196,7 @@
 				{
 					"id": 2,
 					"nextQuestionId": 15,
-					"text": "Référencement"
+					"text": "Referencement"
 				},
 				{
 					"id": 3,
@@ -207,7 +207,7 @@
 		},
 		{
 			"id": 10,
-			"text": "Avez-vous des éléments graphique ?",
+			"text": "Avez-vous des elements graphique ?",
 			"answers": [
 				{
 					"id": 0,
@@ -265,7 +265,7 @@
 		},
 		{
 			"id": 13,
-			"text": "Combien de temps doit durée la vidéo?",
+			"text": "Combien de temps doit duree la video?",
 			"answers": [
 				{
 					"id": 0,
@@ -291,7 +291,7 @@
 		},
 		{
 			"id": 14,
-			"text": "Avez-vous besoin d'éléments visuels tel que du motion en plus ?",
+			"text": "Avez-vous besoin d'elements visuels tel que du motion en plus ?",
 			"answers": [
 				{
 					"id": 0,
@@ -323,7 +323,7 @@
 		},
 		{
 			"id": 16,
-			"text": "Avez- vous besoin d'une page de présentation pour votre application?",
+			"text": "Avez-vous besoin d'une page de presentation pour votre application?",
 			"answers": [
 				{
 					"id": 0,

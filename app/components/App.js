@@ -46,13 +46,14 @@ export default class App extends React.Component {
             },
             detailDisplayed: false,
             isSorted: false,
+            babyIsHovered: false,
             isSoundActive: true,
         }
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        // window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
+        window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
     }
 
     handleScroll(e) {
@@ -68,16 +69,20 @@ export default class App extends React.Component {
     }
 
     handleMouseDown(e) {
-        let initialX = e.pageX
-        let initialY = e.pageY
-        this.setState({
-            mouseDown: true,
-            mouseDownInitialX: initialX,
-            mouseDownInitialY: initialY
-        })
+        e.preventDefault
+        if (!this.state.babyIsHovered) {
+            let initialX = e.pageX
+            let initialY = e.pageY
+            this.setState({
+                mouseDown: true,
+                mouseDownInitialX: initialX,
+                mouseDownInitialY: initialY
+            })
+        }
     }
 
     handleMouseUp(e) {
+        e.preventDefault
         this.setState({
             mouseDown: false
         })
@@ -99,6 +104,12 @@ export default class App extends React.Component {
                 }
             })
         }
+    }
+
+    toggleBabyIsHovered(value) {
+        this.setState({
+            babyIsHovered: value,
+        })
     }
 
     setControlHighlighting(control) {
@@ -212,6 +223,7 @@ export default class App extends React.Component {
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     isDragging={this.state.mouseDown}
+                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)}
                     mouseDownDrag={this.state.mouseDownPos} />
                 {detailBaby}
                 <FilterNav
