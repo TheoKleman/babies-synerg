@@ -199,8 +199,6 @@ export default class App extends React.Component {
             <div
                 className="main-content"
                 onWheel={this.handleScroll.bind(this)}
-                // onMouseDown={this.handleMouseDown.bind(this)}
-                // onMouseUp={this.handleMouseUp.bind(this)}
                 >
                 <Form
                     isDisplayed={this.state.formDisplayed}
