@@ -112,65 +112,26 @@ export default class Board extends React.Component {
 			&& (deltaX != 0 || deltaY != 0) 
 			&& !this.state.boardIsTranslatingWithScroll 
 			&& !this.props.isDragging) {
-
-			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 25)
+			
+			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 5)
 			this.setState({
 				navigateScrollInterval: navigateScrollInterval,
 				boardIsTranslatingWithScroll: true
 			})
-
 		} else if (deltaX == 0 && deltaY == 0) {
 			this.isNotNavigatingWithScroll()
 		}
 
 		// Drag board
-		if ((this.props.mouseDownDrag.X != 0|| this.props.mouseDownDrag.Y != 0)
+		if ((nextProps.mouseDownDrag.X != 0|| nextProps.mouseDownDrag.Y != 0)
 			&& !this.state.boardIsTranslatingWithScroll
 			&& !this.props.formDisplayed) {
-
-			let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
-			let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
-
-			// Check if X is in range
-			if (newX < this.state.boardTranslateX.min) {
-				newX = this.state.boardTranslateX.min
-			} else if (newX > this.state.boardTranslateX.max){
-				newX = this.state.boardTranslateX.max
-			}
-			// Check if Y is in range
-			if (newY < this.state.boardTranslateY.min) {
-				newY = this.state.boardTranslateY.min
-			} else if (newY > this.state.boardTranslateY.max){
-				newY = this.state.boardTranslateX.max
-			}
-
-			this.setState({
-			    boardIsTranslatingWithDrag: true,
-			    boardTranslateX: {
-			        X: newX,
-			        max: 0,
-			        min: - (this.state.boardWidth - this.props.viewportSize.width)
-			    },
-			    boardTranslateY: {
-			        Y: newY,
-			        max: 0,
-			        min: - (this.state.boardHeight - this.props.viewportSize.height)
-			    },
-			})
 			
-			var navigateDragInterval = setInterval(this.updateBoardTransformOnDrag(), 1)
+			this.navigateWithDrag()
 			this.setState({
-				navigateDragInterval: navigateDragInterval
+				boardIsTranslatingWithDrag: true
 			})
-			TweenMax.to(this.refs.board,.35, {
-				scale: .95,
-				ease: Power2.easeOut
-			})
-		} else if (this.props.mouseDownDrag.X == 0 && this.props.mouseDownDrag.Y == 0) {
-			TweenMax.to(this.refs.board,.35, {
-				scale: 1,
-				ease: Power2.easeOut
-			})
+		} else if (nextProps.mouseDownDrag.X == 0 && nextProps.mouseDownDrag.Y == 0) {
 			this.isNotNavigatingWithDrag()
 			this.setState({
 				beforeDrag: {
@@ -217,15 +178,19 @@ export default class Board extends React.Component {
 			}
 
 			// Execute navigate
-			if (direction != null && isPositive != null && !this.state.boardIsTranslatingWithKeys) {
+			if (direction != null 
+				&& isPositive != null 
+				&& !this.state.boardIsTranslatingWithKeys 
+				&& !this.state.boardIsTranslatingWithDrag) {
 				this.isNotNavigatingWithScroll()
+				this.isNotNavigatingWithDrag()
 
 				this.navigateWithKeys(direction, isPositive)
 				var navigateKeysInterval = setInterval(this.navigateWithKeys.bind(this, direction, isPositive), 25)
 
 				this.setState({
-					boardIsTranslatingWithKeys: true,
-					navigateKeysInterval: navigateKeysInterval
+					navigateKeysInterval: navigateKeysInterval,
+					boardIsTranslatingWithKeys: true
 				})
 			}
 		}
@@ -268,6 +233,41 @@ export default class Board extends React.Component {
 		}
 	}
 
+	navigateWithDrag() {
+		let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
+		let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
+
+		// Check if X is in range
+		if (newX < this.state.boardTranslateX.min) {
+			newX = this.state.boardTranslateX.min
+		} else if (newX > this.state.boardTranslateX.max){
+			newX = this.state.boardTranslateX.max
+		}
+		// Check if Y is in range
+		if (newY < this.state.boardTranslateY.min) {
+			newY = this.state.boardTranslateY.min
+		} else if (newY > this.state.boardTranslateY.max){
+			newY = this.state.boardTranslateX.max
+		}
+
+		if (!this.props.formDisplayed) {
+			this.setState({
+			    boardTranslateX: {
+			        X: newX,
+			        max: 0,
+			        min: - (this.state.boardWidth - this.props.viewportSize.width)
+			    },
+			    boardTranslateY: {
+			        Y: newY,
+			        max: 0,
+			        min: - (this.state.boardHeight - this.props.viewportSize.height)
+			    },
+			})
+
+			this.updateBoardTransformOnDrag()
+		}
+	}
+
 	navigateWithScroll() {
 		let maxSpeed = 90
 		let { X } = this.state.boardTranslateX
@@ -275,8 +275,8 @@ export default class Board extends React.Component {
 
 		let { deltaX, deltaY } = this.props.scrollDelta
 
-		let newX = 3 * (-deltaX)
-		let newY = 3 * (-deltaY)
+		let newX = .75 * (-deltaX)
+		let newY = .75 * (-deltaY)
 
 		// Set max speed
 		if (newX > maxSpeed) {
@@ -397,9 +397,7 @@ export default class Board extends React.Component {
 	}
 
 	isNotNavigatingWithDrag() {
-		clearInterval(this.state.navigateDragInterval)
 		this.setState({
-			navigateDragInterval: 0,
 			boardIsTranslatingWithDrag: false
 		})
 	}
@@ -436,7 +434,7 @@ export default class Board extends React.Component {
 	}
 
 	updateBoardTransformOnScroll() {
-		TweenMax.to(this.refs.board,.6, {
+		TweenMax.to(this.refs.board,.05, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
 			ease: Power0.easeNone

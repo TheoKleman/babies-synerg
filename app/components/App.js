@@ -43,11 +43,16 @@ export default class App extends React.Component {
             isSoundActive: true,
             focusedBabyGroup: "",
         }
+
+        this.handleMouseDown = this.handleMouseDown.bind(this)
+        this.handleMouseUp = this.handleMouseUp.bind(this)
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
         window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
+        window.addEventListener('mousedown', this.handleMouseDown)
+        window.addEventListener('mouseup', this.handleMouseUp)
     }
 
     handleScroll(e) {
@@ -67,6 +72,7 @@ export default class App extends React.Component {
             e.preventDefault
             let initialX = e.pageX
             let initialY = e.pageY
+
             this.setState({
                 mouseDown: true,
                 mouseDownInitialX: initialX,
@@ -194,8 +200,6 @@ export default class App extends React.Component {
             <div
                 className="main-content"
                 onWheel={this.handleScroll.bind(this)}
-                onMouseDown={this.handleMouseDown.bind(this)}
-                onMouseUp={this.handleMouseUp.bind(this)}
                 >
                 <Form
                     isDisplayed={this.state.formDisplayed}
