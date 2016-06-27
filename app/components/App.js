@@ -41,7 +41,7 @@ export default class App extends React.Component {
             isSorted: false,
             babyIsHovered: false,
             isSoundActive: true,
-            groupFocus: "",
+            focusedBabyGroup: "",
         }
     }
 
@@ -175,8 +175,9 @@ export default class App extends React.Component {
 
     setGroupFocus(value) {
         this.setState({
-            groupFocus: value
+            focusedBabyGroup: value
         })
+        // console.log(this.state.focusedBabyGroup) 
     }
 
     handleResize(){
@@ -210,7 +211,7 @@ export default class App extends React.Component {
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     isDragging={this.state.mouseDown}
-                    focusedBabyGroup={this.state.groupFocus}
+                    focusedBabyGroup={this.state.focusedBabyGroup}
                     toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)}
                     mouseDownDrag={this.state.mouseDownPos} />
                 <FilterNav

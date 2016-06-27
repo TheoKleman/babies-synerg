@@ -18,7 +18,6 @@ export default class FilterNav extends React.Component {
 
     mooveToGroup(e) {
         e.preventDefault()
-
         this.props.setGroupFocus(e.target.dataset.group)
     }
 
