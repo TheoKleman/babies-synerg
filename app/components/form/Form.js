@@ -58,7 +58,9 @@ export default class Form extends React.Component {
 		} // Back key
 		else if (e.keyCode == 8 && this.props.isDisplayed) {
 			e.preventDefault()
-			this.previousStep()
+			if (this.state.step < 7) {
+				this.previousStep()
+			}
 		}
 	}
 
