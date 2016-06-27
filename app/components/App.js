@@ -59,8 +59,6 @@ export default class App extends React.Component {
                     deltaY: e.deltaY
                 }
             })
-            console.log(e.deltaX)
-            console.log(e.deltaY)
         }
     }
 
