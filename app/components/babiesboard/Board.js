@@ -227,8 +227,8 @@ export default class Board extends React.Component {
 	}
 
 	navigateWithDrag() {
-		let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
-		let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
+		let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X/1.5
+		let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y/1.5
 
 		// Check if X is in range
 		if (newX < this.state.boardTranslateX.min) {
@@ -262,7 +262,7 @@ export default class Board extends React.Component {
 	}
 
 	navigateWithScroll() {
-		let maxSpeed = 90
+		let maxSpeed = 60
 		let { X } = this.state.boardTranslateX
 		let { Y } = this.state.boardTranslateY
 
@@ -437,7 +437,7 @@ export default class Board extends React.Component {
 	updateBoardTransformOnDrag() {
 		var self = this
 
-		TweenMax.to(this.refs.board,.01, {
+		TweenMax.to(this.refs.board,.1, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
 			ease: Power0.easeNone,
