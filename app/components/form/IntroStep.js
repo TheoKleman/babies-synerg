@@ -12,7 +12,6 @@ export default class IntroStep extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("Intro step unmounted")
         window.removeEventListener("keyup", this.handleKeyUp)   
     }
 

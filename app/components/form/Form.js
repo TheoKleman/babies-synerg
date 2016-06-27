@@ -35,9 +35,10 @@ export default class Form extends React.Component {
 			this.showForm()
 		}
 
-		if (nextState.nextQuestionId != this.state.nextQuestionId) {
-			this.nextStep(nextState.nextQuestionId)
-		}
+		// if (nextState.nextQuestionId != this.state.nextQuestionId) {
+		// 	console.log("JE CHANGE FRER")
+		// 	this.nextStep(nextState.nextQuestionId)
+		// }
 	}
 
 	componentWillMount() {
@@ -60,6 +61,10 @@ export default class Form extends React.Component {
 		// ESC key 
 		if (e.keyCode == 27 && this.props.isDisplayed) {
 			this.hideForm();
+		} // Back key
+		else if (e.keyCode == 8 && this.props.isDisplayed) {
+			e.preventDefault()
+			this.previousStep()
 		}
 	}
 
@@ -108,7 +113,6 @@ export default class Form extends React.Component {
 	}
 
 	nextStep(nextQuestionId) {
-		console.log(this.state.step)
 		if (this.state.step >= this.state.stepMax) {
 			var newStep = this.state.step
 		} else if (nextQuestionId === "endPoint") {
@@ -195,7 +199,9 @@ export default class Form extends React.Component {
 		this.setState({
 			step: 0,
 			currentQuestionId: 0,
-			currentQuestion: this.state.questions[0]
+			currentQuestion: this.state.questions[0],
+			previousQuestionsIds: [],
+			answers: []
 		})
 	}
 
@@ -235,6 +241,7 @@ export default class Form extends React.Component {
 		} else if (this.state.step == 6) {
 			var rightContent = <SummaryStep 
 									step={this.state.step}
+									formIsDisplayed={this.props.isDisplayed}
 									peopleAvailable={this.state.peopleAvailable}
 									goToNextStep={this.nextStep.bind(this)}
 									/>

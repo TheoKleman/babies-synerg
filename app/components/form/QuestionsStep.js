@@ -13,6 +13,20 @@ export default class QuestionsStep extends React.Component {
 		this.handleKeyUp = this.handleKeyUp.bind(this)
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.currentQuestion.id != this.props.currentQuestion.id) {
+			var tl = new TimelineMax()
+			tl.to(this.refs.sectionQuestions, 0, {
+				scale: .5,
+				ease: Power2.easeOut,
+			})
+			tl.to(this.refs.sectionQuestions, .3, {
+				scale: 1,
+				ease: Power2.easeOut,
+			})
+		}
+	}
+
 	componentWillMount() {
 		window.addEventListener('keyup', this.handleKeyUp)
 	}
@@ -29,9 +43,10 @@ export default class QuestionsStep extends React.Component {
 	}
 
 	handleKeyUp(e) {
+		console.log("KeyUp")
 		var self = this
 
-		if (this.props.formIsDisplayed && this.props.step >= 1 && this.props.step < 6) {
+		if (this.props.formIsDisplayed) {
 			// Handle A/B/C/D/E keys
 			switch(e.keyCode) {
 				case 65:
