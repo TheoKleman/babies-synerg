@@ -45,6 +45,7 @@ export default class App extends React.Component {
                 year: 0
             },
             detailDisplayed: false,
+            babyIsHovered: false,
             isSorting: false,
             isSoundActive: true,
         }
@@ -52,7 +53,7 @@ export default class App extends React.Component {
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        // window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
+        window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
     }
 
     handleScroll(e) {
@@ -68,13 +69,15 @@ export default class App extends React.Component {
     }
 
     handleMouseDown(e) {
-        let initialX = e.pageX
-        let initialY = e.pageY
-        this.setState({
-            mouseDown: true,
-            mouseDownInitialX: initialX,
-            mouseDownInitialY: initialY
-        })
+        if (!this.state.babyIsHovered) {
+            let initialX = e.pageX
+            let initialY = e.pageY
+            this.setState({
+                mouseDown: true,
+                mouseDownInitialX: initialX,
+                mouseDownInitialY: initialY
+            })
+        }
     }
 
     handleMouseUp(e) {
@@ -97,6 +100,18 @@ export default class App extends React.Component {
                     X: 0,
                     Y: 0
                 }
+            })
+        }
+    }
+
+    toggleBabyIsHovered() {
+        if (this.state.babyIsHovered) {
+            this.setState({
+                babyIsHovered: false,
+            })
+        } else {
+            this.setState({
+                babyIsHovered: true,
             })
         }
     }
@@ -212,6 +227,7 @@ export default class App extends React.Component {
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                     isDragging={this.state.mouseDown}
+                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)}
                     mouseDownDrag={this.state.mouseDownPos} />
                 {detailBaby}
                 <FilterNav
