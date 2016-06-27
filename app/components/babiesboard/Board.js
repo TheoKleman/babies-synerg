@@ -99,7 +99,7 @@ export default class Board extends React.Component {
 
 		// Drag board
 		if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll) {
-			
+
 			let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
 			let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
 
@@ -415,7 +415,7 @@ export default class Board extends React.Component {
 		var self = this
 
 		TweenMax.to(this.refs.board,.2, {
-			scale: .9,
+			scale: .95,
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
 			ease: Power0.easeNone,
