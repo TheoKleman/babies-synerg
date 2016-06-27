@@ -56,11 +56,9 @@ export default class Form extends React.Component {
 		if (e.keyCode == 27 && this.props.isDisplayed) {
 			this.hideForm();
 		} // Back key
-		else if (e.keyCode == 8 && this.props.isDisplayed) {
+		else if (e.keyCode == 8 && this.props.isDisplayed && this.state.step < 7) {
 			e.preventDefault()
-			if (this.state.step < 7) {
-				this.previousStep()
-			}
+			this.previousStep()
 		}
 	}
 
@@ -163,7 +161,7 @@ export default class Form extends React.Component {
 			// Unset last answer
 			var answersArray = []
 			answersArray = this.state.answers
-			answersArray = answersArray.slice(0, -2)
+			answersArray = answersArray.slice(0, -3)
 		} else {
 			var newCurrentQuestionId = 0
 			var previousQuestionsIds = []
@@ -179,8 +177,8 @@ export default class Form extends React.Component {
 		})
 	}
 
-	saveAnswer(question, answer) {
-		var theAnswer = [question,answer]
+	saveAnswer(question, answer, sentence) {
+		var theAnswer = [question,answer,sentence]
 		var answersArray = []
 		answersArray = this.state.answers
 		answersArray = answersArray.concat(theAnswer)
