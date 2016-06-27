@@ -59,12 +59,14 @@ export default class App extends React.Component {
                     deltaY: e.deltaY
                 }
             })
+            console.log(e.deltaX)
+            console.log(e.deltaY)
         }
     }
 
     handleMouseDown(e) {
-        e.preventDefault
         if (!this.state.babyIsHovered) {
+            e.preventDefault
             let initialX = e.pageX
             let initialY = e.pageY
             this.setState({
@@ -76,10 +78,16 @@ export default class App extends React.Component {
     }
 
     handleMouseUp(e) {
-        e.preventDefault
-        this.setState({
-            mouseDown: false
-        })
+        if (!this.state.babyIsHovered) {
+            e.preventDefault
+            this.setState({
+                mouseDown: false,
+                mouseDownPos: {
+                    X: 0,
+                    Y: 0
+                }
+            })
+        }
     }
 
     handleMouseDownMove(e) {

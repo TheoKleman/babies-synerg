@@ -20,10 +20,10 @@ export default class Form extends React.Component {
 			questions: [],
 			answers:[],
 			peopleAvailable: {
-				designers: 18,
-				developers: 9,
-				market: 3,
-				management: 24 
+				designers: 0,
+				developers: 0,
+				market: 0,
+				management: 0 
 			}
 		}
 	}

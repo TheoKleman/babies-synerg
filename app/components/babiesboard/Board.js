@@ -98,22 +98,28 @@ export default class Board extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-
-		let { deltaX, deltaY } = this.props.scrollDelta
-		
 		// Scroll board
-		if ((deltaX != 0 || deltaY != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.isDragging) {
+		let { deltaX, deltaY } = nextProps.scrollDelta
+
+		if (nextProps.scrollDelta != this.props.scrollDelta 
+			&& (deltaX != 0 || deltaY != 0) 
+			&& !this.state.boardIsTranslatingWithScroll 
+			&& !this.props.isDragging) {
+
 			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 25)
 			this.setState({
 				navigateScrollInterval: navigateScrollInterval,
 				boardIsTranslatingWithScroll: true
 			})
+
 		} else if (deltaX == 0 && deltaY == 0) {
 			this.isNotNavigatingWithScroll()
 		}
 
 		// Drag board
-		if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.formDisplayed) {
+		if ((this.props.mouseDownDrag.X != 0|| this.props.mouseDownDrag.Y != 0)
+			&& !this.state.boardIsTranslatingWithScroll
+			&& !this.props.formDisplayed) {
 
 			let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
 			let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
@@ -145,14 +151,18 @@ export default class Board extends React.Component {
 			    },
 			})
 			
-			var navigateDragInterval = setInterval(this.updateBoardTransformOnDrag(), 200)
+			var navigateDragInterval = setInterval(this.updateBoardTransformOnDrag(), 1)
 			this.setState({
 				navigateDragInterval: navigateDragInterval
 			})
+			TweenMax.to(this.refs.board,.35, {
+				scale: .95,
+				ease: Power2.easeOut
+			})
 		} else if (this.props.mouseDownDrag.X == 0 && this.props.mouseDownDrag.Y == 0) {
-			TweenMax.to(this.refs.board,.2, {
+			TweenMax.to(this.refs.board,.35, {
 				scale: 1,
-				ease: Power0.easeNone
+				ease: Power2.easeOut
 			})
 			this.isNotNavigatingWithDrag()
 			this.setState({
@@ -366,7 +376,7 @@ export default class Board extends React.Component {
 	isNotNavigatingWithScroll() {
 		clearInterval(this.state.navigateScrollInterval)
 		this.setState({
-			navigateScrollInterval: undefined,
+			navigateScrollInterval: 0,
 			boardIsTranslatingWithScroll: false
 		})
 	}
@@ -374,7 +384,7 @@ export default class Board extends React.Component {
 	isNotNavigatingWithKeys() {
 		clearInterval(this.state.navigateKeysInterval)
 		this.setState({
-			navigateKeysInterval: undefined,
+			navigateKeysInterval: 0,
 			boardIsTranslatingWithKeys: false,
 		})
 	}
@@ -382,7 +392,7 @@ export default class Board extends React.Component {
 	isNotNavigatingWithDrag() {
 		clearInterval(this.state.navigateDragInterval)
 		this.setState({
-			navigateDragInterval: undefined,
+			navigateDragInterval: 0,
 			boardIsTranslatingWithDrag: false
 		})
 	}
@@ -429,8 +439,7 @@ export default class Board extends React.Component {
 	updateBoardTransformOnDrag() {
 		var self = this
 
-		TweenMax.to(this.refs.board,.25, {
-			scale: .95,
+		TweenMax.to(this.refs.board,.01, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
 			ease: Power0.easeNone,
