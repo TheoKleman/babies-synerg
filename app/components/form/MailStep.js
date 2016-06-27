@@ -8,13 +8,32 @@ export default class MailStep extends React.Component {
 		this.state = {
 			isMailValid: false,
 			isMailChecked: false,
+			presetMessage: ""
 		}
+	}
+
+	componentWillMount() {
+		// Set preset message
+		var presetMessage = ""
+		for (var i = 0; i < this.props.mailAnswers.length; i = i + 3) {
+			presetMessage += this.props.mailAnswers[i + 2]
+		}
+
+		this.setState({
+			presetMessage: presetMessage
+		})
 	}
 
 	componentDidMount() {
 		TweenMax.to(this.refs.sectionMail, .3, {
 			scale: 1,
 			ease: Power2.easeOut,
+		})
+	}
+
+	handleTextareaChange(e) {
+		this.setState({
+			presetMessage: e.target.value
 		})
 	}
 
@@ -31,7 +50,7 @@ export default class MailStep extends React.Component {
 
 			// Couple question & answers
 			var answers = []
-			for (var i = 0; i < this.props.mailAnswers.length; i = i + 2) {
+			for (var i = 0; i < this.props.mailAnswers.length; i = i + 3) {
 				var temp = {
 					question : null,
 					answer: null
@@ -111,7 +130,12 @@ export default class MailStep extends React.Component {
 					<span>Pour resumer !</span>
 					<div className="mail--form">
 						<div className="textarea-section">
-							<textarea placeholder="Bonjour ..." ref="bodyText"></textarea>
+							<textarea
+								placeholder="Remplissez moi !"
+								ref="bodyText"
+								value={this.state.presetMessage}
+								onChange={this.handleTextareaChange.bind(this)}>
+								</textarea>
 							<div className="input-group">
 								<input type="mail" placeholder="Adresse e-mail" ref="mailInput"/>
 								<div className="input-error" style={inputErrorStyle}>
