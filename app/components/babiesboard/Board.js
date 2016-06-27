@@ -101,7 +101,7 @@ export default class Board extends React.Component {
 		}
 
 		// Drag board
-		if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll) {
+		if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll && !this.props.formDisplayed) {
 
 			let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
 			let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
