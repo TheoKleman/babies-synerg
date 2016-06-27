@@ -99,8 +99,9 @@ export default class Board extends React.Component {
 
 		// Drag board
 		if ((this.props.mouseDownDrag.X != 0 || this.props.mouseDownDrag.Y != 0) && !this.state.boardIsTranslatingWithScroll) {
-			let newX = this.state.boardTranslateX.X + this.props.mouseDownDrag.X/10
-			let newY = this.state.boardTranslateY.Y + this.props.mouseDownDrag.Y/10
+			
+			let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X
+			let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y
 
 			// Check if X is in range
 			if (newX < this.state.boardTranslateX.min) {
@@ -139,6 +140,12 @@ export default class Board extends React.Component {
 				ease: Power0.easeNone
 			})
 			this.isNotNavigatingWithDrag()
+			this.setState({
+				beforeDrag: {
+					boardX: this.state.boardTranslateX.X,
+					boardY: this.state.boardTranslateY.Y,
+				}
+			})
 		}
 	}
 

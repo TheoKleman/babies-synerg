@@ -229,11 +229,11 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e, id) {
-		this.props.toggleBabyIsHovered()
+		this.props.toggleBabyIsHovered(true)
 	}
 
 	handleMouseLeave(e) {
-		this.props.toggleBabyIsHovered()
+		this.props.toggleBabyIsHovered(false)
 		// this.getBabySkin(this.props.datas.tag)
 		this.props.setDetailIsDisplayedProps(false)
 	}

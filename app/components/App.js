@@ -104,16 +104,10 @@ export default class App extends React.Component {
         }
     }
 
-    toggleBabyIsHovered() {
-        if (this.state.babyIsHovered) {
-            this.setState({
-                babyIsHovered: false,
-            })
-        } else {
-            this.setState({
-                babyIsHovered: true,
-            })
-        }
+    toggleBabyIsHovered(value) {
+        this.setState({
+            babyIsHovered: value,
+        })
     }
 
     setControlHighlighting(control) {
