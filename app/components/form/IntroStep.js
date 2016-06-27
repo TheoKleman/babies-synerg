@@ -3,14 +3,17 @@ import React from 'react'
 export default class IntroStep extends React.Component {
     constructor() {
         super()
+
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
     componentWillMount() {
-        window.addEventListener("keyup", this.handleKeyUp.bind(this))
+        window.addEventListener("keyup", this.handleKeyUp)
     }
 
     componentWillUnmount() {
-        window.removeEventListener("keyup", this.handleKeyUp.bind(this))   
+        console.log("Intro step unmounted")
+        window.removeEventListener("keyup", this.handleKeyUp)   
     }
 
     componentDidMount() {

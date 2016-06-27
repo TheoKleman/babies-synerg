@@ -5,23 +5,17 @@ var classNames = require('classnames')
 export default class AnswerItem extends React.Component {
 	constructor() {
 		super()
+	}
 
-		this.state = {
-			isClicked: false,
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.keyPressedId === this.props.answer.id) {
+			this.props.resetKeyPressedId()
+			this.props.setNextQuestionId(this.props.answer.nextQuestionId)
+			this.props.saveAnswer(this.props.question.text, this.props.answer.text)
 		}
 	}
 
-	componentDidMount() {
-		this.setState({
-			isClicked: false
-		})
-	}
-
 	handleAnswer() {
-		this.setState({
-			isClicked: true
-		})
-
 		this.props.setNextQuestionId(this.props.answer.nextQuestionId)
 		this.props.saveAnswer(this.props.question.text, this.props.answer.text)
 	

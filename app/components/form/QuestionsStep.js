@@ -5,6 +5,20 @@ import AnswerItem from './AnswerItem'
 export default class QuestionsStep extends React.Component {
 	constructor() {
 		super()
+
+		this.state = {
+			keyPressedId: null
+		}
+
+		this.handleKeyUp = this.handleKeyUp.bind(this)
+	}
+
+	componentWillMount() {
+		window.addEventListener('keyup', this.handleKeyUp)
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('keyup', this.handleKeyUp)
 	}
 
 	componentDidMount() {
@@ -12,6 +26,47 @@ export default class QuestionsStep extends React.Component {
 			scale: 1,
 			ease: Power2.easeOut,
 		})
+	}
+
+	handleKeyUp(e) {
+		var self = this
+
+		if (this.props.formIsDisplayed && this.props.step >= 1 && this.props.step < 6) {
+			// Handle A/B/C/D/E keys
+			switch(e.keyCode) {
+				case 65:
+					self.setState({
+						keyPressedId: 0
+					})
+					break;
+				case 66:
+					self.setState({
+						keyPressedId: 1
+					})
+					break;
+				case 67:
+					self.setState({
+						keyPressedId: 2
+					})
+					break;
+				case 68:
+					self.setState({
+						keyPressedId: 3
+					})
+					break;
+				case 69:
+					self.setState({
+						keyPressedId: 4
+					})
+					break;
+			}
+		}
+	}
+
+	resetKeyPressedId() {
+		this.setState({
+			keyPressedId: null
+		})	
 	}
 
 	render() {
@@ -30,6 +85,12 @@ export default class QuestionsStep extends React.Component {
 		// Var question number 
 		var questionNumber = this.props.step
 
+		// key pressed id
+		var keyPressedId = this.state.keyPressedId
+
+		// reset key pressed id
+		var resetKeyPressedId = this.resetKeyPressedId.bind(this)
+
 		return(
 			<section className="right--questions" ref="sectionQuestions">
 				<div className="content-centered">
@@ -44,6 +105,8 @@ export default class QuestionsStep extends React.Component {
 								return <AnswerItem 
 									key={answer.id}
 									answer={answer}
+									keyPressedId={keyPressedId}
+									resetKeyPressedId={resetKeyPressedId}
 									question={currentQuestion}
 									goToNextStep={goToNextStep}
 									setNextQuestionId={setNextQuestionId}

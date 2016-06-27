@@ -51,6 +51,11 @@ export default class Form extends React.Component {
 		this.loadQuestions()
 	}
 
+	componentWillUnmount() {
+		// Add event listener
+		window.removeEventListener('keydown', this.handleKeyDown.bind(this))
+	}
+
 	handleKeyDown(e) {
 		// ESC key 
 		if (e.keyCode == 27 && this.props.isDisplayed) {
@@ -103,6 +108,7 @@ export default class Form extends React.Component {
 	}
 
 	nextStep(nextQuestionId) {
+		console.log(this.state.step)
 		if (this.state.step >= this.state.stepMax) {
 			var newStep = this.state.step
 		} else if (nextQuestionId === "endPoint") {
@@ -219,6 +225,7 @@ export default class Form extends React.Component {
 		} else if (this.state.step >= 1 && this.state.step < 6) {
 			var rightContent = <QuestionsStep
 									step={this.state.step}
+									formIsDisplayed={this.props.isDisplayed}
 									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
 									currentQuestion={this.state.currentQuestion}
