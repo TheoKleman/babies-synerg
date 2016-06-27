@@ -30,6 +30,7 @@ export default class Baby extends React.Component {
 			updateAngle: true,
 			isDragging: false,
 			rotateAngleLimit: 40,
+			isMooving: false,
 		}
 	}
 
@@ -40,21 +41,23 @@ export default class Baby extends React.Component {
 	componentDidMount() {
 		this.setPosition(this.props.pos.origin)
 
-		interact(this.refs.itSelf).draggable({
-			inertia: {
-				resistance: 10,
-				minSpeed: 200,
-				endSpeed: 100,
-				smoothEndDuration: 100,
-			},
-			restrict: {
-				restriction: 'parent',
-				elementRect: { top: 0, left: 0, bottom: 1.5, right: 1.5 }
-			},
-			onmove: this.onDragListener.bind(this),
-			onend: this.onDragStop.bind(this),
-			pointerMoveTolerance: 10
-		})
+		if(!this.props.isSorted) {
+			interact(this.refs.itSelf).draggable({
+				inertia: {
+					resistance: 10,
+					minSpeed: 200,
+					endSpeed: 100,
+					smoothEndDuration: 100,
+				},
+				restrict: {
+					restriction: 'parent',
+					elementRect: { top: 0, left: 0, bottom: 1.5, right: 1.5 }
+				},
+				onmove: this.onDragListener.bind(this),
+				onend: this.onDragStop.bind(this),
+				pointerMoveTolerance: 10
+			})
+		}
 	}
 
 	onDragListener(event) {
@@ -132,24 +135,52 @@ export default class Baby extends React.Component {
 	}
 
 	updatePosition(posDestination, posOrigin){
-		if(posDestination != null) {
+		if(posDestination != null && posOrigin != null) {
 			let tl = new TimelineLite ()
 			tl.to(
 	      	this.refs.itSelf,
-	      	2,
+	      	4,
 		      {
 		        x: posDestination.Xpx +"px",
 		        y: posDestination.Ypx +"px",
 		        zIndex: posDestination.y,
-		        ease: Power2.easeOut,
-		        onStart: this.babyRotateOnMoove(posDestination.Xpx, posOrigin.Xpx),
+		        ease: Power1.easeOut,
+		        onStart: this.onBabySort(posDestination, posOrigin),
+		        onComplete: this.onBabySortEnd.bind(this),
 		      }
 		    )
 		}
 	}
 
-	babyRotateOnMoove(destination, origin) {
-		// var babyRotation = this.rotateBaby(direction, this.state.rotateAngleLimit)
+	onBabySort(posDestination, posOrigin) {
+		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.state.rotateAngleLimit)
+
+		TweenMax.set(this.refs.bodyImage, {
+			display: 'none'
+		})
+		TweenMax.set(this.refs.babyPieces, {
+			opacity: 1
+		})
+		TweenMax.allTo(
+			[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
+			2,
+		 {
+			rotation: babyRotation,
+			delay: 0.2,
+			ease: Power1.easeOut,
+		})
+		TweenMax.allTo(
+			[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
+			1.3,
+		 {
+			rotation: 0,
+			delay: 3,
+			ease: Elastic.easeOut.config(0.6, 0.3),
+		})
+	}
+
+	onBabySortEnd() {
+		
 	}
 
 	makeBabyRotate(direction) {
@@ -159,8 +190,32 @@ export default class Baby extends React.Component {
 
 		this.setState({
 			transform: this.refs.itSelf.style.transform,
-			transformArms: "rotate("+babyRotation+"deg)"
+			transformArms: "rotate("+babyRotation+"deg)",
 		})
+	}
+
+	rotateBabyOnSort(destination, origin, rotateAngleLimit) {
+		var angle = 0
+
+		if(destination > origin) {
+			angle = destination - origin
+			origin = destination
+			if(angle > rotateAngleLimit) {
+				angle = rotateAngleLimit
+				return angle
+			} else {
+				return angle
+			}
+		} else {
+			angle = destination - origin
+			origin = destination
+			if(angle < -rotateAngleLimit) {
+				angle = -rotateAngleLimit
+				return angle
+			} else {
+				return angle
+			}
+		}
 	}
 
 	rotateBaby(direction, rotateAngleLimit) {
@@ -194,37 +249,46 @@ export default class Baby extends React.Component {
         switch(skill) {
         	case "Designer":
         		this.setState({
-        			skin: "jaune.png"
+        			skin: "bleu.png"
         		})
         		break;
         	case "Développeur":
         		this.setState({
-        			skin: "bleu.png"
+        			skin: "orange.png"
         		})
         		break;
         	case "Chef de projet":
         		this.setState({
-        			skin: "vert.png"
+        			skin: "jaune.png"
         		})
         		break;
         	case "Marketeux":
         		this.setState({
-        			skin: "orange.png"
+        			skin: "vert.png"
         		})
         		break;
         	default:
         		this.setState({
-        			skin: "orange.png"
+        			skin: "jaune.png"
         		})
         }
 	}
 
 	componentDidUpdate() {
-		if(this.props.isSorting) {
-			console.log("isSorting:"+this.props.isSorting)
-			this.updatePosition(this.props.pos.destination, this.props.pos.origin)
-		} else {
-			console.log("pas sorted")
+		
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.isSorted != this.props.isSorted ) {
+			console.log('coucou')
+			if(this.props.isSorted) {
+				console.log('unSort')
+				this.updatePosition(this.props.pos.origin, this.props.pos.destination)
+			} else {
+				console.log('sort ')
+				this.updatePosition(this.props.pos.destination, this.props.pos.origin)
+			}
+			
 		}
 	}
 
@@ -253,7 +317,7 @@ export default class Baby extends React.Component {
 
 		var piecesClasses = classNames({
 			'baby-pieces': true,
-			'moving': this.state.isDragging
+			'moving': this.state.isDragging,
 		})
 
 		var babyBgClasses = classNames({
@@ -277,13 +341,13 @@ export default class Baby extends React.Component {
 			id={id}
 			ref="itSelf">
 				<div className="the-baby" style={{transform: this.state.transform}}>
-					<span className={babyBgClasses} style={babyStyle}></span>
-					<div className={piecesClasses}>
+					<span ref="bodyImage" className={babyBgClasses} style={babyStyle}></span>
+					<div ref="babyPieces" className={piecesClasses}>
 						<span className="baby-body"><img src={babyBody} alt="baby body"/></span>
-						<span className="baby-arm-right" style={{transform: this.state.transformArms}}><img src="/images/right-arm.png" alt="baby right arm"/></span>
-						<span className="baby-arm-left" style={{transform: this.state.transformArms}}><img src="/images/left-arm.png" alt="baby left arm"/></span>
-						<span className="baby-leg-right" style={{transform: this.state.transformArms}}><img src="/images/right-leg.png" alt="baby right leg"/></span>
-						<span className="baby-leg-left" style={{transform: this.state.transformArms}}><img src="/images/left-leg.png" alt="baby left leg"/></span>
+						<span ref="armRight" className="baby-arm-right" style={{transform: this.state.transformArms}}><img src="/images/right-arm.png" alt="baby right arm"/></span>
+						<span ref="armLeft" className="baby-arm-left" style={{transform: this.state.transformArms}}><img src="/images/left-arm.png" alt="baby left arm"/></span>
+						<span ref="legRight" className="baby-leg-right" style={{transform: this.state.transformArms}}><img src="/images/right-leg.png" alt="baby right leg"/></span>
+						<span ref="legLeft" className="baby-leg-left" style={{transform: this.state.transformArms}}><img src="/images/left-leg.png" alt="baby left leg"/></span>
 					</div>
 				</div>
 			</div>

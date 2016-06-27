@@ -32,7 +32,7 @@ export default class Board extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if ( nextProps.isSorting != this.props.isSorting ){
+		if ( nextProps.isSorted != this.props.isSorted ){
 			return true;
 		}
 		if( nextState.spacebarDown != this.state.spacebarDown) {
@@ -412,7 +412,7 @@ export default class Board extends React.Component {
 					setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 					setBabyDetail={this.props.setBabyDetail}
 					setSorting={this.props.setSorting}
-					isSorting={this.props.isSorting} />
+					isSorted={this.props.isSorted} />
 				<HomeTitle
 					boardWidth={this.state.boardWidth}
 					boardHeight={this.state.boardHeight}

@@ -45,7 +45,7 @@ export default class App extends React.Component {
                 year: 0
             },
             detailDisplayed: false,
-            isSorting: false,
+            isSorted: false,
             isSoundActive: true,
         }
     }
@@ -164,7 +164,7 @@ export default class App extends React.Component {
 
     setSorting(value) {
         this.setState({
-            isSorting: value
+            isSorted: value
         })
     }
 
@@ -207,7 +207,7 @@ export default class App extends React.Component {
                     setDetailIsDisplayedProps={this.setDetailIsDisplayedState.bind(this)}
                     setBabyDetail={this.setBabyDetail.bind(this)}
                     setSorting={this.setSorting.bind(this)}
-                    isSorting={this.state.isSorting}
+                    isSorted={this.state.isSorted}
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
@@ -215,7 +215,7 @@ export default class App extends React.Component {
                     mouseDownDrag={this.state.mouseDownPos} />
                 {detailBaby}
                 <FilterNav
-                    isSorting={this.state.isSorting}
+                    isSorted={this.state.isSorted}
                     setSorting={this.setSorting.bind(this)} />
                 <Footer />
                 <Controls 

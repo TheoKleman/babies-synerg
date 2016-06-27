@@ -22,34 +22,35 @@ export default class BabiesList extends Component {
             safetyWidthDistance: 30,
             safetyHeightDistance: -20,
             goSort: false,
+            isMooving: false,
             devArea: {
             	x: {
-            		start: 0.05,
-            		end: 0.45
+            		start: 0.02,
+            		end: 0.40
             	},
             	y: {
             		start: 0,
-            		end: 0.25
+            		end: 0.20
             	}
             },
             cdpArea: {
             	x: {
-            		start: 0.05,
+            		start: 0.1,
             		end: 0.40
             	},
             	y: {
             		start: 0.50,
-            		end: 0.8
+            		end: 0.80
             	}
             },
             marketArea: {
             	x: {
-            		start: 0.60,
-            		end: 0.85
+            		start: 0.55,
+            		end: 0.75
             	},
             	y: {
             		start: 0,
-            		end: 0.15
+            		end: 0.10
             	}
             },
             designArea: {
@@ -370,7 +371,7 @@ export default class BabiesList extends Component {
 
 	render() {
 		// let sortingBayby = false
-		// if ( this.props.isSorting ){
+		// if ( this.props.isSorted ){
 		// 	sortingBayby = this.sortBabies()
 		// }
 
@@ -401,7 +402,7 @@ export default class BabiesList extends Component {
 							setDetailIsDisplayedProps={this.props.setDetailIsDisplayedProps}
 							setBabyDetail={this.props.setBabyDetail}
 							setSorting={this.props.setSorting}
-							isSorting={this.props.isSorting}
+							isSorted={this.props.isSorted}
 							id={i} />
           			) 
 				}

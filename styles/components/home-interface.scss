@@ -68,11 +68,43 @@ nav.main-filter {
     top: 20px;
     right: 20px;
     z-index: 10;
+    overflow: hidden;
+    transition: all .3s ease .3s;
+
+    &.open {
+        width: auto;
+        height: auto;
+        padding: 20px 20px 20px 15px;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba($purple,.15);
+
+        button.filter-babies {
+            display: none;
+        }
+
+        .filters {
+            display: block;
+        }
+    }
+
+    button.form--close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 30px;
+        width: 32px;
+        background: url(/images/UI/form-close.png);
+        &:hover {
+            transform: rotate(180deg);
+        }
+    }
 
     > button.filter-babies {
         width: 100%;
         height: 100%;
         background-color: $blue;
+        opacity: 1;
+        transition: opacity .3s ease;
         &:hover {
             .shapes {
                 &.fill-yellow { animation: shapeFitOut .4s ease forwards; }
@@ -150,6 +182,69 @@ nav.main-filter {
                 width: 16px;
                 height: 16px;
                 border: 3px solid;
+            }
+        }
+    }
+
+    .filters {
+        position: relative;
+        display: none;
+
+        button.form--close {
+            position: relative;
+            display: block;
+            top: 0;
+            right: 0;
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        ul { clear: both; }
+
+        li.pattern-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            &:hover {
+                img {
+                    transform: scale(1.1) translate3d(4%, 4%, 0);
+                }
+                a.tag {
+                    background-image: linear-gradient(to right, $yellow 0%, $yellow 100%);
+                    background-repeat: no-repeat;
+                    background-position: 0 70%;
+                    background-size: 100% 10px;
+                }
+            }
+        }
+
+        span {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                transform: scale(1) translate3d(0, 0, 0);
+                transition: transform 1.2s ease;
+            }
+        }
+
+        a.tag {
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-family: $font-m1mbold;
+            color: $blue;
+            background-size: 100% 0px;
+            transition: background .3s ease;
+            &.active {
+                background-image: linear-gradient(to right, $yellow 0%, $yellow 100%);
+                background-repeat: no-repeat;
+                background-position: 0 70%;
+                background-size: 100% 10px;
             }
         }
     }
