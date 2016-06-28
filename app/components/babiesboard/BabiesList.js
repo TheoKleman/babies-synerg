@@ -37,11 +37,11 @@ export default class BabiesList extends Component {
             cdpArea: {
             	x: {
             		start: 0.1,
-            		end: 0.40
+            		end: 0.35
             	},
             	y: {
             		start: 0.50,
-            		end: 0.80
+            		end: 0.70
             	}
             },
             marketArea: {
@@ -57,14 +57,14 @@ export default class BabiesList extends Component {
             designArea: {
             	x: {
             		start: 0.58,
-            		end: 0.97
+            		end: 0.90
             	},
             	y: {
             		start: 0.39,
             		end: 0.60
             	}
             },
-            freeZone: 0.4,
+            freeZone: 0,
             devPositionsArea: [],
 			designPositionsArea: [],
 			cdpPositionsArea: [],
@@ -389,7 +389,6 @@ export default class BabiesList extends Component {
 							datas={baby}
 							babySpec={this.state.babySpec}
 							pos={this.state.babiesPosition[i]}
-							sortingBayby={this.sortBabies()}
 							test={this.refs.babyContainer}
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
