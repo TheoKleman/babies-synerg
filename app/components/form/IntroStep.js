@@ -43,6 +43,7 @@ export default class IntroStep extends React.Component {
                         className="key-enter"
                         onClick={this.props.goToNextStep.bind(this)}
                         >
+                        <p>Commencer</p>
                     </button>
                 </div>
             </section>

@@ -49,13 +49,16 @@ footer.main-footer {
             p {
                 margin: 0;
                 color: $blue;
+                font-family: $font-m1mregular;
             }
 
             a {
                 color: $blue;
-                font-weight: bold;
                 text-decoration: none;
-                font-family: $font-m1mbold;
+
+                &.synerghetic {
+                    font-family: $font-m1mbold;
+                }
             }
         }
     }

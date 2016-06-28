@@ -152,7 +152,9 @@ export default class MailStep extends React.Component {
 						<div className="send-section">
 							<button 
 								className="key-enter"
-								onClick={this.endForm.bind(this)}></button>
+								onClick={this.endForm.bind(this)}>
+								<p>Envoyer</p>
+							</button>
 						</div>
 					</div>
 				</div>
