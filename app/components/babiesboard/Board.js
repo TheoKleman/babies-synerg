@@ -134,7 +134,7 @@ export default class Board extends React.Component {
 
 	handleKeyDown(e) {
 		// Handle arrow keys only if board is movable
-		if (!this.props.formDisplayed) {
+		if (this.props.canTranslate) {
 			var direction = null
 			var isPositive = null
 
@@ -263,7 +263,7 @@ export default class Board extends React.Component {
 		}
 
 		// Apply
-		if (!this.props.formDisplayed) {
+		if (this.props.canTranslate) {
 			this.setState({
 				boardTranslateX: {
 					X: X,
@@ -317,7 +317,7 @@ export default class Board extends React.Component {
 			Y = this.state.boardTranslateX.max
 		}
 
-		if (!this.props.formDisplayed) {
+		if (this.props.canTranslate) {
 			this.setState({
 				boardTranslateX: {
 					X: X,
