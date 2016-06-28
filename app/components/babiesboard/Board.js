@@ -27,6 +27,12 @@ export default class Board extends React.Component {
 			boardIsTranslatingWithKeys: false,
 			spacebarDown: false,
 			babyRendered: false,
+			viewportPositionComparedToBoard: {
+				topBorder: 0,
+				rightBorder: 0,
+				bottomBorder: 0,
+				leftBorder: 0
+			},
 			// devsGroupCenterX: 0, 
 			// devsGroupCenterY: 0,
 			// cdpsGroupCenterX: -(this.state.boardWidth / 4), 
@@ -39,16 +45,19 @@ export default class Board extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if ( nextProps.isSorted != this.props.isSorted ){
+		if (nextProps.isSorted != this.props.isSorted) {
 			return true;
 		}
-		if( nextState.spacebarDown != this.state.spacebarDown) {
+		if (nextState.spacebarDown != this.state.spacebarDown) {
 			return true;
 		}
-		if( nextProps.formDisplayed != this.props.formDisplayed) {
+		if (nextState.viewportPositionComparedToBoard.topBorder != this.state.viewportPositionComparedToBoard.topBorder) {
 			return true;
 		}
-		if( nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
+		if (nextProps.formDisplayed != this.props.formDisplayed) {
+			return true;
+		}
+		if (nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			return true;
 		}
 		// You can access `this.props` and `this.state` here
@@ -73,6 +82,12 @@ export default class Board extends React.Component {
 		let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
 		let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
 
+		// set viewportPositionComparedToBoard
+		let top = (this.state.boardHeight/2) - (this.props.viewportSize.height/2)
+		let left = (this.state.boardWidth/2) - (this.props.viewportSize.width/2)
+		let right = left + this.props.viewportSize.width
+		let bottom = top + this.props.viewportSize.height
+
 		// Set states at the beginning
 		this.setState({
 			boardCenterX: centerX,
@@ -86,6 +101,12 @@ export default class Board extends React.Component {
 				Y: centerY,
 				max: 0,
 				min: - (this.state.boardHeight - this.props.viewportSize.height)
+			},
+			viewportPositionComparedToBoard: {
+				topBorder: top,
+				rightBorder: right,
+				bottomBorder: bottom,
+				leftBorder: left
 			},
 		})
 	}
@@ -102,10 +123,22 @@ export default class Board extends React.Component {
 			|| nextProps.viewportSize.height != this.props.viewportSize.height) {
 			let centerX = -((this.state.boardWidth/2) - (nextProps.viewportSize.width/2));
 			let centerY = -((this.state.boardHeight/2) - (nextProps.viewportSize.height/2));
+
+			// set viewportPositionComparedToBoard
+			let top = ((this.state.boardHeight/2) - (this.props.viewportSize.height/2)) * -1 
+			let left = ((this.state.boardWidth/2) - (this.props.viewportSize.width/2)) * -1
+			let right = left + this.props.viewportSize.width
+			let bottom = top + this.props.viewportSize.height
 			
 			this.setState({
 				boardCenterX: centerX,
-				boardCenterY: centerY
+				boardCenterY: centerY,
+				viewportPositionComparedToBoard: {
+					topBorder: top,
+					rightBorder: right,
+					bottomBorder: bottom,
+					leftBorder: left
+				},
 			})
 
 			this.centerBoardImmediatly(centerX, centerY)
@@ -278,6 +311,7 @@ export default class Board extends React.Component {
 			})
 
 			this.updateBoardTransformOnScroll()
+			this.updateViewportPositionComparedToBoard()
 		}
 	}
 
@@ -332,6 +366,7 @@ export default class Board extends React.Component {
 			})
 
 			this.updateBoardTransform()
+			this.updateViewportPositionComparedToBoard()
 		}
 	}
 
@@ -392,6 +427,23 @@ export default class Board extends React.Component {
 				Y: this.state.boardCenterY,
 				max: 0,
 				min: - (this.state.boardHeight - this.props.viewportSize.height)
+			},
+		})
+	}
+
+	updateViewportPositionComparedToBoard() {
+		// set viewportPositionComparedToBoard
+		let top = this.state.boardTranslateY.Y * -1
+		let left = this.state.boardTranslateX.X * -1
+		let right = left + this.props.viewportSize.width
+		let bottom = top + this.props.viewportSize.height
+		
+		this.setState({
+			viewportPositionComparedToBoard: {
+				topBorder: top,
+				rightBorder: right,
+				bottomBorder: bottom,
+				leftBorder: left
 			},
 		})
 	}
