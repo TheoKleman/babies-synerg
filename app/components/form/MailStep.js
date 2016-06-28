@@ -25,8 +25,13 @@ export default class MailStep extends React.Component {
 	}
 
 	componentDidMount() {
-		TweenMax.to(this.refs.sectionMail, .3, {
-			scale: 1,
+		var tl = new TimelineMax()
+		tl.to(this.refs.sectionMail, 0, {
+			alpha: 0,
+			ease: Power2.easeOut,
+		})
+		tl.to(this.refs.sectionMail, .25, {
+			alpha: 1,
 			ease: Power2.easeOut,
 		})
 	}

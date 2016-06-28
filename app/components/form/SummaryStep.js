@@ -12,14 +12,11 @@ export default class SummaryStep extends React.Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("keydown", this.handleKeyDown)   
+        window.removeEventListener("keydown", this.handleKeyDown)
     }
 
     componentDidMount() {
-        TweenMax.to(this.refs.sectionSummary, .3, {
-            scale: 1,
-            ease: Power2.easeOut,
-        })
+        // animation
     }
 
     handleKeyDown(e) {

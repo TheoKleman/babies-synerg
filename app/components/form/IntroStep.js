@@ -16,9 +16,9 @@ export default class IntroStep extends React.Component {
     }
 
     componentDidMount() {
-        TweenMax.to(this.refs.sectionIntro, .3, {
-            scale: 1,
-            ease: Power2.easeOut,
+        TweenMax.to(this.refs.sectionIntro, 2, {
+            y: 0,
+            ease: Elastic.easeOut.config(1, 0.3),
         })
     }
 

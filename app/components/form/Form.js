@@ -12,7 +12,7 @@ export default class Form extends React.Component {
 		super()
 
 		this.state = {
-			step: 0,
+			step: -1,
 			stepMax: 7,
 			previousQuestionsIds: [],
 			currentQuestion: {},
@@ -94,11 +94,15 @@ export default class Form extends React.Component {
 		if (!this.props.isDisplayed) {
 			var self = this;
 
+			this.setState({
+				step: 0,
+			})
+
 			// Tween to displayed state, props already set
 			TweenMax.to(this.refs.form, .5, {
 				opacity: 1,
 				scale: 1,
-				ease: Power2.easeOut,
+				ease: Power2.easeInOut,
 				onStart: function(){
 					self.refs.form.className += ' displayed';
 				}
@@ -191,69 +195,34 @@ export default class Form extends React.Component {
 
 	updateNbOfBabiesBySkills() {
 		var babies = {
-			uiDesigners: 0,
-			motionDesigners: 0,
-			mobileDesigners: 0,
-			montageDesigners: 0,
-			realisationDesigners: 0,
-			strategieDesigners: 0,
-			illuDesigners: 0,
-			threeDDesigners:0,
-			frontDevelopers: 0,
-			backDevelopers: 0,
-			iOSDevelopers: 0,
-			androidDevelopers: 0,
-			phonegapDevelopers: 0,
-			strategieDevelopers: 0,
-			strategieMarket: 0,
-			seoMarket: 0,
-			seaMarket: 0,
-			smoMarket: 0,
+			designers: 0, 
+			developers: 0,
+			market: 0,
 			management: 0
 		}
 
+		// count babies
 		for (var i = 0; i < this.state.answers.length; i = i + 4) {
 			var item = this.state.answers[i+3]
-			babies.uiDesigners += item.uiDesigners
-			babies.motionDesigners += item.motionDesigners
-			babies.mobileDesigners += item.mobileDesigners
-			babies.montageDesigners += item.montageDesigners
-			babies.realisationDesigners += item.realisationDesigners
-			babies.strategieDesigners += item.strategieDesigners
-			babies.illuDesigners += item.illuDesigners
-			babies.threeDDesigner += item.threeDDesigner
-			babies.frontDevelopers += item.frontDevelopers
-			babies.backDevelopers += item.backDevelopers
-			babies.iOSDevelopers += item.iOSDevelopers
-			babies.androidDevelopers += item.androidDevelopers
-			babies.phonegapDevelopers += item.phonegapDevelopers
-			babies.strategieDevelopers += item.strategieDevelopers
-			babies.strategieMarket += item.strategieMarket
-			babies.seoMarket += item.seoMarket
-			babies.seaMarket += item.seaMarket
-			babies.smoMarket += item.smoMarket
+			babies.designers += item.designers
+			babies.developers += item.developers
+			babies.market += item.market
 			babies.management += item.management
 		}
 
-		// count babies
-		var designers = babies.uiDesigners + babies.motionDesigners + babies.mobileDesigners + babies.montageDesigners + babies.realisationDesigners + babies.strategieDesigners + babies.illuDesigners + babies.threeDDesigners
-		var developers = babies.frontDevelopers + babies.backDevelopers + babies.iOSDevelopers + babies.androidDevelopers + babies.phonegapDevelopers + babies.strategieDevelopers
-		var market = babies.strategieMarket + babies.seoMarket + babies.seaMarket + babies.smoMarket
-		var management = babies.management
-
 		this.setState({
 			availablePeopleBySkills: {
-				designers: designers,
-				developers: developers,
-				market: market,
-				management: management,	
+				designers: babies.designers,
+				developers: babies.developers,
+				market: babies.market,
+				management: babies.management,	
 			}
 		})
 	}
 
 	resetForm() {
 		this.setState({
-			step: 0,
+			step: -1,
 			currentQuestionId: 0,
 			currentQuestion: this.state.questions[0],
 			previousQuestionsIds: [],

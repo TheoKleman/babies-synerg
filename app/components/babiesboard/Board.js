@@ -25,7 +25,6 @@ export default class Board extends React.Component {
 			},
 			boardIsTranslatingWithScroll: false,
 			boardIsTranslatingWithKeys: false,
-			boardIsTranslatingWithDrag: false,
 			spacebarDown: false,
 			babyRendered: false,
 			// devsGroupCenterX: 0, 
@@ -97,8 +96,7 @@ export default class Board extends React.Component {
 		window.removeEventListener("keyup", this.handleKeyUp.bind(this))
 	}
 
-	componentWillReceiveProps(nextProps) {
-		
+	componentWillReceiveProps(nextProps) {		
 		if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			this.mooveToFocusedGroup(nextProps.focusedBabyGroup)
 		}
@@ -108,35 +106,15 @@ export default class Board extends React.Component {
 
 		if (nextProps.scrollDelta != this.props.scrollDelta 
 			&& (deltaX != 0 || deltaY != 0) 
-			&& !this.state.boardIsTranslatingWithScroll 
-			&& !this.props.isDragging) {
+			&& !this.state.boardIsTranslatingWithScroll) {
 			
-			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 5)
+			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 20)
 			this.setState({
 				navigateScrollInterval: navigateScrollInterval,
 				boardIsTranslatingWithScroll: true
 			})
 		} else if (deltaX == 0 && deltaY == 0) {
 			this.isNotNavigatingWithScroll()
-		}
-
-		// Drag board
-		if ((nextProps.mouseDownDrag.X != 0|| nextProps.mouseDownDrag.Y != 0)
-			&& !this.state.boardIsTranslatingWithScroll
-			&& !this.props.formDisplayed) {
-			
-			this.navigateWithDrag()
-			this.setState({
-				boardIsTranslatingWithDrag: true
-			})
-		} else if (nextProps.mouseDownDrag.X == 0 && nextProps.mouseDownDrag.Y == 0) {
-			this.isNotNavigatingWithDrag()
-			this.setState({
-				beforeDrag: {
-					boardX: this.state.boardTranslateX.X,
-					boardY: this.state.boardTranslateY.Y,
-				}
-			})
 		}
 	}
 
@@ -174,14 +152,17 @@ export default class Board extends React.Component {
 				isPositive = false
 				this.props.setControlHighlighting("right", true)
 			}
+			// Spacebar
+			else if (e.keyCode == 32 && !this.state.spacebarDown) {
+				// Center board 
+				this.centerBoard()
+			}
 
 			// Execute navigate
 			if (direction != null 
 				&& isPositive != null 
-				&& !this.state.boardIsTranslatingWithKeys 
-				&& !this.state.boardIsTranslatingWithDrag) {
+				&& !this.state.boardIsTranslatingWithKeys) {
 				this.isNotNavigatingWithScroll()
-				this.isNotNavigatingWithDrag()
 
 				this.navigateWithKeys(direction, isPositive)
 				var navigateKeysInterval = setInterval(this.navigateWithKeys.bind(this, direction, isPositive), 25)
@@ -199,9 +180,6 @@ export default class Board extends React.Component {
 
 		// Spacebar - Open form modal
 		if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
-			// Center board 
-			self.centerBoard()
-
 			self.setState({
 				spacebarDown: true,
 				spacebarTO: setTimeout(function(){
@@ -231,41 +209,6 @@ export default class Board extends React.Component {
 		}
 	}
 
-	navigateWithDrag() {
-		let newX = this.state.beforeDrag.boardX + this.props.mouseDownDrag.X/1.5
-		let newY = this.state.beforeDrag.boardY + this.props.mouseDownDrag.Y/1.5
-
-		// Check if X is in range
-		if (newX < this.state.boardTranslateX.min) {
-			newX = this.state.boardTranslateX.min
-		} else if (newX > this.state.boardTranslateX.max){
-			newX = this.state.boardTranslateX.max
-		}
-		// Check if Y is in range
-		if (newY < this.state.boardTranslateY.min) {
-			newY = this.state.boardTranslateY.min
-		} else if (newY > this.state.boardTranslateY.max){
-			newY = this.state.boardTranslateX.max
-		}
-
-		if (!this.props.formDisplayed) {
-			this.setState({
-			    boardTranslateX: {
-			        X: newX,
-			        max: 0,
-			        min: - (this.state.boardWidth - this.props.viewportSize.width)
-			    },
-			    boardTranslateY: {
-			        Y: newY,
-			        max: 0,
-			        min: - (this.state.boardHeight - this.props.viewportSize.height)
-			    },
-			})
-
-			this.updateBoardTransformOnDrag()
-		}
-	}
-
 	navigateWithScroll() {
 		let maxSpeed = 60
 		let { X } = this.state.boardTranslateX
@@ -273,8 +216,8 @@ export default class Board extends React.Component {
 
 		let { deltaX, deltaY } = this.props.scrollDelta
 
-		let newX = .75 * (-deltaX)
-		let newY = .75 * (-deltaY)
+		let newX = 1 * (-deltaX)
+		let newY = 1 * (-deltaY)
 
 		// Set max speed
 		if (newX > maxSpeed) {
@@ -289,8 +232,8 @@ export default class Board extends React.Component {
 		}
 
 		// Set new X & Y board values
-		X = X + newX
-		Y = Y + newY
+		X += newX
+		Y += newY
 
 		// Check if X is in range
 		if (X < this.state.boardTranslateX.min) {
@@ -394,14 +337,8 @@ export default class Board extends React.Component {
 		})
 	}
 
-	isNotNavigatingWithDrag() {
-		this.setState({
-			boardIsTranslatingWithDrag: false
-		})
-	}
-
 	centerBoard() {
-		TweenMax.to(this.refs.board,1, {
+		TweenMax.to(this.refs.board,1.5, {
 			x: this.state.boardCenterX,
 			y: this.state.boardCenterY,
 			ease: Power2.easeOut
@@ -432,20 +369,10 @@ export default class Board extends React.Component {
 	}
 
 	updateBoardTransformOnScroll() {
-		TweenMax.to(this.refs.board,.05, {
+		TweenMax.to(this.refs.board,.2, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
-			ease: Power0.easeNone
-		})
-	}
-
-	updateBoardTransformOnDrag() {
-		var self = this
-
-		TweenMax.to(this.refs.board,.1, {
-			x: this.state.boardTranslateX.X,
-			y: this.state.boardTranslateY.Y,
-			ease: Power0.easeNone,
+			ease: Power0.linear
 		})
 	}
 
@@ -456,7 +383,7 @@ export default class Board extends React.Component {
 			ease: Power2.easeOut
 		})
 	}
-
+	
 	mooveToFocusedGroup(group) {
 
 		console.log("group: "+group)
