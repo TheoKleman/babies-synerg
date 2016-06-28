@@ -100,8 +100,14 @@ export default class Baby extends React.Component {
 	}
 
 	onDragStop(event) {
+		console.log("drag stop")
 		var babyContent = document.getElementById(event.target.id).firstChild
 		babyContent.style.transform = "rotate(0deg)"
+
+		this.setState({
+			transform: babyContent.style.transform,
+			transformArms: "rotate(0deg)",
+		})
 
 		this.setState({
 			isDragging: false

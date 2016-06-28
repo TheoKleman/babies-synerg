@@ -476,10 +476,10 @@ export default class Board extends React.Component {
 		} else if(group == "devs") {
 			this.setState({
 				boardTranslateX: {
-					X: this.state.boardWidth / 4,
+					X: -((this.state.boardWidth/4) - (this.props.viewportSize.width/4)),
 				},
 				boardTranslateY: {
-					Y: this.state.boardHeight / 4,
+					Y: -((this.state.boardWidth/4) - (this.props.viewportSize.width/4)),
 				},
 			})
 		} else if(group == "marketeux") {
