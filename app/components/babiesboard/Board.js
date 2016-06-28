@@ -96,8 +96,7 @@ export default class Board extends React.Component {
 		window.removeEventListener("keyup", this.handleKeyUp.bind(this))
 	}
 
-	componentWillReceiveProps(nextProps) {
-		
+	componentWillReceiveProps(nextProps) {		
 		if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			this.mooveToFocusedGroup(nextProps.focusedBabyGroup)
 		}
@@ -109,7 +108,7 @@ export default class Board extends React.Component {
 			&& (deltaX != 0 || deltaY != 0) 
 			&& !this.state.boardIsTranslatingWithScroll) {
 			
-			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 5)
+			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 20)
 			this.setState({
 				navigateScrollInterval: navigateScrollInterval,
 				boardIsTranslatingWithScroll: true
@@ -153,6 +152,11 @@ export default class Board extends React.Component {
 				isPositive = false
 				this.props.setControlHighlighting("right", true)
 			}
+			// Spacebar
+			else if (e.keyCode == 32 && !this.state.spacebarDown) {
+				// Center board 
+				this.centerBoard()
+			}
 
 			// Execute navigate
 			if (direction != null 
@@ -176,9 +180,6 @@ export default class Board extends React.Component {
 
 		// Spacebar - Open form modal
 		if (e.keyCode == 32 && !this.props.formDisplayed && !this.state.spacebarDown) {
-			// Center board 
-			self.centerBoard()
-
 			self.setState({
 				spacebarDown: true,
 				spacebarTO: setTimeout(function(){
@@ -215,8 +216,8 @@ export default class Board extends React.Component {
 
 		let { deltaX, deltaY } = this.props.scrollDelta
 
-		let newX = .75 * (-deltaX)
-		let newY = .75 * (-deltaY)
+		let newX = 1 * (-deltaX)
+		let newY = 1 * (-deltaY)
 
 		// Set max speed
 		if (newX > maxSpeed) {
@@ -231,8 +232,8 @@ export default class Board extends React.Component {
 		}
 
 		// Set new X & Y board values
-		X = X + newX
-		Y = Y + newY
+		X += newX
+		Y += newY
 
 		// Check if X is in range
 		if (X < this.state.boardTranslateX.min) {
@@ -337,7 +338,7 @@ export default class Board extends React.Component {
 	}
 
 	centerBoard() {
-		TweenMax.to(this.refs.board,1, {
+		TweenMax.to(this.refs.board,1.5, {
 			x: this.state.boardCenterX,
 			y: this.state.boardCenterY,
 			ease: Power2.easeOut
@@ -368,10 +369,10 @@ export default class Board extends React.Component {
 	}
 
 	updateBoardTransformOnScroll() {
-		TweenMax.to(this.refs.board,.05, {
+		TweenMax.to(this.refs.board,.2, {
 			x: this.state.boardTranslateX.X,
 			y: this.state.boardTranslateY.Y,
-			ease: Power0.easeNone
+			ease: Power0.linear
 		})
 	}
 
