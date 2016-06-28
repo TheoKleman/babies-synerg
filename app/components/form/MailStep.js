@@ -15,7 +15,7 @@ export default class MailStep extends React.Component {
 	componentWillMount() {
 		// Set preset message
 		var presetMessage = ""
-		for (var i = 0; i < this.props.mailAnswers.length; i = i + 3) {
+		for (var i = 0; i < this.props.mailAnswers.length; i = i + 4) {
 			presetMessage += this.props.mailAnswers[i + 2]
 		}
 

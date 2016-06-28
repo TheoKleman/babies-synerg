@@ -11,13 +11,13 @@ export default class AnswerItem extends React.Component {
 		if (nextProps.keyPressedId === this.props.answer.id) {
 			this.props.resetKeyPressedId()
 			this.props.goToNextStep(this.props.answer.nextQuestionId)
-			this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence)
+			this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies)
 		}
 	}
 
 	handleAnswer() {
 		this.props.goToNextStep(this.props.answer.nextQuestionId)
-		this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence)
+		this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies)
 	}
 
 	render() {

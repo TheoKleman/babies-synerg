@@ -29,10 +29,10 @@ export default class SummaryStep extends React.Component {
     }
 
     render() {
-        var designers = this.props.peopleAvailable.designers
-        var developers = this.props.peopleAvailable.developers
-        var market = this.props.peopleAvailable.market
-        var management = this.props.peopleAvailable.management
+        var designers = this.props.availablePeopleBySkills.designers
+        var developers = this.props.availablePeopleBySkills.developers
+        var market = this.props.availablePeopleBySkills.market
+        var management = this.props.availablePeopleBySkills.management
         var total =  designers + developers + market + management
 
         return(
