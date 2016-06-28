@@ -31,7 +31,7 @@ export default class HomeTitle extends React.Component {
 			className="title-container disable-select"
 			style={titleStyle}
 			ref="homeTitle">
-				<h1><span>Aujourd'hui, synerg'hetic compte 164 enfants du web !</span></h1>
+				<h1><span>Aujourd'hui, synerg'hetic compte 164 <br />enfants du web !</span></h1>
 
 				<SpaceBar
 					formDisplayed={this.props.formDisplayed}
