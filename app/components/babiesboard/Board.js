@@ -27,10 +27,10 @@ export default class Board extends React.Component {
 			boardIsTranslatingWithKeys: false,
 			spacebarDown: false,
 			babyRendered: false,
-			// devsGroupCenterX: (3400/4), 
-			// devsGroupCenterY: (1900/4),
-			// cdpsGroupCenterX: (3400/4), 
-			// cdpsGroupCenterY: ((1900/4)*3),
+			// devsGroupCenterX: 0, 
+			// devsGroupCenterY: 0,
+			// cdpsGroupCenterX: -(this.state.boardWidth / 4), 
+			// cdpsGroupCenterY: (0),
 			// marketeuxGroupCenterX: ((3400/4)*3), 
 			// marketeuxGroupCenterY: (1900/4),
 			// designersGroupCenterX: ((3400/4)*3), 
@@ -54,13 +54,6 @@ export default class Board extends React.Component {
 		// You can access `this.props` and `this.state` here
 		// This function should return a boolean, whether the component should re-render.
 		return false;
-	}
-
-	componentWillUpdate(nextProps, nextState) {
-	    if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
-	    	
-	    	this.mooveToFocusedGroup(nextProps.focusedBabyGroup) 
-	    }
 	}
 
 	componentWillMount() {
@@ -104,6 +97,11 @@ export default class Board extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		
+		if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
+			this.mooveToFocusedGroup(nextProps.focusedBabyGroup)
+		}
+
 		// Scroll board
 		let { deltaX, deltaY } = nextProps.scrollDelta
 
@@ -377,52 +375,53 @@ export default class Board extends React.Component {
 		})
 	}
 
+	boardTransformToGroup(posX, posY) {
+		TweenMax.to(this.refs.board,1, {
+			x: posX,
+			y: posY,
+			ease: Power2.easeOut
+		})
+	}
+	
 	mooveToFocusedGroup(group) {
 
 		console.log("group: "+group)
 		
 		if(group == "cdps") {
-			this.setState({
-				boardTranslateX: {
-					X: this.state.boardWidth / 4,
-				},
-				boardTranslateY: {
-					Y: (this.state.boardHeight / 4) * 3,
-				},
-			})
-		} else if(group == "designers") {
-			this.setState({
-				boardTranslateX: {
-					X: (this.state.boardWidth / 4) * 3,
-				},
-				boardTranslateY: {
-					Y: (this.state.boardHeight / 4) * 3,
-				},
-			})
-		} else if(group == "devs") {
-			this.setState({
-				boardTranslateX: {
-					X: -((this.state.boardWidth/4) - (this.props.viewportSize.width/4)),
-				},
-				boardTranslateY: {
-					Y: -((this.state.boardWidth/4) - (this.props.viewportSize.width/4)),
-				},
-			})
-		} else if(group == "marketeux") {
-			this.setState({
-				boardTranslateX: {
-					X: (this.state.boardWidth / 4) * 3,
-				},
-				boardTranslateY: {
-					Y: this.state.boardHeight / 4,
-				},
-			})
+			
+			this.boardTransformToGroup(0, (-(this.state.boardHeight / 2)- 60))
+			this.updateStateAfterTranslation(0, (-(this.state.boardHeight / 2)- 60))
 		}
+		if(group == "designers") {
 
-		console.log(this.state.boardTranslateX)
-		console.log(this.state.boardTranslateY)
+			this.boardTransformToGroup(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
+			this.updateStateAfterTranslation(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
+		}
+		if(group == "devs") {
+			
+			this.boardTransformToGroup(0, 0)
+			this.updateStateAfterTranslation(0, 0)
+		}
+		if(group == "marketeux") {
 
-		this.updateBoardTransform()
+			this.boardTransformToGroup(-(this.state.boardWidth / 2.5), 0)
+			this.updateStateAfterTranslation(-(this.state.boardWidth / 2.5), 0)
+		}
+	}
+
+	updateStateAfterTranslation(posX, posY) {
+		this.setState({
+			boardTranslateX: {
+				X: posX,
+				max: 0,
+				min: - (this.state.boardWidth - this.props.viewportSize.width)
+			},
+			boardTranslateY: {
+				Y: posY,
+				max: 0,
+				min: - (this.state.boardHeight - this.props.viewportSize.height)
+			},
+		})
 	}
 
 	render(){

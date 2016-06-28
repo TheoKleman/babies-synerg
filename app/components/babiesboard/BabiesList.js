@@ -61,7 +61,7 @@ export default class BabiesList extends Component {
             	},
             	y: {
             		start: 0.39,
-            		end: 0.70
+            		end: 0.60
             	}
             },
             freeZone: 0.4,
