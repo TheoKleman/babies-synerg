@@ -96,7 +96,21 @@ export default class Board extends React.Component {
 		window.removeEventListener("keyup", this.handleKeyUp.bind(this))
 	}
 
-	componentWillReceiveProps(nextProps) {		
+	componentWillReceiveProps(nextProps) {
+		// Center board & set min/max board translateX/Y on resize
+		if (nextProps.viewportSize.width != this.props.viewportSize.width
+			|| nextProps.viewportSize.height != this.props.viewportSize.height) {
+			let centerX = -((this.state.boardWidth/2) - (nextProps.viewportSize.width/2));
+			let centerY = -((this.state.boardHeight/2) - (nextProps.viewportSize.height/2));
+			
+			this.setState({
+				boardCenterX: centerX,
+				boardCenterY: centerY
+			})
+
+			this.centerBoardImmediatly(centerX, centerY)
+		}
+
 		if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			this.mooveToFocusedGroup(nextProps.focusedBabyGroup)
 		}
@@ -334,6 +348,28 @@ export default class Board extends React.Component {
 		this.setState({
 			navigateKeysInterval: 0,
 			boardIsTranslatingWithKeys: false,
+		})
+	}
+
+	centerBoardImmediatly(centerX, centerY) {
+		TweenMax.to(this.refs.board,0, {
+			x: centerX,
+			y: centerY
+		})
+		// Clear all navigation intervals
+		this.isNotNavigatingWithKeys()
+		this.isNotNavigatingWithScroll()
+		this.setState({
+			boardTranslateX: {
+				X: centerX,
+				max: 0,
+				min: - (this.state.boardWidth - this.props.viewportSize.width)
+			},
+			boardTranslateY: {
+				Y: centerY,
+				max: 0,
+				min: - (this.state.boardHeight - this.props.viewportSize.height)
+			},
 		})
 	}
 
