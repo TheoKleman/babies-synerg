@@ -299,7 +299,7 @@
 			"skills": ["Strategie","Seo","Sea","Smo"],
 			"tag": "Marketeux",
 			"year": 2017
-		},
+		},  
 		{
 			"nickname": "Théo K.",
 			"skills": ["Strategie","Seo"],
@@ -527,6 +527,282 @@
 			"skills": ["Back","Front","Seo","Montagevideo"],
 			"tag": "Développeur",
 			"year": 2018
+		},
+		{
+			"nickname": "Zakary D.",
+			"skills": ["Back","Front","Seo","Phonegap","Sea",""],
+			"tag": "Développeur",
+			"year": 2018
+		},
+		{
+			"nickname": "Gregoir C.",
+			"skills": ["Ui","Strategie"],
+			"tag": "Designer",
+			"year": 2018
+		},
+		{
+			"nickname": "Nawelle A.",
+			"skills": ["Ui","DesignMobile","Illu","Strategie","Montagevideo","Motion"],
+			"tag": "Développeur",
+			"year": 2018
+		},
+		{
+			"nickname": "Maxime P.",
+			"skills": ["Strategie","Seo","Sea","Smo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Lucie Z.",
+			"skills": ["Ui","DesignMobile","Illu","RéalisationVideo","Montagevideo"],
+			"tag": "Designer",
+			"year": 2019
+		},
+		{
+			"nickname": "Margaux T.",
+			"skills": ["Ui","DesignMobile","Illu"],
+			"tag": "Designer",
+			"year": 2019
+		},
+		{
+			"nickname": "Jonathan B.",
+			"skills": ["Ui","DesignMobile","Illu","Seo","RéalisationVideo","Montagevideo","Motion"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Maxime B.",
+			"skills": ["Ui","Front","Back","Seo","Sea","Motion"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Maxime B.",
+			"skills": ["Ui","DesignMobile"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Arjuna B.",
+			"skills": ["Ui","DesignMobile","Illu","Seo","RéalisationVideo","Montagevideo","Motion"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Paul B.",
+			"skills": ["Front","Back"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Arthur B.",
+			"skills": ["Strategie","Seo","RéalisationVideo","Montagevideo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Hugo C.",
+			"skills": ["Front","Back","iOS","Phonegap","Seo","Sea"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Benjamin C.",
+			"skills": ["Strategie","Seo","RéalisationVideo","Montagevideo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Victor C.",
+			"skills": ["Strategie","Seo","RéalisationVideo","Montagevideo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Quentin C.",
+			"skills": ["Front","Strategie","Montagevideo"],
+			"tag": "Chef de projet",
+			"year": 2017
+		},
+		{
+			"nickname": "Louis C.",
+			"skills": ["Strategie","Seo","Sea"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Valentin C.",
+			"skills": ["Ui","DesignMobile","Strategie","Motion"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Florian C.",
+			"skills": ["Strategie","Seo","Sea","Smo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Maxime D.",
+			"skills": ["Strategie","Seo","Sea","Smo","Motion"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Clément D.",
+			"skills": ["Front","Back","Phonegap","iOS","Android"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Oscar D.",
+			"skills": ["Front","Back","Strategie"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Joanna D.",
+			"skills": ["Strategie","Seo","Sea","Smo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Juliette D.",
+			"skills": ["Illu","Front","Strategie","Motion"],
+			"tag": "Chef de projet",
+			"year": 2017
+		},
+		{
+			"nickname": "Camille D.",
+			"skills": ["Ui","DesignMobile","Strategie"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Youna D.",
+			"skills": ["Strategie","Illu","Ui"],
+			"tag": "Chef de projet",
+			"year": 2017
+		},
+		{
+			"nickname": "Corentin F.",
+			"skills": ["Front","Back","iOS","Phonegap"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Alexandre F.",
+			"skills": ["Front","Back","Sea","Smo","Seo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Pierre L.",
+			"skills": ["Ui","Designer","Montagevideo","RéalisationVideo","Montagevideo"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Thomas L.",
+			"skills": ["Front","Seo","Sea","Smo"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Clément L.",
+			"skills": ["Front","Seo","Sea","Smo","Strategie"],
+			"tag": "Chef de projet",
+			"year": 2017
+		},
+		{
+			"nickname": "Arthur M.",
+			"skills": ["Front","Back","Android","Phonegap"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Alban N.",
+			"skills": ["Strategie","Seo","Sea","Smo","Front"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Thomas P.",
+			"skills": ["Strategie","Seo","Sea","Smo"],
+			"tag": "Marketeux",
+			"year": 2017
+		},
+		{
+			"nickname": "Michaël P.",
+			"skills": ["Ui","Illu","Strategie"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Ravichandrane R.",
+			"skills": ["iOS","Phonegap"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Meghan R.",
+			"skills": ["Ui","DesignMobile","Illu"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Marion R.",
+			"skills": ["Ui","DesignMobile","Illu","Strategie","Motion","Montagevideo"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Maxime R.",
+			"skills": ["Front","Back","Strategie","Seo"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Clara R.",
+			"skills": ["Ui","DesignMobile","Illu","Motion","Montagevideo","RéalisationVideo"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Anastasia S.",
+			"skills": ["Ui","DesignMobile","Illu","Motion"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Axel T.",
+			"skills": ["Ui","DesignMobile","Illu"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Florian T.",
+			"skills": ["Front","Back"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Elise V.",
+			"skills": ["Ui","DesignMobile","Illu"],
+			"tag": "Designer",
+			"year": 2017
+		},
+		{
+			"nickname": "Gabriel V.",
+			"skills": ["Front","Strategie","Back","Phonegap","Seo"],
+			"tag": "Développeur",
+			"year": 2017
+		},
+		{
+			"nickname": "Giovanni X.",
+			"skills": ["Ui","DesignMobile","Illu"],
+			"tag": "Designer",
+			"year": 2017
 		}
 	]
 }
