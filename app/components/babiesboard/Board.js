@@ -464,23 +464,38 @@ export default class Board extends React.Component {
 		if(group == "cdps") {
 			
 			this.boardTransformToGroup(0, (-(this.state.boardHeight / 2)- 60))
+			this.updateStateAfterTranslation(0, (-(this.state.boardHeight / 2)- 60))
 		}
 		if(group == "designers") {
 
 			this.boardTransformToGroup(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
+			this.updateStateAfterTranslation(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
 		}
 		if(group == "devs") {
 			
 			this.boardTransformToGroup(0, 0)
+			this.updateStateAfterTranslation(0, 0)
 		}
 		if(group == "marketeux") {
 
 			this.boardTransformToGroup(-(this.state.boardWidth / 2.5), 0)
+			this.updateStateAfterTranslation(-(this.state.boardWidth / 2.5), 0)
 		}
+	}
 
-		// this.updateBoardTransform()
-		// console.log(this.state.boardTranslateX)
-		// console.log(this.state.boardTranslateY)
+	updateStateAfterTranslation(posX, posY) {
+		this.setState({
+			boardTranslateX: {
+				X: posX,
+				max: 0,
+				min: - (this.state.boardWidth - this.props.viewportSize.width)
+			},
+			boardTranslateY: {
+				Y: posY,
+				max: 0,
+				min: - (this.state.boardHeight - this.props.viewportSize.height)
+			},
+		})
 	}
 
 	render(){
