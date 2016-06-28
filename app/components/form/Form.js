@@ -19,27 +19,6 @@ export default class Form extends React.Component {
 			currentQuestionId: 0,
 			questions: [],
 			answers:[],
-			availablePeople: {
-				uiDesigners: 22,
-				motionDesigners: 12,
-				mobileDesigners: 15,
-				montageDesigners: 3,
-				realisationDesigners: 4,
-				strategieDesigners: 2,
-				illuDesigners: 0,
-				threeDDesigners: 24,
-				frontDevelopers: 25,
-				backDevelopers: 5,
-				iOSDevelopers: 33,
-				androidDevelopers: 0,
-				phonegapDevelopers: 3,
-				strategieDevelopers: 4,
-				strategieMarket: 0,
-				seoMarket: 16,
-				seaMarket: 2,
-				smoMarket: 0,
-				management: 6
-			},
 			availablePeopleBySkills: {
 				designers: 0,
 				developers: 0,
@@ -64,7 +43,6 @@ export default class Form extends React.Component {
 			"currentQuestion": this.state.questions[0]
 		})
 
-		this.loadBabies()
 		this.loadQuestions()
 	}
 
@@ -256,30 +234,6 @@ export default class Form extends React.Component {
 			babies.smoMarket += item.smoMarket
 			babies.management += item.management
 		}
-
-		this.setState({
-			availablePeople: {
-				uiDesigners: babies.uiDesigners
-				motionDesigners: babies.motionDesigners
-				mobileDesigners: babies.mobileDesigners
-				montageDesigners: babies.montageDesigners
-				realisationDesigners: babies.realisationDesigners
-				strategieDesigners: babies.strategieDesigners
-				illuDesigners: babies.illuDesigners
-				threeDDesigner: babies.threeDDesigner
-				frontDevelopers: babies.frontDevelopers
-				backDevelopers: babies.backDevelopers
-				iOSDevelopers: babies.iOSDevelopers
-				androidDevelopers: babies.androidDevelopers
-				phonegapDevelopers: babies.phonegapDevelopers
-				strategieDevelopers: babies.strategieDevelopers
-				strategieMarket: babies.strategieMarket
-				seoMarket: babies.seoMarket
-				seaMarket: babies.seaMarket
-				smoMarket: babies.smoMarket
-				management: babies.management
-			}
-		})
 
 		// count babies
 		var designers = babies.uiDesigners + babies.motionDesigners + babies.mobileDesigners + babies.montageDesigners + babies.realisationDesigners + babies.strategieDesigners + babies.illuDesigners + babies.threeDDesigners
