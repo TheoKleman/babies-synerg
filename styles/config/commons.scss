@@ -67,7 +67,6 @@ button.key {
     &:hover {
         span.key--content {
             transition: all ease .075s;
-            transform: translate3d(0,4px,0);
             background-color: $yellow;
         }
     }

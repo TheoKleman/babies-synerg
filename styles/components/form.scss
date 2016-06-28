@@ -130,13 +130,13 @@ section.form {
         &:hover {
             button.key > span.key--content {
                 background: $yellow;
-                transform: translate3d(0,4px,0);
             }
         }
 
         &.selected {
             button.key > span.key--content {
                 background: $yellow;
+                transform: translate3d(0,4px,0);
             }
         }
     }

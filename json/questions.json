@@ -1,700 +1,614 @@
 {
-	"questions": [
-		{
+	"questions": [{
+		"id": 0,
+		"text": "Quelle est la nature de votre projet ?",
+		"answers": [{
 			"id": 0,
-			"text": "Quelle est la nature de votre projet ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 1,
-					"text": "Site web",
-					"babies": {
-						"developers": 52,
-						"designers": 11,
-						"market": 2,
-						"management": 3
-					},
-					"sentence": "Bonjour, je suis interessé par un site web"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 2,
-					"text": "Application mobile",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Bonjour, je suis interessé par une application mobile,"
-				},
-				{
-					"id": 2,
-					"nextQuestionId": 3,
-					"text": "Contenu multimedia",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Bonjour, je suis interessé par du contenu multimedia,"
-				},
-				{
-					"id": 3,
-					"nextQuestionId": 4,
-					"text": "Conseils",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Bonjour, je suis interessé par du conseils,"
-				},
-				{
-					"id": 4,
-					"nextQuestionId": "endPoint",
-					"text": "Autres",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Bonjour, je voudrais"
-				}
-			]
-		},
-		{
+			"nextQuestionId": 1,
+			"text": "Site web",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 22
+			},
+			"sentence": "Bonjour, je suis interessé par un site web"
+		}, {
 			"id": 1,
-			"text": "Quel type de projet avez-vous en tete ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 5,
-					"text": "Site vitrine",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "vitrine."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 5,
-					"text": "Site e-commerce",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "e-commerce"
-				},
-				{
-					"id": 2,
-					"nextQuestionId": 5,
-					"text": "Refonte graphique",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ", je voudrais modifier l'apparence de mon site."
-				},
-				{
-					"id": 3,
-					"nextQuestionId": "endPoint",
-					"text": "Autres",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				}
-			]
-		},
-		{
+			"nextQuestionId": 2,
+			"text": "Application mobile",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 22
+			},
+			"sentence": "Bonjour, je suis interessé par une application mobile,"
+		}, {
 			"id": 2,
-			"text": "Desirez-vous une application mobile :",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 17,
-					"text": "Android",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "basés sur le language Android."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 17,
-					"text": "iOS",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "basés sur le language iOS."
-				},
-				{
-					"id": 2,
-					"nextQuestionId": 17,
-					"text": "Android et iOS ",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "disponible sur les deux plateforme."
-				}
-			]
-		},
-		{
+			"nextQuestionId": 3,
+			"text": "Contenu multimedia",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 22
+			},
+			"sentence": "Bonjour, je suis interessé par du contenu multimedia,"
+		}, {
 			"id": 3,
-			"text": "Souhaitez-vous un :",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 6,
-					"text": "Motion design",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Cela sera une vidéo d'animation"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 7,
-					"text": "Tournage et montage audiovisuel",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Cela sera une vidéo contenant des plans de vue réel,"
-				},
-				{
-					"id": 2,
-					"nextQuestionId": 8,
-					"text": "3d",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Cela sera du contenu 3D."
-				}
-			]
-		},
-		{
+			"nextQuestionId": 4,
+			"text": "Conseils",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 22
+			},
+			"sentence": "Bonjour, je suis interessé par du conseils,"
+		}, {
 			"id": 4,
-			"text": "Avez-vous besoin de :",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 9,
-					"text": "Audit du site et reco",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "le conseil concerne mon site,"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 10,
-					"text": "Cahier de charge",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "le conseil concerne une création de site internet."
-				}
-			]
-		},
-		{
-			"id": 5,
-			"text": "Avez-vous des maquettes?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin de maquettes graphique."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'ai déjà mes maquettes graphiques."
-				}
-			]
-		},
-		{
-			"id": 6,
-			"text": "Disposez-vous des ressources graphiques ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 13,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je possède déjà des éléments graphique."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 13,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin d'éléments graphique."
-				}
-			]
-		},            
-		{
-			"id": 7,
-			"text": "Avez-vous deja le contenu video ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 14,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je n'ai besoin que de montage."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 14,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin de tourner des scènes pour ma vidéo."
-				}
-			]
-		},
-		{
-			"id": 8,
-			"text": "Disposez-vous des ressources graphiques ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 14,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je possède les objets en 3D je souhaite les animer."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 14,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin de modélisation 3D."
-				}
-			]
-		},
-		{
-			"id": 9,
-			"text": "De quel type ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 15,
-					"text": "Graphique et Ergonomique",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je voudrais un audit sur le graphisme et l'ergonomie de mon site internet"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 15,
-					"text": "Technique",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je voudrais un audit sur le développement de mon site internet"
-				},
-				{
-					"id": 2,
-					"nextQuestionId": 15,
-					"text": "Referencement",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je voudrais une recommandation afin de référencer mon site internet."
-				},
-				{
-					"id": 3,
-					"nextQuestionId": 15,
-					"text": "Strategie digital",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je voudrais une strategie digital pour mon site internet"
-				}    
-			]
-		},
-		{
-			"id": 10,
-			"text": "Avez-vous des elements graphique ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 15,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je possède des éléments graphique."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 15,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je n'ai pas d'éléments graphique et souhaiterai en avoir."
-				}
-			]
-		},
-		{
-			"id": 11,
-			"text": "Avez-vous besoin de recommandations marketing?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'ai besoin de recommandation marketing pour mon site internet."
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				}
-			]
-		},
-		{
-			"id": 12,
-			"text": "Quel est votre budget ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": "endPoint",
-					"text": "0 - 2000 euros",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Mon budget se situe entre 0 et 2 000 euros"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": "endPoint",
-					"text": "2000 - 5000 euros",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Mon budget se situe entre 2 000 et 5 000 euros"
-				},
-				{
-					"id": 2,
-					"nextQuestionId": "endPoint",
-					"text": "5000 - 9000 euros",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Mon budget se situe entre 5 000 et 9 000 euros"
-				},
-				{
-					"id": 3,
-					"nextQuestionId": "endPoint",
-					"text": "It's over 9000",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Mon budget est de plus de 9 000 euros"
-				}
-			]
-		},
-		{
-			"id": 13,
-			"text": "Combien de temps doit duree la video?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "0 - 30 secondes",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Ma vidéo durera moins de 30 secondes"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "30 secondes - 1 minutes",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Ma vidéo durera entre 30 et 1 minute"
-				} ,
-				{
-					"id": 2,
-					"nextQuestionId": 12,
-					"text": "1 minutes et plus",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Ma vidéo durera plus de 1 minute"
-				} ,
-				{
-					"id": 3,
-					"nextQuestionId": 12,
-					"text": "Je ne sais pas",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "Je ne sais pas combien de temps durera ma vidéo"
-				}
-			]
-		},
-		{
-			"id": 14,
-			"text": "Avez-vous besoin d'elements visuels tel que du motion en plus ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin d'animation en plus sur ma vidéo"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				}
-			]
-		},
-		{
-			"id": 15,
-			"text": "Avez-vous besoin de mettre en place ces recommandations ?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin d'une aide technique afin de mettre en place les recommandations"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				}
-			]
-		},
-		{
-			"id": 16,
-			"text": "Avez-vous besoin d'une page de presentation pour votre application?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 12,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin d'un site internet afin de promouvoir mon application"
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 12,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				}
-			]
-		},
-		{
-			"id": 17,
-			"text": "Avez-vous des maquettes?",
-			"answers": [
-				{
-					"id": 0,
-					"nextQuestionId": 16,
-					"text": "Oui",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": ""
-				},
-				{
-					"id": 1,
-					"nextQuestionId": 16,
-					"text": "Non",
-					"babies": {
-						"developers": 0,
-						"designers": 0,
-						"market": 0,
-						"management": 0
-					},
-					"sentence": "J'aurais besoin d'avoir des maquettes pour mon application mobile"
-				}
-			]
-		}
-	]
+			"nextQuestionId": "endPoint",
+			"text": "Autres",
+			"babies": {
+				"developers": 40,
+				"designers": 52,
+				"market": 15,
+				"management": 22
+			},
+			"sentence": "Bonjour, je voudrais"
+		}]
+	}, {
+		"id": 1,
+		"text": "Quel type de projet avez-vous en tete ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 5,
+			"text": "Site vitrine",
+			"babies": {
+				"developers": 35,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "vitrine."
+		}, {
+			"id": 1,
+			"nextQuestionId": 5,
+			"text": "Site e-commerce",
+			"babies": {
+				"developers": 64,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "e-commerce"
+		}, {
+			"id": 2,
+			"nextQuestionId": 5,
+			"text": "Refonte graphique",
+			"babies": {
+				"developers": 35,
+				"designers": 48,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ", je voudrais modifier l'apparence de mon site."
+		}, {
+			"id": 3,
+			"nextQuestionId": "endPoint",
+			"text": "Autres",
+			"babies": {
+				"developers": 40,
+				"designers": 52,
+				"market": 15,
+				"management": 22
+			},
+			"sentence": ""
+		}]
+	}, {
+		"id": 2,
+		"text": "Desirez-vous une application mobile :",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 17,
+			"text": "Android",
+			"babies": {
+				"developers": 7,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "basés sur le language Android."
+		}, {
+			"id": 1,
+			"nextQuestionId": 17,
+			"text": "iOS",
+			"babies": {
+				"developers": 10,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "basés sur le language iOS."
+		}, {
+			"id": 2,
+			"nextQuestionId": 17,
+			"text": "Android et iOS ",
+			"babies": {
+				"developers": 14,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "disponible sur les deux plateforme."
+		}]
+	}, {
+		"id": 3,
+		"text": "Souhaitez-vous un :",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 6,
+			"text": "Motion design",
+			"babies": {
+				"developers": 0,
+				"designers": 43,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Cela sera une vidéo d'animation"
+		}, {
+			"id": 1,
+			"nextQuestionId": 7,
+			"text": "Tournage et montage audiovisuel",
+			"babies": {
+				"developers": 0,
+				"designers": 25,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Cela sera une vidéo contenant des plans de vue réel,"
+		}, {
+			"id": 2,
+			"nextQuestionId": 8,
+			"text": "3d",
+			"babies": {
+				"developers": 0,
+				"designers": 2,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Cela sera du contenu 3D."
+		}]
+	}, {
+		"id": 4,
+		"text": "Avez-vous besoin de :",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 9,
+			"text": "Audit du site et reco",
+			"babies": {
+				"developers": 7,
+				"designers": 5,
+				"market": 10,
+				"management": 0
+			},
+			"sentence": "le conseil concerne mon site,"
+		}, {
+			"id": 1,
+			"nextQuestionId": 10,
+			"text": "Cahier de charge",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 10,
+				"management": 0
+			},
+			"sentence": "le conseil concerne une création de site internet."
+		}]
+	}, {
+		"id": 5,
+		"text": "Avez-vous des maquettes?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin de maquettes graphique."
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 48,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'ai déjà mes maquettes graphiques."
+		}]
+	}, {
+		"id": 6,
+		"text": "Disposez-vous des ressources graphiques ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 13,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je possède déjà des éléments graphique."
+		}, {
+			"id": 1,
+			"nextQuestionId": 13,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 19,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin d'éléments graphique."
+		}]
+	}, {
+		"id": 7,
+		"text": "Avez-vous deja le contenu video ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 14,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je n'ai besoin que de montage."
+		}, {
+			"id": 1,
+			"nextQuestionId": 14,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 14,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin de tourner des scènes pour ma vidéo."
+		}]
+	}, {
+		"id": 8,
+		"text": "Disposez-vous des ressources graphiques ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 14,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je possède les objets en 3D je souhaite les animer."
+		}, {
+			"id": 1,
+			"nextQuestionId": 14,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 1,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin de modélisation 3D."
+		}]
+	}, {
+		"id": 9,
+		"text": "De quel type ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 15,
+			"text": "Graphique et Ergonomique",
+			"babies": {
+				"developers": 0,
+				"designers": 4,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je voudrais un audit sur le graphisme et l'ergonomie de mon site internet"
+		}, {
+			"id": 1,
+			"nextQuestionId": 15,
+			"text": "Technique",
+			"babies": {
+				"developers": 3,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je voudrais un audit sur le développement de mon site internet"
+		}, {
+			"id": 2,
+			"nextQuestionId": 15,
+			"text": "Referencement",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 11,
+				"management": 0
+			},
+			"sentence": "Je voudrais une recommandation afin de référencer mon site internet."
+		}, {
+			"id": 3,
+			"nextQuestionId": 15,
+			"text": "Strategie digital",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 11,
+				"management": 0
+			},
+			"sentence": "Je voudrais une strategie digital pour mon site internet"
+		}]
+	}, {
+		"id": 10,
+		"text": "Avez-vous des elements graphique ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 15,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je possède des éléments graphique."
+		}, {
+			"id": 1,
+			"nextQuestionId": 15,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 48,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je n'ai pas d'éléments graphique et souhaiterai en avoir."
+		}]
+	}, {
+		"id": 11,
+		"text": "Avez-vous besoin de recommandations marketing?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 21,
+				"management": 0
+			},
+			"sentence": "J'ai besoin de recommandation marketing pour mon site internet."
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ""
+		}]
+	}, {
+		"id": 12,
+		"text": "Quel est votre budget ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": "endPoint",
+			"text": "0 - 2000 euros",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Mon budget se situe entre 0 et 2 000 euros"
+		}, {
+			"id": 1,
+			"nextQuestionId": "endPoint",
+			"text": "2000 - 5000 euros",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Mon budget se situe entre 2 000 et 5 000 euros"
+		}, {
+			"id": 2,
+			"nextQuestionId": "endPoint",
+			"text": "5000 - 9000 euros",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Mon budget se situe entre 5 000 et 9 000 euros"
+		}, {
+			"id": 3,
+			"nextQuestionId": "endPoint",
+			"text": "It's over 9000",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Mon budget est de plus de 9 000 euros"
+		}]
+	}, {
+		"id": 13,
+		"text": "Combien de temps doit duree la video?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "0 - 30 secondes",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Ma vidéo durera moins de 30 secondes"
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "30 secondes - 1 minutes",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Ma vidéo durera entre 30 et 1 minute"
+		}, {
+			"id": 2,
+			"nextQuestionId": 12,
+			"text": "1 minutes et plus",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Ma vidéo durera plus de 1 minute"
+		}, {
+			"id": 3,
+			"nextQuestionId": 12,
+			"text": "Je ne sais pas",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "Je ne sais pas combien de temps durera ma vidéo"
+		}]
+	}, {
+		"id": 14,
+		"text": "Avez-vous besoin d'elements visuels tel que du motion en plus ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 43,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin d'animation en plus sur ma vidéo"
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ""
+		}]
+	}, {
+		"id": 15,
+		"text": "Avez-vous besoin de mettre en place ces recommandations ?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "Oui",
+			"babies": {
+				"developers": 35,
+				"designers": 48,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin d'une aide technique afin de mettre en place les recommandations"
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ""
+		}]
+	}, {
+		"id": 16,
+		"text": "Avez-vous besoin d'une page de presentation pour votre application?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 12,
+			"text": "Oui",
+			"babies": {
+				"developers": 48,
+				"designers": 35,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin d'un site internet afin de promouvoir mon application"
+		}, {
+			"id": 1,
+			"nextQuestionId": 12,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ""
+		}]
+	}, {
+		"id": 17,
+		"text": "Avez-vous des maquettes?",
+		"answers": [{
+			"id": 0,
+			"nextQuestionId": 16,
+			"text": "Oui",
+			"babies": {
+				"developers": 0,
+				"designers": 0,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": ""
+		}, {
+			"id": 1,
+			"nextQuestionId": 16,
+			"text": "Non",
+			"babies": {
+				"developers": 0,
+				"designers": 48,
+				"market": 0,
+				"management": 0
+			},
+			"sentence": "J'aurais besoin d'avoir des maquettes pour mon application mobile"
+		}]
+	}]
 }

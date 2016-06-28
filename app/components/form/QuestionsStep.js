@@ -7,9 +7,12 @@ export default class QuestionsStep extends React.Component {
 		super()
 
 		this.state = {
-			keyPressedId: null
+			keyDownId: null,
+			keyUpId: null,
+			isSelected: false,
 		}
 
+		this.handleKeyDown = this.handleKeyDown.bind(this)
 		this.handleKeyUp = this.handleKeyUp.bind(this)
 	}
 
@@ -20,10 +23,12 @@ export default class QuestionsStep extends React.Component {
 	}
 
 	componentWillMount() {
+		window.addEventListener('keydown', this.handleKeyDown)
 		window.addEventListener('keyup', this.handleKeyUp)
 	}
 
 	componentWillUnmount() {
+		window.removeEventListener('keydown', this.handleKeyDown)
 		window.removeEventListener('keyup', this.handleKeyUp)
 	}
 
@@ -31,44 +36,84 @@ export default class QuestionsStep extends React.Component {
 		var tl = new TimelineMax()
 	}
 
-	handleKeyUp(e) {
+	handleKeyDown(e) {
 		var self = this
 
 		if (this.props.formIsDisplayed) {
+			this.setState({
+				isSelected: true
+			})
 			// Handle A/B/C/D/E keys
 			switch(e.keyCode) {
 				case 65:
 					self.setState({
-						keyPressedId: 0
+						keyDownId: 0
 					})
 					break;
 				case 66:
 					self.setState({
-						keyPressedId: 1
+						keyDownId: 1
 					})
 					break;
 				case 67:
 					self.setState({
-						keyPressedId: 2
+						keyDownId: 2
 					})
 					break;
 				case 68:
 					self.setState({
-						keyPressedId: 3
+						keyDownId: 3
 					})
 					break;
 				case 69:
 					self.setState({
-						keyPressedId: 4
+						keyDownId: 4
 					})
 					break;
 			}
 		}
 	}
 
-	resetKeyPressedId() {
+	handleKeyUp(e) {
+		var self = this
 		this.setState({
-			keyPressedId: null
+			isSelected: false
+		})
+		if (this.props.formIsDisplayed) {
+			// Handle A/B/C/D/E keys
+			switch(e.keyCode) {
+				case 65:
+					self.setState({
+						keyUpId: 0
+					})
+					break;
+				case 66:
+					self.setState({
+						keyUpId: 1
+					})
+					break;
+				case 67:
+					self.setState({
+						keyUpId: 2
+					})
+					break;
+				case 68:
+					self.setState({
+						keyUpId: 3
+					})
+					break;
+				case 69:
+					self.setState({
+						keyUpId: 4
+					})
+					break;
+			}
+		}
+	}
+
+	resetKeyUpId() {
+		this.setState({
+			keyUpId: null
 		})	
 	}
 
@@ -85,11 +130,17 @@ export default class QuestionsStep extends React.Component {
 		// Var question number 
 		var questionNumber = this.props.previousQuestionsIds.length + 1
 
+		// key down id 
+		var keyDownId = this.state.keyDownId
+
 		// key pressed id
-		var keyPressedId = this.state.keyPressedId
+		var keyUpId = this.state.keyUpId
 
 		// reset key pressed id
-		var resetKeyPressedId = this.resetKeyPressedId.bind(this)
+		var resetKeyUpId = this.resetKeyUpId.bind(this)
+
+		// is selected
+		var isSelected = this.state.isSelected
 
 		return(
 			<section className="right--questions" ref="sectionQuestions">
@@ -105,8 +156,10 @@ export default class QuestionsStep extends React.Component {
 								return <AnswerItem 
 									key={answer.id}
 									answer={answer}
-									keyPressedId={keyPressedId}
-									resetKeyPressedId={resetKeyPressedId}
+									keyDownId={keyDownId}
+									keyUpId={keyUpId}
+									isSelected={isSelected}
+									resetKeyUpId={resetKeyUpId}
 									question={currentQuestion}
 									goToNextStep={goToNextStep}
 									saveAnswer={saveAnswer}/>
