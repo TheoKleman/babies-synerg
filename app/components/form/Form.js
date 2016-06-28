@@ -19,11 +19,11 @@ export default class Form extends React.Component {
 			currentQuestionId: 0,
 			questions: [],
 			answers:[],
-			peopleAvailable: {
+			availablePeopleBySkills: {
 				designers: 0,
 				developers: 0,
 				market: 0,
-				management: 0 
+				management: 0,
 			}
 		}
 	}
@@ -111,6 +111,7 @@ export default class Form extends React.Component {
 			var newStep = this.state.step
 		} else if (nextQuestionId === "endPoint") {
 			var newStep = 6
+			this.updateNbOfBabiesBySkills()
 		} else {
 			var newStep = this.state.step + 1
 		}
@@ -161,7 +162,7 @@ export default class Form extends React.Component {
 			// Unset last answer
 			var answersArray = []
 			answersArray = this.state.answers
-			answersArray = answersArray.slice(0, -3)
+			answersArray = answersArray.slice(0, -4)
 		} else {
 			var newCurrentQuestionId = 0
 			var previousQuestionsIds = []
@@ -177,14 +178,76 @@ export default class Form extends React.Component {
 		})
 	}
 
-	saveAnswer(question, answer, sentence) {
-		var theAnswer = [question,answer,sentence]
+	saveAnswer(question, answer, sentence, babies) {
+		var theAnswer = [question,answer,sentence, babies]
 		var answersArray = []
 		answersArray = this.state.answers
 		answersArray = answersArray.concat(theAnswer)
 
 		this.setState({
 			answers: answersArray
+		})
+	}
+
+	updateNbOfBabiesBySkills() {
+		var babies = {
+			uiDesigners: 0,
+			motionDesigners: 0,
+			mobileDesigners: 0,
+			montageDesigners: 0,
+			realisationDesigners: 0,
+			strategieDesigners: 0,
+			illuDesigners: 0,
+			threeDDesigners:0,
+			frontDevelopers: 0,
+			backDevelopers: 0,
+			iOSDevelopers: 0,
+			androidDevelopers: 0,
+			phonegapDevelopers: 0,
+			strategieDevelopers: 0,
+			strategieMarket: 0,
+			seoMarket: 0,
+			seaMarket: 0,
+			smoMarket: 0,
+			management: 0
+		}
+
+		for (var i = 0; i < this.state.answers.length; i = i + 4) {
+			var item = this.state.answers[i+3]
+			babies.uiDesigners += item.uiDesigners
+			babies.motionDesigners += item.motionDesigners
+			babies.mobileDesigners += item.mobileDesigners
+			babies.montageDesigners += item.montageDesigners
+			babies.realisationDesigners += item.realisationDesigners
+			babies.strategieDesigners += item.strategieDesigners
+			babies.illuDesigners += item.illuDesigners
+			babies.threeDDesigner += item.threeDDesigner
+			babies.frontDevelopers += item.frontDevelopers
+			babies.backDevelopers += item.backDevelopers
+			babies.iOSDevelopers += item.iOSDevelopers
+			babies.androidDevelopers += item.androidDevelopers
+			babies.phonegapDevelopers += item.phonegapDevelopers
+			babies.strategieDevelopers += item.strategieDevelopers
+			babies.strategieMarket += item.strategieMarket
+			babies.seoMarket += item.seoMarket
+			babies.seaMarket += item.seaMarket
+			babies.smoMarket += item.smoMarket
+			babies.management += item.management
+		}
+
+		// count babies
+		var designers = babies.uiDesigners + babies.motionDesigners + babies.mobileDesigners + babies.montageDesigners + babies.realisationDesigners + babies.strategieDesigners + babies.illuDesigners + babies.threeDDesigners
+		var developers = babies.frontDevelopers + babies.backDevelopers + babies.iOSDevelopers + babies.androidDevelopers + babies.phonegapDevelopers + babies.strategieDevelopers
+		var market = babies.strategieMarket + babies.seoMarket + babies.seaMarket + babies.smoMarket
+		var management = babies.management
+
+		this.setState({
+			availablePeopleBySkills: {
+				designers: designers,
+				developers: developers,
+				market: market,
+				management: management,	
+			}
 		})
 	}
 
@@ -235,7 +298,8 @@ export default class Form extends React.Component {
 			var rightContent = <SummaryStep 
 									step={this.state.step}
 									formIsDisplayed={this.props.isDisplayed}
-									peopleAvailable={this.state.peopleAvailable}
+									existingPeople={this.state.existingPeople}
+									availablePeopleBySkills={this.state.availablePeopleBySkills}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 7) {
