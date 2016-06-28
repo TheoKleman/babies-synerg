@@ -26,13 +26,6 @@ export default class App extends React.Component {
                 deltaX: 0,
                 deltaY: 0
             },
-            mouseDownPos: {
-                X: 0,
-                Y: 0,
-            },
-            mouseDown: false,
-            mouseDownInitialX: 0,
-            mouseDownInitialY: 0,
             boardWidth: 4400,
             boardHeight: 2475,
             mouseInViewport: true,
@@ -43,16 +36,10 @@ export default class App extends React.Component {
             isSoundActive: true,
             focusedBabyGroup: "",
         }
-
-        this.handleMouseDown = this.handleMouseDown.bind(this)
-        this.handleMouseUp = this.handleMouseUp.bind(this)
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-        window.addEventListener('mousemove', this.handleMouseDownMove.bind(this))
-        window.addEventListener('mousedown', this.handleMouseDown)
-        window.addEventListener('mouseup', this.handleMouseUp)
     }
 
     handleScroll(e) {
@@ -62,51 +49,6 @@ export default class App extends React.Component {
                 scrollDelta: {
                     deltaX: e.deltaX,
                     deltaY: e.deltaY
-                }
-            })
-        }
-    }
-
-    handleMouseDown(e) {
-        if (!this.state.babyIsHovered) {
-            e.preventDefault
-            let initialX = e.pageX
-            let initialY = e.pageY
-
-            this.setState({
-                mouseDown: true,
-                mouseDownInitialX: initialX,
-                mouseDownInitialY: initialY
-            })
-        }
-    }
-
-    handleMouseUp(e) {
-        if (!this.state.babyIsHovered) {
-            e.preventDefault
-            this.setState({
-                mouseDown: false,
-                mouseDownPos: {
-                    X: 0,
-                    Y: 0
-                }
-            })
-        }
-    }
-
-    handleMouseDownMove(e) {
-        if (this.state.mouseDown) {
-            this.setState({
-                mouseDownPos: {
-                    X: e.pageX - this.state.mouseDownInitialX,
-                    Y: e.pageY - this.state.mouseDownInitialY
-                }
-            })
-        } else {
-            this.setState({
-                mouseDownPos: {
-                    X: 0,
-                    Y: 0
                 }
             })
         }
@@ -214,10 +156,8 @@ export default class App extends React.Component {
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    isDragging={this.state.mouseDown}
                     focusedBabyGroup={this.state.focusedBabyGroup}
-                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)}
-                    mouseDownDrag={this.state.mouseDownPos} />
+                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)} />
                 <FilterNav
                     isSorted={this.state.isSorted}
                     setSorting={this.setSorting.bind(this)}
