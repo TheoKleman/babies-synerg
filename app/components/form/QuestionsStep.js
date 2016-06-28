@@ -15,15 +15,7 @@ export default class QuestionsStep extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.currentQuestion.id != this.props.currentQuestion.id) {
-			var tl = new TimelineMax()
-			tl.to(this.refs.sectionQuestions, 0, {
-				scale: .5,
-				ease: Power2.easeOut,
-			})
-			tl.to(this.refs.sectionQuestions, .3, {
-				scale: 1,
-				ease: Power2.easeOut,
-			})
+			// animation		
 		}
 	}
 
@@ -36,10 +28,7 @@ export default class QuestionsStep extends React.Component {
 	}
 
 	componentDidMount() {
-		TweenMax.to(this.refs.sectionQuestions, .3, {
-			scale: 1,
-			ease: Power2.easeOut,
-		})
+		var tl = new TimelineMax()
 	}
 
 	handleKeyUp(e) {
