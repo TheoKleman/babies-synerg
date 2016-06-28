@@ -38,7 +38,7 @@ export default class DetailBaby extends Component {
 			opacity: 0,
 			ease: Power2.easeOut,
 			onComplete: function() {
-				self.refs.detail.className = 'baby-detail';
+				self.refs.detail.className += ' baby-detail';
 			}
 		})
 	}
