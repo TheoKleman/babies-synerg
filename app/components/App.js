@@ -15,6 +15,7 @@ export default class App extends React.Component {
                 width: window.innerWidth,
                 height: window.innerHeight,
             },
+            boardCanTranslate: true,
             formDisplayed: false,
             controlsHighlighting: {
                 top: false,
@@ -105,7 +106,8 @@ export default class App extends React.Component {
 
     setFormIsDisplayedState(value) {
         this.setState({
-            formDisplayed: value
+            formDisplayed: value,
+            boardCanTranslate: !value
         })
     }
 
@@ -150,6 +152,7 @@ export default class App extends React.Component {
                     viewportSize={this.state.viewportSize}
                     scrollDelta={this.state.scrollDelta}
                     formDisplayed={this.state.formDisplayed}
+                    canTranslate={this.state.boardCanTranslate}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     setSorting={this.setSorting.bind(this)}
                     isSorted={this.state.isSorted}
