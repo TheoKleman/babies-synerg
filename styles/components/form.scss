@@ -291,6 +291,19 @@ section.form {
         button.key.spacebar {
             margin-top: 0;
             margin-bottom: 0;
+
+            &:hover {
+                span.key--content {
+                    background: $yellow;
+                }
+            }
+
+            &.selected {
+                span.key--content {
+                    background: $yellow;
+                    transform: translate3d(0,4px,0);
+                }
+            }
         }
     }
 

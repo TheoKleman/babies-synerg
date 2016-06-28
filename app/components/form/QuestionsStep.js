@@ -111,8 +111,9 @@ export default class QuestionsStep extends React.Component {
 		}
 	}
 
-	resetKeyUpId() {
+	resetKeyId() {
 		this.setState({
+			keyDownId: null,
 			keyUpId: null
 		})	
 	}
@@ -137,7 +138,7 @@ export default class QuestionsStep extends React.Component {
 		var keyUpId = this.state.keyUpId
 
 		// reset key pressed id
-		var resetKeyUpId = this.resetKeyUpId.bind(this)
+		var resetKeyId = this.resetKeyId.bind(this)
 
 		// is selected
 		var isSelected = this.state.isSelected
@@ -159,7 +160,7 @@ export default class QuestionsStep extends React.Component {
 									keyDownId={keyDownId}
 									keyUpId={keyUpId}
 									isSelected={isSelected}
-									resetKeyUpId={resetKeyUpId}
+									resetKeyId={resetKeyId}
 									question={currentQuestion}
 									goToNextStep={goToNextStep}
 									saveAnswer={saveAnswer}/>

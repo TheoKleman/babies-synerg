@@ -8,6 +8,7 @@ export default class AnswerItem extends React.Component {
 
 		this.state = {
 			isSelected: false,
+			isHovered: false
 		}
 
 		this.handleMouseEnter = this.handleMouseEnter.bind(this)
@@ -25,14 +26,14 @@ export default class AnswerItem extends React.Component {
 
 	componentWillUnmount() {
 		this.refs.itSelf.removeEventListener('mouseenter', this.handleMouseEnter)
-		this.refs.itSelf.removeEventListener('mouseleave', this.handleMouseEnter)
+		this.refs.itSelf.removeEventListener('mouseleave', this.handleMouseLeave)
 		this.refs.itSelf.removeEventListener('mousedown', this.handleMouseDown)
 		this.refs.itSelf.removeEventListener('mouseup', this.handleMouseUp)
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.keyUpId === this.props.answer.id) {
-			this.props.resetKeyUpId()
+			this.props.resetKeyId()
 			this.props.goToNextStep(this.props.answer.nextQuestionId)
 			this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies)
 		}
@@ -93,7 +94,9 @@ export default class AnswerItem extends React.Component {
 
 		// Class selected
 		var buttonClass = "form--answers--item"
-		if (this.props.isSelected && this.props.keyDownId == this.props.answer.id) {
+		if ((this.props.isSelected
+			&& this.props.keyDownId == this.props.answer.id)
+			|| this.state.isSelected) {			
 			buttonClass += " selected"
 		}
 
