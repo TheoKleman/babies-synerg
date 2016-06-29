@@ -152,6 +152,12 @@ export default class App extends React.Component {
                 className="main-content"
                 onWheel={this.handleScroll.bind(this)}
                 >
+                <section id="responsive">
+                    <div>
+                        <img src="/images/form/question14_dab.gif" alt=""/>
+                        <p>Ce site web n'est pas disponible sur les appareils disposant d'une résolution inférieure à 1280px !</p>
+                    </div>
+                </section>
                 {finalScreen}
                 <Form
                     isDisplayed={this.state.formDisplayed}
