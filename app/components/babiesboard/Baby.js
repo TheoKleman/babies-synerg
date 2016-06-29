@@ -266,14 +266,6 @@ export default class Baby extends React.Component {
 
 		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.rotateAngleLimit)
 		
-		if(this.refs.bodyAnimation) {
-			// this.refs.bodyAnimation.props.shouldAnimate = false
-			if(this.refs.bodyAnimation.props.shouldAnimate) {
-				this.setState({
-					shouldAnimate: false
-				})
-			}
-		}
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 1
 		})
@@ -321,12 +313,6 @@ export default class Baby extends React.Component {
 		}
 		if(this.refs.bodyAnimation) {
 			TweenMax.set(this.refs.bodyAnimation, { opacity: 1 })
-			
-			if(this.refs.bodyAnimation.props.shouldBeAnimated) {
-				this.setState({
-					shouldAnimate: true
-				})
-			}
 		}
 	}
 
@@ -432,16 +418,44 @@ export default class Baby extends React.Component {
 		if( nextProps.formDisplayed != this.props.formDisplayed) {
 			if(this.props.formDisplayed) {
 				this.enableDrag(true)
+				if(this.refs.bodyAnimation) {
+					if(this.refs.bodyAnimation.props.shouldBeAnimated) {
+						this.setState({
+							shouldAnimate: true
+						})
+					}
+				}
 			} else {
 				this.enableDrag(false)
+				if(this.refs.bodyAnimation) {
+					if(this.refs.bodyAnimation.props.shouldAnimate) {
+						this.setState({
+							shouldAnimate: false
+						})
+					}
+				}
 			}
 		}
 		if(nextProps.isSorted != this.props.isSorted ) {
 			if(this.props.isSorted) {
 				this.enableDrag(true)
+				if(this.refs.bodyAnimation) {
+					if(this.refs.bodyAnimation.props.shouldBeAnimated) {
+						this.setState({
+							shouldAnimate: true
+						})
+					}
+				}
 				this.updatePosition(this.props.pos.origin, this.props.pos.destination)
 			} else {
 				this.enableDrag(false)
+				if(this.refs.bodyAnimation) {
+					if(this.refs.bodyAnimation.props.shouldAnimate) {
+						this.setState({
+							shouldAnimate: false
+						})
+					}
+				}
 				this.updatePosition(this.props.pos.destination, this.props.pos.origin)
 			}
 		}
