@@ -23,6 +23,7 @@ export default class DetailBaby extends Component {
 			TweenMax.to(this.refs.detail, .3, {
 				opacity: 1,
 				x: 30,
+				scale: 1,
 				ease: Power2.easeOut,
 				onStart: function(){
                     self.refs.detail.className += ' displayed';
@@ -37,6 +38,7 @@ export default class DetailBaby extends Component {
 		TweenMax.to(this.refs.detail, .1, {
 			opacity: 0,
 			x: 0,
+			scale: 0.9,
 			ease: Power2.easeOut,
 			onComplete: function() {
 				self.refs.detail.className = 'baby-detail';

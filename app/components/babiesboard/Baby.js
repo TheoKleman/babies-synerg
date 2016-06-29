@@ -491,7 +491,7 @@ export default class Baby extends React.Component {
 			this.setState({
 				isDisplayedBabyDetail: true
 			})
-			TweenMax.to(this.refs.detail, .3, {
+			TweenMax.to(this.refs.itSelf, .2, {
 				zIndex: 200,
 				ease: Power2.easeOut,
 			})
@@ -502,8 +502,8 @@ export default class Baby extends React.Component {
 		this.setState({
 			isDisplayedBabyDetail: false
 		})
-		TweenMax.to(this.refs.detail, .1, {
-			zIndex: 2,
+		TweenMax.to(this.refs.itSelf, .1, {
+			zIndex: this.props.pos.origin.y,
 			ease: Power2.easeOut,
 		})
 	}
