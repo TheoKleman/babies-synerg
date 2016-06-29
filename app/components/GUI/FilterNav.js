@@ -5,6 +5,10 @@ var classNames = require('classnames')
 export default class FilterNav extends React.Component {
     constructor() {
         super()
+
+        this.state = {
+            activeFilter: "",
+        }
     }
 
     sorting() {
@@ -18,6 +22,15 @@ export default class FilterNav extends React.Component {
 
     mooveToGroup(e) {
         e.preventDefault()
+
+        console.log(this.state.activeFilter)
+
+        this.setState({
+            activeFilter: e.target.dataset.group
+        })
+
+        // e.target.className += " active"
+
         this.props.setGroupFocus(e.target.dataset.group)
     }
 
@@ -25,12 +38,17 @@ export default class FilterNav extends React.Component {
 
         var mainFilterClasses = classNames({
             'main-filter': true,
+            'hidden': this.props.formDisplayed,
             'open': this.props.isSorted
         })
 
         var filtersClasses = classNames({
             'filters': true,
             'active': this.props.setSorting
+        })
+
+        var filterTagClasses = classNames({
+            'tag': true,
         })
 
         return(
@@ -56,21 +74,21 @@ export default class FilterNav extends React.Component {
                             <span><img src="images/pattern-cdp.png" alt="couleur héticiens chefs de projet"/></span>
                             <a 
                             href=""
-                            className="tag"
+                            className={this.state.activeFilter == "cdps" ? "active" : ""}
                             onClick={this.mooveToGroup.bind(this)} data-group="cdps">Chefs de projet</a>
                         </li>
                         <li className="pattern-item">
                             <span><img src="images/pattern-dev.png" alt="couleur héticiens développeurs"/></span>
                             <a 
                             href=""
-                            className="tag"
+                            className={this.state.activeFilter == "devs" ? "active" : ""}
                             onClick={this.mooveToGroup.bind(this)} data-group="devs">Developpeurs</a>
                         </li>
                         <li className="pattern-item">
                             <span><img src="images/pattern-market.png" alt="couleur héticiens marketeux"/></span>
                             <a 
                             href=""
-                            className="tag"
+                            className={this.state.activeFilter == "marketeux" ? "active" : ""}
                             onClick={this.mooveToGroup.bind(this)} data-group="marketeux">Marketeux</a>
                         </li>
                         <li className="pattern-item">
@@ -78,7 +96,8 @@ export default class FilterNav extends React.Component {
                             <a 
                             href=""
                             className="tag"
-                            onClick={this.mooveToGroup.bind(this)} data-group="designers">Créatifs</a>
+                            onClick={this.mooveToGroup.bind(this)} data-group="designers"
+                            className={this.state.activeFilter == "designers" ? "active" : ""}>Créatifs</a>
                         </li>
                     </ul>
                 </div>

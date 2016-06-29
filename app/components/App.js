@@ -181,6 +181,7 @@ export default class App extends React.Component {
                     focusedBabyGroup={this.state.focusedBabyGroup}
                     toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)} />
                 <FilterNav
+                    formDisplayed={this.state.formDisplayed}
                     isSorted={this.state.isSorted}
                     setSorting={this.setSorting.bind(this)}
                     setGroupFocus={this.setGroupFocus.bind(this)} />

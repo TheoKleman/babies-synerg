@@ -450,12 +450,12 @@ export default class Board extends React.Component {
 		this.setState({
 			boardTranslateX: {
 				X: posX,
-				max: 0,
+				max: this.state.boardWidth,
 				min: - (this.state.boardWidth - this.props.viewportSize.width)
 			},
 			boardTranslateY: {
 				Y: posY,
-				max: 0,
+				max: this.state.boardHeight,
 				min: - (this.state.boardHeight - this.props.viewportSize.height)
 			},
 		})
