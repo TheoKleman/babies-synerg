@@ -6,9 +6,16 @@ export default class MailStep extends React.Component {
 		super()
 
 		this.state = {
+			isSelected: false,
+			isHovered: false,
 			isMailValid: false,
 			isMailChecked: false,
 		}
+
+		this.handleMouseEnter = this.handleMouseEnter.bind(this)
+		this.handleMouseLeave = this.handleMouseLeave.bind(this)
+		this.handleMouseDown = this.handleMouseDown.bind(this)
+		this.handleMouseUp = this.handleMouseUp.bind(this)
 	}
 
 	componentWillMount() {
@@ -24,7 +31,45 @@ export default class MailStep extends React.Component {
 	}
 
 	componentDidMount() {
-		// Animation
+		this.refs.keyEnter.addEventListener('mouseenter', this.handleMouseEnter)
+		this.refs.keyEnter.addEventListener('mouseleave', this.handleMouseLeave)
+		this.refs.keyEnter.addEventListener('mousedown', this.handleMouseDown)
+		this.refs.keyEnter.addEventListener('mouseup', this.handleMouseUp)
+	}
+
+	componentWillUnmount() {
+		this.refs.keyEnter.removeEventListener('mouseenter', this.handleMouseEnter)
+		this.refs.keyEnter.removeEventListener('mouseleave', this.handleMouseLeave)
+		this.refs.keyEnter.removeEventListener('mousedown', this.handleMouseDown)
+		this.refs.keyEnter.removeEventListener('mouseup', this.handleMouseUp)
+	}
+
+	handleMouseEnter() {
+	    this.setState({
+	        isHovered: true
+	    })
+	}
+
+	handleMouseLeave() {
+	    this.setState({
+	        isHovered: false,
+	        isSelected: false
+	    })  
+	}
+
+	handleMouseDown() {
+	    this.setState({
+	        isSelected: true,
+	    })
+	}
+
+	handleMouseUp() {
+	    this.setState({
+	        isSelected: false,
+	    })
+	    if (this.state.isHovered) {
+	        this.endForm()
+	    }
 	}
 
 	handleTextareaChange(e) {
@@ -115,6 +160,12 @@ export default class MailStep extends React.Component {
 			}
 		}
 
+		// Class selected
+		var buttonClass = "key-enter"
+		if (this.state.isSelected) {         
+		    buttonClass += " selected"
+		}
+
 		return(
 			<section className="right--mail" ref="sectionMail">
 				<div className="content-centered">
@@ -136,10 +187,11 @@ export default class MailStep extends React.Component {
 						</div>
 
 						<div className="send-section">
-							<button 
-								className="key-enter"
-								onClick={this.endForm.bind(this)}>
-								<p>Envoyer</p>
+							<button
+							    ref="keyEnter"
+							    className={buttonClass}
+							    >
+							    <p>Envoyer</p>
 							</button>
 						</div>
 					</div>

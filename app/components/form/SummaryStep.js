@@ -9,7 +9,7 @@ export default class SummaryStep extends React.Component {
 			isHovered: false
 		}
 
-		this.handleKeyDown = this.handleKeyDown.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this)
 		this.handleKeyUp = this.handleKeyUp.bind(this)
 
 		this.handleMouseEnter = this.handleMouseEnter.bind(this)
