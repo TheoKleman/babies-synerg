@@ -2,7 +2,7 @@
     "questions": [{
         "id": 0,
         "text": "Quelle est la nature de votre projet ?",
-        "gif": "./images/form/question02_grattement-tete.gif",
+        "gif": "/images/form/question02_grattement-tete.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 1,
@@ -62,7 +62,7 @@
     }, {
         "id": 1,
         "text": "Quel type de projet avez-vous en tete ?",
-        "gif": "./images/form/question03_ordinateur",
+        "gif": "/images/form/question03_ordinateur.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 5,
@@ -111,7 +111,7 @@
     }, {
         "id": 2,
         "text": "Desirez-vous une application mobile :",
-        "gif": "./images/form/question04_telephone.gif",
+        "gif": "/images/form/question04_telephone.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 17,
@@ -149,7 +149,7 @@
     }, {
         "id": 3,
         "text": "Souhaitez-vous un :",
-        "gif": "./images/form/question05_popcorn.gif",
+        "gif": "/images/form/question05_popcorn.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 6,
@@ -187,7 +187,7 @@
     }, {
         "id": 4,
         "text": "Avez-vous besoin de :",
-        "gif": "./images/form/question06_loupe.gif",
+        "gif": "/images/form/question06_loupe.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 9,
@@ -214,7 +214,7 @@
     }, {
         "id": 5,
         "text": "Avez-vous des maquettes?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -241,7 +241,7 @@
     }, {
         "id": 6,
         "text": "Disposez-vous des ressources graphiques ?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 13,
@@ -268,7 +268,7 @@
     }, {
         "id": 7,
         "text": "Avez-vous deja le contenu video ?",
-        "gif": "./images/form/question08_camera-film.gif",
+        "gif": "/images/form/question08_camera-film.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 14,
@@ -295,7 +295,7 @@
     }, {
         "id": 8,
         "text": "Disposez-vous des ressources graphiques ?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 14,
@@ -322,7 +322,7 @@
     }, {
         "id": 9,
         "text": "De quel type ?",
-        "gif": "./images/form/question09_malette.gif",
+        "gif": "/images/form/question09_malette.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 15,
@@ -371,7 +371,7 @@
     }, {
         "id": 10,
         "text": "Avez-vous des elements graphique ?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 15,
@@ -398,7 +398,7 @@
     }, {
         "id": 11,
         "text": "Avez-vous besoin de recommandations marketing?",
-        "gif": "./images/form/question14_dab.gif",
+        "gif": "/images/form/question14_dab.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -425,7 +425,7 @@
     }, {
         "id": 12,
         "text": "Quel est votre budget ?",
-        "gif": "./images/form/question12_lunette-argent-thug",
+        "gif": "/images/form/question12_lunette-argent-thug.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": "endPoint",
@@ -474,7 +474,7 @@
     }, {
         "id": 13,
         "text": "Combien de temps doit duree la video?",
-        "gif": "./images/form/question13_moove-dance.gif",
+        "gif": "/images/form/question13_moove-dance.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -523,7 +523,7 @@
     }, {
         "id": 14,
         "text": "Avez-vous besoin d'elements visuels tel que du motion en plus ?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -550,7 +550,7 @@
     }, {
         "id": 15,
         "text": "Avez-vous besoin de mettre en place ces recommandations ?",
-        "gif": "./images/form/question14_dab.gif",
+        "gif": "/images/form/question14_dab.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -577,7 +577,7 @@
     }, {
         "id": 16,
         "text": "Avez-vous besoin d'une page de presentation pour votre application?",
-        "gif": "./images/form/question03_ordinateur.gif",
+        "gif": "/images/form/question03_ordinateur.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 12,
@@ -604,7 +604,7 @@
     }, {
         "id": 17,
         "text": "Avez-vous des maquettes?",
-        "gif": "./images/form/question07_pinceau-dessine.gif",
+        "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
             "nextQuestionId": 16,

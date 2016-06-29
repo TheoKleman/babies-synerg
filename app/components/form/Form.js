@@ -14,6 +14,7 @@ export default class Form extends React.Component {
 
 		this.state = {
 			step: -1,
+			questionGif: "",
 			previousQuestionsIds: [],
 			currentQuestion: {},
 			currentQuestionId: 0,
@@ -24,7 +25,8 @@ export default class Form extends React.Component {
 				developers: 0,
 				market: 0,
 				management: 0,
-			}
+			},
+			isCloseHovered: false
 		}
 	}
 
@@ -33,7 +35,11 @@ export default class Form extends React.Component {
 			return true
 		} else if (nextState.step != this.state.step) {
 			return true
-		} else {
+		} else if (nextState.questionGif != this.state.questionGif) {
+			return true
+		} else if (nextState.isCloseHovered != this.state.isCloseHovered) {
+			return true
+		}  else {
 			return false
 		}
 	}
@@ -192,6 +198,13 @@ export default class Form extends React.Component {
 		})
 	}
 
+	setQuestionGif(value) {
+		console.log(value)
+		this.setState({
+			questionGif: value
+		})
+	}
+
 	saveAnswer(question, answer, sentence, babies) {
 		var theAnswer = [question,answer,sentence, babies]
 		var answersArray = []
@@ -230,6 +243,18 @@ export default class Form extends React.Component {
 		})
 	}
 
+	closeMouseOver() {
+		this.setState({
+			isCloseHovered: true
+		})
+	}
+
+	closeMouseOut() {
+		this.setState({
+			isCloseHovered: false
+		})
+	}
+
 	resetForm() {
 		this.setState({
 			step: -1,
@@ -243,11 +268,16 @@ export default class Form extends React.Component {
 	render() {
 		var closeForm
 		var button
+		var gif = "/images/form/question01_bonjour.gif"
 
 		// Button close available only if form is displayed
 		if (this.props.isDisplayed) {
 			var closeForm = this.hideForm.bind(this);
-			var buttonClose = <button className="form--close" onClick={closeForm}></button>
+			var buttonClose = <button
+								className="form--close"
+								onClick={closeForm}
+								onMouseOver={this.closeMouseOver.bind(this)}
+								onMouseOut={this.closeMouseOut.bind(this)}></button>
 		}
 
 		// Button previous availability
@@ -255,8 +285,9 @@ export default class Form extends React.Component {
 			var buttonPrevious = <button className="form--previous-step"onClick={this.previousStep.bind(this)}><span>Précédent</span></button>
 		}
 
-		// Set right section content
+		// Set section content
 		if (this.state.step == 0) {
+			gif = "/images/form/question01_bonjour.gif"
 			var rightContent = <IntroStep 
 									step={this.state.step}
 									goToNextStep={this.nextStep.bind(this)}
@@ -264,33 +295,46 @@ export default class Form extends React.Component {
 									formIsDisplayed={this.props.isDisplayed}
 									/>
 		} else if (this.state.step >= 1 && this.state.step < 6) {
+			if (this.state.currentQuestion.id === 0) {
+				gif = this.state.questions[0].gif
+			} else {
+				gif = this.state.questionGif
+			}
 			var rightContent = <QuestionsStep
 									step={this.state.step}
 									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
 									currentQuestion={this.state.currentQuestion}
+									setQuestionGif={this.setQuestionGif.bind(this)}
 									previousQuestionsIds={this.state.previousQuestionsIds}
 									saveAnswer={this.saveAnswer.bind(this)}
 									/>   
 		} else if (this.state.step == 6) {
+			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
 			var rightContent = <SummaryStep 
 									step={this.state.step}
 									availablePeopleBySkills={this.state.availablePeopleBySkills}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 7) {
+			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
 			var rightContent = <MailStep 
 									step={this.state.step}
 									mailAnswers={this.state.answers}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 8) {
+			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
 			var rightContent = <ThanksStep 
 									step={this.state.step}
 									hideForm={this.hideForm.bind(this)}
 									resetForm={this.resetForm.bind(this)}
 									setFinalScreenIsDisplayed={this.props.setFinalScreenIsDisplayed}
 									/>	
+		}
+
+		if (this.state.isCloseHovered) {
+			gif = "/images/form/hover-close-form_non.gif"
 		}
 		
 		return(
@@ -299,7 +343,7 @@ export default class Form extends React.Component {
 				className="form">
 				<div className="form--container">
 					<div className="form--container--left">
-						<img className="gif-baby" src="/images/baby.gif" alt=""/>
+						<img className="gif-baby" src={gif} alt=""/>
 					</div>
 					<div className="form--container--right">
 						{rightContent}
