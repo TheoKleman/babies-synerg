@@ -14,7 +14,7 @@ export default class ThanksStep extends React.Component {
 
         setTimeout(function(){
             self.goToFinalScreen()
-        }, 2000)
+        }, 3500)
     }
 
     goToFinalScreen() {
