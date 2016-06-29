@@ -164,6 +164,7 @@ section.form {
             max-height: 104px;
             padding: 0;
             background: url(/images/UI/key-enter.svg) no-repeat bottom center;
+            transition: all ease .05s;
 
             > p {
                 position: absolute;
@@ -176,12 +177,20 @@ section.form {
                 font-size: 14px;
                 line-height: 14px;
                 letter-spacing: .1em;
+                transition: all ease .05s;
             }
 
             &:hover {
                 background: url(/images/UI/key-enter-hover.svg) no-repeat bottom center;
+                transition: all ease .05s;
+            }
+
+            &.selected {
+                background: url(/images/UI/key-enter-selected.svg) no-repeat bottom center;
+                transition: all ease .05s;
 
                 > p {
+                    transition: all ease .05s;
                     transform: translate3d(-50%,5px,0);
                 }
             }
