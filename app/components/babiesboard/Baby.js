@@ -22,6 +22,7 @@ export default class Baby extends React.Component {
 			isDisplayedBabyDetail: false,
 			isMooving: false,
 			hideAnimationSprite: false,
+			shouldAnimate: true,
 		}
 
 		this.rotateAngleLimit = 40
@@ -265,6 +266,14 @@ export default class Baby extends React.Component {
 
 		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.rotateAngleLimit)
 		
+		if(this.refs.bodyAnimation) {
+			// this.refs.bodyAnimation.props.shouldAnimate = false
+			if(this.refs.bodyAnimation.props.shouldAnimate) {
+				this.setState({
+					shouldAnimate: false
+				})
+			}
+		}
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 1
 		})
@@ -311,7 +320,13 @@ export default class Baby extends React.Component {
 			TweenMax.set(this.refs.bodyImage, { opacity: 1 })	
 		}
 		if(this.refs.bodyAnimation) {
-			TweenMax.set(this.refs.bodyAnimation, { opacity: 1 })	
+			TweenMax.set(this.refs.bodyAnimation, { opacity: 1 })
+			
+			if(this.refs.bodyAnimation.props.shouldBeAnimated) {
+				this.setState({
+					shouldAnimate: true
+				})
+			}
 		}
 	}
 
@@ -526,7 +541,8 @@ export default class Baby extends React.Component {
 				if (this.state.head != "undefined" && this.state.animation != 'undefined') {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
-					var shouldAnimate = this.props.id < 20 ? true : false
+					var shouldAnimate = this.props.id < 20 && this.state.shouldAnimate ? true : false
+					var shouldBeAnimated = this.props.id < 20 ? true : false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"
@@ -535,6 +551,7 @@ export default class Baby extends React.Component {
 						width={200}
 						height={200}
 						timeout={80}
+						shouldBeAnimated={shouldBeAnimated}
 						shouldAnimate={shouldAnimate} />
 				}
 			} else {
