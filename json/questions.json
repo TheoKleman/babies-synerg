@@ -2,6 +2,7 @@
 	"questions": [{
 		"id": 0,
 		"text": "Quelle est la nature de votre projet ?",
+		"gif": "./images/form/money.gif",
 		"answers": [{
 			"id": 0,
 			"nextQuestionId": 1,

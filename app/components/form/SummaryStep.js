@@ -84,9 +84,21 @@ export default class SummaryStep extends React.Component {
 
 	render() {
 		var designers = this.props.availablePeopleBySkills.designers
+		if (designers > 0) {
+			var designersText = <li>{designers}<small>créatifs</small></li>
+		}
 		var developers = this.props.availablePeopleBySkills.developers
+		if (developers > 0) {
+			var developersText = <li>{developers}<small>developpeurs</small></li>
+		}
 		var market = this.props.availablePeopleBySkills.market
+		if (market > 0) {
+			var marketText = <li>{market}<small>marketeux</small></li>
+		}
 		var management = this.props.availablePeopleBySkills.management
+		if (management > 0) {
+			var managementText = <li>{management}<small>chefs de projet</small></li>
+		}
 		var total =  designers + developers + market + management
 
 		// Class selected
@@ -105,10 +117,10 @@ export default class SummaryStep extends React.Component {
 						</small>
 					</span>
 					<ul>
-						<li>{designers}<small>designers</small></li>
-						<li>{developers}<small>developpeurs</small></li>
-						<li>{market}<small>marketeux</small></li>
-						<li>{management}<small>chefs de projet</small></li>
+						{designersText}
+						{developersText}
+						{marketText}
+						{managementText}
 					</ul>
 
 					<button

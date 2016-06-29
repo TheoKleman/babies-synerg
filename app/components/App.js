@@ -116,7 +116,6 @@ export default class App extends React.Component {
     }
 
     setFinalScreenIsDisplayed(value) {
-        console.log(value)
         this.setState({
             finalScreenDisplayed: value,
             boardCanTranslate: !value
