@@ -3,6 +3,7 @@ import qwest from "qwest"
 import ReactDOM from 'react-dom'
 import Draggable from 'react-draggable'
 import GSAP from 'gsap'
+import SpriteAnimator from 'react-sprite-animator'
 
 import DetailBaby from "./DetailBaby"
 var interact = require('interact.js');
@@ -33,6 +34,8 @@ export default class Baby extends React.Component {
 			isDisplayedBabyDetail: false,
 			rotateAngleLimit: 40,
 			isMooving: false,
+			hasSprite: 0,
+			hideAnimationSprite: false,
 		}
 	}
 
@@ -44,6 +47,39 @@ export default class Baby extends React.Component {
 		this.setPosition(this.props.pos.origin)
 
 		this.enableDrag(true)
+
+		this.randomizeAnimation()
+	}
+
+	randomizeAnimation() {
+		if(this.props.datas.tag == "Designer") {
+			this.setState({
+				head: this.getRandomNumber(1, 2),
+				animation: this.getRandomNumber(1, 4),
+				hasSprite: this.getRandomNumber(1, 2),
+			})
+		}
+		if(this.props.datas.tag == "Développeur") {
+			this.setState({
+				head: this.getRandomNumber(3, 4),
+				animation: this.getRandomNumber(1, 4),
+				hasSprite: this.getRandomNumber(1, 2),
+			})
+		}
+		if(this.props.datas.tag == "Chef de projet") {
+			this.setState({
+				head: this.getRandomNumber(1, 2),
+				animation: this.getRandomNumber(1, 4),
+				hasSprite: this.getRandomNumber(1, 2),
+			})
+		}
+		if(this.props.datas.tag == "Marketeux") {
+			this.setState({
+				head: this.getRandomNumber(3, 4),
+				animation: this.getRandomNumber(1, 4),
+				hasSprite: this.getRandomNumber(1, 2),
+			})
+		}
 	}
 
 	enableDrag(value) {
@@ -97,6 +133,10 @@ export default class Baby extends React.Component {
 		// update the posiion attributes
 		target.setAttribute('data-x', x);
 		target.setAttribute('data-y', y);
+
+		this.setState({
+			isDisplayedBabyDetail: false
+		})	
 	}
 
 	onDragStop(event) {
@@ -111,6 +151,10 @@ export default class Baby extends React.Component {
 
 		this.setState({
 			isDragging: false
+		})
+
+		TweenMax.set(this.refs.babyPieces, {
+			opacity: 0
 		})
 	}
 
@@ -167,14 +211,23 @@ export default class Baby extends React.Component {
 	}
 
 	onBabySort(posDestination, posOrigin) {
-		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.state.rotateAngleLimit)
-
-		TweenMax.set(this.refs.bodyImage, {
-			display: 'none'
+		// this.refs.bodyAnimation.props.shouldAnimate = false
+		this.setState({
+			hideAnimationSprite: true
 		})
+
+		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.state.rotateAngleLimit)
+		
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 1
 		})
+		if(this.refs.bodyImage) {
+			TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
+		}
+		if(this.refs.bodyAnimation) {
+			TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
+		}
+		
 		TweenMax.allTo(
 			[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
 			2,
@@ -194,8 +247,24 @@ export default class Baby extends React.Component {
 	}
 
 	onBabySortEnd() {
-		
+		TweenMax.set(this.refs.babyPieces, {
+			opacity: 0
+		})
+		if(this.refs.bodyImage) {
+			TweenMax.set(this.refs.bodyImage, { opacity: 1 })	
+		}
+		if(this.refs.bodyAnimation) {
+			TweenMax.set(this.refs.bodyAnimation, { opacity: 1 })	
+		}
 	}
+
+	getRandomNumber(limitInf, limitSup) {	
+ 		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
+ 	}
+
+ 	shouldBabyAnimate(value) {
+ 		return value
+ 	}
 
 	makeBabyRotate(direction) {
 		var babyRotation = this.rotateBaby(direction, this.state.rotateAngleLimit)
@@ -263,27 +332,32 @@ export default class Baby extends React.Component {
         switch(skill) {
         	case "Designer":
         		this.setState({
-        			skin: "bleu.png"
+        			skin: "blue",
+        			color: "blue"
         		})
         		break;
         	case "Développeur":
         		this.setState({
-        			skin: "orange.png"
+        			skin: "orange",
+        			color: "orange"
         		})
         		break;
         	case "Chef de projet":
         		this.setState({
-        			skin: "jaune.png"
+        			skin: "yellow",
+        			color: "yellow"
         		})
         		break;
         	case "Marketeux":
         		this.setState({
-        			skin: "vert.png"
+        			skin: "green",
+        			color: "green"
         		})
         		break;
         	default:
         		this.setState({
-        			skin: "jaune.png"
+        			skin: "yellow",
+        			color: "yellow"
         		})
         }
 	}
@@ -333,8 +407,40 @@ export default class Baby extends React.Component {
 		}
 	}
 
+	isBlue(value) {
+		if(value == "blue")
+			return true
+		else
+			return false
+	}
+	isOrange(value) {
+		if(value == "orange")
+			return true
+		else
+			return false
+	}
+	isYellow(value) {
+		if(value == "yellow")
+			return true
+		else
+			return false
+	}
+	isGreen(value) {
+		if(value == "green")
+			return true
+		else
+			return false
+	}
+
 	handleMouseEnter(e, id) {
 		this.props.toggleBabyIsHovered(true)
+		this.setState({
+			isDisplayedBabyDetail: true
+		})
+		TweenMax.to(this.refs.itSelf, .3, {
+			zIndex: 200,
+			ease: Power2.easeOut,
+		})
 	}
 
 	handleMouseLeave(e) {
@@ -342,24 +448,30 @@ export default class Baby extends React.Component {
 		this.setState({
 			isDisplayedBabyDetail: false
 		})
+		TweenMax.to(this.refs.itSelf, .1, {
+			zIndex: this.props.pos.origin.y,
+			ease: Power2.easeOut,
+		})
 	}
 
 	handleMouseDown(e) {
-		let babyDatas = this.props.datas		
-		this.setState({
-			isDisplayedBabyDetail: true
-		})
+		let babyDatas = this.props.datas	
 	}
 
 	render() {
 
 		const id = "baby-"+this.props.id
+		let color= this.state.color
 
 		var babyClasses = classNames({
 			'baby': true,
 			'hovered': this.state.isHovering,
 			'neighbourg': this.state.isNeighbourg,
-			'disabled': this.props.isSorted
+			'disabled': this.props.isSorted,
+			'blue': this.isBlue(color),
+			'orange': this.isOrange(color),
+			'yellow': this.isYellow(color),
+			'green': this.isGreen(color),
 		})
 
 		var piecesClasses = classNames({
@@ -367,17 +479,50 @@ export default class Baby extends React.Component {
 			'moving': this.state.isDragging,
 		})
 
-		var babyBgClasses = classNames({
-			'baby-bg': true,
-			'moving': this.state.isDragging
-		})
-
 		var babyStyle = {
-			backgroundImage: "url(/images/"+this.state.skin+")",
+			backgroundImage: "url(/images/"+this.state.skin+".png)",
 			backgroundSize: "cover"
 		}
 
-		var babyBody = "/images/body-"+this.state.skin
+		var bodyAnimationClasses = classNames({
+			'baby-bg': true,
+			'moving': this.state.isDragging,
+		})
+
+		var babyStaticBgClasses = classNames({
+			'baby-bg': true,
+			'sized': true,
+			'moving': this.state.isDragging
+		})
+
+		if(this.state.hasSprite != 0) {
+			if(this.state.hasSprite % 2 == 0) {
+
+				if (this.state.head != "undefined" && this.state.animation != 'undefined') {
+					
+					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
+					var shouldAnimate = this.props.id < 30 ? true : false
+
+					var animator = <SpriteAnimator
+						ref="bodyAnimation"
+						className={bodyAnimationClasses}	
+						sprite={animationUrl}
+						width={200}
+						height={200}
+						timeout={80}
+						shouldAnimate={false} />
+				}
+			} else {
+				var animator = <div 
+					ref="bodyImage"
+					className={babyStaticBgClasses}
+					style={babyStyle} />
+			}
+		}
+
+		if(this.state.head) {
+			var babyBody = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body.png"
+		}
 
 		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null
 
@@ -394,7 +539,7 @@ export default class Baby extends React.Component {
 					babyDetail={this.props.datas}
 					isDisplayedBabyDetail={this.state.isDisplayedBabyDetail} />
 				<div className="the-baby" style={{transform: this.state.transform}}>
-					<span ref="bodyImage" className={babyBgClasses} style={babyStyle}></span>
+					{animator}
 					<div ref="babyPieces" className={piecesClasses}>
 						<span className="baby-body"><img src={babyBody} alt="baby body"/></span>
 						<span ref="armRight" className="baby-arm-right" style={{transform: this.state.transformArms}}><img src="/images/right-arm.png" alt="baby right arm"/></span>

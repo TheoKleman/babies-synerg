@@ -6,7 +6,6 @@ var classNames = require('classnames')
 export default class DetailBaby extends Component {
 	constructor() {
 		super()
-
 	}
 
 	componentWillUpdate(nextProps) {
@@ -21,8 +20,9 @@ export default class DetailBaby extends Component {
 		if(!this.props.isDisplayed) {
 			var self = this
 
-			TweenMax.to(this.refs.detail, .5, {
+			TweenMax.to(this.refs.detail, .3, {
 				opacity: 1,
+				x: 30,
 				ease: Power2.easeOut,
 				onStart: function(){
                     self.refs.detail.className += ' displayed';
@@ -34,38 +34,14 @@ export default class DetailBaby extends Component {
 	hideDetail() {
 		var self = this
 
-		TweenMax.to(this.refs.detail, .5, {
+		TweenMax.to(this.refs.detail, .1, {
 			opacity: 0,
+			x: 0,
 			ease: Power2.easeOut,
 			onComplete: function() {
-				self.refs.detail.className += ' baby-detail';
+				self.refs.detail.className = 'baby-detail';
 			}
 		})
-	}
-
-	isBlue(value) {
-		if(value == "blue")
-			return true
-		else
-			return false
-	}
-	isOrange(value) {
-		if(value == "orange")
-			return true
-		else
-			return false
-	}
-	isYellow(value) {
-		if(value == "yellow")
-			return true
-		else
-			return false
-	}
-	isGreen(value) {
-		if(value == "green")
-			return true
-		else
-			return false
 	}
 
 	componentDidUpdate() {
@@ -80,14 +56,9 @@ export default class DetailBaby extends Component {
 		let nickname = this.props.babyDetail.nickname
 		let tag = this.props.babyDetail.tag
 		let year = this.props.babyDetail.year
-		let color= this.props.color
 
 		var detailClasses = classNames({
 			'baby-detail': true,
-			'blue': this.isBlue(color),
-			'orange': this.isOrange(color),
-			'yellow': this.isYellow(color),
-			'green': this.isGreen(color),
 		})
 
 		return (
