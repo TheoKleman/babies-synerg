@@ -14,9 +14,13 @@ export default class Footer extends React.Component {
                 </div>
                 <div className="misc">
                     <div className="misc--buttons">
-                        <button className="primary">
+                        <a 
+                            href="https://twitter.com/intent/tweet?
+                            text=Coucou Dali"
+                            className="btn primary"
+                            target="_blank">
                             Partager
-                        </button>
+                        </a>
                         <button className="secondary">
                             Infos
                         </button>

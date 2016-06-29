@@ -78,7 +78,7 @@ export default class FilterNav extends React.Component {
                             <a 
                             href=""
                             className="tag"
-                            onClick={this.mooveToGroup.bind(this)} data-group="designers">Designers</a>
+                            onClick={this.mooveToGroup.bind(this)} data-group="designers">Créatifs</a>
                         </li>
                     </ul>
                 </div>
