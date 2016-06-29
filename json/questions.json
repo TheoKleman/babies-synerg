@@ -13,7 +13,7 @@
                 "market": 0,
                 "management": 22
             },
-            "sentence": "Bonjour, je suis interessé par un site web"
+            "sentence": "Bonjour, je suis intéressé(e) par un site "
         }, {
             "id": 1,
             "nextQuestionId": 2,
@@ -24,18 +24,18 @@
                 "market": 0,
                 "management": 22
             },
-            "sentence": "Bonjour, je suis interessé par une application mobile,"
+            "sentence": "Bonjour, je suis intéressé(e) par une application mobile,"
         }, {
             "id": 2,
             "nextQuestionId": 3,
-            "text": "Contenu multimedia",
+            "text": "Contenu multimédia",
             "babies": {
                 "developers": 0,
                 "designers": 0,
                 "market": 0,
                 "management": 22
             },
-            "sentence": "Bonjour, je suis interessé par du contenu multimedia,"
+            "sentence": "Bonjour, je suis intéressé(e) par du contenu multimédia, "
         }, {
             "id": 3,
             "nextQuestionId": 4,
@@ -46,7 +46,7 @@
                 "market": 0,
                 "management": 22
             },
-            "sentence": "Bonjour, je suis interessé par du conseils,"
+            "sentence": "Bonjour, je suis intéressé(e) par du conseil, "
         }, {
             "id": 4,
             "nextQuestionId": "endPoint",
@@ -61,7 +61,7 @@
         }]
     }, {
         "id": 1,
-        "text": "Quel type de projet avez-vous en tete ?",
+        "text": "Quel type de projet avez-vous en tête ?",
         "gif": "/images/form/question03_ordinateur.gif",
         "answers": [{
             "id": 0,
@@ -73,7 +73,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "vitrine."
+            "sentence": "vitrine. "
         }, {
             "id": 1,
             "nextQuestionId": 5,
@@ -84,7 +84,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "e-commerce"
+            "sentence": "e-commerce. "
         }, {
             "id": 2,
             "nextQuestionId": 5,
@@ -95,7 +95,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": ", je voudrais modifier l'apparence de mon site."
+            "sentence": ", je voudrais modifier l'apparence de mon site. "
         }, {
             "id": 3,
             "nextQuestionId": "endPoint",
@@ -106,11 +106,11 @@
                 "market": 15,
                 "management": 22
             },
-            "sentence": ""
+            "sentence": " "
         }]
     }, {
         "id": 2,
-        "text": "Desirez-vous une application mobile :",
+        "text": "Désirez-vous une application mobile :",
         "gif": "/images/form/question04_telephone.gif",
         "answers": [{
             "id": 0,
@@ -122,7 +122,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "basés sur le language Android."
+            "sentence": "basée sur le language Android. "
         }, {
             "id": 1,
             "nextQuestionId": 17,
@@ -133,7 +133,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "basés sur le language iOS."
+            "sentence": "basée sur le language iOS. "
         }, {
             "id": 2,
             "nextQuestionId": 17,
@@ -144,7 +144,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "disponible sur les deux plateforme."
+            "sentence": "disponible sur les deux plateformes. "
         }]
     }, {
         "id": 3,
@@ -160,7 +160,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Cela sera une vidéo d'animation"
+            "sentence": "Cela sera une vidéo d'animation "
         }, {
             "id": 1,
             "nextQuestionId": 7,
@@ -171,7 +171,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Cela sera une vidéo contenant des plans de vue réel,"
+            "sentence": "Cela sera une vidéo contenant des plans de vues réelles, "
         }, {
             "id": 2,
             "nextQuestionId": 8,
@@ -182,7 +182,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Cela sera du contenu 3D."
+            "sentence": "Cela sera du contenu 3D. "
         }]
     }, {
         "id": 4,
@@ -198,7 +198,7 @@
                 "market": 10,
                 "management": 0
             },
-            "sentence": "le conseil concerne mon site,"
+            "sentence": "le conseil concerne mon site, "
         }, {
             "id": 1,
             "nextQuestionId": 10,
@@ -209,7 +209,7 @@
                 "market": 10,
                 "management": 0
             },
-            "sentence": "le conseil concerne une création de site internet."
+            "sentence": "le conseil concerne une création de site internet. "
         }]
     }, {
         "id": 5,
@@ -225,7 +225,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin de maquettes graphique."
+            "sentence": "J'ai déjà des maquettes graphiques. "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -236,7 +236,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'ai déjà mes maquettes graphiques."
+            "sentence": "J'aurais besoin de maquettes graphiques. "
         }]
     }, {
         "id": 6,
@@ -252,7 +252,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je possède déjà des éléments graphique."
+            "sentence": "Je possède déjà des éléments graphiques. "
         }, {
             "id": 1,
             "nextQuestionId": 13,
@@ -263,11 +263,11 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin d'éléments graphique."
+            "sentence": "J'aurais besoin d'éléments graphiques. "
         }]
     }, {
         "id": 7,
-        "text": "Avez-vous deja le contenu video ?",
+        "text": "Avez-vous déjà le contenu vidéo ?",
         "gif": "/images/form/question08_camera-film.gif",
         "answers": [{
             "id": 0,
@@ -290,7 +290,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin de tourner des scènes pour ma vidéo."
+            "sentence": "J'aurais besoin de tourner des scènes pour ma vidéo. "
         }]
     }, {
         "id": 8,
@@ -306,7 +306,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je possède les objets en 3D je souhaite les animer."
+            "sentence": "Je possède les objets en 3D, je souhaite les animer. "
         }, {
             "id": 1,
             "nextQuestionId": 14,
@@ -317,7 +317,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin de modélisation 3D."
+            "sentence": "J'aurais besoin de modélisation 3D. "
         }]
     }, {
         "id": 9,
@@ -333,7 +333,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je voudrais un audit sur le graphisme et l'ergonomie de mon site internet"
+            "sentence": "Je voudrais un audit sur le graphisme et l'ergonomie de mon site internet "
         }, {
             "id": 1,
             "nextQuestionId": 15,
@@ -344,7 +344,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je voudrais un audit sur le développement de mon site internet"
+            "sentence": "Je voudrais un audit sur le développement de mon site internet "
         }, {
             "id": 2,
             "nextQuestionId": 15,
@@ -355,7 +355,7 @@
                 "market": 11,
                 "management": 0
             },
-            "sentence": "Je voudrais une recommandation afin de référencer mon site internet."
+            "sentence": "Je voudrais une recommandation afin de référencer mon site internet. "
         }, {
             "id": 3,
             "nextQuestionId": 15,
@@ -366,11 +366,11 @@
                 "market": 11,
                 "management": 0
             },
-            "sentence": "Je voudrais une strategie digital pour mon site internet"
+            "sentence": "Je voudrais une stratégie digitale pour mon site internet "
         }]
     }, {
         "id": 10,
-        "text": "Avez-vous des elements graphique ?",
+        "text": "Avez-vous des élements graphiques ?",
         "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
@@ -382,7 +382,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je possède des éléments graphique."
+            "sentence": "Je possède des éléments graphiques. "
         }, {
             "id": 1,
             "nextQuestionId": 15,
@@ -393,11 +393,11 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je n'ai pas d'éléments graphique et souhaiterai en avoir."
+            "sentence": "Je n'ai pas d'éléments graphiques et souhaiterais en avoir. "
         }]
     }, {
         "id": 11,
-        "text": "Avez-vous besoin de recommandations marketing?",
+        "text": "Avez-vous besoin de recommandations marketing ?",
         "gif": "/images/form/question14_dab.gif",
         "answers": [{
             "id": 0,
@@ -409,7 +409,7 @@
                 "market": 21,
                 "management": 0
             },
-            "sentence": "J'ai besoin de recommandation marketing pour mon site internet."
+            "sentence": "J'ai besoin de recommandations marketing pour mon site internet. "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -420,7 +420,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": ""
+            "sentence": " "
         }]
     }, {
         "id": 12,
@@ -473,7 +473,7 @@
         }]
     }, {
         "id": 13,
-        "text": "Combien de temps doit duree la video?",
+        "text": "Combien de temps doit durer la vidéo?",
         "gif": "/images/form/question13_moove-dance.gif",
         "answers": [{
             "id": 0,
@@ -485,7 +485,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Ma vidéo durera moins de 30 secondes"
+            "sentence": "Ma vidéo durera moins de 30 secondes "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -496,7 +496,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Ma vidéo durera entre 30 et 1 minute"
+            "sentence": "Ma vidéo durera entre 30 secondes et 1 minute "
         }, {
             "id": 2,
             "nextQuestionId": 12,
@@ -507,7 +507,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Ma vidéo durera plus de 1 minute"
+            "sentence": "Ma vidéo durera plus de 1 minute "
         }, {
             "id": 3,
             "nextQuestionId": 12,
@@ -518,11 +518,11 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "Je ne sais pas combien de temps durera ma vidéo"
+            "sentence": "Je ne sais pas combien de temps durera ma vidéo "
         }]
     }, {
         "id": 14,
-        "text": "Avez-vous besoin d'elements visuels tel que du motion en plus ?",
+        "text": "Avez-vous besoin d'élements visuels tel que du motion design en plus ?",
         "gif": "/images/form/question07_pinceau-dessine.gif",
         "answers": [{
             "id": 0,
@@ -534,7 +534,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin d'animation en plus sur ma vidéo"
+            "sentence": "J'aurais besoin d'animation en plus sur ma vidéo "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -545,7 +545,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": ""
+            "sentence": " "
         }]
     }, {
         "id": 15,
@@ -561,7 +561,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin d'une aide technique afin de mettre en place les recommandations"
+            "sentence": "J'aurais besoin d'une aide technique afin de mettre en place les recommandations "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -576,7 +576,7 @@
         }]
     }, {
         "id": 16,
-        "text": "Avez-vous besoin d'une page de presentation pour votre application?",
+        "text": "Avez-vous besoin d'une page de présentation pour votre application?",
         "gif": "/images/form/question03_ordinateur.gif",
         "answers": [{
             "id": 0,
@@ -588,7 +588,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": "J'aurais besoin d'un site internet afin de promouvoir mon application"
+            "sentence": "J'aurais besoin d'un site internet afin de promouvoir mon application "
         }, {
             "id": 1,
             "nextQuestionId": 12,
@@ -615,7 +615,7 @@
                 "market": 0,
                 "management": 0
             },
-            "sentence": ""
+            "sentence": "J'ai déjà des maquettes graphiques. "
         }, {
             "id": 1,
             "nextQuestionId": 16,
