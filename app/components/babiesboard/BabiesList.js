@@ -24,46 +24,6 @@ export default class BabiesList extends Component {
             safetyHeightDistance: -20,
             goSort: false,
             isMooving: false,
-            devArea: {
-            	x: {
-            		start: 0.02,
-            		end: 0.40
-            	},
-            	y: {
-            		start: 0,
-            		end: 0.20
-            	}
-            },
-            cdpArea: {
-            	x: {
-            		start: 0.1,
-            		end: 0.35
-            	},
-            	y: {
-            		start: 0.50,
-            		end: 0.70
-            	}
-            },
-            marketArea: {
-            	x: {
-            		start: 0.55,
-            		end: 0.75
-            	},
-            	y: {
-            		start: 0,
-            		end: 0.10
-            	}
-            },
-            designArea: {
-            	x: {
-            		start: 0.58,
-            		end: 0.90
-            	},
-            	y: {
-            		start: 0.39,
-            		end: 0.60
-            	}
-            },
             freeZone: 0,
             devPositionsArea: [],
 			designPositionsArea: [],
@@ -73,6 +33,47 @@ export default class BabiesList extends Component {
 			creatifs: [],
 			cdps: [],
 			marketeux: [],
+		}
+
+		this.devArea = {
+			x: {
+				start: 0.02,
+				end: 0.40
+			},
+			y: {
+				start: 0,
+				end: 0.20
+			}
+		},
+		this.cdpArea = {
+			x: {
+				start: 0.1,
+				end: 0.35
+			},
+			y: {
+				start: 0.50,
+				end: 0.70
+			}
+		},
+		this.marketArea = {
+			x: {
+				start: 0.55,
+				end: 0.75
+			},
+			y: {
+				start: 0,
+				end: 0.10
+			}
+		},
+		this.designArea = {
+			x: {
+				start: 0.58,
+				end: 0.90
+			},
+			y: {
+				start: 0.39,
+				end: 0.60
+			}
 		}
 	}
 
@@ -91,10 +92,10 @@ export default class BabiesList extends Component {
 	    })
 
 	    this.setState({
-	    	devPositionsArea: this.assignAreas(this.state.devArea),
-	    	designPositionsArea: this.assignAreas(this.state.designArea),
-	    	cdpPositionsArea: this.assignAreas(this.state.cdpArea),
-	    	marketPositionsArea: this.assignAreas(this.state.marketArea),
+	    	devPositionsArea: this.assignAreas(this.devArea),
+	    	designPositionsArea: this.assignAreas(this.designArea),
+	    	cdpPositionsArea: this.assignAreas(this.cdpArea),
+	    	marketPositionsArea: this.assignAreas(this.marketArea),
 	    })
 
 	    // console.log("caseHeight : "+caseWidth);

@@ -112,7 +112,7 @@ export default class Baby extends React.Component {
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 1
 		})
-		
+
 		var baseX = this.props.pos.origin.Xpx,
 			baseY = this.props.pos.origin.Ypx - 40
 
@@ -232,22 +232,32 @@ export default class Baby extends React.Component {
 			TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
 		}
 		
-		TweenMax.allTo(
-			[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
-			2,
-		 {
-			rotation: babyRotation,
-			delay: 0.2,
-			ease: Power1.easeOut,
-		})
-		TweenMax.allTo(
-			[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
-			1.3,
-		 {
-			rotation: 0,
-			delay: 3,
-			ease: Elastic.easeOut.config(0.6, 0.3),
-		})
+		// TweenMax.allTo(
+		// 	[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
+		// 	2,
+		//  {
+		// 	rotation: babyRotation,
+		// 	delay: 0.2,
+		// 	ease: Power1.easeOut,
+		// })
+		// TweenMax.allTo(
+		// 	[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
+		// 	1.3,
+		//  {
+		// 	rotation: 0,
+		// 	delay: 3,
+		// 	ease: Elastic.easeOut.config(0.5, 0.3),
+		// })
+		let tl = new TimelineLite ()
+			tl.to(
+	      	[this.refs.legLeft, this.refs.legRight],
+	      	0.3,
+		      {
+		        y: 10,
+		        ease: Power1.easeOut,
+		        repeat: 10,
+		      }
+		    )
 	}
 
 	onBabySortEnd() {
@@ -437,14 +447,16 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e, id) {
-		this.props.toggleBabyIsHovered(true)
-		this.setState({
-			isDisplayedBabyDetail: true
-		})
-		TweenMax.to(this.refs.itSelf, .3, {
-			zIndex: 200,
-			ease: Power2.easeOut,
-		})
+		if(!this.props.formDisplayed && !this.props.isSorted) {
+			this.props.toggleBabyIsHovered(true)
+			this.setState({
+				isDisplayedBabyDetail: true
+			})
+			TweenMax.to(this.refs.itSelf, .3, {
+				zIndex: 200,
+				ease: Power2.easeOut,
+			})
+		}
 	}
 
 	handleMouseLeave(e) {
@@ -484,7 +496,7 @@ export default class Baby extends React.Component {
 		})
 
 		var babyStyle = {
-			backgroundImage: "url(/images/"+this.state.skin+".png)",
+			backgroundImage: "url(/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body-full.png)",
 			backgroundSize: "cover"
 		}
 
@@ -505,7 +517,7 @@ export default class Baby extends React.Component {
 				if (this.state.head != "undefined" && this.state.animation != 'undefined') {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
-					var shouldAnimate = this.props.id < 30 ? true : false
+					var shouldAnimate = this.props.id < 10 ? true : false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"
@@ -514,7 +526,7 @@ export default class Baby extends React.Component {
 						width={200}
 						height={200}
 						timeout={80}
-						shouldAnimate={false} />
+						shouldAnimate={shouldAnimate} />
 				}
 			} else {
 				var animator = <div 
@@ -525,10 +537,14 @@ export default class Baby extends React.Component {
 		}
 
 		if(this.state.head) {
+			console.log(this.props.datas.tag)
+			console.log(this.state.head)
 			var babyBody = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body.png"
 		}
 
 		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null
+
+		console.log('render')
 
 		return(			
 			<div

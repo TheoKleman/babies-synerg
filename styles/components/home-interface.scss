@@ -121,6 +121,7 @@ nav.main-filter {
 
         .shapes {
             position: relative;
+            margin: 0 auto;
             margin-top: -10px;
             width: 50px;
             height: 50px;
@@ -128,8 +129,8 @@ nav.main-filter {
 
             &.fill-yellow {
                 position: absolute;
-                margin-top: 0;
-                bottom: 20px;
+                top: 25px;
+                left: 20px;
                 z-index: 2;
                 transform: rotate(30deg) scale(1);
                 animation: shapeFitIn .6s ease forwards;
