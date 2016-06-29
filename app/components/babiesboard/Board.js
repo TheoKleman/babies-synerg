@@ -429,7 +429,7 @@ export default class Board extends React.Component {
 			this.boardTransformToGroup(0, (-(this.state.boardHeight / 2)- 60))
 			this.updateStateAfterTranslation(0, (-(this.state.boardHeight / 2)- 60))
 		}
-		if(group == "designers") {
+		if(group == "creatifs") {
 
 			this.boardTransformToGroup(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
 			this.updateStateAfterTranslation(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))

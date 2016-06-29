@@ -70,7 +70,7 @@ export default class BabiesList extends Component {
 			cdpPositionsArea: [],
 			marketPositionsArea: [],
 			devs: [],
-			designers: [],
+			creatifs: [],
 			cdps: [],
 			marketeux: [],
 		}
@@ -282,7 +282,7 @@ export default class BabiesList extends Component {
 	}
 
 	sortBabiesByTag() {
-		let designers = [],
+		let creatifs = [],
 			devs = [],
 			cdps = [],
 			marketeux = []
@@ -290,8 +290,8 @@ export default class BabiesList extends Component {
 		for (var i = 0; i < this.state.babies.length; i++) {
 			let tag = this.state.babies[i].tag
 
-			if(tag == "Designer")
-				designers.push(i)
+			if(tag == "Créatif")
+				creatifs.push(i)
 
 			if(tag == "Développeur")
 				devs.push(i)
@@ -303,8 +303,8 @@ export default class BabiesList extends Component {
 				marketeux.push(i)
 		}
 
-		if(designers != "" && devs != "" && cdps != "" && marketeux != "") {
-			this.setRandomDestination(designers, this.state.designPositionsArea)
+		if(creatifs != "" && devs != "" && cdps != "" && marketeux != "") {
+			this.setRandomDestination(creatifs, this.state.designPositionsArea)
 			this.setRandomDestination(devs, this.state.devPositionsArea)
 			this.setRandomDestination(cdps, this.state.cdpPositionsArea)
 			this.setRandomDestination(marketeux, this.state.marketPositionsArea)	

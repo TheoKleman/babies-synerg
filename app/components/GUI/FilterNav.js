@@ -95,8 +95,8 @@ export default class FilterNav extends React.Component {
                             <span><img src="images/pattern-design.png" alt="couleur héticiens designers"/></span>
                             <a 
                             href=""
-                            className={this.state.activeFilter == "designers" ? "active" : ""}
-                            onClick={this.mooveToGroup.bind(this)} data-group="designers">Designers</a>
+                            className={this.state.activeFilter == "creatifs" ? "active" : ""}
+                            onClick={this.mooveToGroup.bind(this)} data-group="creatifs">Créatifs</a>
                         </li>
                     </ul>
                 </div>

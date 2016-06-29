@@ -52,7 +52,7 @@ export default class Baby extends React.Component {
 	}
 
 	randomizeAnimation() {
-		if(this.props.datas.tag == "Designer") {
+		if(this.props.datas.tag == "Créatif") {
 			this.setState({
 				head: this.getRandomNumber(1, 2),
 				animation: this.getRandomNumber(1, 4),
@@ -109,6 +109,10 @@ export default class Baby extends React.Component {
 			isDragging: true
 		})
 
+		TweenMax.set(this.refs.babyPieces, {
+			opacity: 1
+		})
+		
 		var baseX = this.props.pos.origin.Xpx,
 			baseY = this.props.pos.origin.Ypx - 40
 
@@ -330,7 +334,7 @@ export default class Baby extends React.Component {
         let babySKin = '';
 
         switch(skill) {
-        	case "Designer":
+        	case "Créatif":
         		this.setState({
         			skin: "blue",
         			color: "blue"
@@ -367,7 +371,7 @@ export default class Baby extends React.Component {
         let babySKin = '';
 
         switch(skill) {
-        	case "Designer":
+        	case "Créatif":
         		return "blue"
         		break;
         	case "Développeur":
