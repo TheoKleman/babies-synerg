@@ -7,8 +7,20 @@ export default class Controls extends React.Component {
         super()
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.formDisplayed != this.props.formDisplayed) {
+            return true
+        } else if (nextProps.isSoundActive != this.props.isSoundActive) {
+            return true
+        } else if (nextProps.controlsHighlighting != this.props.controlsHighlighting) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     muteSound(value) {
-        if(this.props.isSoundActive) {
+        if (this.props.isSoundActive) {
             this.props.setSound(false)
         } else {
             this.props.setSound(true)

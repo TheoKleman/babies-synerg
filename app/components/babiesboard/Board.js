@@ -11,49 +11,28 @@ export default class Board extends React.Component {
 		super()
 
 		this.state = {
-			boardWidth: 3400,
-			boardHeight: 1900,
-			boardTranslateX: {
-				X: 0,
-				min: null,
-				max: null
-			},
-			boardTranslateY: {
-				Y: 0,
-				min: null,
-				max: null
-			},
 			boardIsTranslatingWithScroll: false,
 			boardIsTranslatingWithKeys: false,
 			spacebarDown: false,
 			babyRendered: false,
-			// devsGroupCenterX: 0, 
-			// devsGroupCenterY: 0,
-			// cdpsGroupCenterX: -(this.state.boardWidth / 4), 
-			// cdpsGroupCenterY: (0),
-			// marketeuxGroupCenterX: ((3400/4)*3), 
-			// marketeuxGroupCenterY: (1900/4),
-			// designersGroupCenterX: ((3400/4)*3), 
-			// designersGroupCenterY: ((1900/4)*3),
 		}
+
+		this.boardWidth = 3400
+		this.boardHeight = 1900
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (nextProps.isSorted != this.props.isSorted) {
-			return true;
+			return true
+		} else if (nextState.spacebarDown != this.state.spacebarDown) {
+			return true
+		} else if (nextProps.formDisplayed != this.props.formDisplayed) {
+			return true
+		} else if (nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
+			return true
+		} else {
+			return false
 		}
-		if (nextState.spacebarDown != this.state.spacebarDown) {
-			return true;
-		}
-		if (nextProps.formDisplayed != this.props.formDisplayed) {
-			return true;
-		}
-		if (nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
-			return true;
-		}
-		// You can access `this.props` and `this.state` here
-		// This function should return a boolean, whether the component should re-render.
-		return false;
 	}
 
 	componentWillMount() {
@@ -66,12 +45,10 @@ export default class Board extends React.Component {
 		this.setState({
 			viewportSize: this.props.viewportSize
 		})
-	}
 
-	componentDidMount() {
 		// Center board & set min/max board translateX/Y
-		let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
-		let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
+		let centerX = -((this.boardWidth/2) - (this.props.viewportSize.width/2));
+		let centerY = -((this.boardHeight/2) - (this.props.viewportSize.height/2));
 
 		// Set states at the beginning
 		this.setState({
@@ -80,12 +57,12 @@ export default class Board extends React.Component {
 			boardTranslateX: {
 				X: centerX,
 				max: 0,
-				min: - (this.state.boardWidth - this.props.viewportSize.width)
+				min: - (this.boardWidth - this.props.viewportSize.width)
 			},
 			boardTranslateY: {
 				Y: centerY,
 				max: 0,
-				min: - (this.state.boardHeight - this.props.viewportSize.height)
+				min: - (this.boardHeight - this.props.viewportSize.height)
 			}
 		})
 	}
@@ -100,8 +77,8 @@ export default class Board extends React.Component {
 		// Center board & set min/max board translateX/Y on resize
 		if (nextProps.viewportSize.width != this.props.viewportSize.width
 			|| nextProps.viewportSize.height != this.props.viewportSize.height) {
-			let centerX = -((this.state.boardWidth/2) - (nextProps.viewportSize.width/2));
-			let centerY = -((this.state.boardHeight/2) - (nextProps.viewportSize.height/2));
+			let centerX = -((this.boardWidth/2) - (nextProps.viewportSize.width/2));
+			let centerY = -((this.boardHeight/2) - (nextProps.viewportSize.height/2));
 			
 			this.setState({
 				boardCenterX: centerX,
@@ -268,12 +245,12 @@ export default class Board extends React.Component {
 				boardTranslateX: {
 					X: X,
 					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
+					min: - (this.boardWidth - this.props.viewportSize.width)
 				},
 				boardTranslateY: {
 					Y: Y,
 					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
+					min: - (this.boardHeight - this.props.viewportSize.height)
 				}
 			})
 
@@ -322,12 +299,12 @@ export default class Board extends React.Component {
 				boardTranslateX: {
 					X: X,
 					max: 0,
-					min: - (this.state.boardWidth - this.props.viewportSize.width)
+					min: - (this.boardWidth - this.props.viewportSize.width)
 				},
 				boardTranslateY: {
 					Y: Y,
 					max: 0,
-					min: - (this.state.boardHeight - this.props.viewportSize.height)
+					min: - (this.boardHeight - this.props.viewportSize.height)
 				}
 			})
 
@@ -363,12 +340,12 @@ export default class Board extends React.Component {
 			boardTranslateX: {
 				X: centerX,
 				max: 0,
-				min: - (this.state.boardWidth - this.props.viewportSize.width)
+				min: - (this.boardWidth - this.props.viewportSize.width)
 			},
 			boardTranslateY: {
 				Y: centerY,
 				max: 0,
-				min: - (this.state.boardHeight - this.props.viewportSize.height)
+				min: - (this.boardHeight - this.props.viewportSize.height)
 			},
 		})
 	}
@@ -386,12 +363,12 @@ export default class Board extends React.Component {
 			boardTranslateX: {
 				X: this.state.boardCenterX,
 				max: 0,
-				min: - (this.state.boardWidth - this.props.viewportSize.width)
+				min: - (this.boardWidth - this.props.viewportSize.width)
 			},
 			boardTranslateY: {
 				Y: this.state.boardCenterY,
 				max: 0,
-				min: - (this.state.boardHeight - this.props.viewportSize.height)
+				min: - (this.boardHeight - this.props.viewportSize.height)
 			},
 		})
 	}
@@ -426,13 +403,13 @@ export default class Board extends React.Component {
 		
 		if(group == "cdps") {
 			
-			this.boardTransformToGroup(0, (-(this.state.boardHeight / 2)- 60))
-			this.updateStateAfterTranslation(0, (-(this.state.boardHeight / 2)- 60))
+			this.boardTransformToGroup(0, (-(this.boardHeight / 2)- 60))
+			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
 		if(group == "creatifs") {
 
-			this.boardTransformToGroup(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
-			this.updateStateAfterTranslation(-(this.state.boardWidth / 2), (-(this.state.boardHeight / 3) - 60))
+			this.boardTransformToGroup(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
+			this.updateStateAfterTranslation(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
 		}
 		if(group == "devs") {
 			
@@ -441,8 +418,8 @@ export default class Board extends React.Component {
 		}
 		if(group == "marketeux") {
 
-			this.boardTransformToGroup(-(this.state.boardWidth / 2.5), 0)
-			this.updateStateAfterTranslation(-(this.state.boardWidth / 2.5), 0)
+			this.boardTransformToGroup(-(this.boardWidth / 2.5), 0)
+			this.updateStateAfterTranslation(-(this.boardWidth / 2.5), 0)
 		}
 	}
 
@@ -450,24 +427,24 @@ export default class Board extends React.Component {
 		this.setState({
 			boardTranslateX: {
 				X: posX,
-				max: this.state.boardWidth,
-				min: - (this.state.boardWidth - this.props.viewportSize.width)
+				max: this.boardWidth,
+				min: - (this.boardWidth - this.props.viewportSize.width)
 			},
 			boardTranslateY: {
 				Y: posY,
-				max: this.state.boardHeight,
-				min: - (this.state.boardHeight - this.props.viewportSize.height)
+				max: this.boardHeight,
+				min: - (this.boardHeight - this.props.viewportSize.height)
 			},
 		})
 	}
 
 	render(){
 		// Center board & set min/max board translateX/Y
-		let centerX = -((this.state.boardWidth/2) - (this.props.viewportSize.width/2));
-		let centerY = -((this.state.boardHeight/2) - (this.props.viewportSize.height/2));
+		let centerX = -((this.boardWidth/2) - (this.props.viewportSize.width/2));
+		let centerY = -((this.boardHeight/2) - (this.props.viewportSize.height/2));
 		let style = {
-			width: this.state.boardWidth,
-			height: this.state.boardHeight,
+			width: this.boardWidth,
+			height: this.boardHeight,
 			transform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)'
 		}
 
@@ -478,15 +455,15 @@ export default class Board extends React.Component {
 				style={style}
 				>
 				<BabiesList
-					boardWidth={this.state.boardWidth}
-					boardHeight={this.state.boardHeight}
+					boardWidth={this.boardWidth}
+					boardHeight={this.boardHeight}
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
 					formDisplayed={this.props.formDisplayed}
 					toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)} />
 				<HomeTitle
-					boardWidth={this.state.boardWidth}
-					boardHeight={this.state.boardHeight}
+					boardWidth={this.boardWidth}
+					boardHeight={this.boardHeight}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					formDisplayed={this.props.formDisplayed}
 					isSpaceBarPressed={this.state.spacebarDown}

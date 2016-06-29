@@ -11,6 +11,16 @@ export default class FilterNav extends React.Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.formDisplayed != this.props.formDisplayed) {
+            return true
+        } else if (nextProps.isSorted != this.props.isSorted) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     sorting() {
         if(!this.props.isSorted)
             this.props.setSorting(true)

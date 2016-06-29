@@ -8,7 +8,6 @@ export default class MailStep extends React.Component {
 		this.state = {
 			isMailValid: false,
 			isMailChecked: false,
-			presetMessage: ""
 		}
 	}
 
@@ -25,15 +24,7 @@ export default class MailStep extends React.Component {
 	}
 
 	componentDidMount() {
-		var tl = new TimelineMax()
-		tl.to(this.refs.sectionMail, 0, {
-			alpha: 0,
-			ease: Power2.easeOut,
-		})
-		tl.to(this.refs.sectionMail, .25, {
-			alpha: 1,
-			ease: Power2.easeOut,
-		})
+		// Animation
 	}
 
 	handleTextareaChange(e) {

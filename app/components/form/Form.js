@@ -13,7 +13,6 @@ export default class Form extends React.Component {
 
 		this.state = {
 			step: -1,
-			stepMax: 7,
 			previousQuestionsIds: [],
 			currentQuestion: {},
 			currentQuestionId: 0,
@@ -25,6 +24,16 @@ export default class Form extends React.Component {
 				market: 0,
 				management: 0,
 			}
+		}
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.isDisplayed != this.props.isDisplayed) {
+			return true
+		} else if (nextState.step != this.state.step) {
+			return true
+		} else {
+			return false
 		}
 	}
 
@@ -111,7 +120,7 @@ export default class Form extends React.Component {
 	}
 
 	nextStep(nextQuestionId) {
-		if (this.state.step >= this.state.stepMax) {
+		if (this.state.step > 7){
 			var newStep = this.state.step
 		} else if (nextQuestionId === "endPoint") {
 			var newStep = 6
@@ -256,7 +265,6 @@ export default class Form extends React.Component {
 		} else if (this.state.step >= 1 && this.state.step < 6) {
 			var rightContent = <QuestionsStep
 									step={this.state.step}
-									formIsDisplayed={this.props.isDisplayed}
 									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
 									currentQuestion={this.state.currentQuestion}
@@ -266,8 +274,6 @@ export default class Form extends React.Component {
 		} else if (this.state.step == 6) {
 			var rightContent = <SummaryStep 
 									step={this.state.step}
-									formIsDisplayed={this.props.isDisplayed}
-									existingPeople={this.state.existingPeople}
 									availablePeopleBySkills={this.state.availablePeopleBySkills}
 									goToNextStep={this.nextStep.bind(this)}
 									/>

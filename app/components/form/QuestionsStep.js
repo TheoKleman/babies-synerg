@@ -39,38 +39,36 @@ export default class QuestionsStep extends React.Component {
 	handleKeyDown(e) {
 		var self = this
 
-		if (this.props.formIsDisplayed) {
-			this.setState({
-				isSelected: true
-			})
-			// Handle A/B/C/D/E keys
-			switch(e.keyCode) {
-				case 65:
-					self.setState({
-						keyDownId: 0
-					})
-					break;
-				case 66:
-					self.setState({
-						keyDownId: 1
-					})
-					break;
-				case 67:
-					self.setState({
-						keyDownId: 2
-					})
-					break;
-				case 68:
-					self.setState({
-						keyDownId: 3
-					})
-					break;
-				case 69:
-					self.setState({
-						keyDownId: 4
-					})
-					break;
-			}
+		this.setState({
+			isSelected: true
+		})
+		// Handle A/B/C/D/E keys
+		switch(e.keyCode) {
+			case 65:
+				self.setState({
+					keyDownId: 0
+				})
+				break;
+			case 66:
+				self.setState({
+					keyDownId: 1
+				})
+				break;
+			case 67:
+				self.setState({
+					keyDownId: 2
+				})
+				break;
+			case 68:
+				self.setState({
+					keyDownId: 3
+				})
+				break;
+			case 69:
+				self.setState({
+					keyDownId: 4
+				})
+				break;
 		}
 	}
 
@@ -79,35 +77,33 @@ export default class QuestionsStep extends React.Component {
 		this.setState({
 			isSelected: false
 		})
-		if (this.props.formIsDisplayed) {
-			// Handle A/B/C/D/E keys
-			switch(e.keyCode) {
-				case 65:
-					self.setState({
-						keyUpId: 0
-					})
-					break;
-				case 66:
-					self.setState({
-						keyUpId: 1
-					})
-					break;
-				case 67:
-					self.setState({
-						keyUpId: 2
-					})
-					break;
-				case 68:
-					self.setState({
-						keyUpId: 3
-					})
-					break;
-				case 69:
-					self.setState({
-						keyUpId: 4
-					})
-					break;
-			}
+		// Handle A/B/C/D/E keys
+		switch(e.keyCode) {
+			case 65:
+				self.setState({
+					keyUpId: 0
+				})
+				break;
+			case 66:
+				self.setState({
+					keyUpId: 1
+				})
+				break;
+			case 67:
+				self.setState({
+					keyUpId: 2
+				})
+				break;
+			case 68:
+				self.setState({
+					keyUpId: 3
+				})
+				break;
+			case 69:
+				self.setState({
+					keyUpId: 4
+				})
+				break;
 		}
 	}
 

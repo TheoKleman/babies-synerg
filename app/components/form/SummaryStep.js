@@ -66,7 +66,7 @@ export default class SummaryStep extends React.Component {
 	}
 
 	handleKeyDown(e) {
-		if (e.keyCode == 32 && this.props.formIsDisplayed) {
+		if (e.keyCode == 32) {
 			this.setState({
 				isSelected: true
 			})
@@ -74,7 +74,7 @@ export default class SummaryStep extends React.Component {
 	}
 
 	handleKeyUp(e) {
-		if (e.keyCode == 32 && this.props.formIsDisplayed) {
+		if (e.keyCode == 32) {
 			this.setState({
 				isSelected: false
 			})
