@@ -9,6 +9,10 @@ export default class FinalScreen extends React.Component {
     componentDidMount() {
         var self = this
 
+        // Play video
+        if (!this.props.isSoundActive) {
+            this.refs.video.volume = 0
+        }
         this.refs.video.play()
 
         // Enter animation

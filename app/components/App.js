@@ -143,7 +143,8 @@ export default class App extends React.Component {
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
-            finalScreen = <FinalScreen 
+            finalScreen = <FinalScreen
+                            isSoundActive={this.state.isSoundActive} 
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
         }
 
