@@ -35,7 +35,7 @@ export default class BabiesList extends Component {
 			},
 			y: {
 				start: 0.50,
-				end: 0.70
+				end: 0.65
 			}
 		},
 		this.marketArea = {
