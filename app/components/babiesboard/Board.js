@@ -403,7 +403,7 @@ export default class Board extends React.Component {
 		
 		if(group == "cdps") {
 			
-			this.boardTransformToGroup(0, (-(this.boardHeight / 2)- 60))
+			this.boardTransformToGroup(0, (-(this.boardHeight / 2)))
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
 		if(group == "creatifs") {
