@@ -1,5 +1,6 @@
 import React from "react"
 
+import FinalScreen from "./FinalScreen.js"
 import Form from "./form/Form.js"
 import Board from "./babiesboard/Board"
 import Footer from "./GUI/Footer.js"
@@ -15,6 +16,8 @@ export default class App extends React.Component {
                 width: window.innerWidth,
                 height: window.innerHeight,
             },
+            boardCanTranslate: true,
+            finalScreenDisplayed: false,
             formDisplayed: false,
             controlsHighlighting: {
                 top: false,
@@ -36,6 +39,8 @@ export default class App extends React.Component {
             isSoundActive: true,
             focusedBabyGroup: "",
         }
+
+        this.setFinalScreenIsDisplayed = this.setFinalScreenIsDisplayed.bind(this)
     }
 
     componentDidMount(){
@@ -105,7 +110,16 @@ export default class App extends React.Component {
 
     setFormIsDisplayedState(value) {
         this.setState({
-            formDisplayed: value
+            formDisplayed: value,
+            boardCanTranslate: !value
+        })
+    }
+
+    setFinalScreenIsDisplayed(value) {
+        console.log(value)
+        this.setState({
+            finalScreenDisplayed: value,
+            boardCanTranslate: !value
         })
     }
 
@@ -138,18 +152,27 @@ export default class App extends React.Component {
     }
 
     render(){
+        var finalScreen
+        if (this.state.finalScreenDisplayed) {
+            finalScreen = <FinalScreen 
+                            setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
+        }
+
         return (
             <div
                 className="main-content"
                 onWheel={this.handleScroll.bind(this)}
                 >
+                {finalScreen}
                 <Form
                     isDisplayed={this.state.formDisplayed}
-                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)} />
+                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                    setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
                 <Board
                     viewportSize={this.state.viewportSize}
                     scrollDelta={this.state.scrollDelta}
                     formDisplayed={this.state.formDisplayed}
+                    canTranslate={this.state.boardCanTranslate}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                     setSorting={this.setSorting.bind(this)}
                     isSorted={this.state.isSorted}

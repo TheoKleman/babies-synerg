@@ -30,11 +30,12 @@ button.key {
     background: transparent;
     border: 0;
     font-family: $font-m1mbold;
+    letter-spacing: 0.1em;
 
     > span {
         display: block;
         padding: 0 15px;
-        border-radius: 6px;
+        border-radius: 5px;
         text-align: center;
     }
 
@@ -46,7 +47,7 @@ button.key {
         bottom: 0;
         height: 50px;
         background: $blue-a5;
-        border: 4px solid $blue;
+        border: 3px solid $blue;
     }
 
     span.key--content {
@@ -56,7 +57,7 @@ button.key {
         height: 45px;
         line-height: 37px;
         background: $light;
-        border: 4px solid $blue;
+        border: 3px solid $blue;
         color: $blue;
         text-transform: uppercase;
         transform: translate3d(0,0px,0);
@@ -66,7 +67,6 @@ button.key {
     &:hover {
         span.key--content {
             transition: all ease .075s;
-            transform: translate3d(0,4px,0);
             background-color: $yellow;
         }
     }

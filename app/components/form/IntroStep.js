@@ -16,10 +16,7 @@ export default class IntroStep extends React.Component {
     }
 
     componentDidMount() {
-        TweenMax.to(this.refs.sectionIntro, 2, {
-            y: 0,
-            ease: Elastic.easeOut.config(1, 0.3),
-        })
+        // animation
     }
 
     handleKeyUp(e) {
@@ -43,6 +40,7 @@ export default class IntroStep extends React.Component {
                         className="key-enter"
                         onClick={this.props.goToNextStep.bind(this)}
                         >
+                        <p>Commencer</p>
                     </button>
                 </div>
             </section>

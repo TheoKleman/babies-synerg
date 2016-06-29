@@ -13,9 +13,10 @@ div.title-container {
 		text-align: center;
 		letter-spacing: 1px;
 		font-family: $font-silkscreen;
+		letter-spacing: -0.1em;
 
 		span {
-			padding: 0 10px 6px 10px;
+			padding: 0 5px 5px 5px;
 			text-decoration: none;
 			background-image: linear-gradient(to right, $yellow 0%, $yellow 100%);
 			background-repeat: repeat-x;

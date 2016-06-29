@@ -64,8 +64,9 @@ section.form {
         padding: 0;
         text-transform: none;
         background-color: transparent;
+        font-family: $font-m1mregular;
         color: $grey;
-        font-size: 11px;
+        font-size: 14px;
         height: 35px;
         background: url(/images/UI/form-arrow.svg) no-repeat top center;
 
@@ -116,9 +117,11 @@ section.form {
                 top: 50%;
                 transform: translate3d(0,-50%,0);
                 height: auto;
-                line-height: 20px;
+                line-height: 15px;
                 font-size: 14px;
                 text-transform: uppercase;
+                font-family: $font-m1mbold;
+                letter-spacing: 0.1em;
                 color: $blue;
                 font-weight: bold;
             }
@@ -127,13 +130,13 @@ section.form {
         &:hover {
             button.key > span.key--content {
                 background: $yellow;
-                transform: translate3d(0,4px,0);
             }
         }
 
         &.selected {
             button.key > span.key--content {
                 background: $yellow;
+                transform: translate3d(0,4px,0);
             }
         }
     }
@@ -151,6 +154,7 @@ section.form {
         }
 
         button.key-enter {
+            position: relative;
             display: block;
             margin: 0 auto;
             margin-top: 30px;
@@ -160,11 +164,26 @@ section.form {
             max-height: 104px;
             padding: 0;
             background: url(/images/UI/key-enter.svg) no-repeat bottom center;
-            transition: all ease .075s;
+
+            > p {
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                transform: translate3d(-50%,0,0);
+                color: $blue;
+                font-family: $font-m1mbold;
+                text-transform: uppercase;
+                font-size: 14px;
+                line-height: 14px;
+                letter-spacing: .1em;
+            }
 
             &:hover {
                 background: url(/images/UI/key-enter-hover.svg) no-repeat bottom center;
-                transition: all ease .075s;
+
+                > p {
+                    transform: translate3d(-50%,5px,0);
+                }
             }
         }
     }
@@ -172,19 +191,22 @@ section.form {
     .right--intro {
         text-align: center;
         font-family: $font-silkscreen;
-        transform: translate3d(0,400px,0);
 
         span {
             display: inline-block;
-            font-size: 18px;
+            font-size: 20px;
             text-transform: uppercase;
             color: $blue;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            letter-spacing: -0.1em;
         }
 
         p {
-            font-size: 14px;
+            font-size: 16px;
+            line-height: 20px;
             color: $grey;
+            font-family: $font-m1mregular;
+            letter-spacing: 0;
         }
     }
 
@@ -216,9 +238,8 @@ section.form {
             font-size: 35px;
             text-transform: uppercase;
             color: $blue;
-            font-weight: bold;
             font-family: $font-silkscreen;
-            letter-spacing: .5;
+            letter-spacing: -0.1em;
             margin-bottom: 0;
             
             &:before {
@@ -241,7 +262,7 @@ section.form {
 
         ul {
             margin-top: 0;
-            margin-bottom: 35px;
+            margin-bottom: 50px;
             display: block;
             font-family: $font-silkscreen;
             color: $blue;
@@ -249,13 +270,15 @@ section.form {
             li {
                 display: inline-block;
                 font-size: 25px;
-                margin-right: 50px;
+                margin-right: 25px;
+                letter-spacing: -0.1em;
 
                 &:last-child {
                     margin-right: 0;
                 }
 
                 small {
+                    letter-spacing: .1em;
                     font-size: 14px;
                     margin-left: 3px;
                     text-transform: uppercase;
@@ -265,7 +288,21 @@ section.form {
         }
 
         button.key.spacebar {
-            margin-top: 30px;
+            margin-top: 0;
+            margin-bottom: 0;
+
+            &:hover {
+                span.key--content {
+                    background: $yellow;
+                }
+            }
+
+            &.selected {
+                span.key--content {
+                    background: $yellow;
+                    transform: translate3d(0,4px,0);
+                }
+            }
         }
     }
 
@@ -292,6 +329,7 @@ section.form {
             width: 100%;
 
             textarea, input {
+                display: block;
                 width: 100%;
                 resize: none;
                 height: 120px;
@@ -339,6 +377,7 @@ section.form {
             .input-group {
                 height: 40px;
                 padding: 0;
+                margin-top: 15px;
                 width: 100%;
             }
 

@@ -22,7 +22,7 @@ export default class Footer extends React.Component {
                         </button>
                     </div>
                     <div className="misc--copyright">
-                        <p>Crédits / © Copyright 2016 - <a target="blank" href="http://www.synerghetic.net/">SynergHetic.net</a></p>
+                        <p><a href="">Crédits</a> / © Copyright 2016 - <a className="synerghetic" target="blank" href="http://www.synerghetic.net/">SynergHetic.net</a></p>
                     </div>
                 </div>
             </footer>

@@ -277,6 +277,7 @@ export default class Form extends React.Component {
 									mailAnswers={this.state.answers}
 									hideForm={this.hideForm.bind(this)}
 									resetForm={this.resetForm.bind(this)}
+									setFinalScreenIsDisplayed={this.props.setFinalScreenIsDisplayed}
 									/>
 		}
 		
