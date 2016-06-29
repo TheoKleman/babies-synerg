@@ -27,7 +27,12 @@ export default class SpaceBar extends React.Component {
 				}
 				this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 2.5, {
 					width: "110%",
-					ease: Power1.easeIn
+					ease: Power1.easeIn,
+					onComplete: function(){
+						setTimeout(function(){
+							self.spaceBarProgression.timeScale(5).reverse(0)
+						}, 500)
+					}
 				})
 			} else {
 				this.spaceBarProgression.timeScale(3).reverse()
