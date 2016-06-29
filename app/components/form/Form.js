@@ -25,7 +25,8 @@ export default class Form extends React.Component {
 				developers: 0,
 				market: 0,
 				management: 0,
-			}
+			},
+			isCloseHovered: false
 		}
 	}
 
@@ -36,7 +37,9 @@ export default class Form extends React.Component {
 			return true
 		} else if (nextState.questionGif != this.state.questionGif) {
 			return true
-		} else {
+		} else if (nextState.isCloseHovered != this.state.isCloseHovered) {
+			return true
+		}  else {
 			return false
 		}
 	}
@@ -240,6 +243,18 @@ export default class Form extends React.Component {
 		})
 	}
 
+	closeMouseOver() {
+		this.setState({
+			isCloseHovered: true
+		})
+	}
+
+	closeMouseOut() {
+		this.setState({
+			isCloseHovered: false
+		})
+	}
+
 	resetForm() {
 		this.setState({
 			step: -1,
@@ -253,12 +268,16 @@ export default class Form extends React.Component {
 	render() {
 		var closeForm
 		var button
-		var gif = "/images/baby.gif"
+		var gif = "/images/form/question01_bonjour.gif"
 
 		// Button close available only if form is displayed
 		if (this.props.isDisplayed) {
 			var closeForm = this.hideForm.bind(this);
-			var buttonClose = <button className="form--close" onClick={closeForm}></button>
+			var buttonClose = <button
+								className="form--close"
+								onClick={closeForm}
+								onMouseOver={this.closeMouseOver.bind(this)}
+								onMouseOut={this.closeMouseOut.bind(this)}></button>
 		}
 
 		// Button previous availability
@@ -291,14 +310,14 @@ export default class Form extends React.Component {
 									saveAnswer={this.saveAnswer.bind(this)}
 									/>   
 		} else if (this.state.step == 6) {
-			gif = "/images/form/question01_bonjour.gif"
+			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
 			var rightContent = <SummaryStep 
 									step={this.state.step}
 									availablePeopleBySkills={this.state.availablePeopleBySkills}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 7) {
-			gif = "/images/form/question01_bonjour.gif"
+			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
 			var rightContent = <MailStep 
 									step={this.state.step}
 									mailAnswers={this.state.answers}
@@ -312,6 +331,10 @@ export default class Form extends React.Component {
 									resetForm={this.resetForm.bind(this)}
 									setFinalScreenIsDisplayed={this.props.setFinalScreenIsDisplayed}
 									/>	
+		}
+
+		if (this.state.isCloseHovered) {
+			gif = "/images/form/hover-close-form_non.gif"
 		}
 		
 		return(
