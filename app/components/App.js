@@ -32,10 +32,7 @@ export default class App extends React.Component {
             boardWidth: 4400,
             boardHeight: 2475,
             mouseInViewport: true,
-            detailDisplayed: false,
-            detailDisplayed: false,
             isSorted: false,
-            babyIsHovered: false,
             isSoundActive: true,
             focusedBabyGroup: "",
         }
@@ -57,12 +54,6 @@ export default class App extends React.Component {
                 }
             })
         }
-    }
-
-    toggleBabyIsHovered(value) {
-        this.setState({
-            babyIsHovered: value,
-        })
     }
 
     setControlHighlighting(control) {

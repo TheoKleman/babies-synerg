@@ -178,7 +178,7 @@ export default class Board extends React.Component {
 					self.setState({
 						spacebarDown: false,
 					})
-				}, 1000)
+				}, 2500)
 			})
 		}
 	}
@@ -467,8 +467,7 @@ export default class Board extends React.Component {
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					formDisplayed={this.props.formDisplayed}
 					spacebarDown={this.state.spacebarDown}
-					babyRendered={this.state.babyRendered}
-					centerBoard={this.centerBoard.bind(this)}/>
+					babyRendered={this.state.babyRendered} />
 			</section>
 		)
 	}
