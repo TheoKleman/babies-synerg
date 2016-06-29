@@ -14,11 +14,15 @@ export default class FilterNav extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.formDisplayed != this.props.formDisplayed) {
             return true
-        } else if (nextProps.isSorted != this.props.isSorted) {
-            return true
-        } else {
-            return false
         }
+        if (nextProps.isSorted != this.props.isSorted) {
+            return true
+        }
+        if(nextState.activeFilter != this.props.activeFilter) {
+            return true
+        }
+
+        return false
     }
 
     sorting() {
@@ -33,13 +37,9 @@ export default class FilterNav extends React.Component {
     mooveToGroup(e) {
         e.preventDefault()
 
-        console.log(this.state.activeFilter)
-
         this.setState({
             activeFilter: e.target.dataset.group
         })
-
-        // e.target.className += " active"
 
         this.props.setGroupFocus(e.target.dataset.group)
     }
