@@ -1,5 +1,6 @@
 import React from "react"
 
+import FinalScreen from "./FinalScreen.js"
 import Form from "./form/Form.js"
 import Board from "./babiesboard/Board"
 import Footer from "./GUI/Footer.js"
@@ -16,6 +17,7 @@ export default class App extends React.Component {
                 height: window.innerHeight,
             },
             boardCanTranslate: true,
+            finalScreenDisplayed: false,
             formDisplayed: false,
             controlsHighlighting: {
                 top: false,
@@ -37,6 +39,8 @@ export default class App extends React.Component {
             isSoundActive: true,
             focusedBabyGroup: "",
         }
+
+        this.setFinalScreenIsDisplayed = this.setFinalScreenIsDisplayed.bind(this)
     }
 
     componentDidMount(){
@@ -111,6 +115,14 @@ export default class App extends React.Component {
         })
     }
 
+    setFinalScreenIsDisplayed(value) {
+        console.log(value)
+        this.setState({
+            finalScreenDisplayed: value,
+            boardCanTranslate: !value
+        })
+    }
+
     setSorting(value) {
         this.setState({
             isSorted: value
@@ -140,14 +152,22 @@ export default class App extends React.Component {
     }
 
     render(){
+        var finalScreen
+        if (this.state.finalScreenDisplayed) {
+            finalScreen = <FinalScreen 
+                            setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
+        }
+
         return (
             <div
                 className="main-content"
                 onWheel={this.handleScroll.bind(this)}
                 >
+                {finalScreen}
                 <Form
                     isDisplayed={this.state.formDisplayed}
-                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)} />
+                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                    setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
                 <Board
                     viewportSize={this.state.viewportSize}
                     scrollDelta={this.state.scrollDelta}

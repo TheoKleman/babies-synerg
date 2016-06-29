@@ -72,11 +72,12 @@ export default class MailStep extends React.Component {
 				mail: mail
 			}
 			this.sendFormData(data)
-			// this.props.hideForm()
+			this.props.hideForm()
+			this.props.setFinalScreenIsDisplayed(true)
 
-			// setTimeout(function(){
-			//     self.props.resetForm()
-			// }, 500)
+			setTimeout(function(){
+			    self.props.resetForm()
+			}, 500)
 		} else {
 			console.log("invalid mail")
 			this.setState({
