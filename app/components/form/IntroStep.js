@@ -7,6 +7,10 @@ export default class IntroStep extends React.Component {
         this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return false
+    }
+
     componentWillMount() {
         window.addEventListener("keyup", this.handleKeyUp)
     }
