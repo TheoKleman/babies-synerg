@@ -499,13 +499,15 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseLeave(e) {
-		this.setState({
-			isDisplayedBabyDetail: false
-		})
-		TweenMax.to(this.refs.itSelf, .1, {
-			zIndex: this.props.pos.origin.y,
-			ease: Power2.easeOut,
-		})
+		if(!this.props.formDisplayed && !this.props.isSorted) {
+			this.setState({
+				isDisplayedBabyDetail: false
+			})
+			TweenMax.to(this.refs.itSelf, .1, {
+				zIndex: this.props.pos.origin.y,
+				ease: Power2.easeOut,
+			})
+		}
 	}
 
 	handleMouseDown(e) {
