@@ -138,7 +138,6 @@ export default class App extends React.Component {
         this.setState({
             focusedBabyGroup: value
         })
-        // console.log(this.state.focusedBabyGroup) 
     }
 
     handleResize(){
@@ -178,8 +177,7 @@ export default class App extends React.Component {
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    focusedBabyGroup={this.state.focusedBabyGroup}
-                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)} />
+                    focusedBabyGroup={this.state.focusedBabyGroup} />
                 <FilterNav
                     formDisplayed={this.state.formDisplayed}
                     isSorted={this.state.isSorted}

@@ -14,29 +14,52 @@ export default class Baby extends React.Component {
 		super()
 
 		this.state = {
-			maxW: 0,
-			maxH: 0,
-			babyWidth: 0,
-			babyHeight: 0,
-			style: {
-				top: "0px",
-				left: "0px",
-				zIndex: 0,
-			},
 			isHovering: false,
 			iNeighbourg: false,
-			savedTop: 0,
-			savedLeft: 0,
 			globalDrag: null,
-			savedX: 0,
 			updateAngle: true,
 			isDragging: false,
 			isDisplayedBabyDetail: false,
-			rotateAngleLimit: 40,
 			isMooving: false,
-			hasSprite: 0,
 			hideAnimationSprite: false,
 		}
+
+		this.rotateAngleLimit = 40
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if(nextProps.formDisplayed != this.props.formDisplayed) {
+			return true
+		}
+		if(nextProps.babies != this.props.babies) {
+			return true
+		}
+		if(nextProps.pos != this.props.pos) {
+			return true
+		}
+		if(nextProps.datas != this.props.datas) {
+			return true
+		}
+		if(nextProps.isSorted != this.props.isSorted) {
+			return true
+		}
+		if(nextState.isMooving != this.state.isMooving) {
+			return true
+		}
+		if(nextState.isDragging != this.state.isDragging) {
+			return true
+		}
+		if(nextState.isDisplayedBabyDetail != this.state.isDisplayedBabyDetail) {
+			return true
+		}
+		if(nextState.color != this.state.color) {
+			return true
+		}
+		if(nextState.transform != this.state.transform) {
+			return true
+		}
+
+		return false
 	}
 
     componentWillMount() {
@@ -45,44 +68,62 @@ export default class Baby extends React.Component {
 
 	componentDidMount() {
 		this.setPosition(this.props.pos.origin)
-
 		this.enableDrag(true)
-
-		this.randomizeAnimation()
+		this.randomizeSkin()
 	}
 
-	randomizeAnimation() {
-		if(this.props.datas.tag == "Créatif") {
-			this.setState({
-				head: this.getRandomNumber(1, 2),
-				animation: this.getRandomNumber(1, 4),
-				hasSprite: this.getRandomNumber(1, 2),
-			})
+	randomizeSkin() {
+		switch(this.props.datas.tag) {
+			case "Créatif":
+				this.setState({
+					skin: "blue",
+					color: "blue",
+					head: this.getRandomNumber(1, 2),
+					animation: this.getRandomNumber(1, 4),
+					hasSprite: this.getRandomNumber(1, 2)
+				})
+				break;
+			case "Développeur":
+				this.setState({
+					skin: "orange",
+					color: "orange",
+					head: this.getRandomNumber(3, 4),
+					animation: this.getRandomNumber(1, 4),
+					hasSprite: this.getRandomNumber(1, 2)
+				})
+				break;
+			case "Chef de projet":
+				this.setState({
+					skin: "yellow",
+					color: "yellow",
+					head: this.getRandomNumber(1, 2),
+					animation: this.getRandomNumber(1, 4),
+					hasSprite: this.getRandomNumber(1, 2)
+				})
+				break;
+			case "Marketeux":
+				this.setState({
+					skin: "green",
+					color: "green",
+					head: this.getRandomNumber(3, 4),
+					animation: this.getRandomNumber(1, 4),
+					hasSprite: this.getRandomNumber(1, 2)
+				})
+				break;
+			default:
+				this.setState({
+					skin: "yellow",
+					color: "yellow",
+					head: this.getRandomNumber(1, 2),
+					animation: this.getRandomNumber(1, 4),
+					hasSprite: this.getRandomNumber(1, 2)
+				})
 		}
-		if(this.props.datas.tag == "Développeur") {
-			this.setState({
-				head: this.getRandomNumber(3, 4),
-				animation: this.getRandomNumber(1, 4),
-				hasSprite: this.getRandomNumber(1, 2),
-			})
-		}
-		if(this.props.datas.tag == "Chef de projet") {
-			this.setState({
-				head: this.getRandomNumber(1, 2),
-				animation: this.getRandomNumber(1, 4),
-				hasSprite: this.getRandomNumber(1, 2),
-			})
-		}
-		if(this.props.datas.tag == "Marketeux") {
-			this.setState({
-				head: this.getRandomNumber(3, 4),
-				animation: this.getRandomNumber(1, 4),
-				hasSprite: this.getRandomNumber(1, 2),
-			})
-		}
+
 	}
 
 	enableDrag(value) {
+		console.log("can drag "+value)
 		if(value) {
 			interact(this.refs.itSelf).draggable({
 				inertia: {
@@ -106,7 +147,8 @@ export default class Baby extends React.Component {
 
 	onDragListener(event) {
 		this.setState({
-			isDragging: true
+			isDragging: true,
+			isMooving: true
 		})
 
 		TweenMax.set(this.refs.babyPieces, {
@@ -129,6 +171,8 @@ export default class Baby extends React.Component {
 		// Rotate baby here //
 		this.makeBabyRotate(x)
 
+		console.log("baby mooving x: "+x+" y: "+y)
+
 		// translate the element
 		target.style.webkitTransform =
 		target.style.transform =
@@ -144,17 +188,17 @@ export default class Baby extends React.Component {
 	}
 
 	onDragStop(event) {
-		console.log("drag stop")
 		var babyContent = document.getElementById(event.target.id).firstChild
 		babyContent.style.transform = "rotate(0deg)"
 
 		this.setState({
-			transform: babyContent.style.transform,
+			transform: "rotate(0deg)",
 			transformArms: "rotate(0deg)",
 		})
 
 		this.setState({
-			isDragging: false
+			isDragging: false,
+			isMooving: false,
 		})
 
 		TweenMax.set(this.refs.babyPieces, {
@@ -215,12 +259,11 @@ export default class Baby extends React.Component {
 	}
 
 	onBabySort(posDestination, posOrigin) {
-		// this.refs.bodyAnimation.props.shouldAnimate = false
 		this.setState({
 			hideAnimationSprite: true
 		})
 
-		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.state.rotateAngleLimit)
+		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.rotateAngleLimit)
 		
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 1
@@ -281,12 +324,12 @@ export default class Baby extends React.Component {
  	}
 
 	makeBabyRotate(direction) {
-		var babyRotation = this.rotateBaby(direction, this.state.rotateAngleLimit)
+		var babyRotation = this.rotateBaby(direction, this.rotateAngleLimit)
 
 		this.refs.itSelf.style.transform = "rotate("+babyRotation+"deg)"
 
 		this.setState({
-			transform: this.refs.itSelf.style.transform,
+			transform: "rotate("+babyRotation+"deg)",
 			transformArms: "rotate("+babyRotation+"deg)",
 		})
 	}
@@ -342,38 +385,6 @@ export default class Baby extends React.Component {
 	getBabySkin(skill) {
 
         let babySKin = '';
-
-        switch(skill) {
-        	case "Créatif":
-        		this.setState({
-        			skin: "blue",
-        			color: "blue"
-        		})
-        		break;
-        	case "Développeur":
-        		this.setState({
-        			skin: "orange",
-        			color: "orange"
-        		})
-        		break;
-        	case "Chef de projet":
-        		this.setState({
-        			skin: "yellow",
-        			color: "yellow"
-        		})
-        		break;
-        	case "Marketeux":
-        		this.setState({
-        			skin: "green",
-        			color: "green"
-        		})
-        		break;
-        	default:
-        		this.setState({
-        			skin: "yellow",
-        			color: "yellow"
-        		})
-        }
 	}
 
 	getBabyColor(skill) {
@@ -446,13 +457,12 @@ export default class Baby extends React.Component {
 			return false
 	}
 
-	handleMouseEnter(e, id) {
+	handleMouseEnter(e) {
 		if(!this.props.formDisplayed && !this.props.isSorted) {
-			this.props.toggleBabyIsHovered(true)
 			this.setState({
 				isDisplayedBabyDetail: true
 			})
-			TweenMax.to(this.refs.itSelf, .3, {
+			TweenMax.to(this.refs.detail, .3, {
 				zIndex: 200,
 				ease: Power2.easeOut,
 			})
@@ -460,12 +470,11 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseLeave(e) {
-		this.props.toggleBabyIsHovered(false)
 		this.setState({
 			isDisplayedBabyDetail: false
 		})
-		TweenMax.to(this.refs.itSelf, .1, {
-			zIndex: this.props.pos.origin.y,
+		TweenMax.to(this.refs.detail, .1, {
+			zIndex: 2,
 			ease: Power2.easeOut,
 		})
 	}
@@ -475,19 +484,17 @@ export default class Baby extends React.Component {
 	}
 
 	render() {
-
 		const id = "baby-"+this.props.id
-		let color= this.state.color
 
 		var babyClasses = classNames({
 			'baby': true,
 			'hovered': this.state.isHovering,
 			'neighbourg': this.state.isNeighbourg,
 			'disabled': this.props.isSorted,
-			'blue': this.isBlue(color),
-			'orange': this.isOrange(color),
-			'yellow': this.isYellow(color),
-			'green': this.isGreen(color),
+			'blue': this.isBlue(this.state.color),
+			'orange': this.isOrange(this.state.color),
+			'yellow': this.isYellow(this.state.color),
+			'green': this.isGreen(this.state.color),
 		})
 
 		var piecesClasses = classNames({
@@ -495,9 +502,11 @@ export default class Baby extends React.Component {
 			'moving': this.state.isDragging,
 		})
 
-		var babyStyle = {
-			backgroundImage: "url(/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body-full.png)",
-			backgroundSize: "cover"
+		if(this.state.head) {
+			var babyStyle = {
+				backgroundImage: "url(/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body-full.png)",
+				backgroundSize: "cover"
+			}
 		}
 
 		var bodyAnimationClasses = classNames({
@@ -517,7 +526,7 @@ export default class Baby extends React.Component {
 				if (this.state.head != "undefined" && this.state.animation != 'undefined') {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
-					var shouldAnimate = this.props.id < 10 ? true : false
+					var shouldAnimate = this.props.id < 20 ? true : false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"
@@ -537,26 +546,25 @@ export default class Baby extends React.Component {
 		}
 
 		if(this.state.head) {
-			console.log(this.props.datas.tag)
-			console.log(this.state.head)
 			var babyBody = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body.png"
 		}
 
-		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null
-
-		console.log('render')
+		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null,
+			onMouseEnterEvent = !this.state.isMooving ? this.handleMouseEnter.bind(this) : null
 
 		return(			
 			<div
 			className={babyClasses}
 			onMouseDown={onClickEvent}
-			onMouseEnter={this.handleMouseEnter.bind(this, id)}
+			onMouseEnter={onMouseEnterEvent}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
 			ref="itSelf">
 				<DetailBaby
+					ref="detail"
 					color={this.getBabyColor(this.props.datas.tag)}
 					babyDetail={this.props.datas}
+					isMooving={this.state.isMooving}
 					isDisplayedBabyDetail={this.state.isDisplayedBabyDetail} />
 				<div className="the-baby" style={{transform: this.state.transform}}>
 					{animator}

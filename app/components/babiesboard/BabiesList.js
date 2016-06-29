@@ -11,30 +11,13 @@ export default class BabiesList extends Component {
 
 		this.state = {
 			babies: [],
-            boardItSelf: [],
             babiesPosition: [],
-            scale: 5,
-            widthWhiteSpace: 300,
-            heightWhiteSpace: 250,
-            nbCasesX: 0,
-            nbCasesY: 0,
-            caseWidth: 0,
-            caseHeight: 0,
-            safetyWidthDistance: 30,
-            safetyHeightDistance: -20,
             goSort: false,
             isMooving: false,
-            freeZone: 0,
-            devPositionsArea: [],
-			designPositionsArea: [],
-			cdpPositionsArea: [],
-			marketPositionsArea: [],
-			devs: [],
-			creatifs: [],
-			cdps: [],
-			marketeux: [],
 		}
 
+		this.scale = 5
+		this.freeZone = 0
 		this.devArea = {
 			x: {
 				start: 0.02,
@@ -75,12 +58,33 @@ export default class BabiesList extends Component {
 				end: 0.60
 			}
 		}
+		this.widthWhiteSpace = 300
+		this.heightWhiteSpace = 250
+		this.safetyWidthDistance = 30
+		this.safetyHeightDistance = -20
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if(nextProps.spacebarDown != this.props.spacebarDown) {
+			return true
+		}
+		if(nextProps.formDisplayed != this.props.formDisplayed) {
+			return true
+		}
+		if(nextProps.isSorted != this.props.isSorted) {
+			return true
+		}
+		if(nextState.babies != this.state.babies) {
+			return true
+		}
+
+		return false
 	}
 
     setVirtualBoard(){
-	    let nbCasesX = Math.floor(( this.props.boardWidth / ( this.state.babySpec.babyWidth + this.state.safetyWidthDistance ) ) * this.state.scale)
+	    let nbCasesX = Math.floor(( this.props.boardWidth / ( this.state.babySpec.babyWidth + this.safetyWidthDistance ) ) * this.scale)
 	    let caseWidth = this.props.boardWidth / nbCasesX
-	    let nbCasesY = Math.floor(( this.props.boardHeight / ( this.state.babySpec.babyHeight + this.state.safetyHeightDistance ) ) * this.state.scale)
+	    let nbCasesY = Math.floor(( this.props.boardHeight / ( this.state.babySpec.babyHeight + this.safetyHeightDistance ) ) * this.scale)
 	    let caseHeight = this.props.boardHeight / nbCasesY
 	    
 	    this.setState({
@@ -97,11 +101,6 @@ export default class BabiesList extends Component {
 	    	cdpPositionsArea: this.assignAreas(this.cdpArea),
 	    	marketPositionsArea: this.assignAreas(this.marketArea),
 	    })
-
-	    // console.log("caseHeight : "+caseWidth);
-	    // console.log("caseWidth : "+caseHeight);
-	    // console.log("nbCaseX : "+nbCasesX);
-	    // console.log("nbCaseY : "+nbCasesY);
 	}
 
     buildVirtualBoard(nbCasesX, nbCasesY, caseWidth, caseHeight){
@@ -112,7 +111,7 @@ export default class BabiesList extends Component {
                 array[i][j] = new this.boardCell(i, j, caseWidth, caseHeight, this)
             }
         }
-        array = this.whiteSpace(this.state.widthWhiteSpace, this.state.heightWhiteSpace, nbCasesX, nbCasesY, caseWidth, caseHeight, array)
+        array = this.whiteSpace(this.widthWhiteSpace, this.heightWhiteSpace, nbCasesX, nbCasesY, caseWidth, caseHeight, array)
         return array
     }
 
@@ -135,10 +134,10 @@ export default class BabiesList extends Component {
     }
 
     boardCell(x, y, caseWidth, caseHeight, that){
-    	// let limit = Math.floor(that.state.scale / 2)
+    	// let limit = Math.floor(that.scale / 2)
         return {
             "Xpx": (x * caseWidth),
-            "Ypx": (y * caseHeight) - that.state.safetyHeightDistance,
+            "Ypx": (y * caseHeight) - that.safetyHeightDistance,
             "x": x,
             "y": y,
             "free" : 1
@@ -167,7 +166,7 @@ export default class BabiesList extends Component {
     }
 
 	setRandomPosition(){
-		let limit = Math.floor(this.state.scale / 2)
+		let limit = Math.floor(this.scale / 2)
 		let randX = limit + Math.round(Math.random() * ( this.state.boardItSelf.length - (limit * 2 ) ))
 		let randY = limit + Math.round(Math.random() * ( this.state.boardItSelf[0].length - (limit * 2 ) ))
 		if ( this.checkIfSpotFree(randX, randY) ){
@@ -179,7 +178,7 @@ export default class BabiesList extends Component {
 	}
 
 	setBabyPosition(x, y){
-		let limit = Math.floor(this.state.scale / 2)
+		let limit = Math.floor(this.scale / 2)
 		let casesOwn = {
 			origin: null,
 			otherCases: [],
@@ -249,7 +248,7 @@ export default class BabiesList extends Component {
 
 
 	checkIfSpotFree(x, y){
-		let limit = Math.floor(this.state.scale / 2)
+		let limit = Math.floor(this.scale / 2)
 		for ( var i = (x - limit); i <= (x + limit); i++ ){
 			for ( var j = (y - limit); j <= (y + limit); j++ ){
 				if ( Math.sqrt( Math.pow(i - x, 2) ) + Math.sqrt( Math.pow(j - y, 2) ) <= limit ){
@@ -332,7 +331,7 @@ export default class BabiesList extends Component {
 	}
 
 	emptyArea(firstIndex, array) {
-		let limit = Math.floor(array[firstIndex].length * this.state.freeZone)
+		let limit = Math.floor(array[firstIndex].length * this.freeZone)
 
 		for (var x = firstIndex; x < array.length; x++) {
 			for (var y = (array[firstIndex].length - limit); y < array[firstIndex].length; y++) {
@@ -381,6 +380,8 @@ export default class BabiesList extends Component {
 			}
 		}
 
+		console.log("render babiesList")
+
 		return(
 			<div className="babies-container" ref="babyContainer">
 				{
@@ -390,11 +391,9 @@ export default class BabiesList extends Component {
 							datas={baby}
 							babySpec={this.state.babySpec}
 							pos={this.state.babiesPosition[i]}
-							test={this.refs.babyContainer}
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
 							formDisplayed={this.props.formDisplayed}
-                            toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)}
 							id={i} />
           			) 
 				}

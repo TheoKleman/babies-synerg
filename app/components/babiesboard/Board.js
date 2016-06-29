@@ -460,13 +460,13 @@ export default class Board extends React.Component {
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
 					formDisplayed={this.props.formDisplayed}
-					toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)} />
+					spacebarDown={this.props.spacebarDown} />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					formDisplayed={this.props.formDisplayed}
-					isSpaceBarPressed={this.state.spacebarDown}
+					spacebarDown={this.state.spacebarDown}
 					babyRendered={this.state.babyRendered}
 					centerBoard={this.centerBoard.bind(this)}/>
 			</section>

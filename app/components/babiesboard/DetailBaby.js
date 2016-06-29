@@ -9,11 +9,11 @@ export default class DetailBaby extends Component {
 	}
 
 	componentWillUpdate(nextProps) {
-		if(nextProps.isDisplayedBabyDetail) {
-			this.hideDetail()
-		} else {
-			this.showDetail()
-		}
+		// if(nextProps.isDisplayedBabyDetail) {
+		// 	this.hideDetail()
+		// } else {
+		// 	this.showDetail()
+		// }
 	}
 
 	showDetail() {
@@ -45,10 +45,12 @@ export default class DetailBaby extends Component {
 	}
 
 	componentDidUpdate() {
-		if(this.props.isDisplayedBabyDetail) {
-			this.showDetail()
-		} else {
-			this.hideDetail()
+		if(!this.props.isMooving) {
+			if(this.props.isDisplayedBabyDetail) {
+				this.showDetail()
+			} else {
+				this.hideDetail()
+			}
 		}
 	}
 

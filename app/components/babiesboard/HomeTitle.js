@@ -37,7 +37,7 @@ export default class HomeTitle extends React.Component {
 					formDisplayed={this.props.formDisplayed}
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					centerBoard={this.props.centerBoard.bind(this)}
-					isSpaceBarPressed={this.props.isSpaceBarPressed} />
+					spacebarDown={this.props.spacebarDown} />
 				<p>Maintenez la barre espace pour ...</p>
 			</div>
 		)
