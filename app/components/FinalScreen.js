@@ -9,6 +9,8 @@ export default class FinalScreen extends React.Component {
     componentDidMount() {
         var self = this
 
+        this.refs.video.play()
+
         // Enter animation
         TweenMax.to(this.refs.itSelf, .5, {
             opacity: 1,
@@ -17,7 +19,7 @@ export default class FinalScreen extends React.Component {
         })
 
         // Timeout before closing final screen component
-        var videoDuration = 5000
+        var videoDuration = 19500
 
         setTimeout(function(){
             // Leave animation
@@ -35,7 +37,10 @@ export default class FinalScreen extends React.Component {
     render(){
         return (
             <section ref="itSelf" className="final--screen">
-                <p>ici une vidéo un jour</p>
+                <video
+                    ref="video"
+                    id="video-background"
+                    src="./media/final.mp4"/>
             </section>
         )
     }
