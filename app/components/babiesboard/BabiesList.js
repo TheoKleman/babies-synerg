@@ -394,7 +394,6 @@ export default class BabiesList extends Component {
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
 							formDisplayed={this.props.formDisplayed}
-                            toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)}
 							id={i} />
           			) 
 				}

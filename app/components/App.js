@@ -32,10 +32,7 @@ export default class App extends React.Component {
             boardWidth: 4400,
             boardHeight: 2475,
             mouseInViewport: true,
-            detailDisplayed: false,
-            detailDisplayed: false,
             isSorted: false,
-            babyIsHovered: false,
             isSoundActive: true,
             focusedBabyGroup: "",
         }
@@ -57,12 +54,6 @@ export default class App extends React.Component {
                 }
             })
         }
-    }
-
-    toggleBabyIsHovered(value) {
-        this.setState({
-            babyIsHovered: value,
-        })
     }
 
     setControlHighlighting(control) {
@@ -178,8 +169,7 @@ export default class App extends React.Component {
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    focusedBabyGroup={this.state.focusedBabyGroup}
-                    toggleBabyIsHovered={this.toggleBabyIsHovered.bind(this)} />
+                    focusedBabyGroup={this.state.focusedBabyGroup} />
                 <FilterNav
                     formDisplayed={this.state.formDisplayed}
                     isSorted={this.state.isSorted}

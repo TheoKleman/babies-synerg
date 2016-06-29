@@ -448,7 +448,6 @@ export default class Baby extends React.Component {
 
 	handleMouseEnter(e, id) {
 		if(!this.props.formDisplayed && !this.props.isSorted) {
-			this.props.toggleBabyIsHovered(true)
 			this.setState({
 				isDisplayedBabyDetail: true
 			})
@@ -460,7 +459,6 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseLeave(e) {
-		this.props.toggleBabyIsHovered(false)
 		this.setState({
 			isDisplayedBabyDetail: false
 		})
@@ -537,14 +535,10 @@ export default class Baby extends React.Component {
 		}
 
 		if(this.state.head) {
-			console.log(this.props.datas.tag)
-			console.log(this.state.head)
 			var babyBody = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/baby-body.png"
 		}
 
 		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null
-
-		console.log('render')
 
 		return(			
 			<div

@@ -459,8 +459,7 @@ export default class Board extends React.Component {
 					boardHeight={this.boardHeight}
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
-					formDisplayed={this.props.formDisplayed}
-					toggleBabyIsHovered={this.props.toggleBabyIsHovered.bind(this)} />
+					formDisplayed={this.props.formDisplayed} />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}
