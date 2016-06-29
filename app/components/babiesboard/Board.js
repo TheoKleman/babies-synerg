@@ -467,7 +467,8 @@ export default class Board extends React.Component {
 					setFormIsDisplayedProps={this.props.setFormIsDisplayedProps}
 					formDisplayed={this.props.formDisplayed}
 					spacebarDown={this.state.spacebarDown}
-					babyRendered={this.state.babyRendered} />
+					babyRendered={this.state.babyRendered}
+					centerBoard={this.centerBoard.bind(this)} />
 			</section>
 		)
 	}

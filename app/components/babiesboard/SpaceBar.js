@@ -18,6 +18,23 @@ export default class SpaceBar extends React.Component {
 		this.spaceBarProgression;
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.spacebarDown != this.props.spacebarDown) {
+			if (nextProps.spacebarDown) {
+				// spacebar progression animation
+				if (this.spaceBarProgression) {
+					this.spaceBarProgression.timeScale(5).reverse(0)
+				}
+				this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 2.5, {
+					width: "110%",
+					ease: Power1.easeIn
+				})
+			} else {
+				this.spaceBarProgression.timeScale(3).reverse()
+			}
+		}
+	}
+
 	handleMouseEnter() {
 		this.setState({
 			isHovered: true
@@ -68,9 +85,9 @@ export default class SpaceBar extends React.Component {
 					}, 500)
 					clearInterval(self.state.clickProgress)
 					self.props.setFormIsDisplayedProps(true)
+					self.props.centerBoard()
 					self.setState({
 						clickDown: false,
-						p: 0,
 					})
 				}, 2500),
 			})

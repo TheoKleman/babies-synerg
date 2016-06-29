@@ -34,7 +34,6 @@ export default class MailStep extends React.Component {
 	}
 
 	endForm() {
-		var self = this
 		var mail = this.refs.mailInput.value
 		var body = this.refs.bodyText.value
 
@@ -63,12 +62,7 @@ export default class MailStep extends React.Component {
 				mail: mail
 			}
 			this.sendFormData(data)
-			this.props.hideForm()
-			this.props.setFinalScreenIsDisplayed(true)
-
-			setTimeout(function(){
-			    self.props.resetForm()
-			}, 500)
+			this.props.goToNextStep()
 		} else {
 			console.log("invalid mail")
 			this.setState({

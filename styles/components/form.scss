@@ -141,7 +141,7 @@ section.form {
         }
     }
 
-    .right--intro, .right--questions, .right--summary, .right--mail {
+    .right--intro, .right--questions, .right--summary, .right--mail, .right--thanks {
         width: 100%;
         height: 300px;
         position: relative;
@@ -188,7 +188,7 @@ section.form {
         }
     }
 
-    .right--intro {
+    .right--intro, .right--thanks {
         text-align: center;
         font-family: $font-silkscreen;
 
