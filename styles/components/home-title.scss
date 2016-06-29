@@ -33,4 +33,22 @@ div.title-container {
 		font-family: $font-m1mregular;
 	}
 
+	> button.key.spacebar {
+		> span.key--content {
+			position: relative;
+			overflow: hidden;
+
+			& > div.progress {
+				position: absolute;
+				top: 0;
+				left: -10%;
+				height: 100%;
+				width: 10%;
+				background: $yellow;
+				border-radius: 50px;
+				z-index: -1;
+			}
+		}
+	}
+
 }

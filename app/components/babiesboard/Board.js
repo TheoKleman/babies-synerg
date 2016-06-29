@@ -178,7 +178,7 @@ export default class Board extends React.Component {
 					self.setState({
 						spacebarDown: false,
 					})
-				}, 1000)
+				}, 2500)
 			})
 		}
 	}
