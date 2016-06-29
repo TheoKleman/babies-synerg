@@ -6,6 +6,7 @@ import IntroStep from './IntroStep'
 import QuestionsStep from './QuestionsStep'
 import SummaryStep from './SummaryStep'
 import MailStep from './MailStep'
+import ThanksStep from './ThanksStep'
 
 export default class Form extends React.Component {
 	constructor() {
@@ -281,10 +282,15 @@ export default class Form extends React.Component {
 			var rightContent = <MailStep 
 									step={this.state.step}
 									mailAnswers={this.state.answers}
+									goToNextStep={this.nextStep.bind(this)}
+									/>
+		} else if (this.state.step == 8) {
+			var rightContent = <ThanksStep 
+									step={this.state.step}
 									hideForm={this.hideForm.bind(this)}
 									resetForm={this.resetForm.bind(this)}
 									setFinalScreenIsDisplayed={this.props.setFinalScreenIsDisplayed}
-									/>
+									/>	
 		}
 		
 		return(
