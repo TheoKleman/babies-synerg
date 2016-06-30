@@ -1,4 +1,5 @@
 import React from "react"
+
 import Konami from "konami-js"
 
 import FinalScreen from "./FinalScreen.js"
