@@ -23,7 +23,7 @@ export default class FinalScreen extends React.Component {
         })
 
         // Timeout before closing final screen component
-        var videoDuration = 19500
+        var videoDuration = 21500
 
         setTimeout(function(){
             // Leave animation

@@ -30,12 +30,6 @@ export default class Baby extends React.Component {
 		this.ohAudio.src = './media/oh.wav'
 		this.youpiAudio = document.createElement('audio');
 		this.youpiAudio.src = './media/youpi.wav'
-		this.oupsAudio = document.createElement('audio');
-		this.oupsAudio.src = './media/oups.wav'
-		this.youhouAudio = document.createElement('audio');
-		this.youhouAudio.src = './media/youhou.wav'
-		this.coucouAudio = document.createElement('audio');
-		this.coucouAudio.src = './media/coucou.wav'
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -163,9 +157,17 @@ export default class Baby extends React.Component {
 	}
 
 	onDragListener(event) {
+		var self = this
+
 		// Play oh song
 		if (!this.state.isDragging && this.props.isSoundActive) {
 			this.ohAudio.play()
+
+			var delay = Math.floor(Math.random() * (1200 - 700 + 1)) + 700
+
+			setTimeout(function(){
+				self.youpiAudio.play()
+			}, delay)
 		}
 
 		this.setState({
@@ -549,17 +551,6 @@ export default class Baby extends React.Component {
 				zIndex: 200,
 				ease: Power2.easeOut,
 			})
-		} else if (!this.props.formDisplayed && this.props.isSorted) {
-			// play sound
-			if (this.props.isSoundActive) {
-				if (this.state.color == "blue") {
-					this.oupsAudio.play()
-				} else if (this.state.color == "orange") {
-					this.youhouAudio.play()
-				} else if (this.state.color == "yellow" || this.state.color == "green") {
-					this.coucouAudio.play()
-				}
-			}
 		}
 	}
 
@@ -583,9 +574,7 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseUp() {
-		if (this.props.isSoundActive) {
-			this.youpiAudio.play()
-		}
+		
 	}
 
 	render() {

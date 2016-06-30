@@ -24,14 +24,14 @@ export default class SpaceBar extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		var self = this
-		
+
 		if (nextProps.spacebarDown != this.props.spacebarDown) {
 			if (nextProps.spacebarDown) {
 				// spacebar progression animation
 				if (this.spaceBarProgression) {
 					this.spaceBarProgression.timeScale(5).reverse(0)
 				}
-				this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 2.5, {
+				this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 1.2, {
 					width: "110%",
 					ease: Power1.easeIn,
 					onComplete: function(){
@@ -103,7 +103,7 @@ export default class SpaceBar extends React.Component {
 		if (this.spaceBarProgression) {
 			this.spaceBarProgression.timeScale(5).reverse(0)
 		}
-		this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 2.5, {
+		this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 1.5, {
 			width: "110%",
 			ease: Power1.easeIn
 		})
@@ -122,7 +122,7 @@ export default class SpaceBar extends React.Component {
 					self.setState({
 						clickDown: false,
 					})
-				}, 2500),
+				}, 1200),
 			})
 		}
 	}
