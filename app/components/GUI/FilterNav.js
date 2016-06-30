@@ -25,6 +25,33 @@ export default class FilterNav extends React.Component {
         return false
     }
 
+    componentDidMount() {
+        // Tweenmax here
+        TweenMax.staggerFrom(
+            '.pattern-item',
+            0.7,
+            {
+                opacity: 0,
+                ease: Power2.easeOut,
+                delay: 3.5,
+            },
+            0.4
+        )
+    }
+
+    componentWillUnmount() {
+        TweenMax.staggerFrom(
+            '.pattern-item',
+            0.7,
+            {
+                opacity: 1,
+                ease: Power2.easeOut,
+                delay: 0.1,
+            },
+            0.4
+        )
+    }
+
     sorting() {
         if(!this.props.isSorted)
             this.props.setSorting(true)
@@ -62,7 +89,7 @@ export default class FilterNav extends React.Component {
         })
 
         return(
-            <nav className={mainFilterClasses}>
+            <nav ref="itSelf" className={mainFilterClasses}>
                 <button 
                     className="filter-babies"
                     onClick={this.sorting.bind(this)}>

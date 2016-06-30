@@ -134,7 +134,6 @@ export default class Baby extends React.Component {
 	}
 
 	enableDrag(value) {
-		console.log("can drag "+value)
 		if(value) {
 			interact(this.refs.itSelf).draggable({
 				inertia: {
@@ -186,8 +185,6 @@ export default class Baby extends React.Component {
 
 		// Rotate baby here //
 		this.makeBabyRotate(x)
-
-		console.log("baby mooving x: "+x+" y: "+y)
 
 		// translate the element
 		target.style.webkitTransform =
@@ -290,33 +287,45 @@ export default class Baby extends React.Component {
 		if(this.refs.bodyAnimation) {
 			TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
 		}
+
+		// var babySmallRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, 90)
 		
-		// TweenMax.allTo(
-		// 	[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
-		// 	2,
+		// TweenMax.to(
+		// 	this.refs.armRight,
+		// 	0.3,
 		//  {
-		// 	rotation: babyRotation,
-		// 	delay: 0.2,
+		// 	rotation: babySmallRotation,
+		// 	delay: 0.1,
 		// 	ease: Power1.easeOut,
 		// })
-		// TweenMax.allTo(
-		// 	[this.refs.armRight, this.refs.armLeft, this.refs.legRight, this.refs.legLeft],
-		// 	1.3,
+		// TweenMax.to(
+		// 	this.refs.armRight,
+		// 	0.3,
 		//  {
 		// 	rotation: 0,
 		// 	delay: 3,
-		// 	ease: Elastic.easeOut.config(0.5, 0.3),
+		// 	ease: Power1.easeOut,
 		// })
-		let tl = new TimelineLite ()
-			tl.to(
-	      	[this.refs.legLeft, this.refs.legRight],
-	      	0.3,
-		      {
-		        y: 10,
-		        ease: Power1.easeOut,
-		        repeat: 10,
-		      }
-		    )
+		// let tl = new TimelineLite ()
+		// 	tl.to(
+	 //      	this.refs.legLeft,
+	 //      	0.5,
+		//       {
+		//         y: 5,
+		//         ease: Power1.easeOut,
+		//         repeat: 15,
+		//         delay: 0.3,
+		//       }
+		//     )
+		//     tl.to(
+	 //      	this.refs.legRight,
+	 //      	0.5,
+		//       {
+		//         y: 5,
+		//         ease: Power1.easeOut,
+		//         repeat: 15,
+		//       }
+		//     )
 	}
 
 	onBabySortEnd() {
