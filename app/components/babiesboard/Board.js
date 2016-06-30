@@ -389,7 +389,7 @@ export default class Board extends React.Component {
 		})
 	}
 
-	boardTransformToGroup(posX, posY) {
+	updateBoardTransformToFocusedGroup(posX, posY) {
 		TweenMax.to(this.refs.board,1, {
 			x: posX,
 			y: posY,
@@ -398,32 +398,37 @@ export default class Board extends React.Component {
 	}
 	
 	mooveToFocusedGroup(group) {
-
 		console.log("group: "+group)
 		
 		if(group == "cdps") {
-			
-			this.boardTransformToGroup(0, (-(this.boardHeight / 2)))
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
 		if(group == "creatifs") {
-
-			this.boardTransformToGroup(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
 			this.updateStateAfterTranslation(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
 		}
 		if(group == "devs") {
-			
-			this.boardTransformToGroup(0, 0)
 			this.updateStateAfterTranslation(0, 0)
 		}
 		if(group == "marketeux") {
-
-			this.boardTransformToGroup(-(this.boardWidth / 2.5), 0)
 			this.updateStateAfterTranslation(-(this.boardWidth / 2.5), 0)
 		}
 	}
 
 	updateStateAfterTranslation(posX, posY) {
+		// Check if X is in range
+		if (posX < this.state.boardTranslateX.min) {
+			posX = this.state.boardTranslateX.min
+		} else if (posX > this.state.boardTranslateX.max){
+			posX = this.state.boardTranslateX.max
+		}
+		// Check if Y is in range
+		if (posY < this.state.boardTranslateY.min) {
+			posY = this.state.boardTranslateY.min
+		} else if (posY > this.state.boardTranslateY.max){
+			posY = this.state.boardTranslateX.max
+		}
+
+		// Set states
 		this.setState({
 			boardTranslateX: {
 				X: posX,
@@ -436,6 +441,9 @@ export default class Board extends React.Component {
 				min: - (this.boardHeight - this.props.viewportSize.height)
 			},
 		})
+
+		// The execute
+		this.updateBoardTransformToFocusedGroup(posX, posY)
 	}
 
 	render(){
