@@ -1,12 +1,13 @@
 
-import React from "react"   
+import React, { Component, PropTypes } from "react"
 import qwest from "qwest"
 import GSAP from 'gsap'
 
 import BabiesList from "./BabiesList"
 import HomeTitle from "./HomeTitle"
+import Stat from "./Stat"
 
-export default class Board extends React.Component {
+export default class Board extends Component {
 	constructor() {
 		super()
 
@@ -448,6 +449,33 @@ export default class Board extends React.Component {
 			transform: 'translate3d('+ centerX +'px,'+ centerY +'px,0)'
 		}
 
+		if(this.props.isSorted) {
+			var stat1 = <Stat
+					groupId="devs-stat"
+					groupName="Développeurs"
+					groupCount="32"
+					statPercent="67%"
+					isSorted={this.props.setSorting} />
+			var stat2 = <Stat
+					groupId="creatifs-stat"
+					groupName="Créatifs"
+					groupCount="51"
+					statPercent="75%"
+					isSorted={this.props.setSorting} />
+			var stat3 = <Stat
+					groupId="cdps-stat"
+					groupName="Chefs de projet"
+					groupCount="21"
+					statPercent="63%"
+					isSorted={this.props.setSorting} />
+			var stat4 =	<Stat
+					groupId="marketeux-stat"
+					groupName="Marketeux"
+					groupCount="15"
+					statPercent="79%"
+					isSorted={this.props.setSorting} />
+		}
+
 		return (
 			<section
 				ref="board"
@@ -469,6 +497,10 @@ export default class Board extends React.Component {
 					spacebarDown={this.state.spacebarDown}
 					babyRendered={this.state.babyRendered}
 					centerBoard={this.centerBoard.bind(this)} />
+				{stat1}
+				{stat2}
+				{stat3}
+				{stat4}
 			</section>
 		)
 	}

@@ -1,0 +1,125 @@
+.stat-container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 500px;
+	color: $blue;
+	opacity: 0;
+	transform: scale(0.9);
+
+	&#devs-stat {
+		left: 500px;
+		top: 650px;
+	}
+
+	&#creatifs-stat {
+		left: 2400px;
+		top: 1410px;
+	}
+
+	&#cdps-stat {
+		left: 600px;
+		top: 1500px;	
+	}
+
+	&#marketeux-stat {
+		left: 2050px;
+		top: 450px;
+	}
+
+	button.key {
+		margin-bottom: 20px;
+		&:hover {
+			span.key--content {
+			    cursor: default;
+			    background-color: $light;
+			}
+		}
+	}
+
+	.agency-stat {
+
+		margin-bottom: 20px;
+
+		span, p {
+			display: inline-block;
+			text-transform: uppercase;
+		}
+
+		&__percent {
+			margin-right: 5px;
+			font-family: $font-silkscreen;
+			font-size: 25px;
+		}
+
+		&__text {
+			font-family: $font-m1mbold;
+			font-size: 16px;
+			span {
+				font-family: $font-m1mregular;
+				font-size: 14px;
+			}
+		}
+	}
+
+	.fun-stat {
+		display: flex;
+		align-items: center;
+		p {
+			font-family: $font-m1mbold;
+			font-size: 16px;
+			text-transform: uppercase;
+		}
+
+		.fun-stat-items {
+			margin-left: 20px;
+		}
+
+		.stat-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			&:first-child {
+				margin-bottom: 10px;
+			}
+
+			&:nth-child(2) {
+				.stat-bar {
+					span { background-color: rgba($blue, .3); }
+				}
+			}
+
+			.stat-bar {
+				display: flex;
+				align-items: center;
+				width: 250px;
+				height: 15px;
+				margin-right: 20px;
+				span {
+					display: inline-block;
+					height: 15px;
+					background-color: $blue;
+				}
+				p {
+					display: inline-block;
+					margin-left: 5px;
+					font-family: $font-silkscreen;
+				}
+			}
+			img {
+				position: relative;
+				height: 25px;
+				width: auto;
+				margin-right: 10px;
+			}
+			.stat-name {
+				font-size: 12px;
+				font-family: $font-m1mregular;
+				text-transform: none;
+				color: $grey;
+			}
+		}
+	}
+}

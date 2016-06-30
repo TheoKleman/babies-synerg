@@ -107,8 +107,7 @@ export default class AnswerItem extends React.Component {
 			<div
 				className={buttonClass}
 				ref="itSelf"
-				id={id}
-				>
+				id={id} >
 				<button 
 					ref="itSelf-button"
 					className="key">
