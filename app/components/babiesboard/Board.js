@@ -432,7 +432,7 @@ export default class Board extends Component {
 		}
 
 		// Set states
-		this.souetState({
+		this.setState({
 			boardTranslateX: {
 				X: posX,
 				max: this.boardWidth,

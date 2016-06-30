@@ -30,6 +30,12 @@ export default class Baby extends React.Component {
 		this.ohAudio.src = './media/oh.wav'
 		this.youpiAudio = document.createElement('audio');
 		this.youpiAudio.src = './media/youpi.wav'
+		this.oupsAudio = document.createElement('audio');
+		this.oupsAudio.src = './media/oups.wav'
+		this.youhouAudio = document.createElement('audio');
+		this.youhouAudio.src = './media/youhou.wav'
+		this.coucouAudio = document.createElement('audio');
+		this.coucouAudio.src = './media/coucou.wav'
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -504,6 +510,17 @@ export default class Baby extends React.Component {
 				zIndex: 200,
 				ease: Power2.easeOut,
 			})
+		} else if (!this.props.formDisplayed && this.props.isSorted) {
+			// play sound
+			if (this.props.isSoundActive) {
+				if (this.state.color == "blue") {
+					this.oupsAudio.play()
+				} else if (this.state.color == "orange") {
+					this.youhouAudio.play()
+				} else if (this.state.color == "yellow" || this.state.color == "green") {
+					this.coucouAudio.play()
+				}
+			}
 		}
 	}
 
