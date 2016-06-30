@@ -21,6 +21,7 @@
     "interact-js": "^2.0.1",
     "interact.js": "^1.2.6",
     "json-loader": "^0.5.4",
+    "konami-js": "0.0.2",
     "qwest": "^4.4.0",
     "react": "~15.1.0",
     "react-dom": "^15.1.0",

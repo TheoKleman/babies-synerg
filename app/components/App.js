@@ -1,4 +1,5 @@
 import React from "react"
+import Konami from "konami-js"
 
 import FinalScreen from "./FinalScreen.js"
 import Form from "./form/Form.js"
@@ -37,6 +38,15 @@ export default class App extends React.Component {
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
+
+        var self = this
+
+        new Konami(function(){
+            self.setState({
+                finalScreenDisplayed: true,
+                boardCanTranslate: false
+            })
+        });
     }
 
     setControlHighlighting(control) {
