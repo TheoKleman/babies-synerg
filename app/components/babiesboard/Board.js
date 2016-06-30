@@ -40,6 +40,7 @@ export default class Board extends Component {
 
 	componentWillMount() {
 		// Add event listener
+		window.addEventListener('wheel', this.handleScroll.bind(this))
 		window.addEventListener('keydown', this.handleKeyDown.bind(this))
 		window.addEventListener('keypress', this.handleKeyPress.bind(this))
 		window.addEventListener("keyup", this.handleKeyUp.bind(this))
@@ -71,6 +72,7 @@ export default class Board extends Component {
 	}
 
 	componentWillUnmount() {
+		window.removeEventListener('wheel', this.handleScroll.bind(this))
 		window.removeEventListener("keydown", this.handleKeyDown.bind(this))
 		window.removeEventListener("keypress", this.handleKeyPress.bind(this))
 		window.removeEventListener("keyup", this.handleKeyUp.bind(this))
@@ -94,21 +96,66 @@ export default class Board extends Component {
 		if(nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			this.mooveToFocusedGroup(nextProps.focusedBabyGroup)
 		}
+	}
 
-		// Scroll board
-		let { deltaX, deltaY } = nextProps.scrollDelta
+	handleScroll(e) {
+		e.preventDefault()
+		var deltaX = e.deltaX
+		var deltaY = e.deltaY
 
-		if (nextProps.scrollDelta != this.props.scrollDelta 
-			&& (deltaX != 0 || deltaY != 0) 
-			&& !this.state.boardIsTranslatingWithScroll) {
-			
-			var navigateScrollInterval = setInterval(this.navigateWithScroll.bind(this), 20)
+		let maxSpeed = 60
+		let { X } = this.state.boardTranslateX
+		let { Y } = this.state.boardTranslateY
+
+		let newX = 1 * (-deltaX)
+		let newY = 1 * (-deltaY)
+
+		// Set max speed
+		if (newX > maxSpeed) {
+			newX = maxSpeed
+		} else if (newX < -maxSpeed) {
+			newX = -maxSpeed
+		}
+		if (newY > maxSpeed) {
+			newY = maxSpeed
+		} else if (newY < -maxSpeed) {
+			newY = -maxSpeed
+		}
+
+		// Set new X & Y board values
+		X += newX
+		Y += newY
+
+		// Check if X is in range
+		if (X < this.state.boardTranslateX.min) {
+			X = this.state.boardTranslateX.min
+		} else if (X > this.state.boardTranslateX.max){
+			X = this.state.boardTranslateX.max
+		}
+		// Check if Y is in range
+		if (Y < this.state.boardTranslateY.min) {
+			Y = this.state.boardTranslateY.min
+		} else if (Y > this.state.boardTranslateY.max){
+			Y = this.state.boardTranslateX.max
+		}
+
+		// Apply
+		if (this.props.canTranslate) {
 			this.setState({
-				navigateScrollInterval: navigateScrollInterval,
-				boardIsTranslatingWithScroll: true
+				boardIsTranslatingWithScroll: true,
+				boardTranslateX: {
+					X: X,
+					max: 0,
+					min: - (this.boardWidth - this.props.viewportSize.width)
+				},
+				boardTranslateY: {
+					Y: Y,
+					max: 0,
+					min: - (this.boardHeight - this.props.viewportSize.height)
+				}
 			})
-		} else if (deltaX == 0 && deltaY == 0) {
-			this.isNotNavigatingWithScroll()
+
+			this.updateBoardTransformOnScroll()
 		}
 	}
 
@@ -203,64 +250,6 @@ export default class Board extends Component {
 		}
 	}
 
-	navigateWithScroll() {
-		let maxSpeed = 60
-		let { X } = this.state.boardTranslateX
-		let { Y } = this.state.boardTranslateY
-
-		let { deltaX, deltaY } = this.props.scrollDelta
-
-		let newX = 1 * (-deltaX)
-		let newY = 1 * (-deltaY)
-
-		// Set max speed
-		if (newX > maxSpeed) {
-			newX = maxSpeed
-		} else if (newX < -maxSpeed) {
-			newX = -maxSpeed
-		}
-		if (newY > maxSpeed) {
-			newY = maxSpeed
-		} else if (newY < -maxSpeed) {
-			newY = -maxSpeed
-		}
-
-		// Set new X & Y board values
-		X += newX
-		Y += newY
-
-		// Check if X is in range
-		if (X < this.state.boardTranslateX.min) {
-			X = this.state.boardTranslateX.min
-		} else if (X > this.state.boardTranslateX.max){
-			X = this.state.boardTranslateX.max
-		}
-		// Check if Y is in range
-		if (Y < this.state.boardTranslateY.min) {
-			Y = this.state.boardTranslateY.min
-		} else if (Y > this.state.boardTranslateY.max){
-			Y = this.state.boardTranslateX.max
-		}
-
-		// Apply
-		if (this.props.canTranslate) {
-			this.setState({
-				boardTranslateX: {
-					X: X,
-					max: 0,
-					min: - (this.boardWidth - this.props.viewportSize.width)
-				},
-				boardTranslateY: {
-					Y: Y,
-					max: 0,
-					min: - (this.boardHeight - this.props.viewportSize.height)
-				}
-			})
-
-			this.updateBoardTransformOnScroll()
-		}
-	}
-
 	navigateWithKeys(direction, isPositive) {
 		let { X } = this.state.boardTranslateX
 		let { Y } = this.state.boardTranslateY
@@ -316,9 +305,7 @@ export default class Board extends Component {
 	}
 
 	isNotNavigatingWithScroll() {
-		clearInterval(this.state.navigateScrollInterval)
 		this.setState({
-			navigateScrollInterval: 0,
 			boardIsTranslatingWithScroll: false
 		})
 	}

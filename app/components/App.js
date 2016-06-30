@@ -25,13 +25,8 @@ export default class App extends React.Component {
                 bottom: false,
                 left: false,
             },
-            scrollDelta: {
-                deltaX: 0,
-                deltaY: 0
-            },
             boardWidth: 4400,
             boardHeight: 2475,
-            mouseInViewport: true,
             isSorted: false,
             isSoundActive: true,
             focusedBabyGroup: "",
@@ -42,18 +37,6 @@ export default class App extends React.Component {
 
     componentDidMount(){
         window.addEventListener('resize', this.handleResize.bind(this))
-    }
-
-    handleScroll(e) {
-        if (!this.state.formDisplayed) {
-            e.preventDefault()
-            this.setState({
-                scrollDelta: {
-                    deltaX: e.deltaX,
-                    deltaY: e.deltaY
-                }
-            })
-        }
     }
 
     setControlHighlighting(control) {
@@ -151,7 +134,6 @@ export default class App extends React.Component {
         return (
             <div
                 className="main-content"
-                onWheel={this.handleScroll.bind(this)}
                 >
                 <section id="responsive">
                     <div>
@@ -166,7 +148,7 @@ export default class App extends React.Component {
                     setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
                 <Board
                     viewportSize={this.state.viewportSize}
-                    scrollDelta={this.state.scrollDelta}
+                    // scrollDelta={this.state.scrollDelta}
                     formDisplayed={this.state.formDisplayed}
                     canTranslate={this.state.boardCanTranslate}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
