@@ -19,7 +19,6 @@ export default class QuestionsStep extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.currentQuestion.id != this.props.currentQuestion.id) {
 			// set gif
-			console.log(nextProps.currentQuestion.gif)
 			this.props.setQuestionGif(nextProps.currentQuestion.gif)
 		}
 	}
