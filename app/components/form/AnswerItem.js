@@ -49,7 +49,7 @@ export default class AnswerItem extends React.Component {
 		this.setState({
 			isHovered: false,
 			isSelected: false
-		})	
+		})
 	}
 
 	handleMouseDown() {

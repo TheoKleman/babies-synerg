@@ -8,14 +8,28 @@ var classNames = require('classnames')
 export default class Stat extends Component {
 	constructor() {
 		super()
+
+		this.state = {
+			isSelected: false,
+			isHovered: false
+		}
+
+		this.oupsAudio = document.createElement('audio');
+		this.oupsAudio.src = './media/oups.wav'
+		this.youhouAudio = document.createElement('audio');
+		this.youhouAudio.src = './media/youhou.wav'
+		this.coucouAudio = document.createElement('audio');
+		this.coucouAudio.src = './media/coucou.wav'
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		
-		if(nextProps.isSorted != this.props.isSorted) {
+		if (nextProps.isSorted != this.props.isSorted) {
 			return true
+		} else if (nextState.isSelected != this.state.isSelected) {
+			return true
+		} else {
+			return false
 		}
-		return false
 	}
 
 	componentDidMount() {
@@ -32,12 +46,42 @@ export default class Stat extends Component {
 		)
 	}
 
-	render() {
-
-		var groupBtnClasses = classNames({
-			'key': true,
+	handleMouseEnter(){
+		this.setState({
+			isHovered: true
 		})
+	}
 
+	handleMouseLeave(){
+		this.setState({
+			isHovered: false,
+			isSelected: false
+		})
+	}
+
+	handleMouseDown(){
+		this.setState({
+			isSelected: true,
+		})
+		// play sound
+		if (this.props.isSoundActive) {
+			if (this.props.groupId == "devs-stat") {
+				this.oupsAudio.play()
+			} else if (this.props.groupId == "creatifs-stat") {
+				this.youhouAudio.play()
+			} else if (this.props.groupId == "marketeux-stat" || this.props.groupId == "cdps-stat") {
+				this.coucouAudio.play()
+			}
+		}
+	}
+
+	handleMouseUp(){
+		this.setState({
+			isSelected: false,
+		})
+	}
+
+	render() {
 		if(this.props.groupId == "devs-stat") {
 			var item1 = <StatItem
 							percent="60%"
@@ -81,6 +125,12 @@ export default class Stat extends Component {
 
 		var playOrPrefer = this.props.playOrPrefer == "play" ? "Ils jouent à :" : "Ils préfèrent: "
 
+		// Class selected
+		var groupBtnClasses = "key"
+		if (this.state.isSelected) {			
+			groupBtnClasses += " selected"
+		}
+
 		return(
 			<div
 				ref="itSelf"
@@ -89,6 +139,10 @@ export default class Stat extends Component {
 				<button
 					ref="btnGroup"
 					className={groupBtnClasses}
+					onMouseEnter={this.handleMouseEnter.bind(this)}
+					onMouseLeave={this.handleMouseLeave.bind(this)}
+					onMouseDown={this.handleMouseDown.bind(this)}
+					onMouseUp={this.handleMouseUp.bind(this)}
 					>
 					<span className="key--content">{this.props.groupCount} {this.props.groupName}</span>
 					<span className="key--double"></span>

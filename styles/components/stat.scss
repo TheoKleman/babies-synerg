@@ -30,12 +30,12 @@
 
 	button.key {
 		margin-bottom: 20px;
-		&:hover {
-			span.key--content {
-			    cursor: default;
-			    background-color: $light;
-			}
-		}
+		// &:hover {
+		// 	span.key--content {
+		// 	    cursor: default;
+		// 	    background-color: $light;
+		// 	}
+		// }
 	}
 
 	.agency-stat {
