@@ -65,20 +65,19 @@ export default class BabiesList extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		if(nextProps.spacebarDown != this.props.spacebarDown) {
+		if (nextProps.spacebarDown != this.props.spacebarDown) {
 			return true
-		}
-		if(nextProps.formDisplayed != this.props.formDisplayed) {
+		} else if(nextProps.formDisplayed != this.props.formDisplayed) {
 			return true
-		}
-		if(nextProps.isSorted != this.props.isSorted) {
+		} else if (nextProps.isSorted != this.props.isSorted) {
 			return true
-		}
-		if(nextState.babies != this.state.babies) {
+		} else if (nextState.babies != this.state.babies) {
 			return true
+		} else if (nextProps.isSoundActive != this.props.isSoundActive) {
+			return true
+		} else {
+			return false
 		}
-
-		return false
 	}
 
     setVirtualBoard(){
@@ -394,6 +393,7 @@ export default class BabiesList extends Component {
 							setSorting={this.props.setSorting}
 							isSorted={this.props.isSorted}
 							formDisplayed={this.props.formDisplayed}
+							isSoundActive={this.props.isSoundActive}
 							id={i} />
           			) 
 				}

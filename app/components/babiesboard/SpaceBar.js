@@ -43,7 +43,7 @@ export default class SpaceBar extends React.Component {
 			}
 		}
 
-		if (nextProps.spacebarDown) {
+		if (nextProps.spacebarDown && nextProps.isSoundActive) {
 			this.holaAudioKey.play()
 		} else if (!nextProps.spacebarDown) {
 			this.holaAudioKey.pause();
@@ -51,14 +51,14 @@ export default class SpaceBar extends React.Component {
 		}
 	}
 
-	componentWillUpdate(nextState) {
-		if (nextState.isSelected) {
+	componentWillUpdate(nextState, nextProps) {
+		if (nextState.isSelected && nextProps.isSoundActive) {
 			this.holaAudio.play()
 		}
 	}
 
 	componentDidUpdate() {
-		if (this.state.isSelected) {
+		if (this.state.isSelected && this.props.isSoundActive) {
 			this.holaAudio.play()
 		} else if (!this.state.isSelected) {
 			this.holaAudio.pause();

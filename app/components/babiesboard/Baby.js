@@ -152,7 +152,7 @@ export default class Baby extends React.Component {
 
 	onDragListener(event) {
 		// Play oh song
-		if (!this.state.isDragging) {
+		if (!this.state.isDragging && this.props.isSoundActive) {
 			this.ohAudio.play()
 		}
 
@@ -524,7 +524,9 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseUp() {
-		this.youpiAudio.play()
+		if (this.props.isSoundActive) {
+			this.youpiAudio.play()
+		}
 	}
 
 	render() {

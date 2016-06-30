@@ -30,6 +30,8 @@ export default class Board extends React.Component {
 			return true
 		} else if (nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			return true
+		} else if (nextProps.isSoundActive != this.props.isSoundActive) {
+			return true
 		} else {
 			return false
 		}
@@ -429,7 +431,7 @@ export default class Board extends React.Component {
 		}
 
 		// Set states
-		this.setState({
+		this.souetState({
 			boardTranslateX: {
 				X: posX,
 				max: this.boardWidth,
@@ -468,7 +470,8 @@ export default class Board extends React.Component {
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
 					formDisplayed={this.props.formDisplayed}
-					spacebarDown={this.props.spacebarDown} />
+					spacebarDown={this.props.spacebarDown}
+					isSoundActive={this.props.isSoundActive}  />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}
@@ -476,7 +479,8 @@ export default class Board extends React.Component {
 					formDisplayed={this.props.formDisplayed}
 					spacebarDown={this.state.spacebarDown}
 					babyRendered={this.state.babyRendered}
-					centerBoard={this.centerBoard.bind(this)} />
+					centerBoard={this.centerBoard.bind(this)}
+					isSoundActive={this.props.isSoundActive} />
 			</section>
 		)
 	}
