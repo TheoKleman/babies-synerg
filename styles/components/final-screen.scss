@@ -4,8 +4,17 @@ section.final--screen {
     width: 100vw;
     height: 100vh;
     background: $light;
-    padding: 20px;
     text-align: center;
     opacity: 0;
     transform: scale(.95);
+
+    #video-background { 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%,-50%,0);
+        min-width: 100%; 
+        min-height: 100%; 
+        object-fit: cover;
+    }
 }

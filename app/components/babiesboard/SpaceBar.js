@@ -16,6 +16,10 @@ export default class SpaceBar extends React.Component {
 		}
 
 		this.spaceBarProgression;
+		this.holaAudio = document.createElement('audio');
+		this.holaAudio.src = './media/hola.wav'
+		this.holaAudioKey = document.createElement('audio');
+		this.holaAudioKey.src = './media/hola.wav'
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -27,11 +31,38 @@ export default class SpaceBar extends React.Component {
 				}
 				this.spaceBarProgression = new TweenMax.to(this.refs.keyContentProgress, 2.5, {
 					width: "110%",
-					ease: Power1.easeIn
+					ease: Power1.easeIn,
+					onComplete: function(){
+						setTimeout(function(){
+							self.spaceBarProgression.timeScale(5).reverse(0)
+						}, 500)
+					}
 				})
 			} else {
 				this.spaceBarProgression.timeScale(3).reverse()
 			}
+		}
+
+		if (nextProps.spacebarDown && nextProps.isSoundActive) {
+			this.holaAudioKey.play()
+		} else if (!nextProps.spacebarDown) {
+			this.holaAudioKey.pause();
+			this.holaAudioKey.currentTime = 0;
+		}
+	}
+
+	componentWillUpdate(nextState, nextProps) {
+		if (nextState.isSelected && nextProps.isSoundActive) {
+			this.holaAudio.play()
+		}
+	}
+
+	componentDidUpdate() {
+		if (this.state.isSelected && this.props.isSoundActive) {
+			this.holaAudio.play()
+		} else if (!this.state.isSelected) {
+			this.holaAudio.pause();
+			this.holaAudio.currentTime = 0;
 		}
 	}
 

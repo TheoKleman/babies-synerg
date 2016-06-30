@@ -31,6 +31,8 @@ export default class Board extends Component {
 			return true
 		} else if (nextProps.focusedBabyGroup != this.props.focusedBabyGroup) {
 			return true
+		} else if (nextProps.isSoundActive != this.props.isSoundActive) {
+			return true
 		} else {
 			return false
 		}
@@ -390,7 +392,7 @@ export default class Board extends Component {
 		})
 	}
 
-	boardTransformToGroup(posX, posY) {
+	updateBoardTransformToFocusedGroup(posX, posY) {
 		TweenMax.to(this.refs.board,1, {
 			x: posX,
 			y: posY,
@@ -399,33 +401,38 @@ export default class Board extends Component {
 	}
 	
 	mooveToFocusedGroup(group) {
-
 		console.log("group: "+group)
 		
 		if(group == "cdps") {
-			
-			this.boardTransformToGroup(0, (-(this.boardHeight / 2)))
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
 		if(group == "creatifs") {
-
-			this.boardTransformToGroup(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
 			this.updateStateAfterTranslation(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
 		}
 		if(group == "devs") {
-			
-			this.boardTransformToGroup(0, 0)
 			this.updateStateAfterTranslation(0, 0)
 		}
 		if(group == "marketeux") {
-
-			this.boardTransformToGroup(-(this.boardWidth / 2.5), 0)
 			this.updateStateAfterTranslation(-(this.boardWidth / 2.5), 0)
 		}
 	}
 
 	updateStateAfterTranslation(posX, posY) {
-		this.setState({
+		// Check if X is in range
+		if (posX < this.state.boardTranslateX.min) {
+			posX = this.state.boardTranslateX.min
+		} else if (posX > this.state.boardTranslateX.max){
+			posX = this.state.boardTranslateX.max
+		}
+		// Check if Y is in range
+		if (posY < this.state.boardTranslateY.min) {
+			posY = this.state.boardTranslateY.min
+		} else if (posY > this.state.boardTranslateY.max){
+			posY = this.state.boardTranslateX.max
+		}
+
+		// Set states
+		this.souetState({
 			boardTranslateX: {
 				X: posX,
 				max: this.boardWidth,
@@ -437,6 +444,9 @@ export default class Board extends Component {
 				min: - (this.boardHeight - this.props.viewportSize.height)
 			},
 		})
+
+		// The execute
+		this.updateBoardTransformToFocusedGroup(posX, posY)
 	}
 
 	render(){
@@ -488,7 +498,8 @@ export default class Board extends Component {
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
 					formDisplayed={this.props.formDisplayed}
-					spacebarDown={this.props.spacebarDown} />
+					spacebarDown={this.props.spacebarDown}
+					isSoundActive={this.props.isSoundActive}  />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}
@@ -496,11 +507,12 @@ export default class Board extends Component {
 					formDisplayed={this.props.formDisplayed}
 					spacebarDown={this.state.spacebarDown}
 					babyRendered={this.state.babyRendered}
-					centerBoard={this.centerBoard.bind(this)} />
-				{stat1}
-				{stat2}
-				{stat3}
-				{stat4}
+					centerBoard={this.centerBoard.bind(this)}
+					isSoundActive={this.props.isSoundActive} />
+					{stat1}
+					{stat2}
+					{stat3}
+					{stat4}
 			</section>
 		)
 	}

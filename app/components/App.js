@@ -143,7 +143,8 @@ export default class App extends React.Component {
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
-            finalScreen = <FinalScreen 
+            finalScreen = <FinalScreen
+                            isSoundActive={this.state.isSoundActive} 
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
         }
 
@@ -174,7 +175,8 @@ export default class App extends React.Component {
                     controlsHighlighting={this.state.controlsHighlighting}
                     setControlHighlighting={this.setControlHighlighting.bind(this)}
                     unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    focusedBabyGroup={this.state.focusedBabyGroup} />
+                    focusedBabyGroup={this.state.focusedBabyGroup}
+                    isSoundActive={this.state.isSoundActive}  />
                 <FilterNav
                     formDisplayed={this.state.formDisplayed}
                     isSorted={this.state.isSorted}
