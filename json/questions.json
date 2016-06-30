@@ -202,7 +202,7 @@
         }, {
             "id": 1,
             "nextQuestionId": 10,
-            "text": "Cahier de charge",
+            "text": "Cahier des charges",
             "babies": {
                 "developers": 0,
                 "designers": 0,

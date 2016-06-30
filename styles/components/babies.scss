@@ -9,11 +9,8 @@
 		width: 100px;
 		height: 200px;
         // cursor: move;
-        &.hovered {
-            cursor: url(/images/cursor.png), auto;
-        }
         &:hover {
-            cursor: url(/images/cursor.png), auto;
+            cursor: url('/images/cursor.png'), pointer;
         }
         &.disabled {
             cursor: not-allowed;

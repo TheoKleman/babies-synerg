@@ -21,6 +21,14 @@ footer.main-footer {
         }
     }
 
+    .nyan-sprite {
+        position: absolute;
+        left: 110px;
+        bottom: -80px;
+        z-index: 10;
+        background-size: cover;
+    }
+
     .misc {
         position: absolute;
         top: 20px;
@@ -76,7 +84,7 @@ nav.main-filter {
     transition: transform .3s ease-in-out;
 
     &.hidden {
-        transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -150px, 0);
     }
 
     &.open {
