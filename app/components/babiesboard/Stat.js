@@ -79,6 +79,8 @@ export default class Stat extends Component {
 							statName="Game of Thrones"/>
 		}
 
+		var playOrPrefer = this.props.playOrPrefer == "play" ? "Ils jouent à :" : "Ils préfèrent: "
+
 		return(
 			<div
 				ref="itSelf"
@@ -96,7 +98,7 @@ export default class Stat extends Component {
 					<p className="agency-stat__text">ont effectué leur stage dans une agence <span>(2015-2016)</span></p>
 				</div>
 				<div className="fun-stat">
-					<p>Ils jouent à :</p>
+					<p>{playOrPrefer}</p>
 					<div className="fun-stat-items">
 						{item1}
 						{item2}

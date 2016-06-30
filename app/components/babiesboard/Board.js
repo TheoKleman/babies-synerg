@@ -452,24 +452,28 @@ export default class Board extends Component {
 					groupName="Développeurs"
 					groupCount="32"
 					statPercent="67%"
+					playOrPrefer="play"
 					isSorted={this.props.setSorting} />
 			var stat2 = <Stat
 					groupId="creatifs-stat"
 					groupName="Créatifs"
 					groupCount="51"
 					statPercent="75%"
+					playOrPrefer="play"
 					isSorted={this.props.setSorting} />
 			var stat3 = <Stat
 					groupId="cdps-stat"
 					groupName="Chefs de projet"
 					groupCount="21"
 					statPercent="63%"
+					playOrPrefer="prefer"
 					isSorted={this.props.setSorting} />
 			var stat4 =	<Stat
 					groupId="marketeux-stat"
 					groupName="Marketeux"
 					groupCount="15"
 					statPercent="79%"
+					playOrPrefer="prefer"
 					isSorted={this.props.setSorting} />
 		}
 

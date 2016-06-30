@@ -214,6 +214,7 @@ nav.main-filter {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
+            opacity: 1;
             &:hover {
                 img {
                     transform: scale(1.1) translate3d(4%, 4%, 0);
