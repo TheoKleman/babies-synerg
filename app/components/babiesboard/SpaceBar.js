@@ -16,6 +16,10 @@ export default class SpaceBar extends React.Component {
 		}
 
 		this.spaceBarProgression;
+		this.holaAudio = document.createElement('audio');
+		this.holaAudio.src = './media/hola.wav'
+		this.holaAudioKey = document.createElement('audio');
+		this.holaAudioKey.src = './media/hola.wav'
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -37,6 +41,28 @@ export default class SpaceBar extends React.Component {
 			} else {
 				this.spaceBarProgression.timeScale(3).reverse()
 			}
+		}
+
+		if (nextProps.spacebarDown) {
+			this.holaAudioKey.play()
+		} else if (!nextProps.spacebarDown) {
+			this.holaAudioKey.pause();
+			this.holaAudioKey.currentTime = 0;
+		}
+	}
+
+	componentWillUpdate(nextState) {
+		if (nextState.isSelected) {
+			this.holaAudio.play()
+		}
+	}
+
+	componentDidUpdate() {
+		if (this.state.isSelected) {
+			this.holaAudio.play()
+		} else if (!this.state.isSelected) {
+			this.holaAudio.pause();
+			this.holaAudio.currentTime = 0;
 		}
 	}
 

@@ -26,6 +26,10 @@ export default class Baby extends React.Component {
 		}
 
 		this.rotateAngleLimit = 40
+		this.ohAudio = document.createElement('audio');
+		this.ohAudio.src = './media/oh.wav'
+		this.youpiAudio = document.createElement('audio');
+		this.youpiAudio.src = './media/youpi.wav'
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -147,6 +151,11 @@ export default class Baby extends React.Component {
 	}
 
 	onDragListener(event) {
+		// Play oh song
+		if (!this.state.isDragging) {
+			this.ohAudio.play()
+		}
+
 		this.setState({
 			isDragging: true,
 			isMooving: true
@@ -185,7 +194,7 @@ export default class Baby extends React.Component {
 
 		this.setState({
 			isDisplayedBabyDetail: false
-		})	
+		})
 	}
 
 	onDragStop(event) {
@@ -511,7 +520,11 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseDown(e) {
-		let babyDatas = this.props.datas	
+		let babyDatas = this.props.datas
+	}
+
+	handleMouseUp() {
+		this.youpiAudio.play()
 	}
 
 	render() {
@@ -588,7 +601,7 @@ export default class Baby extends React.Component {
 		return(			
 			<div
 			className={babyClasses}
-			onMouseDown={onClickEvent}
+			onMouseUp={this.handleMouseUp.bind(this)} 
 			onMouseEnter={onMouseEnterEvent}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}
@@ -598,7 +611,8 @@ export default class Baby extends React.Component {
 					color={this.getBabyColor(this.props.datas.tag)}
 					babyDetail={this.props.datas}
 					isMooving={this.state.isMooving}
-					isDisplayedBabyDetail={this.state.isDisplayedBabyDetail} />
+					isDisplayedBabyDetail={this.state.isDisplayedBabyDetail}
+					onMouseDown={this.handleMouseDown} />
 				<div className="the-baby" style={{transform: this.state.transform}}>
 					{animator}
 					<div ref="babyPieces" className={piecesClasses}>
