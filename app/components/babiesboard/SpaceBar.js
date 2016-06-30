@@ -23,6 +23,8 @@ export default class SpaceBar extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		var self = this
+		
 		if (nextProps.spacebarDown != this.props.spacebarDown) {
 			if (nextProps.spacebarDown) {
 				// spacebar progression animation
