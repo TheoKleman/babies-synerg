@@ -394,7 +394,7 @@ export default class Board extends Component {
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
 		if(group == "creatifs") {
-			this.updateStateAfterTranslation(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 60))
+			this.updateStateAfterTranslation(-(this.boardWidth / 2), (-(this.boardHeight / 3) - 200))
 		}
 		if(group == "devs") {
 			this.updateStateAfterTranslation(0, 0)
@@ -489,8 +489,9 @@ export default class Board extends Component {
 					setSorting={this.props.setSorting}
 					isSorted={this.props.isSorted}
 					formDisplayed={this.props.formDisplayed}
-					spacebarDown={this.props.spacebarDown}
-					isSoundActive={this.props.isSoundActive}  />
+					spacebarDown={this.state.spacebarDown}
+					isSoundActive={this.props.isSoundActive}
+					viewportSize={this.state.viewportSize}  />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}

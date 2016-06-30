@@ -8,9 +8,12 @@
 		display: inline-block;
 		width: 100px;
 		height: 200px;
-        cursor: move;
+        // cursor: move;
         &.hovered {
-            // cursor: url(/images/cursor.png), auto;
+            cursor: url(/images/cursor.png), auto;
+        }
+        &:hover {
+            cursor: url(/images/cursor.png), auto;
         }
         &.disabled {
             cursor: not-allowed;

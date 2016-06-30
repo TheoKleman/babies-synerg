@@ -75,6 +75,8 @@ export default class BabiesList extends Component {
 			return true
 		} else if (nextProps.isSoundActive != this.props.isSoundActive) {
 			return true
+		} else if(nextProps.viewportSize != this.props.viewportSize) {
+			return true
 		} else {
 			return false
 		}
@@ -184,6 +186,7 @@ export default class BabiesList extends Component {
 			rotation: 0,
 			destination: null,
 		}
+
 		for ( var i = (x - limit); i <= (x + limit); i++ ){
 			for ( var j = (y - limit); j <= (y + limit); j++ ){
 
@@ -193,7 +196,7 @@ export default class BabiesList extends Component {
 							return false
 						} else {
 							this.state.boardItSelf[i][j].free = 0
-							if ( i == x && j == y ){
+							if ( i == x && j == y ){								
 								casesOwn.origin = this.state.boardItSelf[i][j]
 							} else {
 								casesOwn.otherCases.push(this.state.boardItSelf[i][j])
@@ -364,8 +367,8 @@ export default class BabiesList extends Component {
 		
 	}
 
-	componentDidUpdate(){
-		
+	componentWillUpdate(nextProps, nextState) {
+
 	}
 
 	render() {
@@ -379,7 +382,7 @@ export default class BabiesList extends Component {
 			}
 		}
 
-		console.log("render babiesList")
+		// console.log("render babiesList")
 
 		return(
 			<div className="babies-container" ref="babyContainer">
@@ -394,6 +397,10 @@ export default class BabiesList extends Component {
 							isSorted={this.props.isSorted}
 							formDisplayed={this.props.formDisplayed}
 							isSoundActive={this.props.isSoundActive}
+							boardWidth={this.props.boardWidth}
+							boardHeight={this.props.boardHeight}
+							viewportSize={this.props.viewportSize}
+							spacebarDown={this.props.spacebarDown}
 							id={i} />
           			) 
 				}

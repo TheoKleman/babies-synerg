@@ -41,11 +41,11 @@ export default class Stat extends Component {
 		if(this.props.groupId == "devs-stat") {
 			var item1 = <StatItem
 							percent="60%"
-							icon="candy-crush-saga"
+							icon="gta"
 							statName="GTA"/>
 			var item2 = <StatItem 
 							percent="40%"
-							icon="angry-birds"
+							icon="fifa"
 							statName="FIFA"/>
 		}
 		if(this.props.groupId == "creatifs-stat") {
@@ -61,21 +61,21 @@ export default class Stat extends Component {
 		if(this.props.groupId == "cdps-stat") {
 			var item1 = <StatItem 
 							percent="76.2%"
-							icon="angry-birds"
+							icon="jedi"
 							statName="Maitre Jedi"/>
 			var item2 = <StatItem
 							percent="23.8%"
-							icon="candy-crush-saga"
+							icon="sith"
 							statName="Seigneur Sith"/>
 		}
 		if(this.props.groupId == "marketeux-stat") {
 			var item1 = <StatItem
 							percent="58.3%"
-							icon="candy-crush-saga"
+							icon="house-of-cards"
 							statName="House of Cards"/>
 			var item2 = <StatItem 
 							percent="41.7%"
-							icon="angry-birds"
+							icon="game-of-thrones"
 							statName="Game of Thrones"/>
 		}
 

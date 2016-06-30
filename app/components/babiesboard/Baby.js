@@ -41,32 +41,23 @@ export default class Baby extends React.Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		if(nextProps.formDisplayed != this.props.formDisplayed) {
 			return true
-		}
-		if(nextProps.babies != this.props.babies) {
+		} else if(nextProps.babies != this.props.babies) {
 			return true
-		}
-		if(nextProps.pos != this.props.pos) {
+		} else if(nextProps.pos != this.props.pos) {
 			return true
-		}
-		if(nextProps.datas != this.props.datas) {
+		} else if(nextProps.datas != this.props.datas) {
 			return true
-		}
-		if(nextProps.isSorted != this.props.isSorted) {
+		} else if(nextProps.isSorted != this.props.isSorted) {
 			return true
-		}
-		if(nextState.isMooving != this.state.isMooving) {
+		} else if(nextState.isMooving != this.state.isMooving) {
 			return true
-		}
-		if(nextState.isDragging != this.state.isDragging) {
+		} else if(nextState.isDragging != this.state.isDragging) {
 			return true
-		}
-		if(nextState.isDisplayedBabyDetail != this.state.isDisplayedBabyDetail) {
+		} else if(nextState.isDisplayedBabyDetail != this.state.isDisplayedBabyDetail) {
 			return true
-		}
-		if(nextState.color != this.state.color) {
+		} else if(nextState.color != this.state.color) {
 			return true
-		}
-		if(nextState.transform != this.state.transform) {
+		} else if(nextState.transform != this.state.transform) {
 			return true
 		}
 
@@ -81,6 +72,22 @@ export default class Baby extends React.Component {
 		this.setPosition(this.props.pos.origin)
 		this.enableDrag(true)
 		this.randomizeSkin()
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		if(nextProps.spacebarDown != this.props.spacebarDown) {
+			
+			if(this.refs.itSelf.canDoHola) {
+				TweenMax.to(
+					this.refs.itSelf,
+					0.3,
+				 {
+					scale: 2,
+					ease: Power1.easeOut,
+				})
+			}
+
+		}
 	}
 
 	randomizeSkin() {
@@ -251,6 +258,19 @@ export default class Baby extends React.Component {
 	        zIndex: pos.y
 	      }
 	    )
+
+	    let xMin = (this.props.boardWidth / 2) - (this.props.viewportSize.width / 2)
+	    let xMax = (this.props.boardWidth / 2) + (this.props.viewportSize.width / 2)
+	    let yMin = (this.props.boardHeight / 2) - (this.props.viewportSize.height / 2)
+	    let yMax = (this.props.boardHeight / 2) + (this.props.viewportSize.height / 2)
+
+	    if(xMin < pos.Xpx  && pos.Xpx < xMax) {
+	    	if(pos.Ypx > yMin && pos.Ypx < yMax) {
+	    		this.setState({
+	    			canDoHola: true
+	    		})
+	    	}
+	    }
 	}
 
 	updatePosition(posDestination, posOrigin){
@@ -518,6 +538,9 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseEnter(e) {
+		this.setState({
+			'isHovering': true
+		})
 		if(!this.props.formDisplayed && !this.props.isSorted) {
 			this.setState({
 				isDisplayedBabyDetail: true
@@ -541,6 +564,9 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseLeave(e) {
+		this.setState({
+			'isHovering': false
+		})
 		if(!this.props.formDisplayed && !this.props.isSorted) {
 			this.setState({
 				isDisplayedBabyDetail: false
@@ -606,7 +632,7 @@ export default class Baby extends React.Component {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
 					var shouldAnimate = this.props.id < 20 && this.state.shouldAnimate ? true : false
-					var shouldBeAnimated = this.props.id < 30 ? true : false
+					var shouldBeAnimated = this.props.id < 40 ? true : false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"

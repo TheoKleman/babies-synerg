@@ -20,7 +20,7 @@ export default class DetailBaby extends Component {
 		if(!this.props.isDisplayed) {
 			var self = this
 
-			TweenMax.to(this.refs.detail, .3, {
+			TweenMax.to(this.refs.detail, 0, {
 				opacity: 1,
 				x: 30,
 				scale: 1,
