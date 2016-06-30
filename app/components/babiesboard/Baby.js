@@ -277,35 +277,24 @@ export default class Baby extends React.Component {
 		})
 
 		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.rotateAngleLimit)
+		var babySmallRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, 20)
 		
-		TweenMax.set(this.refs.babyPieces, {
-			opacity: 1
+		TweenMax.allTo(
+			[this.refs.armRight, this.refs.armLeft],
+			0.3,
+		 {
+			rotation: babySmallRotation,
+			delay: 0.1,
+			ease: Power1.easeOut,
 		})
-		if(this.refs.bodyImage) {
-			TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
-		}
-		if(this.refs.bodyAnimation) {
-			TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
-		}
-
-		// var babySmallRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, 90)
-		
-		// TweenMax.to(
-		// 	this.refs.armRight,
-		// 	0.3,
-		//  {
-		// 	rotation: babySmallRotation,
-		// 	delay: 0.1,
-		// 	ease: Power1.easeOut,
-		// })
-		// TweenMax.to(
-		// 	this.refs.armRight,
-		// 	0.3,
-		//  {
-		// 	rotation: 0,
-		// 	delay: 3,
-		// 	ease: Power1.easeOut,
-		// })
+		TweenMax.to(
+			this.refs.armRight,
+			0.3,
+		 {
+			rotation: 0,
+			delay: 3,
+			ease: Power1.easeOut,
+		})
 		// let tl = new TimelineLite ()
 		// 	tl.to(
 	 //      	this.refs.legLeft,
@@ -470,6 +459,15 @@ export default class Baby extends React.Component {
 						})
 					}
 				}
+				TweenMax.set(this.refs.babyPieces, {
+					opacity: 1
+				})
+				if(this.refs.bodyImage) {
+					TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
+				}
+				if(this.refs.bodyAnimation) {
+					TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
+				}
 				this.updatePosition(this.props.pos.origin, this.props.pos.destination)
 			} else {
 				this.enableDrag(false)
@@ -479,6 +477,15 @@ export default class Baby extends React.Component {
 							shouldAnimate: false
 						})
 					}
+				}
+				TweenMax.set(this.refs.babyPieces, {
+					opacity: 1
+				})
+				if(this.refs.bodyImage) {
+					TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
+				}
+				if(this.refs.bodyAnimation) {
+					TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
 				}
 				this.updatePosition(this.props.pos.destination, this.props.pos.origin)
 			}
@@ -599,7 +606,7 @@ export default class Baby extends React.Component {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
 					var shouldAnimate = this.props.id < 20 && this.state.shouldAnimate ? true : false
-					var shouldBeAnimated = this.props.id < 20 ? true : false
+					var shouldBeAnimated = this.props.id < 30 ? true : false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"
