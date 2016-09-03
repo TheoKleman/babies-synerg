@@ -1,0 +1,100 @@
+{
+	"images": [
+		{
+			"url" : "/images/sprites/blue/head1/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head1/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head1/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head1/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head2/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head2/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head2/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/blue/head2/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head3/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head3/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head3/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head3/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head4/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head4/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head4/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/green/head4/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head3/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head3/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head3/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head3/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head4/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head4/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head4/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/orange/head4/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head1/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head1/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head1/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head1/anim4/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head2/anim1/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head2/anim2/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head2/anim3/animation.png" 
+		},
+		{
+			"url" : "/images/sprites/yellow/head2/anim4/animation.png" 
+		}
+	]
+}

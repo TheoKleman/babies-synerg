@@ -1,5 +1,8 @@
 import React from "react"
 
+import qwest from "qwest"
+var Preload = require('react-preload').Preload;
+
 import Konami from "konami-js"
 
 import FinalScreen from "./FinalScreen.js"
@@ -48,6 +51,16 @@ export default class App extends React.Component {
                 boardCanTranslate: false
             })
         });
+    }
+
+    componentWillMount() {
+        qwest
+            .get("/json/images.json")
+            .then((xhr, response) => {
+                this.setState({
+                    imagesToLoad: response
+                })
+            })
     }
 
     setControlHighlighting(control) {
@@ -134,6 +147,10 @@ export default class App extends React.Component {
         })
     }
 
+    handleImageLoaderError() {
+        console.log('Error loading images')
+    }
+
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
@@ -142,46 +159,61 @@ export default class App extends React.Component {
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
         }
 
+        var loadingIndicator = (<div>Loading...</div>)
+        var myImages = this.state.imagesToLoad
+        var images = []
+        if(myImages != undefined) {
+            var images = myImages.images
+        }
+
         return (
-            <div
-                className="main-content"
-                >
-                <section id="responsive">
-                    <div>
-                        <img src="/images/form/question14_dab.gif" alt=""/>
-                        <p>Ce site web n'est pas disponible sur les appareils disposant d'une résolution inférieure à 1280px !</p>
+            <Preload
+                    loadingIndicator={loadingIndicator}
+                    images={images}
+                    onError={this.handleImageLoaderError}
+                    autoResolveDelay={3000}
+                    mountChildren={true}
+                    >
+                    <div
+                        className="main-content"
+                        >
+                        <section id="responsive">
+                            <div>
+                                <img src="/images/form/question14_dab.gif" alt=""/>
+                                <p>Ce site web n'est pas disponible sur les appareils disposant d'une résolution inférieure à 1280px !</p>
+                            </div>
+                        </section>
+                        {finalScreen}
+                        <Form
+                            isDisplayed={this.state.formDisplayed}
+                            setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                            setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
+                        <Board
+                            viewportSize={this.state.viewportSize}
+                            // scrollDelta={this.state.scrollDelta}
+                            formDisplayed={this.state.formDisplayed}
+                            canTranslate={this.state.boardCanTranslate}
+                            setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                            setSorting={this.setSorting.bind(this)}
+                            isSorted={this.state.isSorted}
+                            controlsHighlighting={this.state.controlsHighlighting}
+                            setControlHighlighting={this.setControlHighlighting.bind(this)}
+                            unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
+                            focusedBabyGroup={this.state.focusedBabyGroup}
+                            isSoundActive={this.state.isSoundActive}  />
+                        <FilterNav
+                            formDisplayed={this.state.formDisplayed}
+                            isSorted={this.state.isSorted}
+                            setSorting={this.setSorting.bind(this)}
+                            setGroupFocus={this.setGroupFocus.bind(this)} />
+                        <Footer />
+                        <Controls 
+                            controlsHighlighting={this.state.controlsHighlighting}
+                            formDisplayed={this.state.formDisplayed}
+                            isSoundActive={this.state.isSoundActive}
+                            setSound={this.setSound.bind(this)} />
                     </div>
-                </section>
-                {finalScreen}
-                <Form
-                    isDisplayed={this.state.formDisplayed}
-                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
-                    setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
-                <Board
-                    viewportSize={this.state.viewportSize}
-                    // scrollDelta={this.state.scrollDelta}
-                    formDisplayed={this.state.formDisplayed}
-                    canTranslate={this.state.boardCanTranslate}
-                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
-                    setSorting={this.setSorting.bind(this)}
-                    isSorted={this.state.isSorted}
-                    controlsHighlighting={this.state.controlsHighlighting}
-                    setControlHighlighting={this.setControlHighlighting.bind(this)}
-                    unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                    focusedBabyGroup={this.state.focusedBabyGroup}
-                    isSoundActive={this.state.isSoundActive}  />
-                <FilterNav
-                    formDisplayed={this.state.formDisplayed}
-                    isSorted={this.state.isSorted}
-                    setSorting={this.setSorting.bind(this)}
-                    setGroupFocus={this.setGroupFocus.bind(this)} />
-                <Footer />
-                <Controls 
-                    controlsHighlighting={this.state.controlsHighlighting}
-                    formDisplayed={this.state.formDisplayed}
-                    isSoundActive={this.state.isSoundActive}
-                    setSound={this.setSound.bind(this)} />
-            </div>
+                </Preload>
         )
     }
 }

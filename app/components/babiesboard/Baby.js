@@ -343,12 +343,10 @@ export default class Baby extends React.Component {
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 0
 		})
-		if(this.refs.bodyImage) {
-			TweenMax.set(this.refs.bodyImage, { opacity: 1 })	
-		}
-		if(this.refs.bodyAnimation) {
-			TweenMax.set(this.refs.bodyAnimation, { opacity: 1 })
-		}
+		
+		this.setState({
+			isDragging: false
+		})
 	}
 
 	getRandomNumber(limitInf, limitSup) {	
@@ -484,12 +482,11 @@ export default class Baby extends React.Component {
 				TweenMax.set(this.refs.babyPieces, {
 					opacity: 1
 				})
-				if(this.refs.bodyImage) {
-					TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
-				}
-				if(this.refs.bodyAnimation) {
-					TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
-				}
+				
+				this.setState({
+					isDragging: true
+				})
+
 				this.updatePosition(this.props.pos.origin, this.props.pos.destination)
 			} else {
 				this.enableDrag(false)
@@ -503,12 +500,11 @@ export default class Baby extends React.Component {
 				TweenMax.set(this.refs.babyPieces, {
 					opacity: 1
 				})
-				if(this.refs.bodyImage) {
-					TweenMax.set(this.refs.bodyImage, { opacity: 0 })	
-				}
-				if(this.refs.bodyAnimation) {
-					TweenMax.set(this.refs.bodyAnimation, { opacity: 0 })	
-				}
+				
+				this.setState({
+					isDragging: true
+				})
+
 				this.updatePosition(this.props.pos.destination, this.props.pos.origin)
 			}
 		}
@@ -578,6 +574,7 @@ export default class Baby extends React.Component {
 	}
 
 	render() {
+		console.log('render')
 		const id = "baby-"+this.props.id
 
 		var babyClasses = classNames({

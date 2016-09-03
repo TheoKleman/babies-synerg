@@ -1,6 +1,5 @@
 
 import React, { Component, PropTypes } from "react"
-import qwest from "qwest"
 import GSAP from 'gsap'
 
 import BabiesList from "./BabiesList"
