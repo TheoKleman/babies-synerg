@@ -12,6 +12,8 @@ import Footer from "./GUI/Footer.js"
 import FilterNav from "./GUI/FilterNav.js"
 import Controls from "./GUI/Controls.js"
 
+import About from './pagemanager/pages/About.js'
+
 export default class App extends React.Component {
     constructor(){
         super()
@@ -35,6 +37,7 @@ export default class App extends React.Component {
             isSorted: false,
             isSoundActive: true,
             focusedBabyGroup: "",
+            pageToShow: null
         }
 
         this.setFinalScreenIsDisplayed = this.setFinalScreenIsDisplayed.bind(this)
@@ -151,6 +154,20 @@ export default class App extends React.Component {
         console.log('Error loading images')
     }
 
+    openPage(pageSlug) {
+        var page
+
+        switch(pageSlug) {
+            case 'about':
+                page = <About />
+                break;
+        }
+
+        this.setState({
+            pageToShow: page
+        })
+    }
+
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
@@ -182,6 +199,7 @@ export default class App extends React.Component {
                             </div>
                         </section>
                         {finalScreen}
+                        {pageToShow}
                         <Form
                             isDisplayed={this.state.formDisplayed}
                             setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
@@ -204,7 +222,8 @@ export default class App extends React.Component {
                             isSorted={this.state.isSorted}
                             setSorting={this.setSorting.bind(this)}
                             setGroupFocus={this.setGroupFocus.bind(this)} />
-                        <Footer />
+                        <Footer
+                            openPage={this.openPage.bind(this, pageSlug)} />
                         <Controls 
                             controlsHighlighting={this.state.controlsHighlighting}
                             formDisplayed={this.state.formDisplayed}

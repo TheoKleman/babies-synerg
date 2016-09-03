@@ -72,7 +72,7 @@ export default class Footer extends React.Component {
                             target="_blank">
                             Partager
                         </a>
-                        <button className="secondary">
+                        <button className="secondary" onClick={this.props.openPage.bind(this, 'about')}>
                             Infos
                         </button>
                     </div>
