@@ -2,6 +2,8 @@ import React from 'react'
 import Draggable from 'react-draggable'
 import SpriteAnimator from 'react-sprite-animator'
 
+var classNames = require('classnames')
+
 export default class Footer extends React.Component {
     constructor() {
         super()
@@ -13,6 +15,10 @@ export default class Footer extends React.Component {
         this.nyanAudio = document.createElement('audio');
         this.nyanAudio.src = './media/nyancat.wav'
         this.nyanAudio.volume = 0.4
+    }
+
+    componentDidMount() {
+        console.log('mounted')
     }
 
     handleMouseEnter(e) {
@@ -32,16 +38,12 @@ export default class Footer extends React.Component {
 
     render() {
 
-        if(this.state.showNyan) {
-            var nyanCat = <SpriteAnimator
-                        ref="bodyAnimation"
-                        className="nyan-sprite"
-                        sprite="images/animation-nyan.png"
-                        width={360}
-                        height={360}
-                        timeout={80}
-                        shouldAnimate={true} />
-        }
+        const {showNyan} = this.state
+
+        var nyanClasses = classNames({
+            'nyan-sprite': true,
+            'show-nyan': this.state.showNyan
+        })
 
         return(
             <footer className="main-footer">
@@ -53,7 +55,14 @@ export default class Footer extends React.Component {
                     target="_blank">
                     <img src="/images/logo.png" alt=""/>
                 </a>
-                {nyanCat}
+                <SpriteAnimator
+                        ref="bodyAnimation"
+                        className={nyanClasses}
+                        sprite="images/animation-nyan.png"
+                        width={360}
+                        height={360}
+                        timeout={80}
+                        shouldAnimate={showNyan} />
                 <div className="misc">
                     <div className="misc--buttons">
                         <a 

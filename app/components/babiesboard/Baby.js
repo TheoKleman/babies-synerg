@@ -618,7 +618,8 @@ export default class Baby extends React.Component {
 					
 					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
 					var shouldAnimate = this.props.id < 20 && this.state.shouldAnimate ? true : false
-					var shouldBeAnimated = this.props.id < 40 ? true : false
+					// var shouldBeAnimated = this.props.id < 0 ? true : false
+					var shouldBeAnimated = false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"

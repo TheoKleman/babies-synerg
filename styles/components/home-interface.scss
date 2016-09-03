@@ -23,10 +23,15 @@ footer.main-footer {
 
     .nyan-sprite {
         position: absolute;
+        display: none;
         left: 110px;
         bottom: -80px;
         z-index: 10;
         background-size: cover;
+
+        &.show-nyan {
+            display: block;
+        }
     }
 
     .misc {
