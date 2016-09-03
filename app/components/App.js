@@ -159,7 +159,7 @@ export default class App extends React.Component {
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
         }
 
-        var loadingIndicator = (<div>Loading...</div>)
+        var loadingIndicator = (<div id="loader">Loading...</div>)
         var myImages = this.state.imagesToLoad
         var images = []
         if(myImages != undefined) {
@@ -172,11 +172,9 @@ export default class App extends React.Component {
                     images={images}
                     onError={this.handleImageLoaderError}
                     autoResolveDelay={3000}
-                    mountChildren={true}
-                    >
+                    mountChildren={true}>
                     <div
-                        className="main-content"
-                        >
+                        className="main-content">
                         <section id="responsive">
                             <div>
                                 <img src="/images/form/question14_dab.gif" alt=""/>
