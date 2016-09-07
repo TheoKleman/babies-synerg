@@ -1,7 +1,13 @@
-import React from 'react'
-import GSAP from 'gsap'
+import React from "react"
+import ReactDOM from "react-dom"
+import GSAP from "gsap"
 
-export default class Page extends React.component {
+import About from './pages/About.js'
+import Credits from './pages/Credits.js'
+
+import CloseButton from './pagesControls/CloseButton.js'
+
+export default class Page extends React.Component {
 	constructor() {
 		super()
 	}
@@ -23,6 +29,29 @@ export default class Page extends React.component {
 	}
 
 	unmountComponent() {
-		this.unmountComponentAtNode(this.refs.itSelf);
+		console.log('yeah clicked');
+		ReactDOM.unmountComponentAtNode(this.refs.itSelf);
+	}
+
+	render() {
+
+		var pageToShow
+		switch(this.props.pageSlug) {
+			case 'about': 
+				pageToShow = <About />
+				break;
+			case 'credits': 
+				pageToShow = <Credits />
+				break;
+		}
+
+		return(
+			<div 
+				className="page"
+				ref="itSelf">
+				{pageToShow}
+				<CloseButton close={this.unmountComponent.bind(this)} />
+			</div>
+		)
 	}
 }

@@ -20,4 +20,8 @@
 @import "components/home-title.scss";
 @import "components/baby-detail.scss";
 @import "components/final-screen.scss";
-@import "components/about.scss";
+
+// Pages
+@import "components/pages/page.scss";
+@import "components/pages/about.scss";
+@import "components/pages/pageControls/closeButton.scss";

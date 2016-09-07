@@ -77,7 +77,7 @@ export default class Footer extends React.Component {
                         </button>
                     </div>
                     <div className="misc--copyright">
-                        <p><a href="">Crédits</a> / © Copyright 2016 - <a className="synerghetic" target="blank" href="http://www.synerghetic.net/">Synerg'hetic.net</a></p>
+                        <p><a onClick={this.props.openPage.bind(this, 'credits')}>Crédits</a> / © Copyright 2016 - <a className="synerghetic" target="blank" href="http://www.synerghetic.net/">Synerg'hetic.net</a></p>
                     </div>
                 </div>
             </footer>

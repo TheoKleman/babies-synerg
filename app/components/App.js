@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDOM from "react-dom"
 
 import qwest from "qwest"
 var Preload = require('react-preload').Preload;
@@ -12,7 +13,7 @@ import Footer from "./GUI/Footer.js"
 import FilterNav from "./GUI/FilterNav.js"
 import Controls from "./GUI/Controls.js"
 
-import About from './pagemanager/pages/About.js'
+import Page from "./pagemanager/Page.js"
 
 export default class App extends React.Component {
     constructor(){
@@ -159,7 +160,10 @@ export default class App extends React.Component {
 
         switch(pageSlug) {
             case 'about':
-                page = <About />
+                page = 'about'
+                break;
+            case 'credits':
+                page = 'credits'
                 break;
         }
 
@@ -174,6 +178,11 @@ export default class App extends React.Component {
             finalScreen = <FinalScreen
                             isSoundActive={this.state.isSoundActive} 
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
+        }
+
+        var page
+        if(this.state.pageToShow != null) {
+            page = <Page pageSlug={this.state.pageToShow} />
         }
 
         var loadingIndicator = (<div id="loader">Loading...</div>)
@@ -199,7 +208,7 @@ export default class App extends React.Component {
                             </div>
                         </section>
                         {finalScreen}
-                        {pageToShow}
+                        {page}
                         <Form
                             isDisplayed={this.state.formDisplayed}
                             setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
@@ -223,7 +232,7 @@ export default class App extends React.Component {
                             setSorting={this.setSorting.bind(this)}
                             setGroupFocus={this.setGroupFocus.bind(this)} />
                         <Footer
-                            openPage={this.openPage.bind(this, pageSlug)} />
+                            openPage={this.openPage.bind(this)} />
                         <Controls 
                             controlsHighlighting={this.state.controlsHighlighting}
                             formDisplayed={this.state.formDisplayed}
