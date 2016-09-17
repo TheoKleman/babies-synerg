@@ -27,6 +27,7 @@ export default class App extends React.Component {
             boardCanTranslate: true,
             finalScreenDisplayed: false,
             formDisplayed: false,
+            pageDisplayed: false,
             controlsHighlighting: {
                 top: false,
                 right: false,
@@ -41,6 +42,7 @@ export default class App extends React.Component {
             pageToShow: null
         }
 
+        //this.setPageIsOpened = this.setPageIsOpened.bind(this)
         this.setFinalScreenIsDisplayed = this.setFinalScreenIsDisplayed.bind(this)
     }
 
@@ -155,7 +157,7 @@ export default class App extends React.Component {
         console.log('Error loading images')
     }
 
-    openPage(pageSlug) {
+    setOpenPage(pageSlug) {
         var page
 
         switch(pageSlug) {
@@ -168,8 +170,15 @@ export default class App extends React.Component {
         }
 
         this.setState({
-            pageToShow: page
+            pageToShow: page,
+            pageDisplayed: true
         })
+    }
+
+    setPageIsOpened(value) {
+        this.setState({
+            pageDisplayed: value
+        })   
     }
 
     render(){
@@ -181,8 +190,10 @@ export default class App extends React.Component {
         }
 
         var page
-        if(this.state.pageToShow != null) {
-            page = <Page pageSlug={this.state.pageToShow} />
+        if(this.state.pageDisplayed && this.state.pageToShow != null) {
+            page = <Page 
+                    pageSlug={this.state.pageToShow}
+                    setPageIsOpened={this.setPageIsOpened.bind(this)} />
         }
 
         var loadingIndicator = (<div id="loader">Loading...</div>)
@@ -232,7 +243,7 @@ export default class App extends React.Component {
                             setSorting={this.setSorting.bind(this)}
                             setGroupFocus={this.setGroupFocus.bind(this)} />
                         <Footer
-                            openPage={this.openPage.bind(this)} />
+                            setOpenPage={this.setOpenPage.bind(this)} />
                         <Controls 
                             controlsHighlighting={this.state.controlsHighlighting}
                             formDisplayed={this.state.formDisplayed}

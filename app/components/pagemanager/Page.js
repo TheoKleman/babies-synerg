@@ -18,6 +18,8 @@ export default class Page extends React.Component {
 			scale: 1,
 			ease: Power2.easeInOut,
 		})
+
+		this.props.setPageIsOpened(true)
 	}
 
 	componentWillUnmount() {
@@ -30,7 +32,9 @@ export default class Page extends React.Component {
 
 	unmountComponent() {
 		console.log('yeah clicked');
-		ReactDOM.unmountComponentAtNode(this.refs.itSelf);
+		// ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this.refs.itSelf));
+		
+		this.props.setPageIsOpened(false)
 	}
 
 	render() {
