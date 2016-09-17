@@ -70,7 +70,7 @@ export default class Baby extends React.Component {
 
 	componentWillUpdate(nextProps, nextState) {
 		if(nextProps.spacebarDown != this.props.spacebarDown) {
-			
+
 			if(this.refs.itSelf.canDoHola) {
 				TweenMax.to(
 					this.refs.itSelf,
@@ -300,7 +300,7 @@ export default class Baby extends React.Component {
 
 		var babyRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, this.rotateAngleLimit)
 		var babySmallRotation = this.rotateBabyOnSort(posDestination.Xpx, posOrigin.Xpx, 20)
-		
+
 		TweenMax.allTo(
 			[this.refs.armRight, this.refs.armLeft],
 			0.3,
@@ -343,13 +343,13 @@ export default class Baby extends React.Component {
 		TweenMax.set(this.refs.babyPieces, {
 			opacity: 0
 		})
-		
+
 		this.setState({
 			isDragging: false
 		})
 	}
 
-	getRandomNumber(limitInf, limitSup) {	
+	getRandomNumber(limitInf, limitSup) {
  		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
  	}
 
@@ -444,7 +444,7 @@ export default class Baby extends React.Component {
 	}
 
 	componentDidUpdate() {
-		
+
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -482,7 +482,7 @@ export default class Baby extends React.Component {
 				TweenMax.set(this.refs.babyPieces, {
 					opacity: 1
 				})
-				
+
 				this.setState({
 					isDragging: true
 				})
@@ -500,7 +500,7 @@ export default class Baby extends React.Component {
 				TweenMax.set(this.refs.babyPieces, {
 					opacity: 1
 				})
-				
+
 				this.setState({
 					isDragging: true
 				})
@@ -570,11 +570,10 @@ export default class Baby extends React.Component {
 	}
 
 	handleMouseUp() {
-		
+
 	}
 
 	render() {
-		console.log('render')
 		const id = "baby-"+this.props.id
 
 		var babyClasses = classNames({
@@ -615,15 +614,15 @@ export default class Baby extends React.Component {
 			if(this.state.hasSprite % 2 == 0) {
 
 				if (this.state.head != "undefined" && this.state.animation != 'undefined') {
-					
-					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"	
+
+					var animationUrl = "/images/sprites/"+this.state.skin+"/head"+this.state.head+"/anim"+this.state.animation+"/animation.png"
 					var shouldAnimate = this.props.id < 20 && this.state.shouldAnimate ? true : false
 					// var shouldBeAnimated = this.props.id < 0 ? true : false
 					var shouldBeAnimated = false
 
 					var animator = <SpriteAnimator
 						ref="bodyAnimation"
-						className={bodyAnimationClasses}	
+						className={bodyAnimationClasses}
 						sprite={animationUrl}
 						width={200}
 						height={200}
@@ -632,7 +631,7 @@ export default class Baby extends React.Component {
 						shouldAnimate={shouldAnimate} />
 				}
 			} else {
-				var animator = <div 
+				var animator = <div
 					ref="bodyImage"
 					className={babyStaticBgClasses}
 					style={babyStyle} />
@@ -646,10 +645,10 @@ export default class Baby extends React.Component {
 		var onClickEvent = !this.props.isSorted ? this.handleMouseDown.bind(this) : null,
 			onMouseEnterEvent = !this.state.isMooving ? this.handleMouseEnter.bind(this) : null
 
-		return(			
+		return(
 			<div
 			className={babyClasses}
-			onMouseUp={this.handleMouseUp.bind(this)} 
+			onMouseUp={this.handleMouseUp.bind(this)}
 			onMouseEnter={onMouseEnterEvent}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}

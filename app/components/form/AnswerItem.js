@@ -33,9 +33,8 @@ export default class AnswerItem extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.keyUpId === this.props.answer.id) {
+			this.handleAnswer()
 			this.props.resetKeyId()
-			this.props.goToNextStep(this.props.answer.nextQuestionId)
-			this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies)
 		}
 	}
 
@@ -68,8 +67,7 @@ export default class AnswerItem extends React.Component {
 	}
 
 	handleAnswer() {
-		this.props.goToNextStep(this.props.answer.nextQuestionId)
-		this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies)
+		this.props.saveAnswer(this.props.question.text, this.props.answer.text, this.props.answer.sentence, this.props.answer.babies, this.props.answer.nextQuestionId)
 	}
 
 	render() {
@@ -96,7 +94,7 @@ export default class AnswerItem extends React.Component {
 		var buttonClass = "form--answers--item"
 		if ((this.props.isSelected
 			&& this.props.keyDownId == this.props.answer.id)
-			|| this.state.isSelected) {			
+			|| this.state.isSelected) {
 			buttonClass += " selected"
 		}
 
@@ -108,7 +106,7 @@ export default class AnswerItem extends React.Component {
 				className={buttonClass}
 				ref="itSelf"
 				id={id} >
-				<button 
+				<button
 					ref="itSelf-button"
 					className="key">
 					<span className="key--content">{char}</span>
