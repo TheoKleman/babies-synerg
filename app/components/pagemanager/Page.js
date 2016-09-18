@@ -12,6 +12,10 @@ export default class Page extends React.Component {
 		super()
 	}
 
+	componentWillMount() {
+		window.addEventListener('keydown', this.handleKeyDown.bind(this))
+	}
+
 	componentDidMount() {
 		TweenMax.to(this.refs.itSelf, .5, {
 			opacity: 1,
@@ -27,11 +31,20 @@ export default class Page extends React.Component {
 			opacity: 0,
 			scale: .95,
 			ease: Power2.easeInOut,
-		})	
+		})
+
+		window.removeEventListener('keydown', this.handleKeyDown.bind(this))
 	}
 
 	unmountComponent() {	
 		this.props.setPageIsOpened(false)
+	}
+
+	handleKeyDown(e) {
+		// ESC key
+		if (e.keyCode == 27 && this.props.setPageIsOpened) {
+			this.props.setPageIsOpened(false)
+		}
 	}
 
 	render() {
