@@ -7,7 +7,7 @@ export default class closeButton extends React.Component {
 
 	render() {
 		return(
-			<a className="close-button" onClick={this.props.close.bind(this)}>Close</a>
+			<button className="close-button" onClick={this.props.close.bind(this)}></button>
 		);
 	}
 
