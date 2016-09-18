@@ -66,7 +66,16 @@ section#responsive {
             transform: translate3d(-50%, 0, 0);
             width: 100px;
             height: 200px;
-            background: red;
+            // background: red;
+
+            .baby-pieces {
+                span.baby-leg-right {
+                    left: 50px;
+                }
+                span.baby-leg-left {
+                    right: 45px;
+                }
+            }
         }
 
         p {

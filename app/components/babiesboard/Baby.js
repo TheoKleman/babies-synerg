@@ -550,10 +550,6 @@ export default class Baby extends React.Component {
 		let babyDatas = this.props.datas
 	}
 
-	handleMouseUp() {
-
-	}
-
 	render() {
 		const id = "baby-"+this.props.id
 
@@ -631,7 +627,6 @@ export default class Baby extends React.Component {
 		return(
 			<div
 			className={babyClasses}
-			onMouseUp={this.handleMouseUp.bind(this)}
 			onMouseEnter={onMouseEnterEvent}
 			onMouseLeave={this.handleMouseLeave.bind(this)}
 			id={id}

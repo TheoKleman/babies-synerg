@@ -2,12 +2,13 @@
     position: relative;
     height: 100%;
     width: 100%;
+}
 
-	.baby {
-		position: absolute;
-		display: inline-block;
-		width: 100px;
-		height: 200px;
+    .baby {
+        position: absolute;
+        display: inline-block;
+        width: 100px;
+        height: 200px;
         // cursor: move;
         &:hover {
             cursor: url('/images/cursor.png'), pointer;
@@ -34,7 +35,7 @@
             -o-box-shadow: 0px 0px 20px 10px rgba($purple, .15);
             box-shadow: 0px 0px 20px 10px rgba($purple, .15);
         }
-
+        
         .the-baby{
             position: absolute;
             width: 100%;
@@ -172,8 +173,8 @@
         }
 
         &.hover {
-			// border: 1px solid red;
-		}
+            // border: 1px solid red;
+        }
 
         &:hover {
             > .wrapper {
@@ -209,6 +210,4 @@
                 }
             }
         }
-	}
-
-}
+    }

@@ -14,6 +14,7 @@ import FilterNav from "./GUI/FilterNav.js"
 import Controls from "./GUI/Controls.js"
 
 import Page from "./pagemanager/Page.js"
+import BabyResponsive from "./babiesboard/BabyResponsive.js"
 
 export default class App extends React.Component {
     constructor(){
@@ -28,6 +29,7 @@ export default class App extends React.Component {
             finalScreenDisplayed: false,
             formDisplayed: false,
             pageDisplayed: false,
+            showBoard: true,
             controlsHighlighting: {
                 top: false,
                 right: false,
@@ -76,6 +78,15 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
+        console.log(this.state.viewportSize.width)
+        console.log(this.state.viewportSize.height)
+
+        if(this.state.viewportSize.width < 980) {
+            this.setState({
+                showBoard: false
+            })
+        }
+
         qwest
             .get("/json/images.json")
             .then((xhr, response) => {
@@ -244,6 +255,64 @@ export default class App extends React.Component {
             var images = myImages.images
         }
 
+        var board
+        if(this.state.showBoard) {
+            board = <Board
+                        viewportSize={this.state.viewportSize}
+                        // scrollDelta={this.state.scrollDelta}
+                        formDisplayed={this.state.formDisplayed}
+                        canTranslate={this.state.boardCanTranslate}
+                        setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                        setSorting={this.setSorting.bind(this)}
+                        isSorted={this.state.isSorted}
+                        controlsHighlighting={this.state.controlsHighlighting}
+                        setControlHighlighting={this.setControlHighlighting.bind(this)}
+                        unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
+                        focusedBabyGroup={this.state.focusedBabyGroup}
+                        isSoundActive={this.state.isSoundActive}  />
+        }
+
+        const babySpec = {
+            babyHeight: 200,
+            babyWidth: 100,
+            iNeighbourg: false,
+            isHovering: false,
+            maxH: 1900,
+            maxW: 3500,
+            savedLeft: 0,
+            savedTop: 0,
+            style: {
+                left: "0px",
+                top: "0px",
+                zIndex: 1
+            }
+        }
+
+        const baby = {
+            "nickname": "Eden B.",
+            "skills": ["Strategie"],
+            "tag": "Marketeux",
+            "year": 2018
+        }
+
+        const babyPosition = {
+            Xpx: 0,
+            Ypx: 0,
+            free: 1,
+            x: 0,
+            y: 0,
+            origin: {
+                Xpx: 0,
+                Ypx: 0
+            },
+            dest: {
+                Xpx: 0,
+                Ypx: 0
+            }
+        }
+
+        
+
         return (
             <Preload
                     loadingIndicator={loadingIndicator}
@@ -255,10 +324,9 @@ export default class App extends React.Component {
                         className="main-content">
                         <section id="responsive">
                             <div className="center">
-                                <div className="baby">
-                                </div>
+                                <BabyResponsive />
                                 <p>
-                                    Retrouver tous les enfants du web sur le site desktop
+                                    Retrouvez tous les enfants du web sur le site desktop
                                 </p>
                             </div>
                             <div className="bottom">
@@ -271,19 +339,7 @@ export default class App extends React.Component {
                             isDisplayed={this.state.formDisplayed}
                             setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
-                        <Board
-                            viewportSize={this.state.viewportSize}
-                            // scrollDelta={this.state.scrollDelta}
-                            formDisplayed={this.state.formDisplayed}
-                            canTranslate={this.state.boardCanTranslate}
-                            setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
-                            setSorting={this.setSorting.bind(this)}
-                            isSorted={this.state.isSorted}
-                            controlsHighlighting={this.state.controlsHighlighting}
-                            setControlHighlighting={this.setControlHighlighting.bind(this)}
-                            unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
-                            focusedBabyGroup={this.state.focusedBabyGroup}
-                            isSoundActive={this.state.isSoundActive}  />
+                        {board}
                         <FilterNav
                             formDisplayed={this.state.formDisplayed}
                             isSorted={this.state.isSorted}
