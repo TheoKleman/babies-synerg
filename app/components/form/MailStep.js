@@ -54,7 +54,7 @@ export default class MailStep extends React.Component {
 	    this.setState({
 	        isHovered: false,
 	        isSelected: false
-	    })  
+	    })
 	}
 
 	handleMouseDown() {
@@ -83,7 +83,6 @@ export default class MailStep extends React.Component {
 		var body = this.refs.bodyText.value
 
 		if (this.isValidMail(mail)) {
-			console.log("valid mail")
 			this.setState({
 				isMailValid: true
 			})
@@ -128,20 +127,18 @@ export default class MailStep extends React.Component {
 		console.log("AJAX MAIL INFORMATIONS")
 		console.log(data)
 
-		// let url = 'http://local/HETIC/dataviz-synerghetic/sendMail.php'
-		// let url = 'http://lab.theokleman.com/sendMail.php'
 		let url = '/sendMail.php'
 
 		qwest.post(url, {
-				answers: data.answers,
+				// answers: data.answers,
 				body: data.bodyText,
 				mail: data.mail,
 			})
 			.then(function(xhr, response) {
-				console.log("success")
+				// console.log("success", response)
 			})
 			.catch(function(e, xhr, response) {
-				console.log("error")
+				// console.log("error", response)
 			});
 	}
 
@@ -162,7 +159,7 @@ export default class MailStep extends React.Component {
 
 		// Class selected
 		var buttonClass = "key-enter"
-		if (this.state.isSelected) {         
+		if (this.state.isSelected) {
 		    buttonClass += " selected"
 		}
 

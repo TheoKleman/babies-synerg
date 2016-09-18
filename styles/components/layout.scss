@@ -3,7 +3,7 @@
 * {
     box-sizing: border-box;
     will-change: transition, transform, left, bottom, right;
-    -webkit-user-select: none; /* Chrome/Safari */        
+    -webkit-user-select: none; /* Chrome/Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
 
@@ -80,7 +80,7 @@ p {
     font-weight: 400;
 }
 
-// Buttons 
+// Buttons
 a.btn, button {
     border: 0;
     display: inline-block;
@@ -103,5 +103,13 @@ a.btn, button {
     &.secondary {
         background-color: transparent;
         color: $blue;
+    }
+
+    svg {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        top: 2px;
     }
 }

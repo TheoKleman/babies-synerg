@@ -1,12 +1,11 @@
 <?php
     $mailFrom = $_POST['mail'];
     $mailFromName = 'Contact - Enfants du web';
-    $mailSubject = 'Proposition de projet';
-    $mailAnswers = $_POST['answers']
+    $mailSubject = 'Proposition - Enfants du web';
     $mailMessage = stripslashes($_POST['body']);
 
     $sujet = $mailSubject;
-    $strTo = 'kleman.theo@gmail.com';
+    $strTo = 'contact@synerghetic.net';
     $strHeader  = 'MIME-Version: 1.0' . "\r\n";
     $strHeader .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
     $strHeader .= "From: ".$mailFromName." <".$mailFrom.">" . "\r\n";
@@ -26,20 +25,20 @@
 
                 <b>Mail de l'emetteur</b> : ".$_POST['mail']."
                 <br>
-                <b>Message :</b> 
+                <br>
+                <b>Message :</b>
                 <br>
                 ".$mailMessage."
-                ".var_dump($mailAnswers)."
             </body>
         </html>
     ";
 
     if (mail($strTo,$sujet,$message,$strHeader)) {
-        $data = array('success' => true, 'message' => 'Merci ! Votre mail a bien été envoyé !');
+        $data = array('success' => true, 'message' => 'Merci ! Votre mail a bien été envoyé !', 'mail' => $message);
         echo json_encode($data);
     } else {
         $data = array('success' => false, 'message' => 'Une erreur est survenue, le mail n\'a pas pu être envoyé');
         echo json_encode($data);
-        exit;   
+        exit;
     }
 ?>
