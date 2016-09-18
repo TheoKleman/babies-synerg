@@ -116,7 +116,7 @@ export default class App extends React.Component {
             }
         })
     }
-    
+
     unsetControlsHighlighting() {
         this.setState({
             controlsHighlighting: {
@@ -194,7 +194,7 @@ export default class App extends React.Component {
     setPageIsOpened(value) {
         this.setState({
             pageDisplayed: value
-        })   
+        })
     }
 
     shareFacebook(value) {
@@ -226,13 +226,13 @@ export default class App extends React.Component {
         var finalScreen
         if (this.state.finalScreenDisplayed) {
             finalScreen = <FinalScreen
-                            isSoundActive={this.state.isSoundActive} 
+                            isSoundActive={this.state.isSoundActive}
                             setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
         }
 
         var page
         if(this.state.pageDisplayed && this.state.pageToShow != null) {
-            page = <Page 
+            page = <Page
                     pageSlug={this.state.pageToShow}
                     setPageIsOpened={this.setPageIsOpened.bind(this)} />
         }
@@ -254,9 +254,15 @@ export default class App extends React.Component {
                     <div
                         className="main-content">
                         <section id="responsive">
-                            <div>
-                                <img src="/images/form/question14_dab.gif" alt=""/>
-                                <p>Ce site web n'est pas disponible sur les appareils disposant d'une résolution inférieure à 1280px !</p>
+                            <div className="center">
+                                <div className="baby">
+                                </div>
+                                <p>
+                                    Retrouver tous les enfants du web sur le site desktop
+                                </p>
+                            </div>
+                            <div className="bottom">
+                                <a href="http://www.synerghetic.net/" target="_blank">www.synerghetic.net</a>
                             </div>
                         </section>
                         {finalScreen}
@@ -286,7 +292,7 @@ export default class App extends React.Component {
                         <Footer
                             setOpenPage={this.setOpenPage.bind(this)}
                             shareFacebook={this.shareFacebook.bind(this)} />
-                        <Controls 
+                        <Controls
                             controlsHighlighting={this.state.controlsHighlighting}
                             formDisplayed={this.state.formDisplayed}
                             isSoundActive={this.state.isSoundActive}
