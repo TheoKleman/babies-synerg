@@ -230,6 +230,8 @@ export default class App extends React.Component {
                         className="main-content">
                         <section id="responsive">
                             <div className="center">
+                                <div className="baby">
+                                </div>
                                 <p>
                                     Retrouver tous les enfants du web sur le site desktop
                                 </p>
