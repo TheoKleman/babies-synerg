@@ -33,10 +33,6 @@ export default class QuestionsStep extends React.Component {
 		window.removeEventListener('keyup', this.handleKeyUp)
 	}
 
-	componentDidMount() {
-		var tl = new TimelineMax()
-	}
-
 	handleKeyDown(e) {
 		var self = this
 
@@ -112,23 +108,20 @@ export default class QuestionsStep extends React.Component {
 		this.setState({
 			keyDownId: null,
 			keyUpId: null
-		})	
+		})
 	}
 
 	render() {
 		// get currentQuestion
 		var currentQuestion = this.props.currentQuestion
 
-		// Toggle btn
-		var goToNextStep = this.props.goToNextStep.bind(this)
-
 		// Save answer
 		var saveAnswer = this.props.saveAnswer.bind(this)
 
-		// Var question number 
+		// Var question number
 		var questionNumber = this.props.previousQuestionsIds.length + 1
 
-		// key down id 
+		// key down id
 		var keyDownId = this.state.keyDownId
 
 		// key pressed id
@@ -151,7 +144,7 @@ export default class QuestionsStep extends React.Component {
 					<div className="form--answers">
 						{
 							currentQuestion.answers.map(function(answer, i){
-								return <AnswerItem 
+								return <AnswerItem
 									key={answer.id}
 									answer={answer}
 									keyDownId={keyDownId}
@@ -159,7 +152,6 @@ export default class QuestionsStep extends React.Component {
 									isSelected={isSelected}
 									resetKeyId={resetKeyId}
 									question={currentQuestion}
-									goToNextStep={goToNextStep}
 									saveAnswer={saveAnswer}/>
 							})
 						}

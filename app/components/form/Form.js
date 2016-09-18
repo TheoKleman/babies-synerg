@@ -68,9 +68,9 @@ export default class Form extends React.Component {
 	}
 
 	handleKeyDown(e) {
-		// ESC key 
+		// ESC key
 		if (e.keyCode == 27 && this.props.isDisplayed) {
-			this.hideForm();
+			this.hideForm()
 		} // Back key
 		else if (e.keyCode == 8 && this.props.isDisplayed && this.state.step < 7) {
 			e.preventDefault()
@@ -127,11 +127,10 @@ export default class Form extends React.Component {
 	}
 
 	nextStep(nextQuestionId) {
-		if (this.state.step > 7){
+		if (this.state.step > 7) {
 			var newStep = this.state.step
 		} else if (nextQuestionId === "endPoint") {
 			var newStep = 6
-			this.updateNbOfBabiesBySkills()
 		} else {
 			var newStep = this.state.step + 1
 		}
@@ -199,13 +198,12 @@ export default class Form extends React.Component {
 	}
 
 	setQuestionGif(value) {
-		console.log(value)
 		this.setState({
 			questionGif: value
 		})
 	}
 
-	saveAnswer(question, answer, sentence, babies) {
+	saveAnswer(question, answer, sentence, babies, nextQuestionId) {
 		var theAnswer = [question,answer,sentence, babies]
 		var answersArray = []
 		answersArray = this.state.answers
@@ -214,33 +212,42 @@ export default class Form extends React.Component {
 		this.setState({
 			answers: answersArray
 		})
+
+		// Update babies count
+		this.updateNbOfBabiesBySkills()
+		this.nextStep(nextQuestionId)
 	}
 
 	updateNbOfBabiesBySkills() {
-		var babies = {
-			designers: 0, 
-			developers: 0,
-			market: 0,
-			management: 0
-		}
-
-		// count babies
-		for (var i = 0; i < this.state.answers.length; i = i + 4) {
-			var item = this.state.answers[i+3]
-			babies.designers += item.designers
-			babies.developers += item.developers
-			babies.market += item.market
-			babies.management += item.management
-		}
-
-		this.setState({
-			availablePeopleBySkills: {
-				designers: babies.designers,
-				developers: babies.developers,
-				market: babies.market,
-				management: babies.management,	
+		// console.log('ANSWERS', this.state.answers)
+		if (this.state.answers.length > 0) {
+			var babies = {
+				designers: 0,
+				developers: 0,
+				market: 0,
+				management: 0
 			}
-		})
+
+			// count babies
+			for (var i = 0; i < this.state.answers.length; i = i + 4) {
+				var item = this.state.answers[i+3]
+				babies.designers += item.designers
+				babies.developers += item.developers
+				babies.market += item.market
+				babies.management += item.management
+			}
+
+			this.setState({
+				availablePeopleBySkills: {
+					designers: babies.designers,
+					developers: babies.developers,
+					market: babies.market,
+					management: babies.management,
+				}
+			})
+
+			// console.log('BABIES HERE', this.state.availablePeopleBySkills)
+		}
 	}
 
 	closeMouseOver() {
@@ -266,6 +273,16 @@ export default class Form extends React.Component {
 	}
 
 	render() {
+		// console.log("******************************************************")
+		// console.log("step", this.state.step)
+		// console.log("--")
+		// console.log("previousQuestionsIds", this.state.previousQuestionsIds)
+		// console.log("--")
+		// console.log("currentQuestionId", this.state.currentQuestionId)
+		// console.log("--")
+		// console.log("currentQuestion", this.state.currentQuestion)
+		// console.log("******************************************************")
+
 		var closeForm
 		var button
 		var gif = "/images/form/question01_bonjour.gif"
@@ -288,7 +305,7 @@ export default class Form extends React.Component {
 		// Set section content
 		if (this.state.step == 0) {
 			gif = "/images/form/question01_bonjour.gif"
-			var rightContent = <IntroStep 
+			var rightContent = <IntroStep
 									step={this.state.step}
 									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
@@ -302,41 +319,40 @@ export default class Form extends React.Component {
 			}
 			var rightContent = <QuestionsStep
 									step={this.state.step}
-									goToNextStep={this.nextStep.bind(this)}
 									goToPreviousStep={this.previousStep.bind(this)}
 									currentQuestion={this.state.currentQuestion}
 									setQuestionGif={this.setQuestionGif.bind(this)}
 									previousQuestionsIds={this.state.previousQuestionsIds}
 									saveAnswer={this.saveAnswer.bind(this)}
-									/>   
+									/>
 		} else if (this.state.step == 6) {
 			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
-			var rightContent = <SummaryStep 
+			var rightContent = <SummaryStep
 									step={this.state.step}
 									availablePeopleBySkills={this.state.availablePeopleBySkills}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 7) {
 			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
-			var rightContent = <MailStep 
+			var rightContent = <MailStep
 									step={this.state.step}
 									mailAnswers={this.state.answers}
 									goToNextStep={this.nextStep.bind(this)}
 									/>
 		} else if (this.state.step == 8) {
 			gif = "/images/form/reponse-question-bebe-tombe_youpi.gif"
-			var rightContent = <ThanksStep 
+			var rightContent = <ThanksStep
 									step={this.state.step}
 									hideForm={this.hideForm.bind(this)}
 									resetForm={this.resetForm.bind(this)}
 									setFinalScreenIsDisplayed={this.props.setFinalScreenIsDisplayed}
-									/>	
+									/>
 		}
 
 		if (this.state.isCloseHovered) {
 			gif = "/images/form/hover-close-form_non.gif"
 		}
-		
+
 		return(
 			<section
 				ref="form"
