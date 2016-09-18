@@ -197,6 +197,31 @@ export default class App extends React.Component {
         })   
     }
 
+    shareFacebook(value) {
+        const shareText = "Synerg'Hetic la junior entreprise des enfants du web"
+
+        // window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(value)+'&t='+encodeURIComponent(shareText),'sharer','toolbar=0,status=0,width=626,height=436');return false;
+
+        FB.init({
+            appId      : '1160437790668434',
+            status     : true,
+            xfbml      : true,
+            version    : 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+        });
+
+        console.log('http://enfantsduweb.wtf/' + value)
+
+         FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: 'http://enfantsduweb.wtf/',
+            title: shareText,
+            picture: 'http://enfantsduweb.wtf/images/share-image.png'
+        }, function(response){
+
+        });
+    }
+
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
@@ -259,7 +284,8 @@ export default class App extends React.Component {
                             setSorting={this.setSorting.bind(this)}
                             setGroupFocus={this.setGroupFocus.bind(this)} />
                         <Footer
-                            setOpenPage={this.setOpenPage.bind(this)} />
+                            setOpenPage={this.setOpenPage.bind(this)}
+                            shareFacebook={this.shareFacebook.bind(this)} />
                         <Controls 
                             controlsHighlighting={this.state.controlsHighlighting}
                             formDisplayed={this.state.formDisplayed}
