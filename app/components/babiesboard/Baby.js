@@ -309,6 +309,7 @@ export default class Baby extends React.Component {
 			delay: 0.1,
 			ease: Power1.easeOut,
 		})
+
 		TweenMax.to(
 			this.refs.armRight,
 			0.3,
@@ -317,26 +318,6 @@ export default class Baby extends React.Component {
 			delay: 3,
 			ease: Power1.easeOut,
 		})
-		// let tl = new TimelineLite ()
-		// 	tl.to(
-	 //      	this.refs.legLeft,
-	 //      	0.5,
-		//       {
-		//         y: 5,
-		//         ease: Power1.easeOut,
-		//         repeat: 15,
-		//         delay: 0.3,
-		//       }
-		//     )
-		//     tl.to(
-	 //      	this.refs.legRight,
-	 //      	0.5,
-		//       {
-		//         y: 5,
-		//         ease: Power1.easeOut,
-		//         repeat: 15,
-		//       }
-		//     )
 	}
 
 	onBabySortEnd() {
@@ -574,7 +555,7 @@ export default class Baby extends React.Component {
 	}
 
 	render() {
-		console.log('render')
+		// console.log('render')
 		const id = "baby-"+this.props.id
 
 		var babyClasses = classNames({
@@ -630,12 +611,14 @@ export default class Baby extends React.Component {
 						timeout={80}
 						shouldBeAnimated={shouldBeAnimated}
 						shouldAnimate={shouldAnimate} />
+					// var animator = <div className={bodyAnimationClasses}></div>
 				}
 			} else {
 				var animator = <div 
 					ref="bodyImage"
 					className={babyStaticBgClasses}
 					style={babyStyle} />
+				// var animator = <div className={bodyAnimationClasses}></div>
 			}
 		}
 

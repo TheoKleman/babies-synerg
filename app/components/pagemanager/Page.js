@@ -30,10 +30,7 @@ export default class Page extends React.Component {
 		})	
 	}
 
-	unmountComponent() {
-		console.log('yeah clicked');
-		// ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this.refs.itSelf));
-		
+	unmountComponent() {	
 		this.props.setPageIsOpened(false)
 	}
 

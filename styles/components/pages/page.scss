@@ -2,9 +2,78 @@
 	width: 100vw;
 	height: auto;
 	min-height: 100vh;
-	background: $light;
-	position: relative;
+	background-color: rgba($blue, .9);
+	position: absolute;
 	z-index: 20;
 	padding: 30px;
-	color: #000;
+	color: $light;
+
+	.page-content {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 50px 4%;
+	}
+
+	.page-title {
+		display: block;
+		margin-bottom: 80px;
+		text-align: center;
+		font-size: 24px;
+		font-family: $font-silkscreen;
+		text-transform: uppercase;
+	}
+
+	.credit-group {
+		display: block;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	p {
+		font-size: 16px;
+		font-family: $font-m1mregular;
+		line-height: 30px;
+
+		span.bold {
+			font-family: $font-m1mbold;
+		}
+	}
+
+	.credits-mentions {
+		font-size: 12px;
+	}
+
+	button.close-button {
+        position: absolute;
+        top: auto;
+        bottom: 6%;
+        right: auto;
+        left: 50%;
+        // transform: translateX(-50%) rotate(0);
+        height: 30px;
+        width: 32px;
+        background: url(/images/UI/form-close.png);
+
+        &:hover {
+            transform: rotate(180deg) translateX(0);
+        }
+    }
+
+	a {
+		color: $light;
+		font-size: 16px;
+		text-decoration: none;
+	    text-decoration: none;
+	    background-image: linear-gradient(to bottom, transparent 50%, $light 50%);
+	    background-position: 0 95%;
+	    background-repeat: no-repeat;
+	    background-size: 100% 2px;
+	    padding-bottom: 3px;
+	    transition: background .3s ease, color .2s .3s;
+
+	    &:hover {
+	    	background-size: 100% 50px;
+	    	color: $blue;
+	    }
+	}
 }

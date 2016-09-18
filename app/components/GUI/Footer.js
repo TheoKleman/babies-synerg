@@ -17,10 +17,6 @@ export default class Footer extends React.Component {
         this.nyanAudio.volume = 0.4
     }
 
-    componentDidMount() {
-        console.log('mounted')
-    }
-
     handleMouseEnter(e) {
         this.nyanAudio.currentTime = 0
         this.nyanAudio.play()
