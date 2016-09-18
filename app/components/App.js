@@ -237,7 +237,7 @@ export default class App extends React.Component {
                                 </p>
                             </div>
                             <div className="bottom">
-                                <a href="www.synerghetic.net" target="_blank">www.synerghetic.net</a>
+                                <a href="http://www.synerghetic.net/" target="_blank">www.synerghetic.net</a>
                             </div>
                         </section>
                         {finalScreen}

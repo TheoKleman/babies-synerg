@@ -55,7 +55,9 @@ section#responsive {
         left: 50%;
         transform: translate3d(-50%, -50%, 0);
         text-align: center;
-        padding-top: 230px;
+        width: 80%;
+        max-width:  380px;
+        padding-top: 240px;
 
         .baby {
             position: absolute;
