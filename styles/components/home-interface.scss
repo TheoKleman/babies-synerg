@@ -47,7 +47,7 @@ footer.main-footer {
             height: 35px;
             width: 250px;
 
-            button {
+            button, a.btn {
                 margin-right: 10px;
                 font-family: $font-m1mbold;
                 letter-spacing: 1.2px;
@@ -196,7 +196,7 @@ nav.main-filter {
                    height: 0;
                    border-bottom: 9px solid rgba($blue, 0.8);
                    border-right: 6px solid transparent;
-                   border-left: 6px solid transparent; 
+                   border-left: 6px solid transparent;
                 }
             }
             span.square {
@@ -280,7 +280,7 @@ nav.controls {
     align-items: flex-end;
     bottom: 0;
     right: 0;
-    height: 90px; 
+    height: 90px;
     padding: 0 20px 20px 0;
     z-index: 10;
     overflow: hidden;
@@ -301,9 +301,9 @@ nav.controls {
         > button {
             position: absolute;
 
-            &:hover { 
+            &:hover {
                 cursor: default;
-                span.key--content { 
+                span.key--content {
                     transform: translate3d(0, 0, 0);
                     background-color: $light;
                 }
