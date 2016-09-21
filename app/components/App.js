@@ -15,6 +15,8 @@ import Controls from "./GUI/Controls.js"
 import Page from "./pagemanager/Page.js"
 import BabyResponsive from "./babiesboard/BabyResponsive.js"
 
+import Loader from "./Loader.js"
+
 export default class App extends React.Component {
     constructor(){
         super()
@@ -268,6 +270,11 @@ export default class App extends React.Component {
                         setBabiesReady={this.setBabiesReady.bind(this)}  />
         }
 
+        var loader
+        if(this.state.loading) {
+            loader = <Loader />
+        }
+
         const babySpec = {
             babyHeight: 200,
             babyWidth: 100,
@@ -323,6 +330,7 @@ export default class App extends React.Component {
                 </section>
                 {finalScreen}
                 {page}
+                {loader}
                 <Form
                     isDisplayed={this.state.formDisplayed}
                     setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}

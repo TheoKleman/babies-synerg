@@ -1,0 +1,77 @@
+.page-loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $light;
+	background-image: url('../images/pattern.png');
+
+	.page-content {
+		text-align: center;
+	}
+
+	.baby-synerg {
+		position: relative;
+		display: block;
+		margin: 0 auto;
+		height: 290px;
+
+		&::after {
+            position: absolute;
+            content: '';
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 0px;
+            border-radius: 90%;
+            /* background-color: rgba($dark, .2);*/
+            -o-box-shadow: 0px 0px 20px 10px rgba($purple, .15);
+            box-shadow: 0px 0px 20px 10px rgba($purple, .15);
+        }
+	}
+
+	h1 {
+		position: relative;
+		display: inline-block;
+		margin: 0 auto;
+		font-size: 21px;
+		line-height: 31px;
+		text-transform: uppercase;
+		text-align: center;
+		letter-spacing: 1px;
+		font-family: $font-silkscreen;
+		letter-spacing: -0.1em;
+		color: $blue;
+
+		&:after {
+			position: absolute;
+			content: '';
+			left: 0;
+			bottom: 0;
+			height: 15px;
+			background-color: $yellow;
+			animation: grow 2s cubic-bezier(0.86, 0, 0.07, 1) 2s forwards;
+			z-index: -1;
+		}
+	}
+
+	.nav-explanation {
+		margin-top: 60px;
+
+		img {
+			margin-right: 20px;
+		}
+
+		p {
+			display: inline-block;
+			vertical-align: bottom;
+			font-size: 16px;
+			color: $blue;
+		}
+	}
+}
+
+@keyframes grow {
+	0% {width: 0;}
+	100% {width: 100%;}
+}
