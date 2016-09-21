@@ -2,7 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom"
 
 import qwest from "qwest"
-var Preload = require('react-preload').Preload;
 
 import Konami from "konami-js"
 
@@ -86,14 +85,6 @@ export default class App extends React.Component {
                 showBoard: false
             })
         }
-
-        qwest
-            .get("/json/images.json")
-            .then((xhr, response) => {
-                this.setState({
-                    imagesToLoad: response
-                })
-            })
     }
 
     setControlHighlighting(control) {
@@ -248,13 +239,6 @@ export default class App extends React.Component {
                     setPageIsOpened={this.setPageIsOpened.bind(this)} />
         }
 
-        var loadingIndicator = (<div id="loader">Loading...</div>)
-        var myImages = this.state.imagesToLoad
-        var images = []
-        if(myImages != undefined) {
-            var images = myImages.images
-        }
-
         var board
         if(this.state.showBoard) {
             board = <Board
@@ -311,50 +295,41 @@ export default class App extends React.Component {
             }
         }
 
-        
-
         return (
-            <Preload
-                    loadingIndicator={loadingIndicator}
-                    images={images}
-                    onError={this.handleImageLoaderError}
-                    autoResolveDelay={3000}
-                    mountChildren={true}>
-                    <div
-                        className="main-content">
-                        <section id="responsive">
-                            <div className="center">
-                                <BabyResponsive />
-                                <p>
-                                    Retrouvez tous les enfants du web sur le site desktop
-                                </p>
-                            </div>
-                            <div className="bottom">
-                                <a href="http://www.synerghetic.net/" target="_blank">www.synerghetic.net</a>
-                            </div>
-                        </section>
-                        {finalScreen}
-                        {page}
-                        <Form
-                            isDisplayed={this.state.formDisplayed}
-                            setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
-                            setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
-                        {board}
-                        <FilterNav
-                            formDisplayed={this.state.formDisplayed}
-                            isSorted={this.state.isSorted}
-                            setSorting={this.setSorting.bind(this)}
-                            setGroupFocus={this.setGroupFocus.bind(this)} />
-                        <Footer
-                            setOpenPage={this.setOpenPage.bind(this)}
-                            shareFacebook={this.shareFacebook.bind(this)} />
-                        <Controls
-                            controlsHighlighting={this.state.controlsHighlighting}
-                            formDisplayed={this.state.formDisplayed}
-                            isSoundActive={this.state.isSoundActive}
-                            setSound={this.setSound.bind(this)} />
+            <div
+                className="main-content">
+                <section id="responsive">
+                    <div className="center">
+                        <BabyResponsive />
+                        <p>
+                            Retrouvez tous les enfants du web sur le site desktop
+                        </p>
                     </div>
-                </Preload>
+                    <div className="bottom">
+                        <a href="http://www.synerghetic.net/" target="_blank">www.synerghetic.net</a>
+                    </div>
+                </section>
+                {finalScreen}
+                {page}
+                <Form
+                    isDisplayed={this.state.formDisplayed}
+                    setFormIsDisplayedProps={this.setFormIsDisplayedState.bind(this)}
+                    setFinalScreenIsDisplayed={this.setFinalScreenIsDisplayed.bind(this)} />
+                {board}
+                <FilterNav
+                    formDisplayed={this.state.formDisplayed}
+                    isSorted={this.state.isSorted}
+                    setSorting={this.setSorting.bind(this)}
+                    setGroupFocus={this.setGroupFocus.bind(this)} />
+                <Footer
+                    setOpenPage={this.setOpenPage.bind(this)}
+                    shareFacebook={this.shareFacebook.bind(this)} />
+                <Controls
+                    controlsHighlighting={this.state.controlsHighlighting}
+                    formDisplayed={this.state.formDisplayed}
+                    isSoundActive={this.state.isSoundActive}
+                    setSound={this.setSound.bind(this)} />
+            </div>
         )
     }
 }
