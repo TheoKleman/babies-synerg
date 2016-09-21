@@ -388,8 +388,6 @@ export default class BabiesList extends Component {
 			}
 		}
 
-		// console.log("render babiesList")
-
 		return(
 			<div className="babies-container" ref="babyContainer">
 				{

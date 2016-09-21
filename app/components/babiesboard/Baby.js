@@ -80,7 +80,6 @@ export default class Baby extends React.Component {
 					ease: Power1.easeOut,
 				})
 			}
-
 		}
 	}
 
