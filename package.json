@@ -26,8 +26,6 @@
     "react": "~15.1.0",
     "react-dom": "^15.1.0",
     "react-draggable": "^2.1.2",
-    "react-preload": "^0.2.3",
-    "react-preloader": "^1.2.0",
     "react-router": "^2.1.1",
     "react-sprite-animator": "^0.2.3",
     "scrollmagic": "^2.0.5"

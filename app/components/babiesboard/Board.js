@@ -43,7 +43,7 @@ export default class Board extends Component {
 		window.addEventListener('keydown', this.handleKeyDown.bind(this))
 		window.addEventListener('keypress', this.handleKeyPress.bind(this))
 		window.addEventListener("keyup", this.handleKeyUp.bind(this))
-		
+
 		// Set board DOM Elem
 		this.setState({
 			viewportSize: this.props.viewportSize
@@ -83,7 +83,7 @@ export default class Board extends Component {
 			|| nextProps.viewportSize.height != this.props.viewportSize.height) {
 			let centerX = -((this.boardWidth/2) - (nextProps.viewportSize.width/2));
 			let centerY = -((this.boardHeight/2) - (nextProps.viewportSize.height/2));
-			
+
 			this.setState({
 				boardCenterX: centerX,
 				boardCenterY: centerY
@@ -194,13 +194,13 @@ export default class Board extends Component {
 			}
 			// Spacebar
 			else if (e.keyCode == 32 && !this.state.spacebarDown) {
-				// Center board 
+				// Center board
 				this.centerBoard()
 			}
 
 			// Execute navigate
-			if (direction != null 
-				&& isPositive != null 
+			if (direction != null
+				&& isPositive != null
 				&& !this.state.boardIsTranslatingWithKeys) {
 				this.isNotNavigatingWithScroll()
 
@@ -245,7 +245,7 @@ export default class Board extends Component {
 
 		// Unset controls highlithing
 		if(e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 37 || e.keyCode == 39) {
-			this.props.unsetControlsHighlighting()   
+			this.props.unsetControlsHighlighting()
 		}
 	}
 
@@ -385,8 +385,9 @@ export default class Board extends Component {
 			ease: Power2.easeOut
 		})
 	}
+
+	mooveToFocusedGroup(group) {
 	
-	mooveToFocusedGroup(group) {		
 		if(group == "cdps") {
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
@@ -497,7 +498,8 @@ export default class Board extends Component {
 					formDisplayed={this.props.formDisplayed}
 					spacebarDown={this.state.spacebarDown}
 					isSoundActive={this.props.isSoundActive}
-					viewportSize={this.state.viewportSize} />
+					viewportSize={this.state.viewportSize}
+					setBabiesReady={this.props.setBabiesReady.bind(this)}  />
 				<HomeTitle
 					boardWidth={this.boardWidth}
 					boardHeight={this.boardHeight}
