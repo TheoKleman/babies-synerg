@@ -78,7 +78,9 @@ export default class BabiesList extends Component {
 			return true
 		} else if (nextProps.isSoundActive != this.props.isSoundActive) {
 			return true
-		} else if(nextProps.viewportSize != this.props.viewportSize) {
+		} else if (nextProps.viewportSize != this.props.viewportSize) {
+			return true
+		} else if (nextState.babiesReady) {
 			return true
 		} else {
 			return false
@@ -90,7 +92,7 @@ export default class BabiesList extends Component {
 	    let caseWidth = this.props.boardWidth / nbCasesX
 	    let nbCasesY = Math.floor(( this.props.boardHeight / ( this.state.babySpec.babyHeight + this.safetyHeightDistance ) ) * this.scale)
 	    let caseHeight = this.props.boardHeight / nbCasesY
-	    
+
 	    this.setState({
 	        nbCasesX: nbCasesX,
 	        nbCasesY: nbCasesY,
@@ -131,7 +133,7 @@ export default class BabiesList extends Component {
             	let difY = array[i][j].Ypx - center.Ypx
                 if ( Math.pow(difX / width, 2) + Math.pow(difY / height, 2) <= 1 ){
                 	array[i][j].free = 0
-                } 
+                }
             }
         }
     	return array
@@ -152,8 +154,15 @@ export default class BabiesList extends Component {
         qwest
             .get("/json/babies.json")
             .then((xhr, response) => {
+            	let l = response.babies.length
+            	var babiesReady = []
+            	for (var i = 0; i < l; i++) {
+            		babiesReady[i] = false;
+            	}
+
                 this.setState({
-                    babies: response.babies
+                    babies: response.babies,
+                    babiesReady: babiesReady
                 })
                 if (this.props.isSoundActive) {
 					this.coucouAudio.play()
@@ -161,7 +170,7 @@ export default class BabiesList extends Component {
             })
     }
 
-    loadBabySpec() { 
+    loadBabySpec() {
         qwest
             .get("/json/babySpec.json")
             .then((xhr, response) => {
@@ -202,7 +211,7 @@ export default class BabiesList extends Component {
 							return false
 						} else {
 							this.state.boardItSelf[i][j].free = 0
-							if ( i == x && j == y ){								
+							if ( i == x && j == y ){
 								casesOwn.origin = this.state.boardItSelf[i][j]
 							} else {
 								casesOwn.otherCases.push(this.state.boardItSelf[i][j])
@@ -225,7 +234,7 @@ export default class BabiesList extends Component {
 		let fakeLengthX = arrayPositions.length - 1
 		let xArrayLength = this.getArrayExactLength(arrayPositions)
 		let xFirstIndex = (fakeLengthX - xArrayLength) + 1
-		
+
 		let arrayY = arrayPositions[fakeLengthX]
 		let fakeLengthY = arrayY.length - 1
 		let yArrayLength = this.getArrayExactLength(arrayY)
@@ -251,7 +260,7 @@ export default class BabiesList extends Component {
 	}
 
 	sortBabies() {
-		
+
 	}
 
 
@@ -315,7 +324,7 @@ export default class BabiesList extends Component {
 			this.setRandomDestination(creatifs, this.state.designPositionsArea)
 			this.setRandomDestination(devs, this.state.devPositionsArea)
 			this.setRandomDestination(cdps, this.state.cdpPositionsArea)
-			this.setRandomDestination(marketeux, this.state.marketPositionsArea)	
+			this.setRandomDestination(marketeux, this.state.marketPositionsArea)
 		}
 	}
 
@@ -350,7 +359,7 @@ export default class BabiesList extends Component {
 		return array;
 	}
 
-	getRandomNumber(limitInf, limitSup) {	
+	getRandomNumber(limitInf, limitSup) {
  		return Math.floor(Math.random() * (limitSup-limitInf+1)+limitInf)
  	}
 
@@ -369,12 +378,19 @@ export default class BabiesList extends Component {
         this.loadBabies()
 	}
 
-	componentDidMount(){
-		
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.babiesReady.indexOf(false) === -1) {
+			this.props.setBabiesReady(true);
+		}
 	}
 
-	componentWillUpdate(nextProps, nextState) {
+	setBabyReady(id) {
+		var babiesReady = this.state.babiesReady
+		babiesReady[id] = true
 
+		this.setState({
+			babiesReady: babiesReady
+		})
 	}
 
 	render() {
@@ -387,8 +403,6 @@ export default class BabiesList extends Component {
 				this.fillPositions()
 			}
 		}
-
-		// console.log("render babiesList")
 
 		return(
 			<div className="babies-container" ref="babyContainer">
@@ -407,8 +421,9 @@ export default class BabiesList extends Component {
 							boardHeight={this.props.boardHeight}
 							viewportSize={this.props.viewportSize}
 							spacebarDown={this.props.spacebarDown}
+							setBabyReady={this.setBabyReady.bind(this)}
 							id={i} />
-          			) 
+          			)
 				}
 			</div>
 		);

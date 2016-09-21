@@ -20,6 +20,7 @@ export default class App extends React.Component {
         super()
 
         this.state = {
+            loading: true,
             viewportSize: {
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -224,6 +225,12 @@ export default class App extends React.Component {
         });
     }
 
+    setBabiesReady(bool) {
+        this.setState({
+            loading: !bool
+        })
+    }
+
     render(){
         var finalScreen
         if (this.state.finalScreenDisplayed) {
@@ -253,7 +260,8 @@ export default class App extends React.Component {
                         setControlHighlighting={this.setControlHighlighting.bind(this)}
                         unsetControlsHighlighting={this.unsetControlsHighlighting.bind(this)}
                         focusedBabyGroup={this.state.focusedBabyGroup}
-                        isSoundActive={this.state.isSoundActive}  />
+                        isSoundActive={this.state.isSoundActive}
+                        setBabiesReady={this.setBabiesReady.bind(this)}  />
         }
 
         const babySpec = {

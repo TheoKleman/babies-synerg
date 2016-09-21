@@ -68,6 +68,16 @@ export default class Baby extends React.Component {
 		this.randomizeSkin()
 	}
 
+	componentDidUpdate() {
+		if (!this.state.isReady) {
+			this.setState({
+				isReady: true,
+			})
+
+			this.props.setBabyReady(this.props.id)
+		}
+	}
+
 	componentWillUpdate(nextProps, nextState) {
 		if(nextProps.spacebarDown != this.props.spacebarDown) {
 
@@ -422,10 +432,6 @@ export default class Baby extends React.Component {
         	default:
         		return "yellow"
         }
-	}
-
-	componentDidUpdate() {
-
 	}
 
 	componentWillReceiveProps(nextProps) {
