@@ -78,9 +78,6 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.state.viewportSize.width)
-        console.log(this.state.viewportSize.height)
-
         if(this.state.viewportSize.width < 980) {
             this.setState({
                 showBoard: false

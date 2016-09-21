@@ -14,7 +14,7 @@ export default class Board extends Component {
 			boardIsTranslatingWithScroll: false,
 			boardIsTranslatingWithKeys: false,
 			spacebarDown: false,
-			babyRendered: false,
+			babyRendered: false
 		}
 
 		this.boardWidth = 3400
@@ -387,8 +387,7 @@ export default class Board extends Component {
 	}
 
 	mooveToFocusedGroup(group) {
-		console.log("group: "+group)
-
+	
 		if(group == "cdps") {
 			this.updateStateAfterTranslation(0, (-(this.boardHeight / 2)- 60))
 		}
@@ -478,6 +477,11 @@ export default class Board extends Component {
 					playOrPrefer="prefer"
 					isSorted={this.props.setSorting}
 					isSoundActive={this.props.isSoundActive} />
+		}
+
+		let groupToAnimate
+		if(this.state.groupToAnimate != 'undefined') {
+			groupToAnimate = this.state.groupToAnimate
 		}
 
 		return (
