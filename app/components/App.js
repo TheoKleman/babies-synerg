@@ -226,9 +226,14 @@ export default class App extends React.Component {
     }
 
     setBabiesReady(bool) {
-        this.setState({
-            loading: !bool
-        })
+        // chrome painting approximation time kappa <3
+        let to = Math.floor(Math.random() * 3000) + 2000
+
+        setTimeout(() => {
+            this.setState({
+                loading: !bool
+            })
+        }, to)
     }
 
     render(){
