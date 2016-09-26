@@ -46,6 +46,10 @@ export default class App extends React.Component {
             pageToShow: null
         }
 
+
+        this.coucouAudio = document.createElement('audio');
+        this.coucouAudio.src = './media/coucou.wav'
+
         //this.setPageIsOpened = this.setPageIsOpened.bind(this)
         this.setFinalScreenIsDisplayed = this.setFinalScreenIsDisplayed.bind(this)
     }
@@ -226,14 +230,18 @@ export default class App extends React.Component {
 
     setBabiesReady(bool) {
         // chrome painting approximation time kappa <3
-        let to = Math.floor(Math.random() * 2200) + 1200
+        let to = Math.floor(Math.random() * 2800) + 1600
 
         setTimeout(() => {
             this.setState({
                 loading: !bool
             })
 
-            console.log("LOADED IN", to, "ms")
+            if (this.state.isSoundActive) {
+                this.coucouAudio.play()
+            }
+
+            // console.log("LOADED IN", to, "ms")
         }, to)
     }
 
@@ -343,7 +351,8 @@ export default class App extends React.Component {
                     setGroupFocus={this.setGroupFocus.bind(this)} />
                 <Footer
                     setOpenPage={this.setOpenPage.bind(this)}
-                    shareFacebook={this.shareFacebook.bind(this)} />
+                    shareFacebook={this.shareFacebook.bind(this)}
+                    isSoundActive={this.state.isSoundActive} />
                 <Controls
                     controlsHighlighting={this.state.controlsHighlighting}
                     formDisplayed={this.state.formDisplayed}

@@ -62,9 +62,6 @@ export default class BabiesList extends Component {
 		this.heightWhiteSpace = 250
 		this.safetyWidthDistance = 30
 		this.safetyHeightDistance = -20
-
-		this.coucouAudio = document.createElement('audio');
-		this.coucouAudio.src = './media/coucou.wav'
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -164,9 +161,6 @@ export default class BabiesList extends Component {
                     babies: response.babies,
                     babiesReady: babiesReady
                 })
-                if (this.props.isSoundActive) {
-					this.coucouAudio.play()
-                }
             })
     }
 
