@@ -86,44 +86,28 @@ export default class Stat extends Component {
 			var item1 = <StatItem
 							percent="60%"
 							icon="gta"
-							statName="GTA"/>
-			var item2 = <StatItem 
-							percent="40%"
-							icon="fifa"
-							statName="FIFA"/>
+							statName="Jouent à GTA"/>
 		}
 		if(this.props.groupId == "creatifs-stat") {
 			var item1 = <StatItem 
 							percent="71.2%"
 							icon="angry-birds"
-							statName="Angry Birds"/>
-			var item2 = <StatItem
-							percent="28.8%"
-							icon="candy-crush-saga"
-							statName="Candy Crush Saga"/>
+							statName="Jouent à Angry Birds"/>
 		}
 		if(this.props.groupId == "cdps-stat") {
 			var item1 = <StatItem 
 							percent="76.2%"
 							icon="jedi"
-							statName="Maitre Jedi"/>
-			var item2 = <StatItem
-							percent="23.8%"
-							icon="sith"
-							statName="Seigneur Sith"/>
+							statName="Préfèrent Maitre Jedi à seigneur Sith"/>
 		}
 		if(this.props.groupId == "marketeux-stat") {
 			var item1 = <StatItem
 							percent="58.3%"
 							icon="house-of-cards"
-							statName="House of Cards"/>
-			var item2 = <StatItem 
-							percent="41.7%"
-							icon="game-of-thrones"
-							statName="Game of Thrones"/>
+							statName="Préfèrent House of Cards à Games of Thrones"/>
 		}
 
-		var playOrPrefer = this.props.playOrPrefer == "play" ? "Ils jouent à :" : "Ils préfèrent: "
+		var playOrPrefer = this.props.playOrPrefer == "play" ? "jouent à :" : "aiment regarder: "
 
 		// Class selected
 		var groupBtnClasses = "key"
@@ -152,10 +136,8 @@ export default class Stat extends Component {
 					<p className="agency-stat__text">ont effectué leur stage dans une agence <span>(2015-2016)</span></p>
 				</div>
 				<div className="fun-stat">
-					<p>{playOrPrefer}</p>
 					<div className="fun-stat-items">
 						{item1}
-						{item2}
 					</div>
 				</div>
 			</div>

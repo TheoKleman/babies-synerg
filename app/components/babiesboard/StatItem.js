@@ -20,12 +20,8 @@ export default class StatItem extends Component {
 
 		return (
 			<div className="stat-item">
-				<div className="stat-bar">
-					<span style={statBarWidthStyle}></span>
-					<p className={statBarPercentStyle}>{this.props.percent}</p>
-				</div>
+				<p className="stat-name"><span>{this.props.percent}</span>{this.props.statName}</p>
 				<img src={statIcon} alt={this.props.statName}/>
-				<p className="stat-name">{this.props.statName}</p>
 			</div>
 		);
 	}

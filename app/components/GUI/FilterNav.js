@@ -46,7 +46,7 @@ export default class FilterNav extends React.Component {
             {
                 opacity: 1,
                 ease: Power2.easeOut,
-                delay: 0.1,
+                delay: 0.2,
             },
             0.4
         )
