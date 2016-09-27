@@ -9,7 +9,7 @@ export default class Loader extends React.Component {
 		return(
 			<div className="page page-loader">
 				<div className="page-content">
-					<img className="baby-synerg" src="./images/synerg-baby-placeholder.png" alt="Synerg hetic la junior entreprise des enfants du web" />
+					<div className="baby-synerg"/>
 					<h1>Chargement en cours</h1>
 					<div className="nav-explanation">
 						<img src="./images/nav-buttons.png" alt="Comment se déplacer sur le site" />

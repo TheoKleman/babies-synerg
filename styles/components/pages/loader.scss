@@ -13,21 +13,24 @@
 		position: relative;
 		display: block;
 		margin: 0 auto;
-		height: 290px;
+		height: 200px;
+		width: 200px;
+		background: url('../images/loader-baby.png') left center;
+		animation: play 3s steps(60) infinite;
 
 		&::after {
-            position: absolute;
-            content: '';
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 0px;
-            border-radius: 90%;
-            /* background-color: rgba($dark, .2);*/
-            -o-box-shadow: 0px 0px 20px 10px rgba($purple, .15);
-            box-shadow: 0px 0px 20px 10px rgba($purple, .15);
-        }
+			position: absolute;
+			content: '';
+			bottom: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 50px;
+			height: 0px;
+			border-radius: 90%;
+			/* background-color: rgba($dark, .2);*/
+			-o-box-shadow: 0px 0px 20px 10px rgba($purple, .15);
+			box-shadow: 0px 0px 20px 10px rgba($purple, .15);
+		}
 	}
 
 	h1 {
@@ -69,6 +72,10 @@
 			color: $blue;
 		}
 	}
+}
+
+@keyframes play {
+	100% {background-position: -12000px;}
 }
 
 @keyframes grow {
