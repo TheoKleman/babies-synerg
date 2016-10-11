@@ -16,7 +16,7 @@ export default class About extends React.Component {
 					<p>Synerg’hetic est la Junior-Entreprise fondée par et pour les étudiants. Génération des enfants du Web, nous sommes conscients des problématiques et des enjeux liés à Internet. Nous évoluons dans cet écosystème au quotidien par passion et vocation. Plus qu’un marché, Internet est un monde générateur de connaissances et de visibilité. Que vous ayez l’envie de refondre votre site ou que vous soyez à la recherche d’un nouveau prestataire web, nous prendrons plaisir à apporter un air frais, créatif et pertinent à vos besoins. Plus que la simple création de sites, nous avons pour volonté de vous intégrer dans cet univers en veillant sur les tendances de demain pour les traduire selon vos besoins et vos objectifs.</p>
 				</div>
 				<div className="credit-group">
-					<a href="http://www.synerghetic.com" target="_blank">www.synerghetic.com</a>
+					<a href="http://www.synerghetic.net" target="_blank">www.synerghetic.net</a>
 				</div>
 			</section>
 		)

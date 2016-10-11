@@ -6,14 +6,13 @@ var classNames = require('classnames')
 export default class DetailBaby extends Component {
 	constructor() {
 		super()
+
+		this.translationX = 30
+		this.translateOrigin = 0
 	}
 
 	componentWillUpdate(nextProps) {
-		// if(nextProps.isDisplayedBabyDetail) {
-		// 	this.hideDetail()
-		// } else {
-		// 	this.showDetail()
-		// }
+
 	}
 
 	showDetail() {
@@ -22,7 +21,7 @@ export default class DetailBaby extends Component {
 
 			TweenMax.to(this.refs.detail, 0, {
 				opacity: 1,
-				x: 30,
+				x: self.translationX,
 				scale: 1,
 				ease: Power2.easeOut,
 				onStart: function(){
@@ -37,7 +36,7 @@ export default class DetailBaby extends Component {
 
 		TweenMax.to(this.refs.detail, .1, {
 			opacity: 0,
-			x: 0,
+			x: self.translateOrigin,
 			scale: 0.9,
 			ease: Power2.easeOut,
 			onComplete: function() {
@@ -62,7 +61,7 @@ export default class DetailBaby extends Component {
 		let year = this.props.babyDetail.year
 
 		var detailClasses = classNames({
-			'baby-detail': true,
+			'baby-detail': true
 		})
 
 		return (

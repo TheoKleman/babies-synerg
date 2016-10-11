@@ -14,7 +14,7 @@
             cursor: move;
         }
         &.disabled {
-            cursor: not-allowed;
+            // If you want a cursor when babies are sorted
         }
         &.gridElement {
             border: 1px solid red;

@@ -7,6 +7,12 @@
 			"year": 2018
 		},
 		{
+			"nickname": "Mohamed-Ali H.",
+			"skills": ["Seo","Sea","Strategie"],
+			"tag": "Chef de projet",
+			"year": 2018
+		},
+		{
 			"nickname": "Eden B.",
 			"skills": ["Strategie"],
 			"tag": "Marketeux",
@@ -139,7 +145,7 @@
 			"year": 2019
 		},
 		{
-			"nickname": "Laure B;",
+			"nickname": "Laure B.",
 			"skills": ["Ui","DesignMobile","Front"],
 			"tag": "Créatif",
 			"year": 2016

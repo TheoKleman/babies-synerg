@@ -20,6 +20,7 @@ export default class Baby extends React.Component {
 			updateAngle: true,
 			isDragging: false,
 			isDisplayedBabyDetail: false,
+			isCloseBorder: false,
 			isMooving: false,
 			hideAnimationSprite: false,
 			shouldAnimate: true,
@@ -66,6 +67,12 @@ export default class Baby extends React.Component {
 		this.setPosition(this.props.pos.origin)
 		this.enableDrag(true)
 		this.randomizeSkin()
+
+		if(this.props.pos.origin.Xpx > 3000) {
+			this.setState({
+				isCloseBorder: true
+			})	
+		}
 	}
 
 	componentDidUpdate() {
@@ -527,7 +534,7 @@ export default class Baby extends React.Component {
 		})
 		if(!this.props.formDisplayed && !this.props.isSorted) {
 			this.setState({
-				isDisplayedBabyDetail: true
+				isDisplayedBabyDetail: true,
 			})
 			TweenMax.to(this.refs.itSelf, .2, {
 				zIndex: 200,
@@ -567,6 +574,7 @@ export default class Baby extends React.Component {
 			'orange': this.isOrange(this.state.color),
 			'yellow': this.isYellow(this.state.color),
 			'green': this.isGreen(this.state.color),
+			'close-border': this.state.isCloseBorder
 		})
 
 		var piecesClasses = classNames({
