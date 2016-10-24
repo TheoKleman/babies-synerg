@@ -1,12 +1,12 @@
 .page {
 	width: 100vw;
-	height: auto;
-	min-height: 100vh;
+	height: 100vh;
 	background-color: rgba($blue, .9);
 	position: absolute;
 	z-index: 20;
 	padding: 30px;
 	color: $light;
+	overflow-y: auto;
 
 	.page-content {
 		max-width: 860px;
@@ -16,7 +16,7 @@
 
 	.page-title {
 		display: block;
-		margin-bottom: 80px;
+		margin-bottom: 60px;
 		text-align: center;
 		font-size: 24px;
 		font-family: $font-silkscreen;
@@ -27,6 +27,11 @@
 		display: block;
 		margin-bottom: 20px;
 		text-align: center;
+
+		.title {
+			font-family: $font-m1mbold;
+			margin-bottom: 5px;
+		}
 	}
 
 	p {
@@ -44,18 +49,13 @@
 	}
 
 	button.close-button {
-        position: absolute;
-        top: auto;
-        bottom: 6%;
-        right: auto;
-        left: 50%;
-        // transform: translateX(-50%) rotate(0);
+        // transform: rotate(0);
         height: 30px;
         width: 32px;
         background: url(/images/UI/form-close.png);
 
         &:hover {
-            transform: rotate(180deg) translateX(0);
+            transform: rotate(180deg);
         }
     }
 

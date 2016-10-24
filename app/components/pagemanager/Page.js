@@ -15,7 +15,7 @@ export default class Page extends React.Component {
 	componentWillMount() {
 		window.addEventListener('keydown', this.handleKeyDown.bind(this))
 	}
-
+	
 	componentDidMount() {
 		TweenMax.to(this.refs.itSelf, .5, {
 			opacity: 1,

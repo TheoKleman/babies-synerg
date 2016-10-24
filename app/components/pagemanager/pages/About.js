@@ -10,6 +10,10 @@ export default class About extends React.Component {
 			<section className="page-about page-content">
 				<span className="page-title">Synerg'hetic et Les enfants du web </span>
 				<div className="credit-group">
+					<span className="title">Qu’est-ce qu’une Junior-Entreprise ?</span>
+					<p>C’est avant tout une association étudiante implantée dans les universités et établissements d’enseignement supérieur. Elle fonctionne comme une petite entreprise, sur le modèle d’un cabinet de conseil. Les étudiants y mettent en pratique l’enseignement théorique qu’ils reçoivent en réalisant des projets professionnels, pour de véritables clients. Ceux-ci s’initient aux codes, à la culture et aux problématiques d’entreprise. Au contact du client ou travaillant sur son projet, ils sont mis en situation professionnelle avant l’heure.</p>
+				</div>
+				<div className="credit-group">
 					<p>Créée en 2005, Synerg’hetic est la Junior-Entreprise d’HETIC, la grande école de l’Internet. Elle est le reflet de ses étudiants qui entreprennent et observent quotidiennement le Web. Mais c’est aussi un esprit collaboratif pour faire le pont entre la réalité business, technique et créative.</p>
 				</div>
 				<div className="credit-group">

@@ -193,7 +193,8 @@ export default class App extends React.Component {
 
         this.setState({
             pageToShow: page,
-            pageDisplayed: true
+            pageDisplayed: true,
+            boardCanTranslate: false
         })
     }
 
