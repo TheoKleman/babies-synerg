@@ -89,7 +89,7 @@ export default class SummaryStep extends React.Component {
 		}
 		var developers = this.props.availablePeopleBySkills.developers
 		if (developers > 0) {
-			var developersText = <li>{developers}<small>developpeurs</small></li>
+			var developersText = <li>{developers}<small>développeurs</small></li>
 		}
 		var market = this.props.availablePeopleBySkills.market
 		if (market > 0) {
