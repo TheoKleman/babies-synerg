@@ -21,7 +21,7 @@ export default class Credits extends React.Component {
 					<p><span className="bold">Luca Kolen</span> / Sound Design</p>
 				</div>
 				<div className="credit-group">
-					<p><span className="bold">Adel Mezianni</span> / Motion Design</p>
+					<p><span className="bold">Adel Meziani</span> / Motion Design</p>
 					<p><span className="bold">Margaux Cabrol</span> / Voix</p>
 					<p><span className="bold">Alexandra Tchoreloff</span> / Contenu</p>
 				</div>
