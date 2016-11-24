@@ -193,14 +193,14 @@ export default class App extends React.Component {
 
         this.setState({
             pageToShow: page,
-            pageDisplayed: true,
-            boardCanTranslate: false
+            pageDisplayed: true
         })
     }
 
     setPageIsOpened(value) {
         this.setState({
-            pageDisplayed: value
+            pageDisplayed: value,
+            boardCanTranslate: true
         })
     }
 
